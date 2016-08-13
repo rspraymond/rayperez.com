@@ -8,6 +8,6 @@ bower install
 gulp
 ```
 
-OR you can just go to [http://rayperez.com](RayPerez.com)
+OR you can just go to [RayPerez.com](http://rayperez.com)
 
 ## [Click Here for Changelog](CHANGELOG.md) ##
