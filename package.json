@@ -1,0 +1,27 @@
+{
+  "name": "rayperez.com",
+  "version": "1.0.0",
+  "description": "NPM package for rayperez.com",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-sass": "^2.3.2",
+    "gulp-wrapper": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rspraymond/rayperez.com.git"
+  },
+  "author": "Raymond Perez <ray@rayperez.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rspraymond/rayperez.com/issues"
+  },
+  "homepage": "https://github.com/rspraymond/rayperez.com#readme"
+}

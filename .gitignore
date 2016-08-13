@@ -1,0 +1,17 @@
+/nbproject/*
+/bootstrap/compiled.php
+composer.phar
+.DS_Store
+Thumbs.db
+.vagrant
+local/database.php
+.idea
+node_modules
+composer.lock
+_ide_helper.php
+*.swp
+/build/*
+npm-debug.log
+/node_modules/*
+/vendor/*
+.env
