@@ -4,7 +4,6 @@ Want to checkout it out? Download the repo and in the root run the following com
 
 ```bash
 npm install
-bower install
 gulp
 ```
 

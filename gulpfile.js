@@ -21,8 +21,8 @@ gulp.task('copysass', function () {
     return gulp.src(sass_path + '**/style.scss')
             .pipe(sass({includePaths:
                         [
-                            './vendor/bower/foundation-sites/scss',
-                            './vendor/bower/font-awesome/scss'
+                            './node_modules/foundation-sites/scss',
+                            './node_modules/font-awesome/scss'
                         ]
             }))
             .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -41,7 +41,7 @@ gulp.task('staticfiles', function () {
 
 gulp.task('copy', function () {
     copy_f('./src/img/**/*', 'img');
-    copy_f('./vendor/bower/font-awesome/fonts/**/*', 'fonts');
+    copy_f('./node_modules/font-awesome/fonts/**/*', 'fonts');
 });
 
 gulp.task('open', function () {

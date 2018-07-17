@@ -6,6 +6,8 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.14.0",
+    "font-awesome": "^4.7.0",
+    "foundation-sites": "^6.2.3",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.12",
     "gulp-sass": "^2.3.2",
