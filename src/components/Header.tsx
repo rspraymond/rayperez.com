@@ -11,7 +11,7 @@ function Header() {
           Raymond Perez
         </Typography>
         <IconButton
-          href='https://www.linkedin.com/in/raymond-perez-7329212b/'
+          href='https://www.linkedin.com/in/raymond-perez-eng/'
           color='inherit'
           component='a'
           target='_blank'

@@ -131,7 +131,7 @@ const App: React.FC = () => {
     { text: 'Prejump', href: 'https://prejump.com' },
     { text: 'Twitch', href: 'https://twitch.tv/onlyray' },
     { text: 'GitHub', href: 'https://github.com/rspraymond' },
-    { text: 'LinkedIn', href: 'https://www.linkedin.com/in/raymond-perez-7329212b/' },
+    { text: 'LinkedIn', href: 'https://www.linkedin.com/in/raymond-perez-eng/' },
     { text: 'Twitter', href: 'https://twitter.com/onlyray7' },
   ]
 
@@ -157,7 +157,7 @@ const App: React.FC = () => {
               'https://prejump.com',
               'https://twitch.tv/onlyray',
               'https://github.com/rspraymond',
-              'https://www.linkedin.com/in/raymond-perez-7329212b/',
+              'https://www.linkedin.com/in/raymond-perez-eng/',
               'https://twitter.com/onlyray7',
             ],
           }),
