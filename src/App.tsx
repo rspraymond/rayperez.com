@@ -163,23 +163,7 @@ const App: React.FC = () => {
           }),
         ]}
       >
-        <title>Raymond Perez - Senior Software Engineer</title>
-        <meta
-          name='description'
-          content='Personal website of Raymond Perez, a senior software engineer with years of experience in various roles and industries. Check out his skills, experiences, and achievements here.'
-        />
-        <meta
-          name='keywords'
-          content='Raymond Perez, Software Engineer, Laravel, Node.js, React.js, GraphQL, Development'
-        />
-        <meta property='og:title' content='Raymond Perez - Senior Software Engineer' />
-        <meta
-          property='og:description'
-          content='Personal resume of Raymond Perez, a senior software engineer with years of experience in various roles and industries. Check out his skills, experiences, and achievements here.'
-        />
         <meta property='og:image' content={profileImage} />
-        <meta property='og:url' content='https://rayperez.com' />
-        <meta property='og:type' content='website' />
       </Helmet>
       <Container maxWidth={false}>
         <CssBaseline />
