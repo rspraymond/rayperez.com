@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "rayperez-site"
+  bucket = "www.rayperez.com"
 }
 
 resource "aws_s3_bucket_public_access_block" "access_block" {
