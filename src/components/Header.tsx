@@ -10,13 +10,28 @@ function Header() {
         <Typography variant='h6' style={{ flexGrow: 1 }}>
           Raymond Perez
         </Typography>
-        <IconButton href='https://www.linkedin.com/in/raymond-perez-7329212b/' color='inherit'>
+        <IconButton
+          href='https://www.linkedin.com/in/raymond-perez-7329212b/'
+          color='inherit'
+          component='a'
+          target='_blank'
+        >
           <LinkedInIcon />
         </IconButton>
-        <IconButton href='https://github.com/rspraymond' color='inherit'>
+        <IconButton
+          href='https://github.com/rspraymond'
+          color='inherit'
+          component='a'
+          target='_blank'
+        >
           <GitHubIcon />
         </IconButton>
-        <IconButton href='https://twitter.com/onlyray7' color='inherit'>
+        <IconButton
+          href='https://twitter.com/onlyray7'
+          color='inherit'
+          component='a'
+          target='_blank'
+        >
           <TwitterIcon />
         </IconButton>
       </Toolbar>
