@@ -7,7 +7,7 @@ function Header() {
   return (
     <AppBar position='static'>
       <Toolbar>
-        <Typography variant='h6' style={{ flexGrow: 1 }}>
+        <Typography component="h1" variant='h6' style={{ flexGrow: 1 }}>
           Raymond Perez
         </Typography>
         <IconButton
