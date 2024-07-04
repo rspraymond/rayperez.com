@@ -2,7 +2,10 @@ import { Card, CardContent, Chip, Typography } from '@mui/material'
 import React from 'react'
 
 type Skills = {
-  skills: string[]
+  skills: {
+    label: string
+    url: string
+  }[]
 }
 
 const Skills: React.FC<Skills> = ({ skills }) => (
@@ -11,8 +14,14 @@ const Skills: React.FC<Skills> = ({ skills }) => (
       <Typography variant='h5' gutterBottom>
         Skills
       </Typography>
-      {skills.map((skill) => (
-        <Chip label={skill} style={{ margin: 5 }} />
+      {skills.map((skill, key) => (
+        <Chip
+          label={skill.label}
+          style={{ margin: 5, cursor: 'pointer' }}
+          key={key}
+          component='a'
+          href={skill.url}
+        />
       ))}
     </CardContent>
   </Card>
