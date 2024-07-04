@@ -44,12 +44,14 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
               <ProfileCard image={profileImage} />
             </Grid>
             <Grid item xs={12} lg={8}>
-              <Breadcrumbs aria-label='breadcrumb' mb={2}>
-                <Link color='inherit' href='/'>
-                  Home
-                </Link>
-                <Typography color='textPrimary'>{title}</Typography>
-              </Breadcrumbs>
+              <Box mb={2}>
+                <Breadcrumbs aria-label='breadcrumb'>
+                  <Link color='inherit' href='/'>
+                    Home
+                  </Link>
+                  <Typography color='textPrimary'>{title}</Typography>
+                </Breadcrumbs>
+              </Box>
               <Typography variant='h1' component='h1' gutterBottom>
                 {title}
               </Typography>
