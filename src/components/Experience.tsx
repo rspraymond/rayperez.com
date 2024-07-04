@@ -17,8 +17,8 @@ const Experience: React.FC<Experience> = ({ title, company, duration, bullets })
       <Typography variant='subtitle1' color='textSecondary'>
         {company} - {duration}
       </Typography>
-      {bullets.map((bullet) => (
-        <Box marginTop={2}>
+      {bullets.map((bullet, key) => (
+        <Box marginTop={2} key={key}>
           <Typography variant='body1'>{bullet}</Typography>
         </Box>
       ))}

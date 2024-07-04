@@ -11,8 +11,8 @@ const Achievements: React.FC<Achievements> = ({ achievements }) => (
       <Typography variant='h5' gutterBottom>
         Achievements
       </Typography>
-      {achievements.map((achievement) => (
-        <Box marginTop={2}>
+      {achievements.map((achievement, key) => (
+        <Box marginTop={2} key={key}>
           <Typography variant='body1'>{achievement}</Typography>
         </Box>
       ))}
