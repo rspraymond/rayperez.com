@@ -247,7 +247,7 @@ const WhyNest = (): React.ReactElement => {
           </Typography>
 
           <Typography variant='h6' gutterBottom>
-            X. Addressing Common Criticisms
+            IX. Addressing Common Criticisms
           </Typography>
           <Typography paragraph>
             Like any technology, NestJS has its critics. Some developers argue that the framework is
@@ -267,7 +267,7 @@ const WhyNest = (): React.ReactElement => {
           </Typography>
 
           <Typography variant='h6' gutterBottom>
-            XI. Conclusion
+            X. Conclusion
           </Typography>
           <Typography paragraph>
             In conclusion, I choose NestJS for its structured and opinionated nature, TypeScript

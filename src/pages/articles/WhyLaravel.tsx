@@ -405,7 +405,7 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Typography variant='h4' gutterBottom>
-            IX. Conclusion
+            VIII. Conclusion
           </Typography>
 
           <Typography variant='body1' paragraph>
