@@ -13,28 +13,23 @@ import WhyWebDev from './pages/articles/WhyWebDev.tsx'
 import NotFound from './pages/NotFound.tsx'
 import withCanonical from './components/WithCanonical.tsx'
 
-const baseUrl = 'https://www.rayperez.com'
-
 const router = createBrowserRouter([
-  { path: '/', element: withCanonical(Home, `${baseUrl}/`)({}) },
-  { path: '/why-nestjs', element: withCanonical(WhyNest, `${baseUrl}/why-nestjs`)({}) },
-  { path: '/why-graphql', element: withCanonical(WhyGraphQL, `${baseUrl}/why-graphql`)({}) },
-  { path: '/why-nodejs', element: withCanonical(WhyNodeJS, `${baseUrl}/why-nodejs`)({}) },
+  { path: '/', element: withCanonical(Home)({}) },
+  { path: '/why-nestjs', element: withCanonical(WhyNest)({}) },
+  { path: '/why-graphql', element: withCanonical(WhyGraphQL)({}) },
+  { path: '/why-nodejs', element: withCanonical(WhyNodeJS)({}) },
   {
     path: '/why-typescript',
-    element: withCanonical(WhyTypescript, `${baseUrl}/why-typescript`)({}),
+    element: withCanonical(WhyTypescript)({}),
   },
-  { path: '/why-react', element: withCanonical(WhyReactJS, `${baseUrl}/why-react`)({}) },
-  { path: '/why-laravel', element: withCanonical(WhyLaravel, `${baseUrl}/why-laravel`)({}) },
-  { path: '/why-oop', element: withCanonical(WhyOOP, `${baseUrl}/why-oop`)({}) },
+  { path: '/why-react', element: withCanonical(WhyReactJS)({}) },
+  { path: '/why-laravel', element: withCanonical(WhyLaravel)({}) },
+  { path: '/why-oop', element: withCanonical(WhyOOP)({}) },
   {
     path: '/why-web-development',
-    element: withCanonical(WhyWebDev, `${baseUrl}/why-web-development`)({}),
+    element: withCanonical(WhyWebDev)({}),
   },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
+  { path: '*', element: <NotFound /> },
 ])
 
 const darkTheme = createTheme({
