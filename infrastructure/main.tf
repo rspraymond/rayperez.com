@@ -9,16 +9,16 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "access_block" {
-  bucket = aws_s3_bucket.bucket.id
-
-  block_public_acls   = false
-  ignore_public_acls  = false
-  block_public_policy = false
+  bucket                  = aws_s3_bucket.bucket.id
+  block_public_acls       = false
+  ignore_public_acls      = false
+  block_public_policy     = false
   restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_ownership_controls" "bucket_ownership" {
   bucket = aws_s3_bucket.bucket.id
+
   rule {
     object_ownership = "BucketOwnerEnforced"
   }
@@ -34,6 +34,29 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
   error_document {
     key = "index.html"
   }
+
+  routing_rules = <<EOF
+[
+  {
+    "Condition": {
+      "HttpErrorCodeReturnedEquals": "404"
+    },
+    "Redirect": {
+      "HostName": "www.rayperez.com",
+      "ReplaceKeyPrefixWith": "#!/"
+    }
+  },
+  {
+    "Condition": {
+      "HttpErrorCodeReturnedEquals": "403"
+    },
+    "Redirect": {
+      "HostName": "www.rayperez.com",
+      "ReplaceKeyPrefixWith": "#!/"
+    }
+  }
+]
+EOF
 }
 
 data "aws_iam_policy_document" "website_bucket_policy" {
