@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet'
 import Header from '../components/Header.tsx'
 import ProfileCard from '../components/ProfileCard.tsx'
 import profileImage from '../assets/raymond-perez.jpg'
+import withCanonical from './WithCanonical.tsx'
 
 interface BlogPostProps {
   title: string
@@ -64,4 +65,6 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
   )
 }
 
-export default BlogPost
+const BlogPostWithCanonical = withCanonical(BlogPost)
+
+export default BlogPostWithCanonical
