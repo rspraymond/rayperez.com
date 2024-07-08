@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet'
  */
 const withCanonical = <P extends object>(Component: ComponentType<P>) => {
   return (props: P) => {
-    const canonicalUrl = window.location.href
+    const canonicalUrl = window.location.href.replace('/#!', '')
 
     return (
       <>
