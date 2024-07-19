@@ -122,7 +122,7 @@ const skills = [
 
 const links = [
   { text: 'Prejump', href: 'https://prejump.com' },
-  { text: 'Palworld Fast Travel Map', href: 'https://palworld.appsample.com' },
+  { text: 'Palworld Fast Travel Map', href: 'https://palworld-map.appsample.com' },
   { text: 'Twitch', href: 'https://twitch.tv/onlyray' },
   { text: 'GitHub', href: 'https://github.com/rspraymond' },
   { text: 'LinkedIn', href: 'https://www.linkedin.com/in/raymond-perez-eng/' },
