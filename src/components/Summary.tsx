@@ -8,11 +8,13 @@ const Summary: React.FC = () => (
         Professional Summary
       </Typography>
       <Typography variant='body2' color='textSecondary' component='p'>
-        With over a decade of experience in software development, I specialize in various
-        technologies like PHP, React and Node.js. My versatility extends to managing different tech
-        stacks and mentoring junior developers, promoting a collaborative learning environment. I am
-        currently exploring the power of AI to enhance content quality and pushing forward with
-        innovative strategies in the technological scene.
+        Hi my name is Raymond. Feel free to call me Ray or Raymond, I don't mind either (my gamer
+        tag is Reymundo). I am an ambitious entrepreneur focused on creating impactful business
+        ventures that solve real-world problems. With expertise in PHP (Laravel), React, Node.js,
+        and cloud computing (AWS, Datadog, New Relic), I leverage technology to develop innovative
+        solutions. Committed to continuous learning and growth, I actively engage in workshops and
+        entrepreneurial communities. I invite collaboration with like-minded individuals for
+        partnerships, mentorship, and sharing insights to drive meaningful change.
       </Typography>
     </CardContent>
   </Card>
