@@ -53,7 +53,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                   <Typography color='textPrimary'>{title}</Typography>
                 </Breadcrumbs>
               </Box>
-              <Typography variant='h1' component='h1' gutterBottom>
+              <Typography variant='h2' component='h1' gutterBottom>
                 {title}
               </Typography>
               {children}
