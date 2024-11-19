@@ -11,6 +11,7 @@ import WhyLaravel from './pages/articles/WhyLaravel.tsx'
 import WhyOOP from './pages/articles/WhyOOP.tsx'
 import WhyWebDev from './pages/articles/WhyWebDev.tsx'
 import NotFound from './pages/NotFound.tsx'
+import WhyOpinionated from './pages/articles/WhyOpinionated.tsx'
 
 const darkTheme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ const App: React.FC = () => {
           <Route path='/why-laravel' element={<WhyLaravel />} />
           <Route path='/why-oop' element={<WhyOOP />} />
           <Route path='/why-web-development' element={<WhyWebDev />} />
+          <Route path='/why-opinionated' element={<WhyOpinionated />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
