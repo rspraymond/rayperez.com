@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, CardContent, Link, Typography } from '@mui/material'
 import React from 'react'
 
 const Summary: React.FC = () => (
@@ -12,9 +12,13 @@ const Summary: React.FC = () => (
         tag is Reymundo). I am an ambitious entrepreneur focused on creating impactful business
         ventures that solve real-world problems. With expertise in PHP (Laravel), React, Node.js,
         and cloud computing (AWS, Datadog, New Relic), I leverage technology to develop innovative
-        solutions. I prefer <a href='/why-opinionated'>opinionated frameworks</a>. I actively engage
-        in workshops and entrepreneurial communities. I invite collaboration with like-minded
-        individuals for partnerships, mentorship, and sharing insights to drive meaningful change.
+        solutions. I prefer{' '}
+        <Link href='/why-opinionated' key='/why-opinionated' color='primary' underline='hover'>
+          opinionated frameworks
+        </Link>
+        . I actively engage in workshops and entrepreneurial communities. I invite collaboration
+        with like-minded individuals for partnerships, mentorship, and sharing insights to drive
+        meaningful change.
       </Typography>
     </CardContent>
   </Card>

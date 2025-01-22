@@ -1,6 +1,6 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
-import { List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
+import { List, ListItem, ListItemText, Paper, Typography, Link } from '@mui/material'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
@@ -357,42 +357,79 @@ const WhyOpinionated = (): React.ReactElement => {
                 primary='Laravel Official Documentation'
                 secondary="Comprehensive guide to Laravel's features and best practices."
               />
-              <a href='https://laravel.com/docs'>Visit Laravel Documentation</a>
+              <Link
+                href='https://laravel.com/docs'
+                target='_blank'
+                color='primary'
+                underline='hover'
+              >
+                Visit Laravel Documentation
+              </Link>
             </ListItem>
             <ListItem>
               <ListItemText
                 primary='Laravel Routing Guide'
                 secondary='Detailed instructions on setting up and managing routes in Laravel.'
               />
-              <a href='https://laravel.com/docs/routing'>Explore Routing Guide</a>
+              <Link
+                href='https://laravel.com/docs/routing'
+                target='_blank'
+                color='primary'
+                underline='hover'
+              >
+                Explore Routing Guide
+              </Link>
             </ListItem>
             <ListItem>
               <ListItemText
                 primary='Eloquent ORM Documentation'
                 secondary="Learn how to interact with databases using Laravel's Eloquent ORM."
               />
-              <a href='https://laravel.com/docs/eloquent'>Discover Eloquent ORM</a>
+              <Link
+                href='https://laravel.com/docs/eloquent'
+                target='_blank'
+                color='primary'
+                underline='hover'
+              >
+                Discover Eloquent ORM
+              </Link>
             </ListItem>
             <ListItem>
               <ListItemText
                 primary='Laravel Authentication'
                 secondary="Overview of Laravel's built-in authentication system."
               />
-              <a href='https://laravel.com/docs/authentication'>Read Authentication Guide</a>
+              <Link
+                href='https://laravel.com/docs/authentication'
+                target='_blank'
+                color='primary'
+                underline='hover'
+              >
+                Read Authentication Guide
+              </Link>
             </ListItem>
             <ListItem>
               <ListItemText
                 primary='Validation in Laravel'
                 secondary='Guide to implementing data validation in your Laravel applications.'
               />
-              <a href='https://laravel.com/docs/validation'>Check Validation Documentation</a>
+              <Link
+                href='https://laravel.com/docs/validation'
+                target='_blank'
+                color='primary'
+                underline='hover'
+              >
+                Check Validation Documentation
+              </Link>
             </ListItem>
             <ListItem>
               <ListItemText
                 primary='Laracasts'
                 secondary='Community-driven platform for learning Laravel and modern web development.'
               />
-              <a href='https://laracasts.com'>Learn more</a>
+              <Link href='https://laracasts.com' target='_blank' color='primary' underline='hover'>
+                Learn more
+              </Link>
             </ListItem>
           </List>
         </React.Fragment>
