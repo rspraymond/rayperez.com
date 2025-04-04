@@ -1,81 +1,79 @@
 .background {
-    &.primary {
-        background-color: $primary-color;
-    }
-    &.secondary {
-        background-color: $secondary-color;
-    }
-    &.light-grey {
-        background-color: $light-gray;
-    }
-    &.medium-grey {
-        background-color: $medium-gray;
-    }
-    &.success {
-        background-color: $success-color;
-    }
-    &.warning {
-        background-color: $warning-color;
-    }
-    &.danger {
-        background-color: $alert-color;
-    }
-    &.white {
-        background-color: $white;
-    }
-    &.black {
-        background-color: $black;
-    }
-
+  &.primary {
+    background-color: $primary-color;
+  }
+  &.secondary {
+    background-color: $secondary-color;
+  }
+  &.light-grey {
+    background-color: $light-gray;
+  }
+  &.medium-grey {
+    background-color: $medium-gray;
+  }
+  &.success {
+    background-color: $success-color;
+  }
+  &.warning {
+    background-color: $warning-color;
+  }
+  &.danger {
+    background-color: $alert-color;
+  }
+  &.white {
+    background-color: $white;
+  }
+  &.black {
+    background-color: $black;
+  }
 }
 
 .text {
-    &-primary {
-        color: $primary-color;
-    }
-    &-secondary {
-        color: $secondary-color;
-    }
-    &-light-grey {
-        color: $light-gray;
-    }
-    &-medium-grey {
-        color: $medium-gray;
-    }
-    &-success {
-        color: $success-color;
-    }
-    &-warning {
-        color: $warning-color;
-    }
-    &-danger {
-        color: $alert-color;
-    }
-    &-white {
-        color: $white;
-    }
-
+  &-primary {
+    color: $primary-color;
+  }
+  &-secondary {
+    color: $secondary-color;
+  }
+  &-light-grey {
+    color: $light-gray;
+  }
+  &-medium-grey {
+    color: $medium-gray;
+  }
+  &-success {
+    color: $success-color;
+  }
+  &-warning {
+    color: $warning-color;
+  }
+  &-danger {
+    color: $alert-color;
+  }
+  &-white {
+    color: $white;
+  }
 }
 
 body {
-    text-shadow: 0 0 2px $black;
+  text-shadow: 0 0 2px $black;
 }
 
 .full-height {
-    height: 100%;
-    max-height: none;
+  height: 100%;
+  max-height: none;
 }
 
 .full-width {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 .row {
-    padding: 1.5rem 0;
+  padding: 1.5rem 0;
 }
 
 .logo {
-    display:block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }

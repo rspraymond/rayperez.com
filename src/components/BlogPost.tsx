@@ -5,6 +5,7 @@ import { Container, CssBaseline, Box, Grid, Typography, Link, Breadcrumbs } from
 import { Helmet } from 'react-helmet'
 import Header from '../components/Header.tsx'
 import ProfileCard from '../components/ProfileCard.tsx'
+import RecentPosts from '../components/RecentPosts.tsx'
 import profileImage from '../assets/raymond-perez.jpg'
 import withCanonical from './WithCanonical.tsx'
 
@@ -43,6 +44,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
             <Grid item xs={12} lg={4}>
               <Header />
               <ProfileCard image={profileImage} />
+              <RecentPosts />
             </Grid>
             <Grid item xs={12} lg={8}>
               <Box mb={2}>

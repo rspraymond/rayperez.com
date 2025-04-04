@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { Divider, List, ListItem, ListItemText, Typography } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyReactJS = (): React.ReactElement => {
   return (
@@ -60,12 +59,12 @@ const WhyReactJS = (): React.ReactElement => {
             cannot be changed directly. Instead, we create a new state every time we need to make
             changes.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`// Wrong
 this.state.message = 'Hello, World!';
 // Correct
 this.setState({ message: 'Hello, World!' });`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             This approach has several benefits. Firstly, it makes state management easier and more
             predictable. Since the state does not change directly, we can easily track changes over
@@ -89,9 +88,9 @@ this.setState({ message: 'Hello, World!' });`}
             a syntax extension for JavaScript that allows you to write HTML-like code within your
             JavaScript code. This makes the code more readable and easier to understand.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`const element = <h1>Hello, world!</h1>;`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             The integration of HTML-like syntax within JavaScript is a powerful feature that sets
             React apart from other frameworks. It allows for a more intuitive and seamless
@@ -117,7 +116,7 @@ this.setState({ message: 'Hello, World!' });`}
             React, allows for a predictable state container that can be incredibly beneficial for
             large applications.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`import { createStore } from 'redux';
 function counter(state = 0, action) {
   switch (action.type) {
@@ -130,20 +129,20 @@ function counter(state = 0, action) {
   }
 }
 let store = createStore(counter);`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             However, Redux has been criticized for its verbosity and complexity. Thankfully, React's
             ecosystem offers alternatives. Libraries like Zustand and Jotai, or even React's own
             context API, provide simpler and more straightforward ways to manage state.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`import create from 'zustand';
 const useStore = create(set => ({
   count: 0,
   increment: () => set(state => ({ count: state.count + 1 })),
   decrement: () => set(state => ({ count: state.count - 1 })),
 }));`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             The choice of state management solution depends largely on the specific needs of your
             project. The flexibility to choose from a variety of options is another reason why I
@@ -159,7 +158,7 @@ const useStore = create(set => ({
             to manage state and side effects in functional components, which were previously only
             possible in class components.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`import React, { useState } from 'react';
 function Example() {
   const [count, setCount] = useState(0);
@@ -170,7 +169,7 @@ function Example() {
     </div>
   );
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             However, many projects still have legacy code written in class components. React's
             backward compatibility allows for a gradual migration from class components to
@@ -191,7 +190,7 @@ function Example() {
             make routing a breeze. Moreover, the availability of UI libraries like Material-UI or
             Ant Design can significantly speed up the development of user interfaces.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`import { useForm } from 'react-hook-form';
 function App() {
   const { register, handleSubmit, errors } = useForm();
@@ -205,7 +204,7 @@ function App() {
     </form>
   );
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             Additionally, React's large community provides a wealth of resources, including
             tutorials, blog posts, and forums, where developers can seek help and learn from each
@@ -246,7 +245,7 @@ function App() {
             Design, to testing libraries like Jest and Enzyme, React's ecosystem has something for
             every need.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -260,7 +259,7 @@ render(
   </Provider>,
   document.getElementById('root')
 );`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             Furthermore, React's community is one of the most active and supportive, with countless
             tutorials, blog posts, forums, and open-source projects available to learn from and
@@ -282,7 +281,7 @@ render(
             React Hooks. However, I find that React's JSX syntax provides a more seamless
             integration of JavaScript and HTML, which can lead to more readable code.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`// Vue component with Composition API
 <template>
   <button @click="increment">Count is: {{ count }}</button>
@@ -299,7 +298,7 @@ export default {
   }
 };
 </script>`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             Svelte, on the other hand, is a newer framework that compiles your code to tiny,
             framework-less vanilla JavaScript. This results in faster load times and better
@@ -307,7 +306,7 @@ export default {
             libraries, which can slow down development speed. Moreover, React's wider industry
             adoption means more job opportunities and better career prospects.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`// Svelte component
 <script>
   let count = 0;
@@ -316,7 +315,7 @@ export default {
   }
 </script>
 <button on:click={increment}>Count is: {count}</button>`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             While Vue with its Composition API and Svelte with its compiler approach have their
             strengths, I find React's flexibility, powerful JSX syntax, robust ecosystem, and wide

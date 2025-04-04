@@ -5,6 +5,7 @@ import profileImage from '../assets/raymond-perez.jpg'
 import { Container, CssBaseline, Box, Grid } from '@mui/material'
 import Header from '../components/Header.tsx'
 import ProfileCard from '../components/ProfileCard.tsx'
+import RecentPosts from '../components/RecentPosts.tsx'
 import Summary from '../components/Summary.tsx'
 import Links from '../components/Links.tsx'
 import Experience from '../components/Experience.tsx'
@@ -167,6 +168,7 @@ const Home: React.FC = () => {
             <Grid item xs={12} lg={4}>
               <Header />
               <ProfileCard image={profileImage} />
+              <RecentPosts />
             </Grid>
             <Grid item xs={12} lg={8}>
               <Summary />

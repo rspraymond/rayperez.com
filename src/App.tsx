@@ -1,17 +1,20 @@
 import { createTheme, ThemeProvider } from '@mui/material'
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, useNavigate, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home.tsx'
-import WhyNest from './pages/articles/WhyNest.tsx'
-import WhyGraphQL from './pages/articles/WhyGraphQL.tsx'
-import WhyNodeJS from './pages/articles/WhyNodeJS.tsx'
-import WhyTypescript from './pages/articles/WhyTypescript.tsx'
-import WhyReactJS from './pages/articles/WhyReactJS.tsx'
-import WhyLaravel from './pages/articles/WhyLaravel.tsx'
-import WhyOOP from './pages/articles/WhyOOP.tsx'
-import WhyWebDev from './pages/articles/WhyWebDev.tsx'
-import NotFound from './pages/NotFound.tsx'
-import WhyOpinionated from './pages/articles/WhyOpinionated.tsx'
+import LoadingFallback from './components/LoadingFallback'
+
+// Lazy load all page components
+const Home = lazy(() => import('./pages/Home.tsx'))
+const WhyNest = lazy(() => import('./pages/articles/WhyNest.tsx'))
+const WhyGraphQL = lazy(() => import('./pages/articles/WhyGraphQL.tsx'))
+const WhyNodeJS = lazy(() => import('./pages/articles/WhyNodeJS.tsx'))
+const WhyTypescript = lazy(() => import('./pages/articles/WhyTypescript.tsx'))
+const WhyReactJS = lazy(() => import('./pages/articles/WhyReactJS.tsx'))
+const WhyLaravel = lazy(() => import('./pages/articles/WhyLaravel.tsx'))
+const WhyOOP = lazy(() => import('./pages/articles/WhyOOP.tsx'))
+const WhyWebDev = lazy(() => import('./pages/articles/WhyWebDev.tsx'))
+const NotFound = lazy(() => import('./pages/NotFound.tsx'))
+const WhyOpinionated = lazy(() => import('./pages/articles/WhyOpinionated.tsx'))
 
 const darkTheme = createTheme({
   palette: {
@@ -24,19 +27,21 @@ const App: React.FC = () => {
     <ThemeProvider theme={darkTheme}>
       <BrowserRouter>
         <HashRedirectHandler />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/why-nestjs' element={<WhyNest />} />
-          <Route path='/why-graphql' element={<WhyGraphQL />} />
-          <Route path='/why-nodejs' element={<WhyNodeJS />} />
-          <Route path='/why-typescript' element={<WhyTypescript />} />
-          <Route path='/why-react' element={<WhyReactJS />} />
-          <Route path='/why-laravel' element={<WhyLaravel />} />
-          <Route path='/why-oop' element={<WhyOOP />} />
-          <Route path='/why-web-development' element={<WhyWebDev />} />
-          <Route path='/why-opinionated' element={<WhyOpinionated />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/why-nestjs' element={<WhyNest />} />
+            <Route path='/why-graphql' element={<WhyGraphQL />} />
+            <Route path='/why-nodejs' element={<WhyNodeJS />} />
+            <Route path='/why-typescript' element={<WhyTypescript />} />
+            <Route path='/why-react' element={<WhyReactJS />} />
+            <Route path='/why-laravel' element={<WhyLaravel />} />
+            <Route path='/why-oop' element={<WhyOOP />} />
+            <Route path='/why-web-development' element={<WhyWebDev />} />
+            <Route path='/why-opinionated' element={<WhyOpinionated />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </ThemeProvider>
   )
