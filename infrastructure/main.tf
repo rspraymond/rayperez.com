@@ -42,6 +42,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
       "HttpErrorCodeReturnedEquals": "404"
     },
     "Redirect": {
+      "Protocol": "https",
       "HostName": "www.rayperez.com",
       "ReplaceKeyPrefixWith": "#!/"
     }
@@ -51,6 +52,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
       "HttpErrorCodeReturnedEquals": "403"
     },
     "Redirect": {
+      "Protocol": "https",
       "HostName": "www.rayperez.com",
       "ReplaceKeyPrefixWith": "#!/"
     }
