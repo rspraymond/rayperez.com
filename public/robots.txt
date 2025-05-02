@@ -1,0 +1,33 @@
+# robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /drafts/
+Disallow: /*?preview=*
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.map$
+
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /*.js$
+Allow: /*.css$
+
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: Google-Extended
+User-agent: anthropic-ai
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: AhrefsBot
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+User-agent: DotBot
+Disallow: /
+
+Sitemap: https://rayperez.com/sitemap.xml 
