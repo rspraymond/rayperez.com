@@ -8,7 +8,7 @@ const WhyOpinionated = (): React.ReactElement => {
   return (
     <BlogPost
       title='Why I Prefer Opinionated Frameworks'
-      author='Your Name'
+      author='Raymond Perez'
       date='2024-07-04'
       children={
         <React.Fragment>
