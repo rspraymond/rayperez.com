@@ -13,6 +13,7 @@ import Education from '../components/Education.tsx'
 import Skills from '../components/Skills.tsx'
 import Achievements from '../components/Achievements.tsx'
 import { Helmet } from 'react-helmet'
+import { PROFILE } from '../constants/profile'
 
 const experiences = [
   {
@@ -138,8 +139,8 @@ const Home: React.FC = () => {
           helmetJsonLdProp<Person>({
             '@context': 'https://schema.org',
             '@type': 'Person',
-            name: 'Raymond Perez',
-            jobTitle: 'Senior Software Engineer',
+            name: PROFILE.name,
+            jobTitle: PROFILE.role,
             worksFor: {
               '@type': 'Organization',
               name: 'Red Ventures',
@@ -167,7 +168,7 @@ const Home: React.FC = () => {
           <Grid container spacing={2} direction='row-reverse' alignItems='flex-start'>
             <Grid item xs={12} lg={4}>
               <Header />
-              <ProfileCard image={profileImage} />
+              <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
               <RecentPosts />
             </Grid>
             <Grid item xs={12} lg={8}>

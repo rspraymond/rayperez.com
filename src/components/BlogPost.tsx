@@ -8,6 +8,7 @@ import ProfileCard from '../components/ProfileCard.tsx'
 import RecentPosts from '../components/RecentPosts.tsx'
 import profileImage from '../assets/raymond-perez.jpg'
 import withCanonical from './WithCanonical.tsx'
+import { PROFILE } from '../constants/profile'
 
 interface BlogPostProps {
   title: string
@@ -35,7 +36,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
         ]}
       >
         <meta property='og:image' content={profileImage} />
-        <title>{title} - Raymond Perez - Software Engineer</title>
+        <title>
+          {title} - {PROFILE.name} - {PROFILE.role}
+        </title>
       </Helmet>
       <Container maxWidth={false}>
         <CssBaseline />
@@ -43,7 +46,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
           <Grid container spacing={2} direction='row-reverse' alignItems='flex-start'>
             <Grid item xs={12} lg={4}>
               <Header />
-              <ProfileCard image={profileImage} />
+              <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
               <RecentPosts />
             </Grid>
             <Grid item xs={12} lg={8}>
