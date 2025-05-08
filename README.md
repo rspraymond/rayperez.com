@@ -29,12 +29,14 @@ A personal portfolio and technical blog built with React, TypeScript, and Vite.
 ## ⚙️ Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourname/rayperez-site.git
    cd rayperez-site
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -42,6 +44,7 @@ A personal portfolio and technical blog built with React, TypeScript, and Vite.
    ```
 
 3. Start the development server:
+
    ```bash
    npm run dev
    # or
@@ -95,6 +98,7 @@ npm run lint
 ## 🚀 Deployment
 
 1. Create a production build:
+
    ```bash
    npm run build
    ```
@@ -125,6 +129,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🤝 Contact
 
 Raymond Perez:
+
 - [GitHub](https://github.com/rspraymond)
 - [LinkedIn](https://www.linkedin.com/in/raymond-perez-eng/)
 - [Twitter](https://twitter.com/onlyray7)
