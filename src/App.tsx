@@ -11,6 +11,7 @@ const WhyNodeJS = lazy(() => import('./pages/articles/WhyNodeJS.tsx'))
 const WhyTypescript = lazy(() => import('./pages/articles/WhyTypescript.tsx'))
 const WhyReactJS = lazy(() => import('./pages/articles/WhyReactJS.tsx'))
 const WhyLaravel = lazy(() => import('./pages/articles/WhyLaravel.tsx'))
+const WhyInertia = lazy(() => import('./pages/articles/WhyInertia.tsx'))
 const WhyOOP = lazy(() => import('./pages/articles/WhyOOP.tsx'))
 const WhyWebDev = lazy(() => import('./pages/articles/WhyWebDev.tsx'))
 const NotFound = lazy(() => import('./pages/NotFound.tsx'))
@@ -36,6 +37,7 @@ const App: React.FC = () => {
             <Route path='/why-typescript' element={<WhyTypescript />} />
             <Route path='/why-react' element={<WhyReactJS />} />
             <Route path='/why-laravel' element={<WhyLaravel />} />
+            <Route path='/why-inertia' element={<WhyInertia />} />
             <Route path='/why-oop' element={<WhyOOP />} />
             <Route path='/why-web-development' element={<WhyWebDev />} />
             <Route path='/why-opinionated' element={<WhyOpinionated />} />
