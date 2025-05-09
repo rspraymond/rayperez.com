@@ -28,6 +28,10 @@ interface Post {
 // Sample blog posts data - in a real app, this would be fetched from an API or CMS
 const posts: Post[] = [
   {
+    title: 'Why I Choose Inertia.js',
+    path: '/why-inertia',
+  },
+  {
     title: 'Why I Prefer Opinionated Frameworks',
     path: '/why-opinionated',
   },
@@ -42,10 +46,6 @@ const posts: Post[] = [
   {
     title: 'Why OOP Is Important',
     path: '/why-oop',
-  },
-  {
-    title: 'Why ReactJS Is My Frontend Framework of Choice',
-    path: '/why-react',
   },
 ]
 
