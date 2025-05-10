@@ -9,8 +9,7 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyGraphQL = (): React.ReactElement => {
   return (
@@ -64,14 +63,14 @@ const WhyGraphQL = (): React.ReactElement => {
               <ListItemText primary="Dynamic queries: With GraphQL, you can tailor your queries to your exact needs, fetching only the data you need. This is a stark contrast to REST, where you're often limited to predefined endpoints." />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
     email
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <List>
             <ListItem>
               <ListItemText primary='Single endpoint for multiple data needs: Unlike REST, where each resource has its own endpoint, GraphQL has a single endpoint that can handle multiple data needs. This makes it easier to adapt to changing requirements.' />
@@ -86,19 +85,19 @@ const WhyGraphQL = (): React.ReactElement => {
               <ListItemText primary='Tailored data requests: GraphQL allows clients to specify exactly what data they need, reducing the risk of over-fetching or under-fetching. This can lead to more efficient data retrieval and better performance.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <List>
             <ListItem>
               <ListItemText primary='Efficient data retrieval: With GraphQL, you can retrieve multiple resources in a single request, reducing the number of round trips to the server.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -107,7 +106,7 @@ const WhyGraphQL = (): React.ReactElement => {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h4' gutterBottom>
             III. Simplified API Structure
@@ -115,20 +114,20 @@ const WhyGraphQL = (): React.ReactElement => {
           <Typography variant='h6' gutterBottom>
             A. Single endpoint for all queries
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`POST /graphql`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             B. Unified schema for data presentation
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`type User {
   id: ID!
   name: String!
   email: String!
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             C. Ease of integrating with multiple services
@@ -144,7 +143,7 @@ const WhyGraphQL = (): React.ReactElement => {
           <Typography variant='h6' gutterBottom>
             A. Reducing the number of requests
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -153,12 +152,12 @@ const WhyGraphQL = (): React.ReactElement => {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             B. Aggregating data from multiple sources
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -170,18 +169,18 @@ const WhyGraphQL = (): React.ReactElement => {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             C. Optimizing data fetching strategies
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h4' gutterBottom>
             V. Client-Side Development Advantages
@@ -189,31 +188,31 @@ const WhyGraphQL = (): React.ReactElement => {
           <Typography variant='h6' gutterBottom>
             A. Self-documenting APIs
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`type User {
   id: ID!
   name: String!
   email: String!
   posts: [Post!]!
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             B. Generating TypeScript types/interfaces
           </Typography>
-          <SyntaxHighlighter language='typescript' style={materialDark}>
+          <LazySyntaxHighlighter language='typescript'>
             {`interface User {
   id: string;
   name: string;
   email: string;
   posts: Post[];
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             C. Reducing the need for multiple REST endpoints
           </Typography>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -222,7 +221,7 @@ const WhyGraphQL = (): React.ReactElement => {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h4' gutterBottom>
             VI. Security and Error Handling
@@ -235,20 +234,20 @@ const WhyGraphQL = (): React.ReactElement => {
               <ListItemText primary="Parsing JSON for access levels: GraphQL allows you to parse JSON Web Tokens (JWTs) and implement complex authorization rules based on the user's access level." />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`const user = jwt.verify(token, SECRET);`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <List>
             <ListItem>
               <ListItemText primary='Handling security at the application layer: With GraphQL, you can handle security at the application layer, providing fine-grained control over who can access what data.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`const user = getUserFromContext(context);
 if (!user.canSeePost(postId)) {
   throw new Error('Access denied');
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             B. Error handling in GraphQL
@@ -258,7 +257,7 @@ if (!user.canSeePost(postId)) {
               <ListItemText primary='Status codes and response parsing: Unlike REST, which uses HTTP status codes to indicate errors, GraphQL always returns a 200 OK status code. Errors are included in the response body, making it easier to parse and handle errors.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='json' style={materialDark}>
+          <LazySyntaxHighlighter language='json'>
             {`{
   "errors": [
     {
@@ -278,7 +277,7 @@ if (!user.canSeePost(postId)) {
     "post": null
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <List>
             <ListItem>
               <ListItemText primary="Comparison with REST error handling: While REST's use of HTTP status codes for error handling can be simpler and more straightforward, GraphQL's approach provides more detailed and specific error information." />
@@ -296,7 +295,7 @@ if (!user.canSeePost(postId)) {
               <ListItemText primary='Aggregating and transforming data: GraphQL can serve as a middle layer that aggregates and transforms data from multiple sources, making it easier for clients to consume.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -308,7 +307,7 @@ if (!user.canSeePost(postId)) {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <List>
             <ListItem>
               <ListItemText primary='Providing a single source of truth: By aggregating data from multiple sources, GraphQL can provide a single source of truth, reducing the risk of data inconsistencies.' />
@@ -394,7 +393,7 @@ if (!user.canSeePost(postId)) {
               <ListItemText primary='Using GraphQL as a middle layer: You can use GraphQL as a middle layer to aggregate and transform data from existing REST APIs, providing a single point of access for clients.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -403,13 +402,13 @@ if (!user.canSeePost(postId)) {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <List>
             <ListItem>
               <ListItemText primary='Aggregating and transforming REST data: With GraphQL, you can aggregate and transform data from multiple REST endpoints in a single query, simplifying the client-side code.' />
             </ListItem>
           </List>
-          <SyntaxHighlighter language='graphql' style={materialDark}>
+          <LazySyntaxHighlighter language='graphql'>
             {`query {
   user(id: "1") {
     name
@@ -421,7 +420,7 @@ if (!user.canSeePost(postId)) {
     }
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
 
           <Typography variant='h4' gutterBottom>
             X. Conclusion
