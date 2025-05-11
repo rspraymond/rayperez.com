@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyLaravel = (): React.ReactElement => {
   return (
@@ -85,11 +84,11 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`Route::get('/welcome', function () {
   return 'Hello, World!';
 });`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='body1' paragraph>
@@ -146,9 +145,9 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`$users = App\\Models\\User::all();`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='h6' gutterBottom>
@@ -163,13 +162,13 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`@extends('layouts.app')
 
 @section('content')
   <h1>Welcome to Laravel!</h1>
 @endsection`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='h6' gutterBottom>
@@ -184,9 +183,9 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`php artisan make:controller UserController`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='body1' paragraph>
@@ -229,7 +228,7 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`public function handle($request, Closure $next)
 {
   if (Auth::check()) {
@@ -237,7 +236,7 @@ const WhyLaravel = (): React.ReactElement => {
   }
   return redirect('login');
 }`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='body1' paragraph>
@@ -325,12 +324,12 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='html' style={materialDark}>
+            <LazySyntaxHighlighter language='html'>
               {`<form method="POST" action="/profile">
   @csrf
   ...
 </form>`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='body1' paragraph>
@@ -352,9 +351,9 @@ const WhyLaravel = (): React.ReactElement => {
           </Typography>
 
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`ProcessPodcast::dispatch($podcast);`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
 
           <Typography variant='body1' paragraph>
