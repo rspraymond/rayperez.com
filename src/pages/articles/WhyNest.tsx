@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 function formatCodeString(input: string): string {
   if (!input) {
@@ -91,19 +90,19 @@ const WhyNest = (): React.ReactElement => {
             risk of errors.
           </Typography>
           <Box component='pre'>
-            <SyntaxHighlighter language='typescript' style={materialDark}>
+            <LazySyntaxHighlighter language='typescript'>
               {formatCodeString(`app.get('/', function (req, res) { res.send('Hello World!')})`)}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Box>
           <Typography paragraph>
             While in NestJS, the same functionality would be structured like this:
           </Typography>
           <Box component='pre'>
-            <SyntaxHighlighter language='typescript' style={materialDark}>
+            <LazySyntaxHighlighter language='typescript'>
               {formatCodeString(
                 `@Controller()\nexport class AppController {\n\t@Get()\n\tgetHello(): string {\n\t\treturn 'Hello World!';\n\t}\n}`,
               )}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Box>
           <Typography paragraph>
             The NestJS version is more verbose, but it's also more structured and easier to
@@ -122,11 +121,11 @@ const WhyNest = (): React.ReactElement => {
             class members. This makes the code more expressive and easier to reason about.
           </Typography>
           <Box component='pre'>
-            <SyntaxHighlighter language='typescript' style={materialDark}>
+            <LazySyntaxHighlighter language='typescript'>
               {formatCodeString(
                 `@Controller('cats')\nexport class CatsController { constructor(private readonly catsService: CatsService) {} @Get()\n\tfindAll(): Cat[] { return this.catsService.findAll(); } }`,
               )}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Box>
           <Typography paragraph>
             In this code snippet, `@Controller('cats')` and `@Get()` are decorators that tell NestJS
@@ -147,11 +146,11 @@ const WhyNest = (): React.ReactElement => {
             and write testable, reusable code.
           </Typography>
           <Box component='pre'>
-            <SyntaxHighlighter language='typescript' style={materialDark}>
+            <LazySyntaxHighlighter language='typescript'>
               {formatCodeString(
                 `@Injectable() export class CatsService { constructor(private readonly catRepository: CatRepository) {} findAll(): Cat[] { return this.catRepository.findAll(); } }`,
               )}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Box>
           <Typography paragraph>
             In this code snippet, `CatsService` depends on `CatRepository` to retrieve data. Instead
@@ -174,11 +173,11 @@ const WhyNest = (): React.ReactElement => {
             far-reaching effects.
           </Typography>
           <Box component='pre'>
-            <SyntaxHighlighter language='typescript' style={materialDark}>
+            <LazySyntaxHighlighter language='typescript'>
               {formatCodeString(
                 `@Module(\n{ imports: [DatabaseModule],\nproviders: [CatsService, ...catsProviders],\ncontrollers: [CatsController],\n})\nexport class CatsModule {}`,
               )}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Box>
           <Typography paragraph>
             In this code snippet, `CatsModule` is a module that depends on `DatabaseModule`. It
@@ -214,11 +213,11 @@ const WhyNest = (): React.ReactElement => {
             application.
           </Typography>
           <Box component='pre'>
-            <SyntaxHighlighter language='typescript' style={materialDark}>
+            <LazySyntaxHighlighter language='typescript'>
               {formatCodeString(
                 `@Post()\nasync create(@Body() createCatDto: CreateCatDto) { if (!createCatDto.name) { throw new BadRequestException('Name is required'); } // ... }`,
               )}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Box>
           <Typography paragraph>
             In this code snippet, if the `name` property is missing from the request body, a
