@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { List, ListItem, ListItemText, Typography } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyNodeJS = (): React.ReactElement => {
   return (
@@ -47,7 +46,7 @@ const WhyNodeJS = (): React.ReactElement => {
             This not only simplifies the development process but also makes code sharing and
             maintenance a breeze.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`// Example of a simple Node.js server
 const http = require('http');
 const server = http.createServer((req, res) => {
@@ -58,7 +57,7 @@ const server = http.createServer((req, res) => {
 server.listen(3000, '127.0.0.1', () => {
   console.log('Server running at http://127.0.0.1:3000/');
 });`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             In this example, you can see how JavaScript is used to create a simple server using
             Node.js.
@@ -91,7 +90,7 @@ server.listen(3000, '127.0.0.1', () => {
             (Node Package Manager). These packages can provide almost any functionality you might
             need, speeding up development by leveraging existing solutions.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`// Example of using an npm package
 const express = require('express');
 const app = express();
@@ -101,7 +100,7 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
   console.log('App is listening on port 3000');
 });`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             In this example, we're using the Express.js package, a popular web application framework
             for Node.js, to create a simple server.
@@ -134,7 +133,7 @@ app.listen(3000, () => {
             asynchronous, non-blocking I/O model enhances performance, allowing it to handle
             multiple requests concurrently without slowing down.
           </Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`// Example of asynchronous I/O in Node.js
 const fs = require('fs');
 fs.readFile('/file.txt', (err, data) => {
@@ -142,7 +141,7 @@ fs.readFile('/file.txt', (err, data) => {
   console.log(data);
 });
 console.log('Reading file...');`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             In this example, Node.js doesn't wait for the file reading to complete before executing
             the next line of code. This non-blocking nature makes it highly efficient for I/O
