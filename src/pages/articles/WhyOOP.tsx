@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { List, ListItem, ListItemText, Typography } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyOOP = (): React.ReactElement => {
   return (
@@ -99,7 +98,7 @@ const WhyOOP = (): React.ReactElement => {
             access to them through public methods. Here's an example using a{' '}
             <code>BankAccount</code> class:
           </Typography>
-          <SyntaxHighlighter language='php' style={materialDark}>
+          <LazySyntaxHighlighter language='php'>
             {`class BankAccount {
   private $balance;
   public function __construct($balance = 0) {
@@ -118,7 +117,7 @@ const WhyOOP = (): React.ReactElement => {
     return $this->balance;
   }
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography variant='body1' paragraph>
             In this example, the <code>$balance</code> property is encapsulated within the{' '}
             <code>BankAccount</code> class. It can only be modified through the <code>deposit</code>{' '}
