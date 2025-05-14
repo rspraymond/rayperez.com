@@ -114,9 +114,7 @@ const WhyGraphQL = (): React.ReactElement => {
           <Typography variant='h6' gutterBottom>
             A. Single endpoint for all queries
           </Typography>
-          <LazySyntaxHighlighter language='graphql'>
-            {`POST /graphql`}
-          </LazySyntaxHighlighter>
+          <LazySyntaxHighlighter language='graphql'>{`POST /graphql`}</LazySyntaxHighlighter>
 
           <Typography variant='h6' gutterBottom>
             B. Unified schema for data presentation
