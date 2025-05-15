@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { List, ListItem, ListItemText, Paper, Typography, Link } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyOpinionated = (): React.ReactElement => {
   return (
@@ -72,7 +71,7 @@ const WhyOpinionated = (): React.ReactElement => {
           </Typography>
           <Typography variant='body1' paragraph>
             One of the most compelling advantages of opinionated frameworks is their ability to
-            enforce consistency and uphold standards. Here’s how they make a difference:
+            enforce consistency and uphold standards. Here's how they make a difference:
           </Typography>
           <List>
             <ListItem>
@@ -100,7 +99,7 @@ const WhyOpinionated = (): React.ReactElement => {
             <ListItem>
               <ListItemText
                 primary='Faster Development Cycles'
-                secondary='With a clear structure and predefined components, developers can quickly move from concept to implementation. This speed is crucial in today’s fast-paced tech environment, where time-to-market can be a significant competitive advantage.'
+                secondary={`With a clear structure and predefined components, developers can quickly move from concept to implementation. This speed is crucial in today's fast-paced tech environment, where time-to-market can be a significant competitive advantage.`}
               />
             </ListItem>
             <ListItem>
@@ -147,9 +146,9 @@ const WhyOpinionated = (): React.ReactElement => {
             Code Example: Routing
           </Typography>
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`Route::get('/user', function () { return 'User Profile'; });`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
           <Typography variant='body1' paragraph>
             This snippet demonstrates how Laravel simplifies the process of defining routes, making
@@ -160,9 +159,9 @@ const WhyOpinionated = (): React.ReactElement => {
             Code Example: Eloquent ORM
           </Typography>
           <Paper elevation={3} style={{ marginBottom: '16px' }}>
-            <SyntaxHighlighter language='php' style={materialDark}>
+            <LazySyntaxHighlighter language='php'>
               {`$users = App\\Models\\User::all();`}
-            </SyntaxHighlighter>
+            </LazySyntaxHighlighter>
           </Paper>
           <Typography variant='body1' paragraph>
             With just a single line of code, developers can retrieve all user records from the
@@ -271,7 +270,7 @@ const WhyOpinionated = (): React.ReactElement => {
             Just as traditional engineering has evolved through learning from past mistakes,
             software development can benefit from adopting similar principles. By integrating the
             lessons of engineering into software practices, developers can create more robust and
-            reliable applications. Here’s how:
+            reliable applications. Here's how:
           </Typography>
           <List>
             <ListItem>
