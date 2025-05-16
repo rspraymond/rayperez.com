@@ -1,8 +1,7 @@
 import React from 'react'
 import BlogPost from '../../components/BlogPost.tsx'
 import { List, ListItem, ListItemText, Typography } from '@mui/material'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 
 const WhyTypeScript = (): React.ReactElement => {
   return (
@@ -56,12 +55,12 @@ const WhyTypeScript = (): React.ReactElement => {
             This feature is known as compile-time type checking.
           </Typography>
           <Typography paragraph>For example, consider the following JavaScript code:</Typography>
-          <SyntaxHighlighter language='javascript' style={materialDark}>
+          <LazySyntaxHighlighter language='javascript'>
             {`function add(a, b) {
   return a + b;
 }
 add("Hello", 5);`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             In JavaScript, this code would run without any errors, resulting in the string "Hello5".
             However, in TypeScript, the compiler would catch this error, as it's not logical to add
@@ -95,11 +94,11 @@ add("Hello", 5);`}
           <Typography paragraph>
             For instance, consider the following TypeScript function:
           </Typography>
-          <SyntaxHighlighter language='typescript' style={materialDark}>
+          <LazySyntaxHighlighter language='typescript'>
             {`function greet(name: string): string {
   return \`Hello, \${name}!\`;
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             From the function signature, we can immediately tell that the function `greet` expects a
             string parameter `name` and returns a string.
@@ -130,19 +129,19 @@ add("Hello", 5);`}
             need to be made.
           </Typography>
           <Typography paragraph>For example, if you have a function:</Typography>
-          <SyntaxHighlighter language='typescript' style={materialDark}>
+          <LazySyntaxHighlighter language='typescript'>
             {`function greet(name: string): string {
   return \`Hello, \${name}!\`;
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             And you decide to change the `name` parameter to an object:
           </Typography>
-          <SyntaxHighlighter language='typescript' style={materialDark}>
+          <LazySyntaxHighlighter language='typescript'>
             {`function greet(user: {name: string}): string {
   return \`Hello, \${user.name}!\`;
 }`}
-          </SyntaxHighlighter>
+          </LazySyntaxHighlighter>
           <Typography paragraph>
             TypeScript will show an error wherever the `greet` function is called with a string,
             helping you locate and fix all the affected areas.
