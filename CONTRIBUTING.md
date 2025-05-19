@@ -14,6 +14,7 @@ Thank you for considering contributing to this project! This document outlines t
 - [Testing Guidelines](#testing-guidelines)
 - [Project Structure](#project-structure)
 - [SEO Guidelines](#seo-guidelines)
+- [Style Guide](#style-guide)
 
 ## Development Setup
 
@@ -243,6 +244,171 @@ This project follows several SEO best practices:
 - The `BlogPost` component handles the structured data for articles
 - The `Home` page uses Person schema for the author information
 - Ensure all new pages have appropriate structured data
+
+## Style Guide
+
+This section details the design guidelines and styling standards that should be followed when developing for this site.
+
+### Color Scheme
+
+The site uses a dark theme with the following color palette:
+
+- **Primary Background**: `#121212` - Used for page backgrounds and the loading screen
+- **Secondary Background**: `#2d2d2d` - Used for code blocks, cards, and elevated surfaces
+- **Primary Text**: `#ffffff` (with various opacity levels) - Main text color
+- **Secondary Text**: Material UI's `text.secondary` - Used for less prominent text
+- **Primary Accent**: Material UI's `primary.main` - Used for icons, links, and emphasis
+- **Dividers**: Material UI's `divider` - Used for separating content sections
+
+When creating new components:
+
+- Use the ThemeProvider and access colors through the theme object
+- Don't hardcode hex values except when absolutely necessary
+- Maintain the dark mode aesthetic across all components
+
+Example of proper color usage:
+
+```tsx
+import { useTheme } from '@mui/material/styles'
+
+const MyComponent: React.FC = () => {
+  const theme = useTheme()
+
+  return (
+    <Box
+      sx={{
+        bgcolor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
+        borderColor: theme.palette.divider,
+      }}
+    >
+      {/* Component content */}
+    </Box>
+  )
+}
+```
+
+### Typography
+
+- Use Material UI's Typography component for consistent text styling
+- Follow this hierarchy for content:
+  - `h1`: Main page titles
+  - `h2`: Section headings
+  - `h3`: Subsection headings
+  - `body1`: Primary content text
+  - `body2`: Secondary content text
+  - `caption`: Caption text for images and notes
+
+Example:
+
+```tsx
+<Typography variant="h1" component="h1">Page Title</Typography>
+<Typography variant="h2" component="h2">Section Heading</Typography>
+<Typography variant="body1">Main content text.</Typography>
+```
+
+### Spacing & Layout
+
+- Use Material UI's spacing system through the `theme.spacing()` function
+- Common spacing values:
+  - `theme.spacing(1)` - 8px - Minimum spacing between related elements
+  - `theme.spacing(2)` - 16px - Standard spacing between components
+  - `theme.spacing(3)` - 24px - Section spacing
+
+For container padding and margins:
+
+- Desktop: Use `theme.spacing(3)` (24px) minimum
+- Mobile: Use `theme.spacing(2)` (16px) minimum
+
+### Component Styling
+
+- Use Material UI's `sx` prop for styling components
+- For complex or reusable styles, create a dedicated styles object
+- Follow this structure for component files with styles:
+
+```tsx
+import { Box, styled } from '@mui/material'
+
+// Option 1: Using styled components
+const StyledContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  backgroundColor: theme.palette.background.paper,
+  borderRadius: theme.shape.borderRadius,
+}))
+
+// Option 2: Using sx prop
+const MyComponent: React.FC = () => {
+  return (
+    <Box
+      sx={{
+        p: 2,
+        bgcolor: 'background.paper',
+        borderRadius: 1,
+      }}
+    >
+      {/* Component content */}
+    </Box>
+  )
+}
+```
+
+### UI Elements
+
+#### Cards and Containers
+
+- Use Material UI's `Paper` component for cards and elevated content
+- Apply consistent elevation levels:
+  - Level 1 (`elevation={1}`): For most cards and containers
+  - Level 2-3 (`elevation={2-3}`): For highlighted or interactive elements
+  - Level 4+ (`elevation={4+}`): Reserved for modals and dialogs
+
+#### Navigation and Links
+
+- Text links should use the `primary.main` color
+- Apply hover effects for better interactivity
+- Use Material UI's `Link` component for text links and `Button` for action links
+- Include appropriate icons where applicable
+
+#### Forms and Inputs
+
+- Use Material UI form components
+- Provide validation and feedback for all input fields
+- Maintain consistent label and helper text patterns
+
+#### Icons
+
+- Use Material UI icons (`@mui/icons-material`) for all iconography
+- Keep icons at standard sizes:
+  - `fontSize="small"` - For inline or compact areas
+  - `fontSize="medium"` (default) - For most interface elements
+  - `fontSize="large"` - For prominent features and headers
+
+### Responsiveness
+
+- Use Material UI's `Grid` system for complex layouts
+- Implement responsive breakpoints consistently:
+  - `xs`: 0-599px (mobile)
+  - `sm`: 600-899px (tablet)
+  - `md`: 900-1199px (desktop)
+  - `lg`: 1200px+ (large desktop)
+
+Example:
+
+```tsx
+<Grid container spacing={2}>
+  <Grid item xs={12} sm={6} md={4}>
+    {/* Content that takes full width on mobile, half on tablet, third on desktop */}
+  </Grid>
+</Grid>
+```
+
+### Accessibility
+
+- Maintain a minimum contrast ratio of 4.5:1 for text
+- Use semantic HTML elements
+- Include proper ARIA attributes for interactive elements
+- Ensure all interactive elements have focus states
+- Support keyboard navigation for all interactive features
 
 ---
 
