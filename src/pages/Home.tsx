@@ -174,14 +174,14 @@ const Home: React.FC = () => {
             <Grid item xs={12} lg={8}>
               <Summary />
               <Links links={links} />
+              <Skills skills={skills} />
+              <Achievements achievements={achievements} />
               {experiences.map((exp, key) => (
                 <Experience {...exp} key={key} />
               ))}
               {educations.map((edu, key) => (
                 <Education {...edu} key={key} />
               ))}
-              <Skills skills={skills} />
-              <Achievements achievements={achievements} />
             </Grid>
           </Grid>
         </Box>
