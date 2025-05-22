@@ -166,7 +166,73 @@ Fixes #123
 
 ## Testing Guidelines
 
-When adding new features or fixing bugs, consider adding tests to ensure functionality doesn't break in the future.
+This project uses Vitest and React Testing Library for testing components and functionality. All tests should be co-located with their respective components, making it easier to find and maintain them.
+
+### Test File Structure
+
+- Test files should be named with the `.test.tsx` or `.test.ts` extension
+- Place test files in the same directory as the component or module they test
+- Example: For `ProfileCard.tsx`, the test file should be `ProfileCard.test.tsx` in the same directory
+
+### Writing Effective Tests
+
+- Focus on testing behavior rather than implementation details
+- Follow the Arrange-Act-Assert pattern for test structure
+- Each test should be independent and deterministic (no random values or dependencies on external state)
+- Mock external dependencies to ensure tests are isolated
+- Use meaningful test and describe block names that describe the expected behavior
+
+### Component Testing Best Practices
+
+- Test the component's primary functionality first (happy path)
+- Test edge cases and error states
+- Verify that the component renders without errors
+- Test that the right content is displayed
+- Test user interactions using fireEvent or userEvent
+- Avoid testing library implementation details
+
+### Example Test Structure
+
+```tsx
+import { render, screen } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
+import YourComponent from './YourComponent'
+
+describe('YourComponent', () => {
+  it('renders correctly with default props', () => {
+    // Arrange: Set up the test
+    const testProps = {
+      /* ... */
+    }
+
+    // Act: Perform the action being tested
+    render(<YourComponent {...testProps} />)
+
+    // Assert: Check that the expected outcome occurred
+    expect(screen.getByText('Expected Text')).toBeInTheDocument()
+  })
+
+  // Additional test cases...
+})
+```
+
+### Running Tests
+
+- `npm test`: Run all tests once
+- `npm run test:watch`: Run tests in watch mode during development
+- `npm run test:coverage`: Generate test coverage report
+
+### Testing Hooks and Custom Logic
+
+- Test custom hooks with the `renderHook` utility from `@testing-library/react-hooks`
+- For utility functions, focus on testing inputs and outputs
+- For complex business logic, consider using multiple test cases with different inputs
+
+### When to Add Tests
+
+- Always add tests for new components and features
+- Add tests when fixing bugs to prevent regressions
+- Aim for good test coverage, but focus on critical paths and logic
 
 ## Project Structure
 
@@ -175,12 +241,13 @@ rayperez-site/
 ├── public/             # Static assets
 ├── src/
 │   ├── assets/         # Project assets (images, fonts, etc.)
-│   ├── components/     # Reusable React components
 │   │   ├── LoadingFallback.tsx  # Loading indicator for lazy-loaded components
 │   │   ├── LazySyntaxHighlighter.tsx # Lazy-loaded code syntax highlighter
 │   │   ├── SyntaxHighlighterWithTheme.tsx # Implementation for syntax highlighting
 │   │   ├── ProfileCard.tsx   # User profile information
 │   │   ├── RecentPosts.tsx   # Recent articles sidebar component
+│   │   └── ...
+│   ├── components/     # Reusable UI components
 │   │   └── ...
 │   ├── pages/          # Page components (lazy-loaded)
 │   │   └── articles/   # Blog article pages
