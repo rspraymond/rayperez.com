@@ -20,13 +20,21 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 
 // Define the structure of each post
-interface Post {
+export interface Post {
   title: string
   path: string
 }
 
 // Sample blog posts data - in a real app, this would be fetched from an API or CMS
-const posts: Post[] = [
+const defaultPosts: Post[] = [
+  {
+    title: 'Why I Use MVC Pattern',
+    path: '/why-mvc-pattern',
+  },
+  {
+    title: 'Why I Choose React',
+    path: '/why-reactjs',
+  },
   {
     title: 'Why I Choose Inertia.js',
     path: '/why-inertia',
@@ -36,20 +44,17 @@ const posts: Post[] = [
     path: '/why-opinionated',
   },
   {
-    title: 'Why I Chose NestJS',
-    path: '/why-nestjs',
+    title: 'Why I Choose TypeScript',
+    path: '/why-typescript',
   },
-  {
-    title: 'Why I Love Laravel',
-    path: '/why-laravel',
-  },
-  {
-    title: 'Why OOP Is Important',
-    path: '/why-oop',
-  },
+  // Removed the last item to keep only 5 most recent posts
 ]
 
-const RecentPosts: React.FC = () => {
+interface RecentPostsProps {
+  posts?: Post[]
+}
+
+const RecentPosts: React.FC<RecentPostsProps> = ({ posts = defaultPosts }) => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
   const [expanded, setExpanded] = useState(isDesktop)

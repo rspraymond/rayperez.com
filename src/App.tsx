@@ -5,6 +5,7 @@ import LoadingFallback from './components/LoadingFallback'
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home.tsx'))
+const WhyMVC = lazy(() => import('./pages/articles/WhyMVC.tsx'))
 const WhyNest = lazy(() => import('./pages/articles/WhyNest.tsx'))
 const WhyGraphQL = lazy(() => import('./pages/articles/WhyGraphQL.tsx'))
 const WhyNodeJS = lazy(() => import('./pages/articles/WhyNodeJS.tsx'))
@@ -31,6 +32,7 @@ const App: React.FC = () => {
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/why-mvc-pattern' element={<WhyMVC />} />
             <Route path='/why-nestjs' element={<WhyNest />} />
             <Route path='/why-graphql' element={<WhyGraphQL />} />
             <Route path='/why-nodejs' element={<WhyNodeJS />} />

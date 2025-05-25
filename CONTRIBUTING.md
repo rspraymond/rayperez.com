@@ -15,6 +15,7 @@ Thank you for considering contributing to this project! This document outlines t
 - [Project Structure](#project-structure)
 - [SEO Guidelines](#seo-guidelines)
 - [Style Guide](#style-guide)
+- [Article Guidelines](#article-guidelines)
 
 ## Development Setup
 
@@ -476,6 +477,41 @@ Example:
 - Include proper ARIA attributes for interactive elements
 - Ensure all interactive elements have focus states
 - Support keyboard navigation for all interactive features
+
+## Article Guidelines
+
+This section provides guidelines for creating and maintaining articles on the site.
+
+### File Structure
+
+- Place article files in the `src/pages/articles` directory
+- Follow the established naming convention (e.g., `Why[Topic].tsx`)
+- Maintain consistency with existing article components
+
+### Article Content
+
+Each article should follow these general principles:
+
+1. **Structure**: Include key takeaways, introduction, content sections with headings, and conclusion
+2. **Component Usage**: Use appropriate Material UI components (Typography, List, Divider, etc.)
+3. **Code Examples**: Use `LazySyntaxHighlighter` for code examples with proper language specification
+4. **Styling**: Follow the project's style guide for spacing, colors, and typography
+
+### Adding New Articles
+
+When adding a new article:
+
+1. Update the `posts` array in `RecentPosts.tsx`
+2. Maintain only the most recent articles in the list (currently 5)
+3. Ensure URL paths follow the established pattern
+4. Test that navigation works correctly
+
+### Article Testing
+
+- Verify rendering in both desktop and mobile views
+- Check all links and references
+- Ensure code examples display correctly
+- Test navigation to and from your article
 
 ---
 
