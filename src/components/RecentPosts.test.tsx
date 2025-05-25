@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import RecentPosts from './RecentPosts'
+import RecentPosts, { Post } from './RecentPosts'
 
 // Mock Material UI components to better control their behavior
 vi.mock('@mui/material', async () => {
@@ -18,8 +18,15 @@ vi.mock('@mui/material', async () => {
 
 describe('RecentPosts', () => {
   it('renders the post list and allows expanding/collapsing', () => {
+    // Create mock posts for testing
+    const mockPosts: Post[] = [
+      { title: 'Test Post 1', path: '/test-1' },
+      { title: 'Test Post 2', path: '/test-2' },
+      { title: 'Test Post 3', path: '/test-3' },
+    ]
+
     // Arrange
-    render(<RecentPosts />)
+    render(<RecentPosts posts={mockPosts} />)
 
     // Assert initial state (collapsed on mobile)
     const headerText = screen.getByText('Recent Posts')
@@ -40,17 +47,9 @@ describe('RecentPosts', () => {
     // Collapse container should be visible
     expect(collapseContainer).toHaveStyle('display: block')
 
-    // All posts should now be visible
-    const posts = [
-      'Why I Choose Inertia.js',
-      'Why I Prefer Opinionated Frameworks',
-      'Why I Chose NestJS',
-      'Why I Love Laravel',
-      'Why OOP Is Important',
-    ]
-
-    posts.forEach((postTitle) => {
-      expect(screen.getByText(postTitle)).toBeInTheDocument()
+    // All mock posts should now be visible
+    mockPosts.forEach((post) => {
+      expect(screen.getByText(post.title)).toBeInTheDocument()
     })
 
     // Collapse button should now be visible
