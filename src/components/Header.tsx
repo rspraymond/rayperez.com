@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import TwitterIcon from '@mui/icons-material/Twitter'
+import DescriptionIcon from '@mui/icons-material/Description'
 
 function Header() {
   return (
@@ -27,12 +27,13 @@ function Header() {
           <GitHubIcon />
         </IconButton>
         <IconButton
-          href='https://twitter.com/onlyray7'
+          href='/raymond-perez-software-engineer-resume.pdf'
           color='inherit'
           component='a'
           target='_blank'
+          aria-label='Resume'
         >
-          <TwitterIcon />
+          <DescriptionIcon />
         </IconButton>
       </Toolbar>
     </AppBar>

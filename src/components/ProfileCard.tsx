@@ -5,6 +5,7 @@ type ProfileProps = {
   image: string
   name: string
   role: string
+  resumeUrl?: string
 }
 
 const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => (
@@ -14,6 +15,7 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => (
     flexDirection='column'
     alignItems='center'
     style={{ margin: '1rem', padding: '1rem' }}
+    data-testid='profile-card-component'
   >
     <Avatar
       alt={`${name}'s profile picture`}
