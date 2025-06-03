@@ -9,7 +9,7 @@ const Summary: React.FC = () => (
       </Typography>
       <Typography variant='body2' color='textSecondary' component='p'>
         Hi my name is Raymond. Feel free to call me Ray or Raymond, I don't mind either (my gamer
-        tag is Reymundo). I am an ambitious entrepreneur focused on creating impactful business
+        tag is Reymundo). I am an aspiring entrepreneur focused on creating impactful business
         ventures that solve real-world problems. With expertise in PHP (Laravel), React, Node.js,
         and cloud computing (AWS, Datadog, New Relic), I leverage technology to develop innovative
         solutions. I prefer{' '}
