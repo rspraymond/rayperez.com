@@ -169,6 +169,23 @@ Fixes #123
 
 This project uses Vitest and React Testing Library for testing components and functionality. All tests should be co-located with their respective components, making it easier to find and maintain them.
 
+### Test Coverage Requirements
+
+The project enforces a minimum 70% code coverage threshold for:
+
+- Statements
+- Branches
+- Functions
+- Lines
+
+Code that doesn't meet these thresholds will fail the CI build. You can check your coverage locally by running:
+
+```bash
+npm run test:coverage
+```
+
+Coverage reports are generated in the `coverage` directory and are also uploaded as artifacts in CI builds.
+
 ### Test File Structure
 
 - Test files should be named with the `.test.tsx` or `.test.ts` extension

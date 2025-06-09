@@ -10,8 +10,22 @@ export default defineConfig({
     setupFiles: ['./src/setupTests.ts'],
     include: ['**/*.{test,spec}.{ts,tsx}'],
     coverage: {
-      reporter: ['text', 'html'],
-      exclude: ['node_modules/', 'src/setupTests.ts'],
+      provider: 'istanbul',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/setupTests.ts',
+        'src/pages/articles/**',
+        '**/*.d.ts',
+        'src/main.tsx',
+        '.eslintrc.cjs',
+      ],
+      thresholds: {
+        statements: 70,
+        branches: 70,
+        functions: 70,
+        lines: 70,
+      },
     },
   },
   resolve: {
