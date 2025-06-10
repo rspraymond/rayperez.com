@@ -35,3 +35,7 @@ crash.log
 
 # Exclude .tfvars files, which are likely to contain sentitive data
 *.tfvars
+
+# Coverage reports
+coverage
+.nyc_output

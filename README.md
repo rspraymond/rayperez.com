@@ -133,3 +133,21 @@ Raymond Perez:
 - [GitHub](https://github.com/rspraymond)
 - [LinkedIn](https://www.linkedin.com/in/raymond-perez-eng/)
 - [Twitter](https://twitter.com/onlyray7)
+
+## Testing
+
+[![Test Coverage](https://img.shields.io/badge/coverage-70%25-yellow)](coverage)
+
+This project enforces a minimum 70% code coverage threshold. Tests are run using Vitest and React Testing Library.
+
+To run tests:
+
+```bash
+npm test
+```
+
+To run tests with coverage:
+
+```bash
+npm run test:coverage
+```
