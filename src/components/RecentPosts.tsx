@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo, useMemo } from 'react'
 import {
   Typography,
   List,
@@ -13,6 +13,7 @@ import {
   IconButton,
   Collapse,
   useMediaQuery,
+  Theme,
 } from '@mui/material'
 import ArticleIcon from '@mui/icons-material/Article'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
@@ -33,7 +34,7 @@ const defaultPosts: Post[] = [
   },
   {
     title: 'Why I Choose React',
-    path: '/why-reactjs',
+    path: '/why-react',
   },
   {
     title: 'Why I Choose Inertia.js',
@@ -49,6 +50,46 @@ const defaultPosts: Post[] = [
   },
   // Removed the last item to keep only 5 most recent posts
 ]
+
+interface PostItemProps {
+  post: Post
+  index: number
+  theme: Theme
+}
+
+const PostItem = memo(({ post, index, theme }: PostItemProps) => {
+  return (
+    <React.Fragment>
+      {index > 0 && <Divider component='li' variant='inset' />}
+      <ListItem
+        component={Link}
+        href={post.path}
+        sx={{
+          py: 1.5,
+          px: 2,
+          color: 'text.primary',
+          textDecoration: 'none',
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            bgcolor: 'action.hover',
+            transform: 'translateX(4px)',
+          },
+        }}
+      >
+        <ListItemIcon sx={{ minWidth: 32, color: theme.palette.primary.main }}>
+          <ArrowRightAltIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary={post.title}
+          primaryTypographyProps={{
+            variant: 'body2',
+            fontWeight: 'medium',
+          }}
+        />
+      </ListItem>
+    </React.Fragment>
+  )
+})
 
 interface RecentPostsProps {
   posts?: Post[]
@@ -67,6 +108,13 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts = defaultPosts }) => {
   const handleToggle = () => {
     setExpanded((prev) => !prev)
   }
+
+  // Memoize the posts list to prevent re-rendering when expanded state changes
+  const memoizedPosts = useMemo(
+    () =>
+      posts.map((post, index) => <PostItem key={index} post={post} index={index} theme={theme} />),
+    [posts, theme],
+  )
 
   return (
     <Paper
@@ -112,42 +160,10 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts = defaultPosts }) => {
       </Box>
 
       <Collapse in={expanded} timeout='auto'>
-        <List disablePadding>
-          {posts.map((post, index) => (
-            <React.Fragment key={index}>
-              {index > 0 && <Divider component='li' variant='inset' />}
-              <ListItem
-                component={Link}
-                href={post.path}
-                sx={{
-                  py: 1.5,
-                  px: 2,
-                  color: 'text.primary',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    bgcolor: 'action.hover',
-                    transform: 'translateX(4px)',
-                  },
-                }}
-              >
-                <ListItemIcon sx={{ minWidth: 32, color: theme.palette.primary.main }}>
-                  <ArrowRightAltIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={post.title}
-                  primaryTypographyProps={{
-                    variant: 'body2',
-                    fontWeight: 'medium',
-                  }}
-                />
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <List disablePadding>{memoizedPosts}</List>
       </Collapse>
     </Paper>
   )
 }
 
-export default RecentPosts
+export default memo(RecentPosts)
