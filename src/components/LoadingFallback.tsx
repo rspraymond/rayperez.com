@@ -9,7 +9,7 @@ const LoadingFallback: React.FC = () => (
       alignItems: 'center',
       minHeight: '100vh',
       width: '100vw',
-      bgcolor: '#121212',
+      bgcolor: 'background.default',
       margin: 0,
       padding: 0,
       position: 'fixed',
