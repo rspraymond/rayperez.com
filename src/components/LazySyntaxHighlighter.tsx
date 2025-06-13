@@ -13,7 +13,7 @@ const LazySyntaxHighlighter: React.FC<LazySyntaxHighlighterProps> = (props) => {
   return (
     <Suspense
       fallback={
-        <Box sx={{ p: 2, bgcolor: '#2d2d2d', borderRadius: 1, my: 2 }}>
+        <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 1, my: 2 }}>
           <CircularProgress size={20} color='inherit' />
         </Box>
       }
