@@ -1,7 +1,9 @@
-import { createTheme, ThemeProvider } from '@mui/material'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material'
 import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, useNavigate, Routes, Route } from 'react-router-dom'
 import LoadingFallback from './components/LoadingFallback'
+import { ThemeProvider } from './contexts/ThemeContext'
+import { useTheme } from './contexts/useTheme'
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home.tsx'))
@@ -18,15 +20,11 @@ const WhyWebDev = lazy(() => import('./pages/articles/WhyWebDev.tsx'))
 const NotFound = lazy(() => import('./pages/NotFound.tsx'))
 const WhyOpinionated = lazy(() => import('./pages/articles/WhyOpinionated.tsx'))
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
+const AppContent: React.FC = () => {
+  const { theme } = useTheme()
 
-const App: React.FC = () => {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <MuiThemeProvider theme={theme}>
       <BrowserRouter>
         <HashRedirectHandler />
         <Suspense fallback={<LoadingFallback />}>
@@ -47,6 +45,14 @@ const App: React.FC = () => {
           </Routes>
         </Suspense>
       </BrowserRouter>
+    </MuiThemeProvider>
+  )
+}
+
+const App: React.FC = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   )
 }

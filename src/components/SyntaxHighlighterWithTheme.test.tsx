@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
+import { render } from '../test-utils'
 import SyntaxHighlighterWithTheme from './SyntaxHighlighterWithTheme'
 
-// Mock the react-syntax-highlighter library
 vi.mock('react-syntax-highlighter', () => ({
   Prism: ({
     language,
