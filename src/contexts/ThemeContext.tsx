@@ -41,9 +41,13 @@ const useSystemTheme = (): ComputedTheme => {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [themeMode, setThemeModeState] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme-mode')
-      if (stored && ['light', 'dark', 'system'].includes(stored)) {
-        return stored as ThemeMode
+      try {
+        const stored = localStorage.getItem('theme-mode')
+        if (stored && ['light', 'dark', 'system'].includes(stored)) {
+          return stored as ThemeMode
+        }
+      } catch {
+        // localStorage access denied or not available
       }
     }
     return 'dark'
@@ -58,7 +62,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const setThemeMode = (mode: ThemeMode) => {
     setThemeModeState(mode)
     if (typeof window !== 'undefined') {
-      localStorage.setItem('theme-mode', mode)
+      try {
+        localStorage.setItem('theme-mode', mode)
+      } catch {
+        // localStorage access denied or not available
+      }
     }
   }
 
