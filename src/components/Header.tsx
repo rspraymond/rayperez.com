@@ -2,6 +2,7 @@ import { AppBar, Toolbar, Typography, IconButton } from '@mui/material'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import DescriptionIcon from '@mui/icons-material/Description'
+import ThemeToggle from './ThemeToggle'
 
 function Header() {
   return (
@@ -10,6 +11,7 @@ function Header() {
         <Typography component='h1' variant='h6' style={{ flexGrow: 1 }}>
           Raymond Perez
         </Typography>
+        <ThemeToggle />
         <IconButton
           href='https://www.linkedin.com/in/raymond-perez-eng/'
           color='inherit'
