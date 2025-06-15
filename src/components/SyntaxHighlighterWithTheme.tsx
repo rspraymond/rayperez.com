@@ -12,8 +12,8 @@ const SyntaxHighlighterWithTheme: React.FC<SyntaxHighlighterWithThemeProps> = ({
   language,
   children,
 }) => {
-  const { computedTheme } = useTheme()
-  const syntaxTheme = computedTheme === 'light' ? materialLight : materialDark
+  const { themeMode } = useTheme()
+  const syntaxTheme = themeMode === 'light' ? materialLight : materialDark
 
   return (
     <SyntaxHighlighter language={language} style={syntaxTheme}>

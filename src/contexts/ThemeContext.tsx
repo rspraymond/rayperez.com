@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { createTheme } from '@mui/material'
-import { ThemeContextType, ThemeMode, ComputedTheme } from './ThemeTypes'
+import { ThemeContextType, ThemeMode } from './ThemeTypes'
 import { ThemeContext } from './createThemeContext'
 
 const lightTheme = createTheme({
@@ -15,27 +15,11 @@ const darkTheme = createTheme({
   },
 })
 
-const useSystemTheme = (): ComputedTheme => {
-  const [systemTheme, setSystemTheme] = useState<ComputedTheme>(() => {
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    return 'dark'
-  })
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      const handleChange = (event: MediaQueryListEvent) => {
-        setSystemTheme(event.matches ? 'dark' : 'light')
-      }
-
-      mediaQuery.addEventListener('change', handleChange)
-      return () => mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [])
-
-  return systemTheme
+const getSystemTheme = (): ThemeMode => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+  return 'dark'
 }
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -43,21 +27,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (typeof window !== 'undefined') {
       try {
         const stored = localStorage.getItem('theme-mode')
-        if (stored && ['light', 'dark', 'system'].includes(stored)) {
+        if (stored && ['light', 'dark'].includes(stored)) {
           return stored as ThemeMode
         }
       } catch {
         // localStorage access denied or not available
       }
     }
-    return 'dark'
+    // Default to system preference if no stored preference
+    return getSystemTheme()
   })
 
-  const systemTheme = useSystemTheme()
-
-  const computedTheme: ComputedTheme = themeMode === 'system' ? systemTheme : themeMode
-
-  const theme = computedTheme === 'light' ? lightTheme : darkTheme
+  const theme = themeMode === 'light' ? lightTheme : darkTheme
 
   const setThemeMode = (mode: ThemeMode) => {
     setThemeModeState(mode)
@@ -72,7 +53,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const contextValue: ThemeContextType = {
     themeMode,
-    computedTheme,
     theme,
     setThemeMode,
   }

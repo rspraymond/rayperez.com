@@ -1,4 +1,4 @@
-import { renderHook, act, waitFor } from '@testing-library/react'
+import { renderHook, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { ThemeProvider } from './ThemeContext'
 import { useTheme } from './useTheme'
@@ -15,32 +15,15 @@ Object.defineProperty(window, 'localStorage', {
 
 // Create a proper MediaQueryList mock
 const createMatchMediaMock = (matches: boolean) => {
-  const listeners: Array<(e: MediaQueryListEvent) => void> = []
-  let currentMatches = matches
-
   const mockMediaQueryList = {
-    matches: currentMatches,
+    matches,
     media: '(prefers-color-scheme: dark)',
-    addEventListener: vi.fn((event: string, listener: (e: MediaQueryListEvent) => void) => {
-      if (event === 'change') {
-        listeners.push(listener)
-      }
-    }),
+    addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
     onchange: null,
-    addListener: vi.fn(), // Deprecated but part of MediaQueryList
-    removeListener: vi.fn(), // Deprecated but part of MediaQueryList
-    _triggerChange: (newMatches: boolean) => {
-      currentMatches = newMatches
-      mockMediaQueryList.matches = newMatches
-      listeners.forEach((listener) => {
-        listener({
-          matches: newMatches,
-          media: '(prefers-color-scheme: dark)',
-        } as MediaQueryListEvent)
-      })
-    },
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
   }
 
   return vi.fn(() => mockMediaQueryList)
@@ -67,11 +50,22 @@ describe('ThemeContext', () => {
   }
 
   describe('Initial State', () => {
-    it('defaults to dark theme when no stored preference', () => {
+    it('defaults to dark theme based on system preference when no stored preference', () => {
+      matchMediaMock = createMatchMediaMock(true) // System prefers dark
+      window.matchMedia = matchMediaMock as never
+
       const { result } = renderWithThemeProvider()
 
       expect(result.current.themeMode).toBe('dark')
-      expect(result.current.computedTheme).toBe('dark')
+    })
+
+    it('defaults to light theme based on system preference when no stored preference', () => {
+      matchMediaMock = createMatchMediaMock(false) // System prefers light
+      window.matchMedia = matchMediaMock as never
+
+      const { result } = renderWithThemeProvider()
+
+      expect(result.current.themeMode).toBe('light')
     })
 
     it('uses stored theme preference from localStorage', () => {
@@ -80,29 +74,14 @@ describe('ThemeContext', () => {
       const { result } = renderWithThemeProvider()
 
       expect(result.current.themeMode).toBe('light')
-      expect(result.current.computedTheme).toBe('light')
     })
 
-    it('uses system preference when mode is system', () => {
-      localStorageMock.getItem.mockReturnValue('system')
-      matchMediaMock = createMatchMediaMock(false) // System prefers light
-      window.matchMedia = matchMediaMock as never
+    it('falls back to dark theme when matchMedia is not available', () => {
+      window.matchMedia = undefined as never
 
       const { result } = renderWithThemeProvider()
 
-      expect(result.current.themeMode).toBe('system')
-      expect(result.current.computedTheme).toBe('light')
-    })
-
-    it('detects dark system preference correctly', () => {
-      localStorageMock.getItem.mockReturnValue('system')
-      matchMediaMock = createMatchMediaMock(true) // System prefers dark
-      window.matchMedia = matchMediaMock as never
-
-      const { result } = renderWithThemeProvider()
-
-      expect(result.current.themeMode).toBe('system')
-      expect(result.current.computedTheme).toBe('dark')
+      expect(result.current.themeMode).toBe('dark')
     })
   })
 
@@ -115,7 +94,6 @@ describe('ThemeContext', () => {
       })
 
       expect(result.current.themeMode).toBe('light')
-      expect(result.current.computedTheme).toBe('light')
       expect(localStorageMock.setItem).toHaveBeenCalledWith('theme-mode', 'light')
     })
 
@@ -127,114 +105,46 @@ describe('ThemeContext', () => {
       })
 
       expect(result.current.themeMode).toBe('dark')
-      expect(result.current.computedTheme).toBe('dark')
       expect(localStorageMock.setItem).toHaveBeenCalledWith('theme-mode', 'dark')
-    })
-
-    it('switches to system theme and persists to localStorage', () => {
-      const { result } = renderWithThemeProvider()
-
-      act(() => {
-        result.current.setThemeMode('system')
-      })
-
-      expect(result.current.themeMode).toBe('system')
-      expect(result.current.computedTheme).toBe('dark') // matchMedia mock returns dark
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme-mode', 'system')
-    })
-  })
-
-  describe('System Preference Changes', () => {
-    it('updates computed theme when system preference changes and mode is system', async () => {
-      localStorageMock.getItem.mockReturnValue('system')
-      const { result } = renderWithThemeProvider()
-
-      expect(result.current.computedTheme).toBe('dark')
-
-      // Simulate system preference change to light
-      act(() => {
-        const mockMediaQuery = matchMediaMock() as ReturnType<typeof matchMediaMock> & {
-          _triggerChange: (matches: boolean) => void
-        }
-        mockMediaQuery._triggerChange(false)
-      })
-
-      await waitFor(() => {
-        expect(result.current.computedTheme).toBe('light')
-      })
-    })
-
-    it('does not update computed theme when system preference changes and mode is not system', async () => {
-      localStorageMock.getItem.mockReturnValue('light')
-      const { result } = renderWithThemeProvider()
-
-      expect(result.current.computedTheme).toBe('light')
-
-      // Simulate system preference change to dark
-      act(() => {
-        const mockMediaQuery = matchMediaMock() as ReturnType<typeof matchMediaMock> & {
-          _triggerChange: (matches: boolean) => void
-        }
-        mockMediaQuery._triggerChange(true)
-      })
-
-      // Should remain light since mode is explicitly light, not system
-      expect(result.current.computedTheme).toBe('light')
     })
   })
 
   describe('Edge Cases', () => {
-    it('handles invalid localStorage values by defaulting to dark', () => {
+    it('handles invalid localStorage values by defaulting to system preference', () => {
       localStorageMock.getItem.mockReturnValue('invalid-theme')
+      matchMediaMock = createMatchMediaMock(false) // System prefers light
+      window.matchMedia = matchMediaMock as never
 
       const { result } = renderWithThemeProvider()
 
-      expect(result.current.themeMode).toBe('dark')
-      expect(result.current.computedTheme).toBe('dark')
+      expect(result.current.themeMode).toBe('light')
     })
 
     it('handles localStorage access errors gracefully', () => {
       localStorageMock.getItem.mockImplementation(() => {
         throw new Error('localStorage access denied')
       })
+      matchMediaMock = createMatchMediaMock(true) // System prefers dark
+      window.matchMedia = matchMediaMock as never
 
       const { result } = renderWithThemeProvider()
 
       expect(result.current.themeMode).toBe('dark')
-      expect(result.current.computedTheme).toBe('dark')
     })
 
-    it('handles matchMedia not being available', () => {
-      window.matchMedia = undefined as never
-      localStorageMock.getItem.mockReturnValue('system')
+    it('handles localStorage setItem errors gracefully', () => {
+      localStorageMock.setItem.mockImplementation(() => {
+        throw new Error('localStorage access denied')
+      })
 
       const { result } = renderWithThemeProvider()
 
-      // Should fallback to dark when matchMedia is not available
-      expect(result.current.computedTheme).toBe('dark')
-    })
-  })
+      act(() => {
+        result.current.setThemeMode('light')
+      })
 
-  describe('Cleanup', () => {
-    it('removes system preference listener on unmount', () => {
-      const removeEventListenerSpy = vi.fn()
-      const customMock = vi.fn(() => ({
-        matches: true,
-        media: '(prefers-color-scheme: dark)',
-        addEventListener: vi.fn(),
-        removeEventListener: removeEventListenerSpy,
-        dispatchEvent: vi.fn(),
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-      }))
-      window.matchMedia = customMock as never
-
-      const { unmount } = renderWithThemeProvider()
-
-      unmount()
-
-      expect(removeEventListenerSpy).toHaveBeenCalled()
+      // Should still update the state even if localStorage fails
+      expect(result.current.themeMode).toBe('light')
     })
   })
 })
