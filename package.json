@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "prepare": "husky",
     "lint-staged": "lint-staged",
+    "commitlint": "commitlint --from HEAD~1 --to HEAD --verbose",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
@@ -33,6 +34,8 @@
     "schema-dts": "^1.1.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
