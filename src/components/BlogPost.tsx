@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { BlogPosting } from 'schema-dts'
-import { Container, CssBaseline, Box, Grid, Typography, Link, Breadcrumbs } from '@mui/material'
+import {
+  Container,
+  CssBaseline,
+  Box,
+  Grid,
+  Typography,
+  Link,
+  Breadcrumbs,
+  Fab,
+} from '@mui/material'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { Helmet } from 'react-helmet'
 import Header from '../components/Header.tsx'
 import ProfileCard from '../components/ProfileCard.tsx'
@@ -17,7 +27,22 @@ interface BlogPostProps {
   children: React.ReactNode
 }
 
+const scrollToTop = (): void => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) => {
+  const [showBackToTop, setShowBackToTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = (): void => {
+      setShowBackToTop(window.scrollY > 300)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <React.Fragment>
       <Helmet
@@ -65,6 +90,30 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
             </Grid>
           </Grid>
         </Box>
+        {showBackToTop && (
+          <Fab
+            size='small'
+            onClick={scrollToTop}
+            aria-label='back to top'
+            sx={{
+              position: 'fixed',
+              bottom: 16,
+              right: 16,
+              bgcolor: 'background.paper',
+              color: 'text.secondary',
+              border: '1px solid',
+              borderColor: 'divider',
+              opacity: 0.8,
+              '&:hover': {
+                opacity: 1,
+                bgcolor: 'action.hover',
+                borderColor: 'primary.main',
+              },
+            }}
+          >
+            <KeyboardArrowUpIcon />
+          </Fab>
+        )}
       </Container>
     </React.Fragment>
   )
