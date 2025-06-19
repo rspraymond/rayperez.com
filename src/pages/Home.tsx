@@ -160,6 +160,7 @@ const Home: React.FC = () => {
           }),
         ]}
       >
+        <link rel='canonical' href='https://www.rayperez.com' />
         <meta property='og:image' content={profileImage} />
       </Helmet>
       <Container maxWidth={false}>
