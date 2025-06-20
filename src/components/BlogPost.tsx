@@ -10,15 +10,22 @@ import {
   Link,
   Breadcrumbs,
   Fab,
+  IconButton,
+  Tooltip,
 } from '@mui/material'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import BookmarkIcon from '@mui/icons-material/Bookmark'
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import { Helmet } from 'react-helmet'
+import { useLocation } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import ProfileCard from '../components/ProfileCard.tsx'
 import RecentPosts from '../components/RecentPosts.tsx'
+import BookmarkedPosts from '../components/BookmarkedPosts.tsx'
 import profileImage from '../assets/raymond-perez.jpg'
 import withCanonical from './WithCanonical.tsx'
 import { PROFILE } from '../constants/profile'
+import { useBookmarks } from '../hooks/useBookmarks'
 
 interface BlogPostProps {
   title: string
@@ -33,6 +40,11 @@ const scrollToTop = (): void => {
 
 const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) => {
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const location = useLocation()
+  const { isBookmarked, toggleBookmark } = useBookmarks()
+
+  const currentPath = location.pathname
+  const isCurrentlyBookmarked = isBookmarked(currentPath)
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -42,6 +54,10 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleBookmarkClick = () => {
+    toggleBookmark(title, currentPath)
+  }
 
   return (
     <React.Fragment>
@@ -72,6 +88,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
             <Grid item xs={12} lg={4}>
               <Header />
               <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
+              <BookmarkedPosts />
               <RecentPosts />
             </Grid>
             <Grid item xs={12} lg={8}>
@@ -83,9 +100,27 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                   <Typography color='textPrimary'>{title}</Typography>
                 </Breadcrumbs>
               </Box>
-              <Typography variant='h2' component='h1' gutterBottom>
-                {title}
-              </Typography>
+              <Box display='flex' alignItems='center' justifyContent='space-between' mb={2}>
+                <Typography variant='h2' component='h1' sx={{ flexGrow: 1 }}>
+                  {title}
+                </Typography>
+                <Tooltip title={isCurrentlyBookmarked ? 'Remove Bookmark' : 'Bookmark Article'}>
+                  <IconButton
+                    onClick={handleBookmarkClick}
+                    aria-label={isCurrentlyBookmarked ? 'remove bookmark' : 'bookmark article'}
+                    sx={{
+                      color: isCurrentlyBookmarked ? 'primary.main' : 'text.secondary',
+                      ml: 2,
+                      '&:hover': {
+                        color: 'primary.main',
+                        bgcolor: 'action.hover',
+                      },
+                    }}
+                  >
+                    {isCurrentlyBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+                  </IconButton>
+                </Tooltip>
+              </Box>
               {children}
             </Grid>
           </Grid>

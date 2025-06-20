@@ -4,6 +4,7 @@ import { BrowserRouter, useNavigate, Routes, Route } from 'react-router-dom'
 import LoadingFallback from './components/LoadingFallback'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { useTheme } from './contexts/useTheme'
+import { BookmarkProvider } from './contexts/BookmarkContext'
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home.tsx'))
@@ -52,7 +53,9 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <AppContent />
+      <BookmarkProvider>
+        <AppContent />
+      </BookmarkProvider>
     </ThemeProvider>
   )
 }

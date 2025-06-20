@@ -1,7 +1,19 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
+import { BrowserRouter } from 'react-router-dom'
 import BlogPost from './BlogPost'
+
+// Mock the useBookmarks hook
+vi.mock('../hooks/useBookmarks', () => ({
+  useBookmarks: () => ({
+    bookmarks: [],
+    isBookmarked: vi.fn(() => false),
+    addBookmark: vi.fn(),
+    removeBookmark: vi.fn(),
+    toggleBookmark: vi.fn(),
+  }),
+}))
 
 // Define BlogPostProps interface for the test file
 interface BlogPostProps {
@@ -45,7 +57,11 @@ describe('BlogPost', () => {
   }
 
   it('renders with all required components', () => {
-    render(<BlogPost {...defaultProps} />)
+    render(
+      <BrowserRouter>
+        <BlogPost {...defaultProps} />
+      </BrowserRouter>,
+    )
 
     expect(screen.getByTestId('header')).toBeInTheDocument()
     expect(screen.getByTestId('profile-card')).toBeInTheDocument()
@@ -54,7 +70,11 @@ describe('BlogPost', () => {
   })
 
   it('displays the correct blog title and content', () => {
-    render(<BlogPost {...defaultProps} />)
+    render(
+      <BrowserRouter>
+        <BlogPost {...defaultProps} />
+      </BrowserRouter>,
+    )
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Test Blog Title')
     expect(screen.getByTestId('blog-content')).toBeInTheDocument()
@@ -68,7 +88,11 @@ describe('BlogPost', () => {
   })
 
   it('includes SEO metadata with title and structured data', () => {
-    render(<BlogPost {...defaultProps} />)
+    render(
+      <BrowserRouter>
+        <BlogPost {...defaultProps} />
+      </BrowserRouter>,
+    )
 
     const helmet = screen.getByTestId('helmet')
     expect(helmet).toBeInTheDocument()
