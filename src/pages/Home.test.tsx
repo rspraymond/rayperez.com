@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
+import React from 'react'
 import Home from './Home'
 import { PROFILE } from '../constants/profile'
+import { BookmarkProvider } from '../contexts/BookmarkContext'
 
 // Mock the Helmet component
 vi.mock('react-helmet', () => ({
@@ -57,9 +59,17 @@ vi.mock('../components/Education.tsx', () => ({
   ),
 }))
 
+vi.mock('../components/BookmarkedPosts.tsx', () => ({
+  default: () => <div data-testid='bookmarked-posts-component'>Bookmarked Posts Mock</div>,
+}))
+
+const renderWithProvider = (component: React.ReactElement) => {
+  return render(<BookmarkProvider>{component}</BookmarkProvider>)
+}
+
 describe('Home Component', () => {
   it('renders profile information correctly', () => {
-    render(<Home />)
+    renderWithProvider(<Home />)
 
     // Check for profile name and role
     const profileCard = screen.getByTestId('profile-card-component')
@@ -67,7 +77,7 @@ describe('Home Component', () => {
   })
 
   it('renders all main content sections', () => {
-    render(<Home />)
+    renderWithProvider(<Home />)
 
     // Verify all critical sections are present
     expect(screen.getByTestId('header-component')).toBeInTheDocument()
@@ -84,7 +94,7 @@ describe('Home Component', () => {
   })
 
   it('includes structured data for SEO', () => {
-    render(<Home />)
+    renderWithProvider(<Home />)
 
     // Check for Helmet component that contains schema.org data
     const helmet = screen.getByTestId('helmet-mock')
