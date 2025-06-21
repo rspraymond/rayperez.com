@@ -26,6 +26,7 @@ import profileImage from '../assets/raymond-perez.jpg'
 import withCanonical from './WithCanonical.tsx'
 import { PROFILE } from '../constants/profile'
 import { useBookmarks } from '../hooks/useBookmarks'
+import { calculateReadingTime, formatReadingTime } from '../utils/readingTime'
 
 interface BlogPostProps {
   title: string
@@ -45,6 +46,23 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
 
   const currentPath = location.pathname
   const isCurrentlyBookmarked = isBookmarked(currentPath)
+
+  // Calculate reading time from children content
+  const extractTextFromChildren = (children: React.ReactNode): string => {
+    let text = ''
+    React.Children.forEach(children, (child) => {
+      if (typeof child === 'string') {
+        text += child
+      } else if (React.isValidElement(child)) {
+        text += extractTextFromChildren(child.props.children)
+      }
+    })
+    return text
+  }
+
+  const textContent = extractTextFromChildren(children)
+  const readingTime = calculateReadingTime(textContent)
+  const readingTimeDisplay = formatReadingTime(readingTime)
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -120,6 +138,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                     {isCurrentlyBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
                   </IconButton>
                 </Tooltip>
+              </Box>
+              <Box mb={2}>
+                <Typography variant='body2' color='text.secondary'>
+                  {readingTimeDisplay}
+                </Typography>
               </Box>
               {children}
             </Grid>

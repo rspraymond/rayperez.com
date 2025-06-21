@@ -110,4 +110,23 @@ describe('BlogPost', () => {
     })
     expect(metaTag).toBeInTheDocument()
   })
+
+  it('displays reading time for article content', () => {
+    const contentWithWords = (
+      <div data-testid='blog-content'>
+        <p>This is a test article with some content.</p>
+        <p>It has multiple paragraphs to test the reading time calculation.</p>
+        <p>The reading time should be calculated based on the total word count.</p>
+      </div>
+    )
+
+    render(
+      <BrowserRouter>
+        <BlogPost {...defaultProps} children={contentWithWords} />
+      </BrowserRouter>,
+    )
+
+    // Check that reading time is displayed
+    expect(screen.getByText(/min read/)).toBeInTheDocument()
+  })
 })
