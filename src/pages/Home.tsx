@@ -151,6 +151,25 @@ const Home: React.FC = () => {
               name: 'Red Rocks Community College',
             },
             image: profileImage,
+            url: 'https://www.rayperez.com',
+            knowsAbout: [
+              'Software Engineering',
+              'Web Development',
+              'React.js',
+              'Node.js',
+              'TypeScript',
+              'Laravel',
+              'GraphQL',
+              'NestJS',
+              'Object-Oriented Programming',
+            ],
+            hasOccupation: [
+              {
+                '@type': 'Occupation',
+                name: 'Senior Software Engineer',
+                occupationalCategory: 'Software Development',
+              },
+            ],
             sameAs: [
               'https://prejump.com',
               'https://twitch.tv/onlyray',
