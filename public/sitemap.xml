@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://www.rayperez.com/</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-nestjs</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-graphql</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-nodejs</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-typescript</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-react</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-laravel</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-oop</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-  <loc>https://www.rayperez.com/why-web-development</loc>
-  <lastmod>2024-07-04T21:35:22+00:00</lastmod>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.rayperez.com</loc>
+    <lastmod>2025-06-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-mvc-pattern</loc>
+    <lastmod>2024-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-nestjs</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-graphql</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-nodejs</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-typescript</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-react</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-laravel</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-inertia</loc>
+    <lastmod>2025-05-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-oop</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-web-development</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.rayperez.com/why-opinionated</loc>
+    <lastmod>2024-07-04</lastmod>
+  </url>
 </urlset>

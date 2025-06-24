@@ -15,7 +15,8 @@
     "commitlint": "commitlint --from HEAD~1 --to HEAD --verbose",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
