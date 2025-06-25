@@ -8,14 +8,14 @@ const __dirname = path.dirname(__filename)
 const baseUrl = 'https://www.rayperez.com'
 const today = new Date().toISOString().split('T')[0]
 
-function extractRoutesFromApp() {
+function extractRoutesFromApp(): string[] {
   const appPath = path.resolve(__dirname, '../src/App.tsx')
   const appContent = fs.readFileSync(appPath, 'utf8')
 
   // Extract route paths using regex
   const routePattern = /<Route\s+path=['"]([^'"]*)['"]/g
-  const routes = []
-  let match
+  const routes: string[] = []
+  let match: RegExpExecArray | null
 
   while ((match = routePattern.exec(appContent)) !== null) {
     const routePath = match[1]
@@ -28,9 +28,9 @@ function extractRoutesFromApp() {
   return routes
 }
 
-function extractDateFromArticle(routePath) {
+function extractDateFromArticle(routePath: string): string {
   // Map route paths to article filenames
-  const routeToFileMap = {
+  const routeToFileMap: Record<string, string> = {
     '/why-mvc-pattern': 'WhyMVC.tsx',
     '/why-nestjs': 'WhyNest.tsx',
     '/why-graphql': 'WhyGraphQL.tsx',
@@ -62,7 +62,7 @@ function extractDateFromArticle(routePath) {
   }
 }
 
-function generateSitemap() {
+function generateSitemap(): void {
   const routes = extractRoutesFromApp()
 
   const urls = routes
