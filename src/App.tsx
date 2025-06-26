@@ -2,6 +2,7 @@ import { ThemeProvider as MuiThemeProvider } from '@mui/material'
 import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, useNavigate, Routes, Route } from 'react-router-dom'
 import LoadingFallback from './components/LoadingFallback'
+import ErrorBoundary from './components/ErrorBoundary'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { useTheme } from './contexts/useTheme'
 import { BookmarkProvider } from './contexts/BookmarkContext'
@@ -52,11 +53,13 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <BookmarkProvider>
-        <AppContent />
-      </BookmarkProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <BookmarkProvider>
+          <AppContent />
+        </BookmarkProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   )
 }
 
