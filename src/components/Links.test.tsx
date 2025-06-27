@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import Links from './Links'
-import * as MUI from '@mui/material'
 
 // Mock Material-UI's useMediaQuery and useTheme hooks
 vi.mock('@mui/material', async () => {
@@ -17,6 +16,9 @@ vi.mock('@mui/material', async () => {
   }
 })
 
+// Import the mocked hooks
+const { useMediaQuery } = await import('@mui/material')
+
 describe('Links Component', () => {
   const mockLinks = [
     { text: 'GitHub', href: 'https://github.com/example' },
@@ -25,7 +27,7 @@ describe('Links Component', () => {
 
   it('renders links with correct text and href attributes', () => {
     // Arrange: Mock desktop view
-    vi.mocked(MUI.useMediaQuery).mockReturnValue(false)
+    vi.mocked(useMediaQuery).mockReturnValue(false)
 
     // Act: Render component with test data
     render(<Links links={mockLinks} />)
@@ -44,7 +46,7 @@ describe('Links Component', () => {
 
   it('adapts layout for mobile devices', () => {
     // Arrange: Mock mobile view
-    vi.mocked(MUI.useMediaQuery).mockReturnValue(true)
+    vi.mocked(useMediaQuery).mockReturnValue(true)
 
     // Act: Render component with test data
     render(<Links links={mockLinks} />)
@@ -62,7 +64,7 @@ describe('Links Component', () => {
 
   it('handles empty links array gracefully', () => {
     // Arrange: Mock any view mode
-    vi.mocked(MUI.useMediaQuery).mockReturnValue(false)
+    vi.mocked(useMediaQuery).mockReturnValue(false)
 
     // Act: Render component with empty links array
     render(<Links links={[]} />)
