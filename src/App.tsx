@@ -3,6 +3,7 @@ import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, useNavigate, Routes, Route } from 'react-router-dom'
 import LoadingFallback from './components/LoadingFallback'
 import ErrorBoundary from './components/ErrorBoundary'
+import PrintStyles from './components/PrintStyles'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { useTheme } from './contexts/useTheme'
 import { BookmarkProvider } from './contexts/BookmarkContext'
@@ -27,6 +28,7 @@ const AppContent: React.FC = () => {
 
   return (
     <MuiThemeProvider theme={theme}>
+      <PrintStyles />
       <BrowserRouter>
         <HashRedirectHandler />
         <Suspense fallback={<LoadingFallback />}>
