@@ -22,9 +22,9 @@ const experiences = [
     company: 'Red Ventures',
     duration: 'Sep 2021 - Present',
     bullets: [
-      'Transitioned to primarily JavaScript projects, leveraging various tools for application performance management and scalable infrastructure building.',
-      'Assisted in the design and initiation of AI tool development for content enhancement.',
-      'Delved into observability and telemetry operations, enhancing app performance and usability.',
+      'Built JavaScript applications with focus on performance monitoring and scalable infrastructure.',
+      'Helped develop AI tools for content enhancement.',
+      'Worked on application monitoring and performance tracking.',
     ],
   },
   {
@@ -32,9 +32,9 @@ const experiences = [
     company: 'Dealer Inspire',
     duration: 'Feb 2021 - Sep 2021',
     bullets: [
-      'Supported a chatbot and admin interface for dealership websites, used Datadog for monitoring, Bitbucket for code collaboration, and AWS for cloud services.',
-      'Fine-tuned the testing pipeline using Bitbucket, improving Laravel application performance.',
-      'Adapted and accomplished smaller React and Node.js tasks as needed.',
+      'Maintained chatbot and admin interface for dealership websites using Datadog, Bitbucket, and AWS.',
+      'Improved testing pipeline for Laravel applications.',
+      'Completed React and Node.js development tasks.',
     ],
   },
   {
@@ -42,9 +42,9 @@ const experiences = [
     company: 'RE/MAX',
     duration: 'Aug 2018 - Jan 2021',
     bullets: [
-      'Orchestrated the development of Max Center, an agent referral system, utilising GitLab for complete DevOps lifecycle, GitHub for version control, Datadog for monitoring, and TravisCI for Continuous Integration.',
-      'Instituted and enforced test coverage on APIs, improving code quality and reducing bugs.',
-      'Created a collaborative team atmosphere, mentored junior developers.',
+      'Developed Max Center agent referral system using GitLab, GitHub, Datadog, and TravisCI.',
+      'Implemented test coverage on APIs, improving code quality and reducing bugs.',
+      'Mentored junior developers and fostered team collaboration.',
     ],
   },
   {
@@ -52,8 +52,8 @@ const experiences = [
     company: 'Schomp Automotive Group',
     duration: 'Jun 2015 - Dec 2017',
     bullets: [
-      'Oversaw feature development for business-process Laravel application, used Digital Ocean for cloud infrastructure, Bitbucket for code collaboration, and CircleCI for Continuous Integration.',
-      'Developed several third-party integrations, improving dealership efficiency and productivity.',
+      'Built features for Laravel business application using Digital Ocean, Bitbucket, and CircleCI.',
+      'Developed third-party integrations to improve dealership efficiency.',
     ],
   },
   {
@@ -61,8 +61,8 @@ const experiences = [
     company: 'Denver Website Repair',
     duration: 'Jan 2015 - Jun 2015',
     bullets: [
-      'Fixed issues across various environments (PHP/WordPress/Code Igniter).',
-      'Optimized MySQL databases, contributing to faster server response and streamlined operations.',
+      'Fixed issues across PHP, WordPress, and CodeIgniter environments.',
+      'Optimized MySQL databases for faster server response.',
     ],
   },
   {
@@ -70,7 +70,7 @@ const experiences = [
     company: 'Nip and Tuck Carpet Repair',
     duration: 'Apr 2014 - Jan 2015',
     bullets: [
-      'Led online marketing efforts, developed and managed website, driving SEO improvements.',
+      'Led online marketing efforts and managed website development with SEO improvements.',
     ],
   },
   {
@@ -78,8 +78,8 @@ const experiences = [
     company: 'Omni Premier Marketing',
     duration: 'Jun 2013 - Mar 2014',
     bullets: [
-      'Developed responsive WordPress websites, honing skills on mobile-first design.',
-      'Showcased speedy task execution; notable for a website turnaround within merely three days.',
+      'Developed responsive WordPress websites with mobile-first design.',
+      'Completed website projects with quick turnaround times.',
     ],
   },
   {
@@ -87,8 +87,8 @@ const experiences = [
     company: 'Reality Concepts',
     duration: 'Jul 2010 - Jun 2013',
     bullets: [
-      'Assisted in dynamic WordPress-based CMS migration, replacing old static websites.',
-      'Helped integrate plugin system for community and floor plan management.',
+      'Migrated static websites to dynamic WordPress-based CMS.',
+      'Integrated plugin system for community and floor plan management.',
     ],
   },
 ]
@@ -102,15 +102,11 @@ const educations = [
   },
 ]
 const achievements = [
-  'Contributed significantly to the successes of backend operations at Red Ventures through AI tool development.',
-  'Improved testing pipeline efficiency at Dealer Inspire, boosting development performance.',
-  'Steered the development of several key features for Schomp Automotive Group, contributing to business growth.',
-  'Fostered a collaborative learning environment at RE/MAX and mentored junior developers.',
-  'Improved dealership efficiency and productivity at Schomp Automotive Group through third-party integrations.',
-  'Streamlined operations at Denver Website Repair by optimizing MySQL databases for faster server response.',
-  'Managed website development and drove SEO improvements as Marketing Director at Nip and Tuck Carpet Repair.',
-  'Demonstrated efficiency and expertise in web development at Omni Premier Marketing by turning around a website project in just three days.',
-  'Assisted in a dynamic WordPress-based CMS migration at Reality Concepts, improving efficiency by replacing static websites.',
+  'Developed AI tools for backend operations at Red Ventures.',
+  'Mentored junior developers and improved team collaboration at RE/MAX.',
+  'Built key features for Schomp Automotive Group that supported business growth.',
+  'Improved testing pipeline efficiency at Dealer Inspire.',
+  'Increased dealership efficiency through third-party integrations at Schomp Automotive Group.',
 ]
 const skills = [
   { label: 'NestJS', url: '/why-nestjs' },
