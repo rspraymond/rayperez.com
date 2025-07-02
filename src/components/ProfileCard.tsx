@@ -1,5 +1,6 @@
-import { Avatar, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import React from 'react'
+import LazyImage from './LazyImage'
 
 type ProfileProps = {
   image: string
@@ -17,15 +18,16 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => (
     style={{ margin: '1rem', padding: '1rem' }}
     data-testid='profile-card-component'
   >
-    <Avatar
-      alt={`${name}'s profile picture`}
-      src={image}
-      style={{ width: '200px', height: '200px' }}
-      imgProps={{
-        loading: 'eager',
-        decoding: 'async',
+    <Box
+      sx={{
+        borderRadius: '50%',
+        overflow: 'hidden',
+        width: 200,
+        height: 200,
       }}
-    />
+    >
+      <LazyImage src={image} alt={`${name}'s profile picture`} width={200} height={200} priority />
+    </Box>
     <Box component='header' style={{ textAlign: 'center', marginTop: '1rem' }}>
       <p>{role}</p>
     </Box>
