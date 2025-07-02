@@ -1,6 +1,11 @@
 import { render, screen } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import ProfileCard from './ProfileCard'
+
+// Mock LazyImage component
+vi.mock('./LazyImage', () => ({
+  default: ({ src, alt }) => <img src={src} alt={alt} data-testid='lazy-image' />,
+}))
 
 describe('ProfileCard', () => {
   it('renders profile information correctly', () => {
@@ -15,11 +20,12 @@ describe('ProfileCard', () => {
     render(<ProfileCard {...testProps} />)
 
     // Assert
-    const avatar = screen.getByAltText(`${testProps.name}'s profile picture`)
+    const image = screen.getByTestId('lazy-image')
     const roleText = screen.getByText(testProps.role)
 
-    expect(avatar).toBeInTheDocument()
-    expect(avatar).toHaveAttribute('src', testProps.image)
+    expect(image).toBeInTheDocument()
+    expect(image).toHaveAttribute('src', testProps.image)
+    expect(image).toHaveAttribute('alt', `${testProps.name}'s profile picture`)
     expect(roleText).toBeInTheDocument()
   })
 })
