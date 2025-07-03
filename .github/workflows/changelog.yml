@@ -1,0 +1,44 @@
+name: Update Changelog
+
+on:
+  workflow_dispatch: # Allow manual trigger only
+    inputs:
+      version:
+        description: 'Version to generate changelog for (optional)'
+        required: false
+        type: string
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Need full history for tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Generate Changelog
+        run: npm run changelog
+        env:
+          VERSION: ${{ github.event.inputs.version || 'Manual Update' }}
+
+      - name: Commit and Push Changes
+        run: |
+          git add CHANGELOG.md
+          git commit -m "docs: update changelog manually" || echo "No changes to commit"
+          git push
