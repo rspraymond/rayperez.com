@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 
-interface CommitInfo {
+export interface CommitInfo {
   hash: string
   type: string
   scope: string | null
