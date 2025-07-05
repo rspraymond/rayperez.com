@@ -10,6 +10,64 @@ A personal portfolio and technical blog built with React, TypeScript, and Vite.
 - **Performance Optimized**: Implements code splitting, lazy loading, and optimized bundling
 - **SEO Friendly**: Schema.org structured data and meta tags for better search engine visibility
 
+## 🏗️ System Architecture
+
+### Infrastructure Overview
+
+```mermaid
+graph LR
+    subgraph Client["Client Layer"]
+        Browser["Web Browser"]
+    end
+
+    subgraph Delivery["Content Delivery"]
+        CF["Cloudflare CDN<br/>Edge Caching"]
+    end
+
+    subgraph Origin["Origin Layer"]
+        S3["AWS S3<br/>Static Hosting"]
+    end
+
+    Browser <--> |"HTTPS"| CF
+    CF <--> |"Origin Pulls"| S3
+```
+
+### Application Architecture
+
+```mermaid
+graph TB
+    subgraph App["React Application"]
+        Entry["Entry Point<br/>main.tsx"]
+
+        subgraph Core["Core Infrastructure"]
+            direction LR
+            Router["React Router<br/>Route Management"]
+            ErrorBoundary["Error Boundary<br/>Global Error Handling"]
+            CodeSplit["Code Splitting<br/>Lazy Loading"]
+        end
+
+        subgraph State["Global State"]
+            direction LR
+            Theme["Theme Context<br/>Dark/Light Mode"]
+            Bookmarks["Bookmarks Context<br/>Article Management"]
+        end
+
+        subgraph Pages["Content Layer"]
+            direction LR
+            Home["Home Page<br/>Portfolio"]
+            Blog["Blog Posts<br/>Technical Articles"]
+            NotFound["404 Page<br/>Error Handling"]
+        end
+
+        Entry --> Core
+        Core --> State
+        Core --> Pages
+        State --> Pages
+    end
+```
+
+The first diagram shows how user requests flow through the system. The second diagram shows how the React application is organized internally.
+
 ## 🛠️ Technologies
 
 - **React** with TypeScript
