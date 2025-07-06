@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.2.0] - 2025-07-06
+### Features
+
+- improve ci workflows (#65)
+
+### Other Changes
+
+- chore: add system diagram documentation (#64)
+
+
+
 ## [0.1.0] - 2025-07-04
 ### Features
 
