@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.3.0] - 2025-07-07
+### Features
+
+- add deploy from tag (#66)
+
+
+
 ## [0.2.0] - 2025-07-06
 ### Features
 
