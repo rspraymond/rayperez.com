@@ -135,8 +135,7 @@ jobs:
         if: steps.should_bump.outputs.skip == 'false'
         run: |
           git tag "v${{ steps.new_version.outputs.version }}"
-          git push
-          git push --tags
+          git push origin HEAD:main --tags
 
       - name: Create GitHub Release
         if: steps.should_bump.outputs.skip == 'false'
