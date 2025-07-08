@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.3.1] - 2025-07-08
+### Bug Fixes
+
+- use correct push command for tag deploys (#67)
+
+
+
 ## [0.3.0] - 2025-07-07
 ### Features
 
