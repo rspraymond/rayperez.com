@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.3.2] - 2025-07-09
+### Bug Fixes
+
+- add push permissions for deploy job (#68)
+
+
+
 ## [0.3.1] - 2025-07-08
 ### Bug Fixes
 
