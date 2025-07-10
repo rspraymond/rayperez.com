@@ -16,6 +16,7 @@ Thank you for considering contributing to this project! This document outlines t
 - [SEO Guidelines](#seo-guidelines)
 - [Style Guide](#style-guide)
 - [Article Guidelines](#article-guidelines)
+- [Release Process](#release-process)
 
 ## Development Setup
 
@@ -529,6 +530,18 @@ When adding a new article:
 - Check all links and references
 - Ensure code examples display correctly
 - Test navigation to and from your article
+
+## Release Process
+
+For information about the release process, versioning, and deployment, see [RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md).
+
+The release process covers:
+
+- Automated and manual release workflows
+- Version management and semantic versioning
+- Changelog generation and maintenance
+- Pre-release checklist and post-release tasks
+- Troubleshooting common release issues
 
 ---
 
