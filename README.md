@@ -184,6 +184,11 @@ npm run lint
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## 📚 Documentation
+
+- [Contributing Guidelines](CONTRIBUTING.md) - How to contribute to the project
+- [Release Process](docs/RELEASE_PROCESS.md) - Release workflow and versioning
+
 ## 🤝 Contact
 
 Raymond Perez:
