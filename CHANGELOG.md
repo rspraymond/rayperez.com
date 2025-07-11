@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.4.0] - 2025-07-11
+### Features
+
+- optimize react context usage (#70)
+
+### Other Changes
+
+- chore: add release docs (#69)
+
+
+
 ## [0.3.2] - 2025-07-09
 ### Bug Fixes
 
