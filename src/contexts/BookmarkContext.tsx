@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, ReactNode } from 'react'
+import React, { useState, useEffect, useCallback, ReactNode, useMemo } from 'react'
 import { BookmarkContext, type BookmarkContextType, type BookmarkedArticle } from './bookmarkTypes'
 
 const BOOKMARKS_STORAGE_KEY = 'article-bookmarks'
@@ -87,13 +87,16 @@ export const BookmarkProvider: React.FC<{ children: ReactNode }> = ({ children }
     return () => window.removeEventListener('storage', handleStorageChange)
   }, [])
 
-  const value: BookmarkContextType = {
-    bookmarks,
-    isBookmarked,
-    addBookmark,
-    removeBookmark,
-    toggleBookmark,
-  }
+  const value = useMemo<BookmarkContextType>(
+    () => ({
+      bookmarks,
+      isBookmarked,
+      addBookmark,
+      removeBookmark,
+      toggleBookmark,
+    }),
+    [bookmarks, isBookmarked, addBookmark, removeBookmark, toggleBookmark],
+  )
 
   return <BookmarkContext.Provider value={value}>{children}</BookmarkContext.Provider>
 }

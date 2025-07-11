@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { createTheme } from '@mui/material'
 import { ThemeContextType, ThemeMode } from './ThemeTypes'
 import { ThemeContext } from './createThemeContext'
@@ -40,7 +40,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const theme = themeMode === 'light' ? lightTheme : darkTheme
 
-  const setThemeMode = (mode: ThemeMode) => {
+  const setThemeMode = React.useCallback((mode: ThemeMode) => {
     setThemeModeState(mode)
     if (typeof window !== 'undefined') {
       try {
@@ -49,13 +49,16 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         // localStorage access denied or not available
       }
     }
-  }
+  }, [])
 
-  const contextValue: ThemeContextType = {
-    themeMode,
-    theme,
-    setThemeMode,
-  }
+  const contextValue = useMemo<ThemeContextType>(
+    () => ({
+      themeMode,
+      theme,
+      setThemeMode,
+    }),
+    [themeMode, theme, setThemeMode],
+  )
 
   return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>
 }
