@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.5.0] - 2025-07-12
+### Features
+
+- add bio component to blogs (#71)
+
+
+
 ## [0.4.0] - 2025-07-11
 ### Features
 
