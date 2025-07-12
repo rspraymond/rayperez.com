@@ -22,6 +22,7 @@ import Header from '../components/Header.tsx'
 import ProfileCard from '../components/ProfileCard.tsx'
 import RecentPosts from '../components/RecentPosts.tsx'
 import BookmarkedPosts from '../components/BookmarkedPosts.tsx'
+import AuthorBio from '../components/AuthorBio.tsx'
 import profileImage from '../assets/raymond-perez.jpg'
 import withCanonical from './WithCanonical.tsx'
 import { PROFILE } from '../constants/profile'
@@ -145,6 +146,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                 </Typography>
               </Box>
               {children}
+              <AuthorBio />
             </Grid>
           </Grid>
         </Box>

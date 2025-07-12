@@ -15,6 +15,7 @@ import Skills from '../components/Skills.tsx'
 import Achievements from '../components/Achievements.tsx'
 import { Helmet } from 'react-helmet'
 import { PROFILE } from '../constants/profile'
+import { SKILLS } from '../constants/skills'
 
 const experiences = [
   {
@@ -108,16 +109,6 @@ const achievements = [
   'Improved testing pipeline efficiency at Dealer Inspire.',
   'Increased dealership efficiency through third-party integrations at Schomp Automotive Group.',
 ]
-const skills = [
-  { label: 'NestJS', url: '/why-nestjs' },
-  { label: 'GraphQL', url: '/why-graphql' },
-  { label: 'Node.js', url: '/why-nodejs' },
-  { label: 'TypeScript', url: '/why-typescript' },
-  { label: 'React.js', url: '/why-react' },
-  { label: 'Laravel', url: '/why-laravel' },
-  { label: 'OOP', url: '/why-oop' },
-  { label: 'Web Development', url: '/why-web-development' },
-]
 
 const links = [
   { text: 'Prejump', href: 'https://prejump.com' },
@@ -192,7 +183,7 @@ const Home: React.FC = () => {
             <Grid item xs={12} lg={8}>
               <Summary />
               <Links links={links} />
-              <Skills skills={skills} />
+              <Skills skills={SKILLS} />
               <Achievements achievements={achievements} />
               {experiences.map((exp, key) => (
                 <Experience {...exp} key={key} />
