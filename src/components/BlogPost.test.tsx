@@ -94,8 +94,9 @@ describe('BlogPost', () => {
       </BrowserRouter>,
     )
 
-    const helmet = screen.getByTestId('helmet')
-    expect(helmet).toBeInTheDocument()
+    // Since both BlogPost and AuthorBio have Helmet components, we should find multiple
+    const helmets = screen.getAllByTestId('helmet')
+    expect(helmets.length).toBeGreaterThan(0)
 
     // Check that the title contains the blog title
     const titleElement = screen.getByText(
