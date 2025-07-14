@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.6.0] - 2025-07-14
+### Features
+
+- add full screen mode for article code examples (#73)
+
+### Other Changes
+
+- chore: add unit tests for bookmark context component (#72)
+
+
+
 ## [0.5.0] - 2025-07-12
 ### Features
 
