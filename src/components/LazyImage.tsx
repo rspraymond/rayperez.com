@@ -7,6 +7,7 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: number | string
   height?: number | string
   priority?: boolean
+  onLoadStateChange?: (isLoading: boolean) => void
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
@@ -15,10 +16,16 @@ const LazyImage: React.FC<LazyImageProps> = ({
   width,
   height,
   priority = false,
+  onLoadStateChange,
   ...props
 }) => {
   const [isLoading, setIsLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
+
+  React.useEffect(() => {
+    if (onLoadStateChange) onLoadStateChange(isLoading)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading])
 
   return (
     <Box
@@ -35,8 +42,15 @@ const LazyImage: React.FC<LazyImageProps> = ({
         height={height}
         loading={priority ? 'eager' : 'lazy'}
         decoding='async'
-        onLoad={() => setIsLoading(false)}
-        onError={() => setError(true)}
+        onLoad={() => {
+          setIsLoading(false)
+          if (onLoadStateChange) onLoadStateChange(false)
+        }}
+        onError={() => {
+          setError(true)
+          setIsLoading(false)
+          if (onLoadStateChange) onLoadStateChange(false)
+        }}
         style={{
           opacity: isLoading ? 0 : 1,
           transition: 'opacity 0.2s',
