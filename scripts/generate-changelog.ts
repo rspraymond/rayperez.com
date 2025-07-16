@@ -2,6 +2,13 @@ import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 
+if (!process.env.CI && !process.env.ALLOW_LOCAL_CHANGELOG) {
+  console.error(
+    'Changelog generation is only allowed in CI. Set ALLOW_LOCAL_CHANGELOG=1 to override.',
+  )
+  process.exit(1)
+}
+
 export interface CommitInfo {
   hash: string
   type: string
