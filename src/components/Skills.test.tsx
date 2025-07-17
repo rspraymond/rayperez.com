@@ -1,21 +1,30 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
 import Skills from './Skills'
 
 describe('Skills', () => {
   const mockSkills = [
-    { label: 'React', url: 'https://example.com/react' },
-    { label: 'TypeScript', url: 'https://example.com/typescript' },
-    { label: 'Material UI', url: 'https://example.com/mui' },
+    { label: 'React', url: '/why-react' },
+    { label: 'TypeScript', url: '/why-typescript' },
+    { label: 'Material UI', url: '/why-mui' },
   ]
 
+  const renderWithRouter = (skills: typeof mockSkills) => {
+    return render(
+      <MemoryRouter>
+        <Skills skills={skills} />
+      </MemoryRouter>,
+    )
+  }
+
   it('renders the skills heading', () => {
-    render(<Skills skills={mockSkills} />)
+    renderWithRouter(mockSkills)
     expect(screen.getByText('Skills')).toBeInTheDocument()
   })
 
   it('renders all skill chips with correct labels', () => {
-    render(<Skills skills={mockSkills} />)
+    renderWithRouter(mockSkills)
 
     mockSkills.forEach((skill) => {
       const chip = screen.getByText(skill.label)
@@ -24,7 +33,7 @@ describe('Skills', () => {
   })
 
   it('creates chips with correct links and accessibility attributes', () => {
-    render(<Skills skills={mockSkills} />)
+    renderWithRouter(mockSkills)
 
     mockSkills.forEach((skill) => {
       const link = screen.getByText(skill.label).closest('a')
@@ -34,7 +43,7 @@ describe('Skills', () => {
   })
 
   it('has onMouseOver and onMouseOut event handlers', () => {
-    render(<Skills skills={mockSkills} />)
+    renderWithRouter(mockSkills)
 
     const chip = screen.getByText(mockSkills[0].label)
     expect(chip).toHaveProperty('onmouseover')
@@ -46,7 +55,7 @@ describe('Skills', () => {
   })
 
   it('has onFocus and onBlur event handlers', () => {
-    render(<Skills skills={mockSkills} />)
+    renderWithRouter(mockSkills)
 
     const chip = screen.getByText(mockSkills[0].label)
     expect(chip).toHaveProperty('onfocus')
@@ -58,13 +67,13 @@ describe('Skills', () => {
   })
 
   it('renders empty state gracefully', () => {
-    render(<Skills skills={[]} />)
+    renderWithRouter([])
     expect(screen.getByText('Skills')).toBeInTheDocument()
     // Should not throw any errors when no skills are provided
   })
 
   it('renders chips as links', () => {
-    render(<Skills skills={mockSkills} />)
+    renderWithRouter(mockSkills)
 
     mockSkills.forEach((skill) => {
       const link = screen.getByText(skill.label).closest('a')
