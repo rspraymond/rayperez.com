@@ -1,5 +1,6 @@
 import { Card, CardContent, Chip, Typography } from '@mui/material'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 type Skills = {
   skills: {
@@ -36,8 +37,8 @@ const Skills: React.FC<Skills> = ({ skills }) => (
             e.currentTarget.style.backgroundColor = ''
           }}
           key={index}
-          component='a'
-          href={skill.url}
+          component={Link}
+          to={skill.url}
           aria-label={`Read more about ${skill.label}`}
         />
       ))}
