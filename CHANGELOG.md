@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.7.1] - 2025-07-17
+### Bug Fixes
+
+- update skills component to use react router links (#76)
+
+
+
 ## [0.7.0] - 2025-07-15
 ### Features
 
