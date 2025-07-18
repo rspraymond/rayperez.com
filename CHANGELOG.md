@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.8.0] - 2025-07-18
+### Features
+
+- update heading structure on home page (#77)
+
+
+
 ## [0.7.1] - 2025-07-17
 ### Bug Fixes
 
