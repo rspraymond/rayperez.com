@@ -8,7 +8,7 @@ type Achievements = {
 const Achievements: React.FC<Achievements> = ({ achievements }) => (
   <Card style={{ marginTop: 16 }}>
     <CardContent>
-      <Typography variant='h5' gutterBottom>
+      <Typography variant='h5' gutterBottom component='h2'>
         Achievements
       </Typography>
       {achievements.map((achievement, key) => (
