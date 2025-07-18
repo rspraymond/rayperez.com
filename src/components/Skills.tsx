@@ -12,7 +12,7 @@ type Skills = {
 const Skills: React.FC<Skills> = ({ skills }) => (
   <Card style={{ marginTop: 16 }}>
     <CardContent>
-      <Typography variant='h5' gutterBottom id='skills-heading'>
+      <Typography variant='h5' gutterBottom component='h2' id='skills-heading'>
         Skills
       </Typography>
       {skills.map((skill, index) => (

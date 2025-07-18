@@ -25,10 +25,10 @@ const Experience: React.FC<Experience> = ({ title, company, duration, bullets })
     />
     <Card style={{ marginTop: 16 }}>
       <CardContent>
-        <Typography variant='h5' gutterBottom>
+        <Typography variant='h5' gutterBottom component='h2'>
           {title}
         </Typography>
-        <Typography variant='subtitle1' color='textSecondary'>
+        <Typography variant='subtitle1' color='textSecondary' component='p'>
           {company} - {duration}
         </Typography>
         {bullets.map((bullet, key) => (

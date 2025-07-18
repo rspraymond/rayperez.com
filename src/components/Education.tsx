@@ -11,10 +11,10 @@ type Education = {
 const Education: React.FC<Education> = ({ degree, school, duration, details }) => (
   <Card style={{ marginTop: 16 }}>
     <CardContent>
-      <Typography variant='h5' gutterBottom>
+      <Typography variant='h5' gutterBottom component='h2'>
         {degree}
       </Typography>
-      <Typography variant='subtitle1' color='textSecondary'>
+      <Typography variant='subtitle1' color='textSecondary' component='p'>
         {school} - {duration}
       </Typography>
       <Box marginTop={2}>
