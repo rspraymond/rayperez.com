@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.9.0] - 2025-07-19
+### Features
+
+- optimize print styles loading (#78)
+
+
+
 ## [0.8.0] - 2025-07-18
 ### Features
 
