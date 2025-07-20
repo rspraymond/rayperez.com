@@ -56,16 +56,23 @@ describe('BlogPost', () => {
     children: <div data-testid='blog-content'>Test blog content</div>,
   }
 
-  it('renders with all required components', () => {
+  it('renders with all required components and skeletons', () => {
     render(
       <BrowserRouter>
         <BlogPost {...defaultProps} />
       </BrowserRouter>,
     )
 
+    // Check for header (not lazy loaded)
     expect(screen.getByTestId('header')).toBeInTheDocument()
+
+    // Check for skeletons of lazy-loaded components
     expect(screen.getByTestId('profile-card')).toBeInTheDocument()
     expect(screen.getByTestId('recent-posts')).toBeInTheDocument()
+    expect(screen.getByTestId('bookmarked-posts')).toBeInTheDocument()
+    expect(screen.getByTestId('author-bio')).toBeInTheDocument()
+
+    // Check for blog content
     expect(screen.getByTestId('blog-content')).toBeInTheDocument()
   })
 
