@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.10.0] - 2025-07-20
+### Features
+
+- lazy load blog post components (#79)
+
+
+
 ## [0.9.0] - 2025-07-19
 ### Features
 

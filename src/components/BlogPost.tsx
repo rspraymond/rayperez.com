@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { BlogPosting } from 'schema-dts'
 import {
@@ -18,16 +18,19 @@ import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router-dom'
-import Header from '../components/Header.tsx'
-import ProfileCard from '../components/ProfileCard.tsx'
-import RecentPosts from '../components/RecentPosts.tsx'
-import BookmarkedPosts from '../components/BookmarkedPosts.tsx'
-import AuthorBio from '../components/AuthorBio.tsx'
-import profileImage from '../assets/raymond-perez.jpg'
-import withCanonical from './WithCanonical.tsx'
+import Header from './Header'
+import LoadingSkeleton from './LoadingSkeleton'
+import withCanonical from './WithCanonical'
 import { PROFILE } from '../constants/profile'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { calculateReadingTime, formatReadingTime } from '../utils/readingTime'
+import profileImage from '../assets/raymond-perez.jpg'
+
+// Lazy load below-the-fold components
+const ProfileCard = lazy(() => import('./ProfileCard'))
+const RecentPosts = lazy(() => import('./RecentPosts'))
+const BookmarkedPosts = lazy(() => import('./BookmarkedPosts'))
+const AuthorBio = lazy(() => import('./AuthorBio'))
 
 interface BlogPostProps {
   title: string
@@ -106,9 +109,15 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
           <Grid container spacing={2} direction='row-reverse' alignItems='flex-start'>
             <Grid item xs={12} lg={4}>
               <Header />
-              <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
-              <BookmarkedPosts />
-              <RecentPosts />
+              <Suspense fallback={<LoadingSkeleton testId='profile-card' />}>
+                <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
+              </Suspense>
+              <Suspense fallback={<LoadingSkeleton testId='bookmarked-posts' />}>
+                <BookmarkedPosts />
+              </Suspense>
+              <Suspense fallback={<LoadingSkeleton testId='recent-posts' />}>
+                <RecentPosts />
+              </Suspense>
             </Grid>
             <Grid item xs={12} lg={8}>
               <Box mb={2}>
@@ -146,7 +155,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                 </Typography>
               </Box>
               {children}
-              <AuthorBio />
+              <Suspense fallback={<LoadingSkeleton testId='author-bio' />}>
+                <AuthorBio />
+              </Suspense>
             </Grid>
           </Grid>
         </Box>
