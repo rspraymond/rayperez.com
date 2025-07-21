@@ -118,7 +118,6 @@ This project implements several performance optimizations that should be maintai
 - All linting and formatting checks must pass
 - Code should build without errors
 - New features should include documentation
-- Update the CHANGELOG.md if applicable
 
 ## Issue Reporting
 
