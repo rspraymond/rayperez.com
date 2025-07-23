@@ -25,6 +25,7 @@ import { PROFILE } from '../constants/profile'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { calculateReadingTime, formatReadingTime } from '../utils/readingTime'
 import profileImage from '../assets/raymond-perez.jpg'
+import SocialShareButtons from './SocialShareButtons'
 
 // Lazy load below-the-fold components
 const ProfileCard = lazy(() => import('./ProfileCard'))
@@ -149,6 +150,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                   </IconButton>
                 </Tooltip>
               </Box>
+              <SocialShareButtons title={title} />
               <Box mb={2}>
                 <Typography variant='body2' color='text.secondary'>
                   {readingTimeDisplay}
