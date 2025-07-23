@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.11.0] - 2025-07-23
+### Features
+
+- add share buttons to blog posts (#81)
+
+### Other Changes
+
+- chore: add unit test for skeleton component (#80)
+- chore: update contributing docs to reflect automatic changelog
+
+
+
 ## [0.10.0] - 2025-07-20
 ### Features
 
