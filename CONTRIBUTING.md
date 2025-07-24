@@ -530,6 +530,10 @@ When adding a new article:
 - Ensure code examples display correctly
 - Test navigation to and from your article
 
+#### Adding a New Blog Post
+
+Add your post's metadata (title, date, path, and component import) to `src/constants/posts.ts`. This array is the single source for routing, navigation, and the sidebar. No other changes are needed.
+
 ## Release Process
 
 For information about the release process, versioning, and deployment, see [RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md).
