@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.12.0] - 2025-07-24
+### Features
+
+- add post previous/next navigation (#82)
+
+
+
 ## [0.11.0] - 2025-07-23
 ### Features
 
