@@ -24,6 +24,12 @@ vi.mock('react-router-dom', () => {
       <div data-testid={`route-${path}`}>{element}</div>
     ),
     useNavigate: () => navigate,
+    Link: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>) => (
+      <a {...props}>{children}</a>
+    ),
   }
 })
 

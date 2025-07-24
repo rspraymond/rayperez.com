@@ -19,6 +19,7 @@ import ArticleIcon from '@mui/icons-material/Article'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import { posts as allPosts } from '../constants/posts'
 
 // Define the structure of each post
 export interface Post {
@@ -26,30 +27,14 @@ export interface Post {
   path: string
 }
 
-// Sample blog posts data - in a real app, this would be fetched from an API or CMS
-const defaultPosts: Post[] = [
-  {
-    title: 'Why I Use MVC Pattern',
-    path: '/why-mvc-pattern',
-  },
-  {
-    title: 'Why I Choose React',
-    path: '/why-react',
-  },
-  {
-    title: 'Why I Choose Inertia.js',
-    path: '/why-inertia',
-  },
-  {
-    title: 'Why I Prefer Opinionated Frameworks',
-    path: '/why-opinionated',
-  },
-  {
-    title: 'Why I Choose TypeScript',
-    path: '/why-typescript',
-  },
-  // Removed the last item to keep only 5 most recent posts
-]
+// Use the 5 most recent posts by date
+const recentPosts: { title: string; path: string }[] = [...allPosts]
+  .sort((a, b) => {
+    if (a.date === b.date) return a.path.localeCompare(b.path)
+    return a.date < b.date ? 1 : -1 // Descending (newest first)
+  })
+  .slice(0, 5)
+  .map(({ title, path }) => ({ title, path }))
 
 interface PostItemProps {
   post: Post
@@ -92,10 +77,10 @@ const PostItem = memo(({ post, index, theme }: PostItemProps) => {
 })
 
 interface RecentPostsProps {
-  posts?: Post[]
+  posts?: { title: string; path: string }[]
 }
 
-const RecentPosts: React.FC<RecentPostsProps> = ({ posts = defaultPosts }) => {
+const RecentPosts: React.FC<RecentPostsProps> = ({ posts = recentPosts }) => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
   const [expanded, setExpanded] = useState(isDesktop)

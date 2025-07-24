@@ -17,7 +17,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import { Helmet } from 'react-helmet'
-import { useLocation } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import Header from './Header'
 import LoadingSkeleton from './LoadingSkeleton'
 import withCanonical from './WithCanonical'
@@ -26,6 +26,7 @@ import { useBookmarks } from '../hooks/useBookmarks'
 import { calculateReadingTime, formatReadingTime } from '../utils/readingTime'
 import profileImage from '../assets/raymond-perez.jpg'
 import SocialShareButtons from './SocialShareButtons'
+import { posts } from '../constants/posts'
 
 // Lazy load below-the-fold components
 const ProfileCard = lazy(() => import('./ProfileCard'))
@@ -68,6 +69,16 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
   const textContent = extractTextFromChildren(children)
   const readingTime = calculateReadingTime(textContent)
   const readingTimeDisplay = formatReadingTime(readingTime)
+
+  // Previous/Next navigation logic
+  const sortedPosts = [...posts].sort((a, b) => {
+    if (a.date === b.date) return a.path.localeCompare(b.path)
+    return a.date < b.date ? 1 : -1 // Descending (newest first)
+  })
+  const currentIdx = sortedPosts.findIndex((p) => p.path === location.pathname)
+  const prevPost = currentIdx > 0 ? sortedPosts[currentIdx - 1] : undefined
+  const nextPost =
+    currentIdx >= 0 && currentIdx < sortedPosts.length - 1 ? sortedPosts[currentIdx + 1] : undefined
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -160,6 +171,53 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
               <Suspense fallback={<LoadingSkeleton testId='author-bio' />}>
                 <AuthorBio />
               </Suspense>
+              {/* Previous/Next Navigation */}
+              {(prevPost || nextPost) && (
+                <Box
+                  mt={6}
+                  mb={2}
+                  display='flex'
+                  justifyContent='space-between'
+                  alignItems='center'
+                >
+                  {prevPost ? (
+                    <Box>
+                      <Typography variant='caption' color='text.secondary'>
+                        Previous
+                      </Typography>
+                      <Link
+                        component={RouterLink}
+                        to={prevPost.path}
+                        underline='hover'
+                        color='primary'
+                        sx={{ display: 'block', fontWeight: 500 }}
+                      >
+                        {prevPost.title}
+                      </Link>
+                    </Box>
+                  ) : (
+                    <span />
+                  )}
+                  {nextPost ? (
+                    <Box textAlign='right'>
+                      <Typography variant='caption' color='text.secondary'>
+                        Next
+                      </Typography>
+                      <Link
+                        component={RouterLink}
+                        to={nextPost.path}
+                        underline='hover'
+                        color='primary'
+                        sx={{ display: 'block', fontWeight: 500 }}
+                      >
+                        {nextPost.title}
+                      </Link>
+                    </Box>
+                  ) : (
+                    <span />
+                  )}
+                </Box>
+              )}
             </Grid>
           </Grid>
         </Box>
