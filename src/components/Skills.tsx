@@ -1,6 +1,7 @@
 import { Card, CardContent, Chip, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined'
 
 type Skills = {
   skills: {
@@ -12,7 +13,18 @@ type Skills = {
 const Skills: React.FC<Skills> = ({ skills }) => (
   <Card style={{ marginTop: 16 }}>
     <CardContent>
-      <Typography variant='h5' gutterBottom component='h2' id='skills-heading'>
+      <Typography
+        variant='h5'
+        gutterBottom
+        component='h2'
+        id='skills-heading'
+        sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}
+      >
+        <BuildOutlinedIcon
+          sx={{ mr: 1, color: 'text.secondary' }}
+          fontSize='medium'
+          aria-hidden='true'
+        />
         Skills
       </Typography>
       {skills.map((skill, index) => (

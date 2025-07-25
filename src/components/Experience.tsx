@@ -3,6 +3,7 @@ import React from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Occupation } from 'schema-dts'
 import { Helmet } from 'react-helmet'
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 
 type Experience = {
   title: string
@@ -25,7 +26,17 @@ const Experience: React.FC<Experience> = ({ title, company, duration, bullets })
     />
     <Card style={{ marginTop: 16 }}>
       <CardContent>
-        <Typography variant='h5' gutterBottom component='h2'>
+        <Typography
+          variant='h5'
+          gutterBottom
+          component='h2'
+          sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}
+        >
+          <WorkOutlineIcon
+            sx={{ mr: 1, color: 'text.secondary' }}
+            fontSize='medium'
+            aria-hidden='true'
+          />
           {title}
         </Typography>
         <Typography variant='subtitle1' color='textSecondary' component='p'>

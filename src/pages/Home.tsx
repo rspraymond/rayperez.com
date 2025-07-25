@@ -181,6 +181,7 @@ const Home: React.FC = () => {
               <RecentPosts />
             </Grid>
             <Grid item xs={12} lg={8}>
+              {/* Main content area headings and sections */}
               <Summary />
               <Links links={links} />
               <Skills skills={SKILLS} />

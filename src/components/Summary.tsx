@@ -1,10 +1,21 @@
 import { Card, CardContent, Link, Typography } from '@mui/material'
 import React from 'react'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 
 const Summary: React.FC = () => (
   <Card style={{ marginTop: 16, marginBottom: 16 }}>
     <CardContent>
-      <Typography gutterBottom variant='h5' component='h2'>
+      <Typography
+        gutterBottom
+        variant='h5'
+        component='h2'
+        sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}
+      >
+        <PersonOutlineIcon
+          sx={{ mr: 1, color: 'text.secondary' }}
+          fontSize='medium'
+          aria-hidden='true'
+        />
         Professional Summary
       </Typography>
       <Typography variant='body2' color='textSecondary' component='p'>
