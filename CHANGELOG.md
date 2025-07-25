@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.13.0] - 2025-07-25
+### Features
+
+- add icons to home page headings
+
+
+
 ## [0.12.0] - 2025-07-24
 ### Features
 
