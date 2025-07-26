@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.14.0] - 2025-07-26
+### Features
+
+- add title tag to profile pic
+
+
+
 ## [0.13.0] - 2025-07-25
 ### Features
 
