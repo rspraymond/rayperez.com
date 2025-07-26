@@ -41,6 +41,7 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
         <LazyImage
           src={image}
           alt={`${name}'s profile picture`}
+          title={`${name}'s profile picture`}
           width={200}
           height={200}
           priority
