@@ -21,7 +21,7 @@ export const posts: PostMeta[] = [
     Component: lazy(() => import('../pages/articles/WhyInertia')),
   },
   {
-    title: 'Why I Choose Object Orientied Programming',
+    title: 'Why I Choose Object Oriented Programming',
     date: '2024-07-04',
     path: '/why-oop',
     Component: lazy(() => import('../pages/articles/WhyOOP')),
