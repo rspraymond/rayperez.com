@@ -6,7 +6,7 @@ import LazySyntaxHighlighter from '../../components/LazySyntaxHighlighter'
 const WhyOOP = (): React.ReactElement => {
   return (
     <BlogPost
-      title='Why I Choose Object Orientied Programming'
+      title='Why I Choose Object Oriented Programming'
       author='Raymond Perez'
       date='2024-07-04'
       children={
