@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.14.1] - 2025-07-27
+### Bug Fixes
+
+- correct typo on object oriented programming (#83)
+
+
+
 ## [0.14.0] - 2025-07-26
 ### Features
 
