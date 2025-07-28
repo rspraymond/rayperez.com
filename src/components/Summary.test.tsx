@@ -17,9 +17,11 @@ describe('Summary', () => {
     // Check for card structure
     const headingElement = screen.getByRole('heading', { level: 2 })
     expect(headingElement).toBeInTheDocument()
+    expect(headingElement).toHaveTextContent('Professional Summary')
 
-    const cardContent = screen.getByText(/^Hi my name is Raymond/i)
-    expect(cardContent).toBeInTheDocument()
+    // Check that content exists without being tied to specific text
+    const contentElement = screen.getByText(/Raymond Perez/i)
+    expect(contentElement).toBeInTheDocument()
   })
 
   test('contains a link to opinionated frameworks page', () => {
@@ -37,9 +39,17 @@ describe('Summary', () => {
     const card = screen.getByRole('heading', { level: 2 }).closest('div')
     expect(card).toBeInTheDocument()
 
-    // Check that content exists (rather than checking for specific MUI props)
-    const textContent = screen.getByText(/^Hi my name is Raymond/i)
+    // Check that content exists and has proper paragraph structure
+    const textContent = screen.getByText(/software engineer/i)
     expect(textContent).toBeInTheDocument()
     expect(textContent.tagName.toLowerCase()).toBe('p')
+  })
+
+  test('renders call to action', () => {
+    renderComponent()
+
+    // Check for call to action without being too specific about wording
+    const callToAction = screen.getByText(/connect/i)
+    expect(callToAction).toBeInTheDocument()
   })
 })
