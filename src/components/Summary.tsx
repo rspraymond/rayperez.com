@@ -19,17 +19,17 @@ const Summary: React.FC = () => (
         Professional Summary
       </Typography>
       <Typography variant='body2' color='textSecondary' component='p'>
-        Hi my name is Raymond. Feel free to call me Ray or Raymond, I don't mind either (my gamer
-        tag is Reymundo). I am an aspiring entrepreneur focused on creating impactful business
-        ventures that solve real-world problems. With expertise in PHP (Laravel), React, Node.js,
-        and cloud computing (AWS, Datadog, New Relic), I leverage technology to develop innovative
-        solutions. I prefer{' '}
+        I am Raymond Perez, a software engineer and entrepreneur focused on building impactful
+        technology solutions. I specialize in full-stack development with expertise in PHP
+        (Laravel), React, Node.js, and cloud infrastructure (AWS, Datadog, New Relic). I build
+        scalable applications using{' '}
         <Link href='/why-opinionated' key='/why-opinionated' color='primary' underline='hover'>
           opinionated frameworks
-        </Link>
-        . I actively engage in workshops and entrepreneurial communities. I invite collaboration
-        with like-minded individuals for partnerships, mentorship, and sharing insights to drive
-        meaningful change.
+        </Link>{' '}
+        and modern development practices. I actively contribute to entrepreneurial communities and
+        seek partnerships with innovators who share my vision for technology-driven solutions that
+        address real-world challenges. Let's connect to explore collaboration opportunities or
+        discuss how we can build something meaningful together.
       </Typography>
     </CardContent>
   </Card>
