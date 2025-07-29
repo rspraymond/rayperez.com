@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.16.0] - 2025-07-29
+### Features
+
+- add clips finder link (#85)
+
+
+
 ## [0.15.0] - 2025-07-28
 ### Features
 
