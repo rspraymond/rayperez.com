@@ -1,49 +1,43 @@
 ## Changelog
 
-
 ## [0.16.0] - 2025-07-29
+
 ### Features
 
 - add clips finder link (#85)
 
-
-
 ## [0.15.0] - 2025-07-28
+
 ### Features
 
 - update summary to be more declarative and expressive (#84)
 
-
-
 ## [0.14.1] - 2025-07-27
+
 ### Bug Fixes
 
 - correct typo on object oriented programming (#83)
 
-
-
 ## [0.14.0] - 2025-07-26
+
 ### Features
 
 - add title tag to profile pic
 
-
-
 ## [0.13.0] - 2025-07-25
+
 ### Features
 
 - add icons to home page headings
 
-
-
 ## [0.12.0] - 2025-07-24
+
 ### Features
 
 - add post previous/next navigation (#82)
 
-
-
 ## [0.11.0] - 2025-07-23
+
 ### Features
 
 - add share buttons to blog posts (#81)
@@ -53,44 +47,38 @@
 - chore: add unit test for skeleton component (#80)
 - chore: update contributing docs to reflect automatic changelog
 
-
-
 ## [0.10.0] - 2025-07-20
+
 ### Features
 
 - lazy load blog post components (#79)
 
-
-
 ## [0.9.0] - 2025-07-19
+
 ### Features
 
 - optimize print styles loading (#78)
 
-
-
 ## [0.8.0] - 2025-07-18
+
 ### Features
 
 - update heading structure on home page (#77)
 
-
-
 ## [0.7.1] - 2025-07-17
+
 ### Bug Fixes
 
 - update skills component to use react router links (#76)
 
-
-
 ## [0.7.0] - 2025-07-15
+
 ### Features
 
 - add loading skeleton for profile card (#74)
 
-
-
 ## [0.6.0] - 2025-07-14
+
 ### Features
 
 - add full screen mode for article code examples (#73)
@@ -99,16 +87,14 @@
 
 - chore: add unit tests for bookmark context component (#72)
 
-
-
 ## [0.5.0] - 2025-07-12
+
 ### Features
 
 - add bio component to blogs (#71)
 
-
-
 ## [0.4.0] - 2025-07-11
+
 ### Features
 
 - optimize react context usage (#70)
@@ -117,30 +103,26 @@
 
 - chore: add release docs (#69)
 
-
-
 ## [0.3.2] - 2025-07-09
+
 ### Bug Fixes
 
 - add push permissions for deploy job (#68)
 
-
-
 ## [0.3.1] - 2025-07-08
+
 ### Bug Fixes
 
 - use correct push command for tag deploys (#67)
 
-
-
 ## [0.3.0] - 2025-07-07
+
 ### Features
 
 - add deploy from tag (#66)
 
-
-
 ## [0.2.0] - 2025-07-06
+
 ### Features
 
 - improve ci workflows (#65)
@@ -149,9 +131,8 @@
 
 - chore: add system diagram documentation (#64)
 
-
-
 ## [0.1.0] - 2025-07-04
+
 ### Features
 
 - add changelog automation (#62)
@@ -251,7 +232,6 @@
 - chore: add sitemap
 - chore: package updates
 - chore: update dependencies
-
 
 ### V1.0.2 - 2018-07-17
 
