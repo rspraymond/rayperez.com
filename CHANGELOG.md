@@ -1,5 +1,16 @@
 ## Changelog
 
+
+## [0.17.0] - 2025-07-31
+### Features
+
+- cleanup app component (#87)
+
+### Other Changes
+
+- chore: fix code formatting (#86)
+
+
 ## [0.16.0] - 2025-07-29
 
 ### Features
