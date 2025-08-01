@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.18.0] - 2025-08-01
+### Features
+
+- update meta description (#88)
+
+
+
 ## [0.17.0] - 2025-07-31
 ### Features
 
