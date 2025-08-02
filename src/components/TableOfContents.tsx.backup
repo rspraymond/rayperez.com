@@ -1,0 +1,151 @@
+import React, { useEffect, useState } from 'react'
+import {
+  Paper,
+  Typography,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Collapse,
+  IconButton,
+  Box,
+} from '@mui/material'
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
+interface HeadingItem {
+  id: string
+  text: string
+  level: number
+}
+
+const TableOfContents: React.FC = () => {
+  const [headings, setHeadings] = useState<HeadingItem[]>([])
+  const [isExpanded, setIsExpanded] = useState(true)
+
+  useEffect(() => {
+    const extractHeadings = (): HeadingItem[] => {
+      const headingElements = document.querySelectorAll('h3, h5')
+      const headingItems: HeadingItem[] = []
+
+      headingElements.forEach((heading, index) => {
+        const text = heading.textContent?.trim()
+        if (!text) return
+
+        // Skip "Key Takeaways" and "Frequently Asked Questions" headings
+        if (text === 'Key Takeaways' || text === 'Frequently Asked Questions') return
+
+        const level = parseInt(heading.tagName.charAt(1))
+        let id = heading.id
+
+        // Generate ID if not present
+        if (!id) {
+          id = `heading-${index}-${text.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+          heading.id = id
+        }
+
+        headingItems.push({ id, text, level })
+      })
+
+      return headingItems
+    }
+
+    // Extract headings after component mounts and content is rendered
+    const timer = setTimeout(() => {
+      setHeadings(extractHeadings())
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  const handleScrollToHeading = (id: string): void => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  const toggleExpanded = (): void => {
+    setIsExpanded(!isExpanded)
+  }
+
+  // Don't render if no headings found
+  if (headings.length === 0) {
+    return null
+  }
+
+  return (
+    <Paper 
+      elevation={1}
+      sx={{ 
+        mb: 2, 
+        bgcolor: 'background.paper'
+      }}
+    >
+      <Box 
+        display="flex"
+        alignItems="center"
+        sx={{ 
+          px: 3, 
+          py: 2, 
+          borderBottom: '1px solid', 
+          borderColor: 'divider', 
+          cursor: 'pointer',
+          '&:hover': {
+            bgcolor: 'action.hover',
+
+          }
+        }}
+        onClick={toggleExpanded}
+      >
+        <Typography variant="subtitle2" sx={{ fontWeight: 600, color: 'text.primary', flexGrow: 1 }}>
+          Contents
+        </Typography>
+        <IconButton
+          size="small"
+          sx={{ color: 'text.secondary' }}
+          aria-label={isExpanded ? 'collapse table of contents' : 'expand table of contents'}
+        >
+          {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </IconButton>
+      </Box>
+      <Collapse in={isExpanded}>
+        <List dense sx={{ py: 0 }}>
+          {headings.map((heading) => (
+            <ListItem key={heading.id} disablePadding>
+              <ListItemButton
+                onClick={() => handleScrollToHeading(heading.id)}
+                sx={{
+                  pl: heading.level === 3 ? 2 : 3,
+                  py: 0.75,
+                  minHeight: 'auto',
+                  '&:hover': {
+                    bgcolor: 'action.hover',
+                    '                    '                    'bgcolor: 'action.hover', .MuiListItemText-primary': { .MuiListItemText-primary': { .MuiListItemText-primary': {
+                      color: 'primary.main',
+                    },
+                  },
+                }}
+              >
+                <ListItemText
+                  primary={heading.text}
+                  primaryTypographyProps={{
+                    variant: 'body2',
+                    sx: { 
+                      fontSize: heading.level === 3 ? '0.875rem' : '0.8125rem',
+                      fontWeight: heading.level === 3 ? 500 : 400,
+                      color: 'text.secondary',
+                      lineHeight: 1.4
+                    }
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Collapse>
+    </Paper>
+  )
+}
+
+export default TableOfContents
