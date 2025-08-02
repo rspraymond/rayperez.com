@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.19.0] - 2025-08-02
+### Features
+
+- add table of contents (#89)
+
+
+
 ## [0.18.0] - 2025-08-01
 ### Features
 
