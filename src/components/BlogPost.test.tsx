@@ -42,6 +42,18 @@ vi.mock('./RecentPosts', () => ({
   default: () => <div data-testid='recent-posts'>Recent Posts Component</div>,
 }))
 
+vi.mock('./TableOfContents', () => ({
+  default: () => <div data-testid='table-of-contents'>Table of Contents Component</div>,
+}))
+
+vi.mock('./BookmarkedPosts', () => ({
+  default: () => <div data-testid='bookmarked-posts'>Bookmarked Posts Component</div>,
+}))
+
+vi.mock('./AuthorBio', () => ({
+  default: () => <div data-testid='author-bio'>Author Bio Component</div>,
+}))
+
 vi.mock('./WithCanonical', () => ({
   default: (Component: React.ComponentType<BlogPostProps>) => (props: BlogPostProps) => (
     <Component {...props} data-testid='with-canonical' />
@@ -68,6 +80,7 @@ describe('BlogPost', () => {
 
     // Check for skeletons of lazy-loaded components
     expect(screen.getByTestId('profile-card')).toBeInTheDocument()
+    expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
     expect(screen.getByTestId('recent-posts')).toBeInTheDocument()
     expect(screen.getByTestId('bookmarked-posts')).toBeInTheDocument()
     expect(screen.getByTestId('author-bio')).toBeInTheDocument()

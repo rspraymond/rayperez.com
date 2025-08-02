@@ -33,6 +33,7 @@ const ProfileCard = lazy(() => import('./ProfileCard'))
 const RecentPosts = lazy(() => import('./RecentPosts'))
 const BookmarkedPosts = lazy(() => import('./BookmarkedPosts'))
 const AuthorBio = lazy(() => import('./AuthorBio'))
+const TableOfContents = lazy(() => import('./TableOfContents'))
 
 interface BlogPostProps {
   title: string
@@ -167,6 +168,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
                   {readingTimeDisplay}
                 </Typography>
               </Box>
+              <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
+                <TableOfContents />
+              </Suspense>
               {children}
               <Suspense fallback={<LoadingSkeleton testId='author-bio' />}>
                 <AuthorBio />
