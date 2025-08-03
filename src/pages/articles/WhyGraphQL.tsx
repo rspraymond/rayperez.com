@@ -42,7 +42,7 @@ const WhyGraphQL = (): React.ReactElement => {
               />
             </ListItem>
           </List>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             I. Introduction
           </Typography>
           <Typography paragraph>
@@ -52,7 +52,7 @@ const WhyGraphQL = (): React.ReactElement => {
             why, in my experience, I've found myself leaning more towards GraphQL.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             II. Flexibility and Adaptability
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -108,7 +108,7 @@ const WhyGraphQL = (): React.ReactElement => {
 }`}
           </LazySyntaxHighlighter>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             III. Simplified API Structure
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -135,7 +135,7 @@ const WhyGraphQL = (): React.ReactElement => {
             services, providing a single point of access for all your data needs.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IV. Performance Benefits
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -180,7 +180,7 @@ const WhyGraphQL = (): React.ReactElement => {
 }`}
           </LazySyntaxHighlighter>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             V. Client-Side Development Advantages
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -221,7 +221,7 @@ const WhyGraphQL = (): React.ReactElement => {
 }`}
           </LazySyntaxHighlighter>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VI. Security and Error Handling
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -282,7 +282,7 @@ if (!user.canSeePost(postId)) {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VII. Use Cases for GraphQL
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -330,7 +330,7 @@ if (!user.canSeePost(postId)) {
             requirements.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VIII. Drawbacks and Considerations
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -365,7 +365,7 @@ if (!user.canSeePost(postId)) {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IX. Comparing GraphQL and REST
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -420,7 +420,7 @@ if (!user.canSeePost(postId)) {
 }`}
           </LazySyntaxHighlighter>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             X. Conclusion
           </Typography>
           <Typography paragraph>
