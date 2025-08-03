@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.20.0] - 2025-08-03
+### Features
+
+- convert h3 headings for articles (#90)
+
+
+
 ## [0.19.0] - 2025-08-02
 ### Features
 
