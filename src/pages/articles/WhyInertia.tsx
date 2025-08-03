@@ -35,7 +35,7 @@ const WhyInertia = (): React.ReactElement => {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Background
           </Typography>
 
@@ -53,7 +53,7 @@ const WhyInertia = (): React.ReactElement => {
             applications. Let me explain why.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             What Is Inertia.js?
           </Typography>
 
@@ -95,7 +95,7 @@ npm install @inertiajs/react`}
             </LazySyntaxHighlighter>
           </Paper>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Why It Resonates (Personally)
           </Typography>
 
@@ -142,7 +142,7 @@ class UserController extends Controller
             productive from day one while continuously improving my skills.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             How It Changes Development
           </Typography>
 
@@ -279,7 +279,7 @@ export default function CreateUser() {
             </LazySyntaxHighlighter>
           </Paper>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Possible Drawbacks
           </Typography>
 
@@ -348,7 +348,7 @@ return Inertia::render('Dashboard', [
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Community Perspectives
           </Typography>
 
@@ -379,7 +379,7 @@ return Inertia::render('Dashboard', [
             leverage their existing skills while gradually learning new ones.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Practical Differences vs. "Vanilla" React
           </Typography>
 
@@ -538,7 +538,7 @@ export default function Users({ users }: Props) {
             </LazySyntaxHighlighter>
           </Paper>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Takeaways
           </Typography>
 
@@ -573,7 +573,7 @@ export default function Users({ users }: Props) {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Questions to Consider
           </Typography>
 
