@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.21.0] - 2025-08-04
+### Features
+
+- add proper heading for why laravel (#91)
+
+
+
 ## [0.20.0] - 2025-08-03
 ### Features
 
