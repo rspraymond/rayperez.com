@@ -62,7 +62,7 @@ const WhyLaravel = (): React.ReactElement => {
             choice for your next project.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             II. Ease of Use and Rapid Development
           </Typography>
 
@@ -121,7 +121,7 @@ const WhyLaravel = (): React.ReactElement => {
             Laravel community.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             III. Powerful Built-In Features
           </Typography>
 
@@ -194,7 +194,7 @@ const WhyLaravel = (): React.ReactElement => {
             ensure that your code is clean, maintainable, and scalable.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IV. Flexibility and Customization
           </Typography>
 
@@ -258,7 +258,7 @@ const WhyLaravel = (): React.ReactElement => {
             team's coding standards.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             V. Strong Community and Ecosystem
           </Typography>
 
@@ -301,7 +301,7 @@ const WhyLaravel = (): React.ReactElement => {
             application, Laravel has the tools and resources to help you succeed.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VI. Security and Performance
           </Typography>
 
@@ -362,7 +362,7 @@ const WhyLaravel = (): React.ReactElement => {
             for building robust and high-performing web applications.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VII. Comparison with Other Frameworks
           </Typography>
 
@@ -403,7 +403,7 @@ const WhyLaravel = (): React.ReactElement => {
             your project best.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VIII. Conclusion
           </Typography>
 
