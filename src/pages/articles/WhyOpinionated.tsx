@@ -44,7 +44,7 @@ const WhyOpinionated = (): React.ReactElement => {
             distinction is crucial, as it sets the stage for how projects are built and maintained.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             The Engineering Analogy
           </Typography>
           <Typography variant='body1' paragraph>
@@ -63,7 +63,7 @@ const WhyOpinionated = (): React.ReactElement => {
             minimizes risk but also fosters a sense of security and confidence in the final product.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Benefits of Opinionated Frameworks
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -132,7 +132,7 @@ const WhyOpinionated = (): React.ReactElement => {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Laravel as a Case Study
           </Typography>
           <Typography variant='body1' paragraph>
@@ -196,7 +196,7 @@ const WhyOpinionated = (): React.ReactElement => {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Addressing Criticisms
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -248,7 +248,7 @@ const WhyOpinionated = (): React.ReactElement => {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Lessons from Traditional Engineering
           </Typography>
           <Typography variant='h6' gutterBottom>
@@ -287,7 +287,7 @@ const WhyOpinionated = (): React.ReactElement => {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             Conclusion
           </Typography>
           <Typography variant='body1' paragraph>

@@ -26,7 +26,7 @@ const WhyTypeScript = (): React.ReactElement => {
             </ListItem>
           </List>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             I. Introduction
           </Typography>
           <Typography paragraph>
@@ -37,7 +37,7 @@ const WhyTypeScript = (): React.ReactElement => {
             typed superset of JavaScript that adds optional types to the language.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             II. Benefits of TypeScript
           </Typography>
 
@@ -181,7 +181,7 @@ add("Hello", 5);`}
             available to enhance error readability, making the debugging process much smoother.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             III. Addressing Common Concerns
           </Typography>
 
@@ -218,7 +218,7 @@ add("Hello", 5);`}
             daunting option for teams considering making the switch.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IV. Real-World Applications and Success Stories
           </Typography>
 
@@ -244,7 +244,7 @@ add("Hello", 5);`}
             JavaScript.
           </Typography>
 
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             V. Conclusion
           </Typography>
           <Typography paragraph>
