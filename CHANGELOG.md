@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.22.0] - 2025-08-05
+### Features
+
+- convert headings for why opinionated and typescript (#92)
+
+
+
 ## [0.21.0] - 2025-08-04
 ### Features
 
