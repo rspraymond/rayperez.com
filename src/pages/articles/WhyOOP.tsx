@@ -47,7 +47,7 @@ const WhyOOP = (): React.ReactElement => {
             understanding why many choose OOP can provide valuable insights into the world of
             programming.
           </Typography>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             II. The Prevalence of OOP in the Industry
           </Typography>
           <Typography variant='body1' paragraph>
@@ -151,7 +151,7 @@ const WhyOOP = (): React.ReactElement => {
             contributes to the robustness, flexibility, and maintainability of OOP, making it a
             powerful tool for tackling complex programming problems.
           </Typography>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IV. Benefits of OOP
           </Typography>
           <Typography variant='body1' paragraph>
@@ -230,7 +230,7 @@ const WhyOOP = (): React.ReactElement => {
             These benefits make OOP a powerful tool for developing complex software systems.
             However, like any tool, it's not without its criticisms and misconceptions.
           </Typography>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             V. Criticisms and Misconceptions about OOP
           </Typography>
           <Typography variant='body1' paragraph>
@@ -294,7 +294,7 @@ const WhyOOP = (): React.ReactElement => {
             wielding it. With proper understanding and usage, OOP can be a powerful tool in the
             software development arsenal.
           </Typography>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VI. OOP in Modern Software Development
           </Typography>
           <Typography variant='body1' paragraph>
@@ -342,7 +342,7 @@ const WhyOOP = (): React.ReactElement => {
             preferred choice for many developers, and its evolution ensures its relevance in the
             face of changing development practices and technologies.
           </Typography>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VII. Conclusion
           </Typography>
           <Typography variant='body1' paragraph>
