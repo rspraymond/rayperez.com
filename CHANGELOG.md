@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.23.0] - 2025-08-06
+### Features
+
+- convert headings for toc on why oop (#93)
+
+
+
 ## [0.22.0] - 2025-08-05
 ### Features
 
