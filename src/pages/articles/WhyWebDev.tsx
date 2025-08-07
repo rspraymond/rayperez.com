@@ -43,7 +43,7 @@ const WhyWebDev = (): React.ReactElement => {
             potential to make a significant impact. In this post, I'll delve into why web
             development is an ideal career choice for me and potentially for you too.
           </Typography>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             II. Accessibility and Low Barrier to Entry
           </Typography>
           <Typography variant='body1' paragraph>
@@ -76,7 +76,7 @@ const WhyWebDev = (): React.ReactElement => {
             In essence, the low barrier to entry and the abundance of learning resources make web
             development an accessible career choice.
           </Typography>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             III. High Demand and Lucrative Salaries
           </Typography>
           <Typography variant='body1' paragraph>
@@ -106,7 +106,7 @@ const WhyWebDev = (): React.ReactElement => {
             In summary, the high demand, competitive salaries, and the potential to make a
             significant impact make web development a rewarding career choice.
           </Typography>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IV. Versatility and Creative Freedom
           </Typography>
           <Typography variant='body1' paragraph>
@@ -136,7 +136,7 @@ const WhyWebDev = (): React.ReactElement => {
             In a nutshell, the versatility of projects, the opportunity for creativity, and the
             constant learning and innovation make web development a dynamic and fulfilling career.
           </Typography>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             V. Work-Life Balance and Flexibility
           </Typography>
           <Typography variant='body1' paragraph>
@@ -162,7 +162,7 @@ const WhyWebDev = (): React.ReactElement => {
             attractive career option, especially for those who value autonomy and the ability to
             work on their own terms.
           </Typography>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VI. Impact and Contribution
           </Typography>
           <Typography variant='body1' paragraph>
@@ -188,7 +188,7 @@ const WhyWebDev = (): React.ReactElement => {
             designing a user-friendly interface, your work can have a profound impact on the
             end-users.
           </Typography>
-          <Typography variant='h4' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VII. Conclusion
           </Typography>
           <Typography variant='body1' paragraph>
