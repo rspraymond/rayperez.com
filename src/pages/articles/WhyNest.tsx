@@ -66,7 +66,7 @@ const WhyNest = (): React.ReactElement => {
 
           <Divider sx={{ my: 4 }} />
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             I. Introduction
           </Typography>
           <Typography paragraph>
@@ -77,7 +77,7 @@ const WhyNest = (): React.ReactElement => {
             reasons why I, as a developer, choose NestJS over other frameworks.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             II. Structured and Opinionated Framework
           </Typography>
           <Typography paragraph>
@@ -109,7 +109,7 @@ const WhyNest = (): React.ReactElement => {
             understand, especially when the application starts to grow.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             III. TypeScript Integration
           </Typography>
           <Typography paragraph>
@@ -134,7 +134,7 @@ const WhyNest = (): React.ReactElement => {
             integration makes NestJS a joy to work with.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IV. Dependency Injection
           </Typography>
           <Typography paragraph>
@@ -159,7 +159,7 @@ const WhyNest = (): React.ReactElement => {
             version for testing or a different implementation for different environments.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             V. Modularity and Scalability
           </Typography>
           <Typography paragraph>
@@ -186,7 +186,7 @@ const WhyNest = (): React.ReactElement => {
             of responsibilities makes the code easier to understand and maintain.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VI. Comprehensive Documentation and Community Support
           </Typography>
           <Typography paragraph>
@@ -201,7 +201,7 @@ const WhyNest = (): React.ReactElement => {
             and community support invaluable.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VII. Built-in Features and Best Practices
           </Typography>
           <Typography paragraph>
@@ -229,7 +229,7 @@ const WhyNest = (): React.ReactElement => {
             these best practices are built in, so you can focus on writing your business logic.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             VIII. Ease of Onboarding for New Developers
           </Typography>
           <Typography paragraph>
@@ -245,7 +245,7 @@ const WhyNest = (): React.ReactElement => {
             appreciate the flexibility and power that NestJS offers.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             IX. Addressing Common Criticisms
           </Typography>
           <Typography paragraph>
@@ -265,7 +265,7 @@ const WhyNest = (): React.ReactElement => {
             outweigh these potential drawbacks.
           </Typography>
 
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='h3' gutterBottom>
             X. Conclusion
           </Typography>
           <Typography paragraph>
