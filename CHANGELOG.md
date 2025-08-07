@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.24.0] - 2025-08-07
+### Features
+
+- convert headings for why webdev and why nest (#94)
+
+
+
 ## [0.23.0] - 2025-08-06
 ### Features
 
