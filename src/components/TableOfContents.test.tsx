@@ -138,12 +138,22 @@ describe('TableOfContents', () => {
       .filter((btn) => btn.textContent?.includes('First Section'))
 
     if (listItemButtons.length > 0) {
+      // Ensure no hash initially
+      expect(window.location.hash).toBe('')
+
       fireEvent.click(listItemButtons[0])
 
       expect(mockScrollIntoView).toHaveBeenCalledWith({
         behavior: 'smooth',
         block: 'start',
       })
+
+      // Hash should be updated to the generated id of the first matching heading
+      const targetHeading = Array.from(document.querySelectorAll('h3, h5')).find(
+        (h) => h.textContent?.trim() === 'First Section',
+      ) as HTMLElement | undefined
+      const expectedId = targetHeading?.id
+      expect(window.location.hash).toBe(expectedId ? `#${expectedId}` : '')
     }
   })
 

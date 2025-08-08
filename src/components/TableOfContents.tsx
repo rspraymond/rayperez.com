@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   Paper,
   Typography,
@@ -22,6 +22,7 @@ interface HeadingItem {
 const TableOfContents: React.FC = () => {
   const [headings, setHeadings] = useState<HeadingItem[]>([])
   const [isExpanded, setIsExpanded] = useState(true)
+  const hasScrolledOnLoadRef = useRef(false)
 
   useEffect(() => {
     const extractHeadings = (): HeadingItem[] => {
@@ -58,10 +59,32 @@ const TableOfContents: React.FC = () => {
     return () => clearTimeout(timer)
   }, [])
 
+  // Scroll to hash target on initial load once headings are available
+  useEffect(() => {
+    if (hasScrolledOnLoadRef.current) return
+    if (headings.length === 0) return
+
+    const hash = typeof window !== 'undefined' ? window.location.hash : ''
+    if (!hash) return
+
+    const targetId = decodeURIComponent(hash.replace(/^#/, ''))
+    const targetElement = document.getElementById(targetId)
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      hasScrolledOnLoadRef.current = true
+    }
+  }, [headings])
+
   const handleScrollToHeading = (id: string): void => {
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Reflect hash in URL without triggering native jump
+      if (typeof window !== 'undefined' && window.history && 'replaceState' in window.history) {
+        window.history.replaceState(null, '', `#${id}`)
+      } else {
+        window.location.hash = id
+      }
     }
   }
 
