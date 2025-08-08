@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.25.0] - 2025-08-08
+### Features
+
+- update url on toc click (#95)
+
+
+
 ## [0.24.0] - 2025-08-07
 ### Features
 
