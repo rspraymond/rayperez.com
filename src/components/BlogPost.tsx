@@ -135,7 +135,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
             <Grid item xs={12} lg={8}>
               <Box mb={2}>
                 <Breadcrumbs aria-label='breadcrumb'>
-                  <Link color='inherit' href='/'>
+                  <Link component={RouterLink} color='inherit' to='/'>
                     Home
                   </Link>
                   <Typography color='textPrimary'>{title}</Typography>

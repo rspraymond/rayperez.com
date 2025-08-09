@@ -1,4 +1,5 @@
 import { Card, CardContent, Link, Typography } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import React from 'react'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 
@@ -23,7 +24,13 @@ const Summary: React.FC = () => (
         technology solutions. I specialize in full-stack development with expertise in PHP
         (Laravel), React, Node.js, and cloud infrastructure (AWS, Datadog, New Relic). I build
         scalable applications using{' '}
-        <Link href='/why-opinionated' key='/why-opinionated' color='primary' underline='hover'>
+        <Link
+          component={RouterLink}
+          to='/why-opinionated'
+          key='/why-opinionated'
+          color='primary'
+          underline='hover'
+        >
           opinionated frameworks
         </Link>{' '}
         and modern development practices. I actively contribute to entrepreneurial communities and
