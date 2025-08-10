@@ -1,6 +1,7 @@
 import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
+import { pathToFileURL } from 'url'
 
 export interface CommitInfo {
   hash: string
@@ -154,8 +155,12 @@ export function updateChangelog(newEntry: string) {
   fs.writeFileSync(changelogPath, lines.join('\n'))
 }
 
-// Main execution
-const latestTag = getLatestTag()
-const commits = getCommitsSinceTag(latestTag)
-const newEntry = formatChangelogEntry(commits)
-updateChangelog(newEntry)
+// Execute only when run directly (not when imported by tests)
+/* c8 ignore start */
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const latestTag = getLatestTag()
+  const commits = getCommitsSinceTag(latestTag)
+  const newEntry = formatChangelogEntry(commits)
+  updateChangelog(newEntry)
+}
+/* c8 ignore stop */

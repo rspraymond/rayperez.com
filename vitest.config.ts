@@ -14,6 +14,13 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       exclude: [
         'node_modules/',
+        'dist/**',
+        'coverage/**',
+        'public/**',
+        'scripts/**',
+        'vite.config.ts',
+        'vitest.config.ts',
+        '.commitlintrc.cjs',
         'src/setupTests.ts',
         'src/pages/articles/**',
         '**/*.d.ts',
