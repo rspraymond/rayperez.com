@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.25.1] - 2025-08-10
+### Bug Fixes
+
+- prevent changelog generation on tests (#97)
+
+
+
 ## [0.25.0] - 2025-08-08
 ### Features
 
