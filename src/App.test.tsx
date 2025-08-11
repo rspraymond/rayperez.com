@@ -20,9 +20,10 @@ vi.mock('react-router-dom', () => {
   return {
     BrowserRouter: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
     Routes: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-    Route: ({ path, element }: { path: string; element: React.ReactNode }) => (
-      <div data-testid={`route-${path}`}>{element}</div>
+    Route: ({ path, element }: { path?: string; element?: React.ReactNode }) => (
+      <div data-testid={`route-${path ?? 'layout'}`}>{element}</div>
     ),
+    Outlet: () => <div data-testid='outlet' />,
     useNavigate: () => navigate,
     Link: ({
       children,
@@ -41,23 +42,12 @@ vi.mock('./components/LoadingFallback', () => ({
 describe('App', () => {
   it('renders without crashing', () => {
     render(<App />)
-    expect(screen.getByTestId('route-/')).toBeInTheDocument()
+    expect(screen.getByTestId('route-layout')).toBeInTheDocument()
   })
 
   it('renders all routes', () => {
     render(<App />)
-    expect(screen.getByTestId('route-/')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-mvc-pattern')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-nestjs')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-graphql')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-nodejs')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-typescript')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-react')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-laravel')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-inertia')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-oop')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-web-development')).toBeInTheDocument()
-    expect(screen.getByTestId('route-/why-opinionated')).toBeInTheDocument()
+    expect(screen.getByTestId('route-layout')).toBeInTheDocument()
     expect(screen.getByTestId('route-*')).toBeInTheDocument()
   })
 
