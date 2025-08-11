@@ -5,7 +5,6 @@ import {
   ListItem,
   ListItemText,
   Paper,
-  Link,
   Divider,
   Box,
   ListItemIcon,
@@ -15,6 +14,7 @@ import {
   useMediaQuery,
   Theme,
 } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import ArticleIcon from '@mui/icons-material/Article'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -47,8 +47,8 @@ const PostItem = memo(({ post, index, theme }: PostItemProps) => {
     <React.Fragment>
       {index > 0 && <Divider component='li' variant='inset' />}
       <ListItem
-        component={Link}
-        href={post.path}
+        component={RouterLink}
+        to={post.path}
         sx={{
           py: 1.5,
           px: 2,

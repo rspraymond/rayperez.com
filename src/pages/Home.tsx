@@ -2,11 +2,7 @@ import React from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Person } from 'schema-dts'
 import profileImage from '../assets/raymond-perez.jpg'
-import { Container, CssBaseline, Box, Grid } from '@mui/material'
-import Header from '../components/Header.tsx'
-import ProfileCard from '../components/ProfileCard.tsx'
-import RecentPosts from '../components/RecentPosts.tsx'
-import BookmarkedPosts from '../components/BookmarkedPosts.tsx'
+import { Box } from '@mui/material'
 import Summary from '../components/Summary.tsx'
 import Links from '../components/Links.tsx'
 import Experience from '../components/Experience.tsx'
@@ -171,32 +167,18 @@ const Home: React.FC = () => {
         <link rel='canonical' href='https://www.rayperez.com' />
         <meta property='og:image' content={profileImage} />
       </Helmet>
-      <Container maxWidth={false}>
-        <CssBaseline />
-        <Box my={2}>
-          <Grid container spacing={2} direction='row-reverse' alignItems='flex-start'>
-            <Grid item xs={12} lg={4}>
-              <Header />
-              <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
-              <BookmarkedPosts />
-              <RecentPosts />
-            </Grid>
-            <Grid item xs={12} lg={8}>
-              {/* Main content area headings and sections */}
-              <Summary />
-              <Links links={links} />
-              <Skills skills={SKILLS} />
-              <Achievements achievements={achievements} />
-              {experiences.map((exp, key) => (
-                <Experience {...exp} key={key} />
-              ))}
-              {educations.map((edu, key) => (
-                <Education {...edu} key={key} />
-              ))}
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
+      <Box>
+        <Summary />
+        <Links links={links} />
+        <Skills skills={SKILLS} />
+        <Achievements achievements={achievements} />
+        {experiences.map((exp, key) => (
+          <Experience {...exp} key={key} />
+        ))}
+        {educations.map((edu, key) => (
+          <Education {...edu} key={key} />
+        ))}
+      </Box>
     </React.Fragment>
   )
 }

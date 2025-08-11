@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import RecentPosts, { Post } from './RecentPosts'
+import { MemoryRouter } from 'react-router-dom'
 
 // Mock Material UI components to better control their behavior
 vi.mock('@mui/material', async () => {
@@ -26,7 +27,11 @@ describe('RecentPosts', () => {
     ]
 
     // Arrange
-    render(<RecentPosts posts={mockPosts} />)
+    render(
+      <MemoryRouter>
+        <RecentPosts posts={mockPosts} />
+      </MemoryRouter>,
+    )
 
     // Assert initial state (collapsed on mobile)
     const headerText = screen.getByText('Recent Posts')

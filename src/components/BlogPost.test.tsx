@@ -30,17 +30,9 @@ vi.mock('react-helmet', () => ({
   ),
 }))
 
-vi.mock('./Header', () => ({
-  default: () => <div data-testid='header'>Header Component</div>,
-}))
+// Header lives in layout now; no need to assert it here
 
-vi.mock('./ProfileCard', () => ({
-  default: () => <div data-testid='profile-card'>Profile Card Component</div>,
-}))
-
-vi.mock('./RecentPosts', () => ({
-  default: () => <div data-testid='recent-posts'>Recent Posts Component</div>,
-}))
+// Sidebar components moved to layout; not rendered by BlogPost directly
 
 vi.mock('./TableOfContents', () => ({
   default: () => <div data-testid='table-of-contents'>Table of Contents Component</div>,
@@ -75,14 +67,8 @@ describe('BlogPost', () => {
       </BrowserRouter>,
     )
 
-    // Check for header (not lazy loaded)
-    expect(screen.getByTestId('header')).toBeInTheDocument()
-
-    // Check for skeletons of lazy-loaded components
-    expect(screen.getByTestId('profile-card')).toBeInTheDocument()
+    // Check for skeletons of lazy-loaded components rendered by BlogPost
     expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
-    expect(screen.getByTestId('recent-posts')).toBeInTheDocument()
-    expect(screen.getByTestId('bookmarked-posts')).toBeInTheDocument()
     expect(screen.getByTestId('author-bio')).toBeInTheDocument()
 
     // Check for blog content

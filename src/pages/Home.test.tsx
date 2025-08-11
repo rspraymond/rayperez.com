@@ -2,29 +2,11 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
 import Home from './Home'
-import { PROFILE } from '../constants/profile'
 import { BookmarkProvider } from '../contexts/BookmarkContext'
 
 // Mock the Helmet component
 vi.mock('react-helmet', () => ({
   Helmet: ({ children }) => <div data-testid='helmet-mock'>{children}</div>,
-}))
-
-// Mock the components used in Home
-vi.mock('../components/Header.tsx', () => ({
-  default: () => <div data-testid='header-component'>Header Mock</div>,
-}))
-
-vi.mock('../components/ProfileCard.tsx', () => ({
-  default: ({ name, role }) => (
-    <div data-testid='profile-card-component'>
-      Profile: {name} - {role}
-    </div>
-  ),
-}))
-
-vi.mock('../components/RecentPosts.tsx', () => ({
-  default: () => <div data-testid='recent-posts-component'>Recent Posts Mock</div>,
 }))
 
 vi.mock('../components/Summary.tsx', () => ({
@@ -59,28 +41,22 @@ vi.mock('../components/Education.tsx', () => ({
   ),
 }))
 
-vi.mock('../components/BookmarkedPosts.tsx', () => ({
-  default: () => <div data-testid='bookmarked-posts-component'>Bookmarked Posts Mock</div>,
-}))
+// BookmarkedPosts is provided by layout; Home no longer renders it directly
 
 const renderWithProvider = (component: React.ReactElement) => {
   return render(<BookmarkProvider>{component}</BookmarkProvider>)
 }
 
 describe('Home Component', () => {
-  it('renders profile information correctly', () => {
+  it('renders primary content correctly', () => {
     renderWithProvider(<Home />)
-
-    // Check for profile name and role
-    const profileCard = screen.getByTestId('profile-card-component')
-    expect(profileCard).toHaveTextContent(`Profile: ${PROFILE.name} - ${PROFILE.role}`)
+    expect(screen.getByTestId('summary-component')).toBeInTheDocument()
   })
 
   it('renders all main content sections', () => {
     renderWithProvider(<Home />)
 
-    // Verify all critical sections are present
-    expect(screen.getByTestId('header-component')).toBeInTheDocument()
+    // Verify main content sections are present
     expect(screen.getByTestId('summary-component')).toBeInTheDocument()
     expect(screen.getByTestId('skills-component')).toBeInTheDocument()
     expect(screen.getByTestId('achievements-component')).toBeInTheDocument()

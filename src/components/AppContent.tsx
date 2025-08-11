@@ -8,6 +8,7 @@ import { posts } from '../constants/posts'
 import Home from '../pages/Home'
 import NotFound from '../pages/NotFound'
 import HashRedirectHandler from './HashRedirectHandler'
+import SiteLayout from './SiteLayout'
 
 const AppContent: React.FC = () => {
   const { theme } = useTheme()
@@ -19,10 +20,12 @@ const AppContent: React.FC = () => {
         <HashRedirectHandler />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
-            <Route path='/' element={<Home />} />
-            {posts.map((post) => (
-              <Route key={post.path} path={post.path} element={<post.Component />} />
-            ))}
+            <Route element={<SiteLayout />}>
+              <Route path='/' element={<Home />} />
+              {posts.map((post) => (
+                <Route key={post.path} path={post.path} element={<post.Component />} />
+              ))}
+            </Route>
             <Route path='*' element={<NotFound />} />
           </Routes>
         </Suspense>
