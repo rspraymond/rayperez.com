@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.26.0] - 2025-08-11
+### Features
+
+- implement persistent layout (#98)
+
+
+
 ## [0.25.1] - 2025-08-10
 ### Bug Fixes
 
