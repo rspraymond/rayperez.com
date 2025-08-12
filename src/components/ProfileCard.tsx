@@ -1,6 +1,7 @@
-import { Box, Skeleton } from '@mui/material'
+import { Box, Skeleton, Button } from '@mui/material'
 import React from 'react'
 import LazyImage from './LazyImage'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
 
 type ProfileProps = {
   image: string
@@ -51,6 +52,19 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
       <Box component='header' style={{ textAlign: 'center', marginTop: '1rem' }}>
         <p>{role}</p>
       </Box>
+      <Button
+        variant='outlined'
+        color='primary'
+        component='a'
+        href='https://www.linkedin.com/in/raymond-perez-eng/'
+        target='_blank'
+        rel='noopener noreferrer'
+        startIcon={<LinkedInIcon />}
+        aria-label='Connect with Raymond on LinkedIn'
+        sx={{ mt: 1 }}
+      >
+        Connect on LinkedIn
+      </Button>
     </Box>
   )
 }
