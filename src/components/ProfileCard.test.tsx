@@ -28,4 +28,13 @@ describe('ProfileCard', () => {
     expect(image).toHaveAttribute('alt', `${testProps.name}'s profile picture`)
     expect(roleText).toBeInTheDocument()
   })
+
+  it('renders a LinkedIn connect CTA with correct attributes', () => {
+    render(<ProfileCard image='/test-image.jpg' name='Test User' role='Software Engineer' />)
+
+    const cta = screen.getByRole('link', { name: /connect.*linkedin/i })
+    expect(cta).toBeInTheDocument()
+    expect(cta).toHaveAttribute('href', 'https://www.linkedin.com/in/raymond-perez-eng/')
+    expect(cta).toHaveAttribute('target', '_blank')
+  })
 })

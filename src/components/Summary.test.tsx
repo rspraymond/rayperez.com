@@ -45,11 +45,9 @@ describe('Summary', () => {
     expect(textContent.tagName.toLowerCase()).toBe('p')
   })
 
-  test('renders call to action', () => {
+  test('keeps summary content accessible', () => {
     renderComponent()
-
-    // Check for call to action without being too specific about wording
-    const callToAction = screen.getByText(/connect/i)
-    expect(callToAction).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
+    expect(screen.getByText(/Raymond Perez/i)).toBeInTheDocument()
   })
 })
