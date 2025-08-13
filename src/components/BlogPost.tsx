@@ -162,6 +162,19 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
           ) : (
             <span />
           )}
+          <Box>
+            <Link
+              component={RouterLink}
+              to='/'
+              underline='hover'
+              color='primary'
+              aria-label='back to home'
+              onClick={() => window.scrollTo({ top: 0 })}
+              sx={{ fontWeight: 500 }}
+            >
+              Back to Home
+            </Link>
+          </Box>
           {nextPost ? (
             <Box textAlign='right'>
               <Typography variant='caption' color='text.secondary'>
