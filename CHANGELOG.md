@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.28.0] - 2025-08-13
+### Features
+
+- add home link to footer (#100)
+
+
+
 ## [0.27.0] - 2025-08-12
 ### Features
 
