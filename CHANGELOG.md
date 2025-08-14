@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.29.0] - 2025-08-14
+### Features
+
+- add copy link button (#101)
+
+
+
 ## [0.28.0] - 2025-08-13
 ### Features
 
