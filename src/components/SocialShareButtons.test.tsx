@@ -24,8 +24,9 @@ describe('SocialShareButtons', () => {
     mockOpen.mockClear()
   })
 
-  it('renders all three share buttons with correct aria-labels', () => {
+  it('renders all share buttons with correct aria-labels', () => {
     render(<SocialShareButtons title='Test Post' />)
+    expect(screen.getByLabelText('Copy link')).toBeInTheDocument()
     expect(screen.getByLabelText('Share on Twitter')).toBeInTheDocument()
     expect(screen.getByLabelText('Share on LinkedIn')).toBeInTheDocument()
     expect(screen.getByLabelText('Share on Facebook')).toBeInTheDocument()
@@ -47,5 +48,17 @@ describe('SocialShareButtons', () => {
     const url = mockOpen.mock.calls[0][0]
     expect(url).toContain(encodeURIComponent('Test Post'))
     expect(url).toContain(encodeURIComponent('https://example.com/post'))
+  })
+
+  it('copies the current URL to clipboard when copy link is clicked', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    // @ts-expect-error test shim for clipboard
+    global.navigator.clipboard = { writeText }
+
+    render(<SocialShareButtons title='Test Post' />)
+    fireEvent.click(screen.getByLabelText('Copy link'))
+
+    expect(writeText).toHaveBeenCalledWith('https://example.com/post')
+    expect(await screen.findByText('Link copied')).toBeInTheDocument()
   })
 })
