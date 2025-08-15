@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.30.0] - 2025-08-15
+### Features
+
+- add aria labels to external links (#102)
+
+
+
 ## [0.29.0] - 2025-08-14
 ### Features
 
