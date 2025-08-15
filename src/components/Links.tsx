@@ -54,6 +54,7 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
             component='a'
             fullWidth={isMobile}
             sx={isMobile ? { justifyContent: 'flex-start' } : undefined}
+            aria-label={`${link.text} (opens in new window)`}
           >
             {link.text}
           </Button>
