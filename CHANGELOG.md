@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.31.0] - 2025-08-16
+### Features
+
+- add norel to external links (#103)
+
+
+
 ## [0.30.0] - 2025-08-15
 ### Features
 
