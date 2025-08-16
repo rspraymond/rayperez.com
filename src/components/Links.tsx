@@ -50,6 +50,7 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
             color='primary'
             href={link.href}
             target='_blank'
+            rel='noopener noreferrer'
             key={link.href}
             component='a'
             fullWidth={isMobile}
