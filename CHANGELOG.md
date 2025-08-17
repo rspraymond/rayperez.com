@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.32.0] - 2025-08-17
+### Features
+
+- add aria-current to active links (#104)
+
+
+
 ## [0.31.0] - 2025-08-16
 ### Features
 
