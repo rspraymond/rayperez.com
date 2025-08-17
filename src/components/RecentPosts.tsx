@@ -14,7 +14,7 @@ import {
   useMediaQuery,
   Theme,
 } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import ArticleIcon from '@mui/icons-material/Article'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -43,12 +43,16 @@ interface PostItemProps {
 }
 
 const PostItem = memo(({ post, index, theme }: PostItemProps) => {
+  const location = useLocation()
+  const isActive = location.pathname === post.path
+
   return (
     <React.Fragment>
       {index > 0 && <Divider component='li' variant='inset' />}
       <ListItem
         component={RouterLink}
         to={post.path}
+        aria-current={isActive ? 'page' : undefined}
         sx={{
           py: 1.5,
           px: 2,
