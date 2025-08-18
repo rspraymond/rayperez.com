@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.33.0] - 2025-08-18
+### Features
+
+- add title attributes to social links (#105)
+
+
+
 ## [0.32.0] - 2025-08-17
 ### Features
 
