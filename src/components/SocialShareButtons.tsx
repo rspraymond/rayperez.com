@@ -48,7 +48,7 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
     <>
       <Box display='flex' gap={1} mb={2}>
         <Tooltip title='Copy link'>
-          <IconButton aria-label='Copy link' onClick={handleCopy} size='small'>
+          <IconButton aria-label='Copy link' onClick={handleCopy} size='small' title='Copy link'>
             <ContentCopyIcon fontSize='small' />
           </IconButton>
         </Tooltip>
@@ -57,6 +57,7 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
             aria-label='Share on Twitter'
             onClick={() => handleShare('twitter')}
             size='small'
+            title='Share on Twitter'
           >
             <TwitterIcon fontSize='small' />
           </IconButton>
@@ -66,6 +67,7 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
             aria-label='Share on LinkedIn'
             onClick={() => handleShare('linkedin')}
             size='small'
+            title='Share on LinkedIn'
           >
             <LinkedInIcon fontSize='small' />
           </IconButton>
@@ -75,6 +77,7 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
             aria-label='Share on Facebook'
             onClick={() => handleShare('facebook')}
             size='small'
+            title='Share on Facebook'
           >
             <FacebookIcon fontSize='small' />
           </IconButton>
