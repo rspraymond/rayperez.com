@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.34.0] - 2025-08-19
+### Features
+
+- create social meta component (#106)
+
+
+
 ## [0.33.0] - 2025-08-18
 ### Features
 
