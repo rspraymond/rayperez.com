@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import SocialMeta from '../components/SocialMeta'
 
 const NotFound: React.FC = () => {
   return (
@@ -17,6 +18,11 @@ const NotFound: React.FC = () => {
         <title>404 - Page Not Found</title>
         <meta name='robots' content='noindex, nofollow' />
       </Helmet>
+      <SocialMeta
+        title='404 - Page Not Found'
+        description="The page you're looking for doesn't exist. Please check the URL or return to the home page."
+        type='website'
+      />
       <Typography variant='h1' component='h2' gutterBottom>
         404
       </Typography>

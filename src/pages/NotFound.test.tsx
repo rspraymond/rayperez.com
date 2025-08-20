@@ -47,21 +47,30 @@ describe('NotFound', () => {
   it('sets the correct page metadata', () => {
     renderComponent()
 
-    // With our simple mock, we're just testing that the Helmet component is rendered
+    // With our simple mock, we're just testing that Helmet components are rendered
     // with the appropriate children, not the actual Helmet functionality
-    const helmet = screen.getByTestId('helmet')
+    const helmets = screen.getAllByTestId('helmet')
+    expect(helmets).toHaveLength(2)
 
-    // Verify the title is set
-    const title = Array.from(helmet.children).find(
+    // First helmet should contain title and robots meta tag
+    const firstHelmet = helmets[0]
+    const title = Array.from(firstHelmet.children).find(
       (child) => (child as HTMLElement).tagName.toLowerCase() === 'title',
     )
     expect(title).toHaveTextContent('404 - Page Not Found')
 
     // Verify the meta tag for robots is present
-    const metaTags = Array.from(helmet.children).filter(
+    const metaTags = Array.from(firstHelmet.children).filter(
       (child) => (child as HTMLElement).tagName.toLowerCase() === 'meta',
     )
     expect(metaTags.length).toBeGreaterThan(0)
+
+    // Second helmet should contain social meta tags
+    const secondHelmet = helmets[1]
+    const socialMetaTags = Array.from(secondHelmet.children).filter(
+      (child) => (child as HTMLElement).tagName.toLowerCase() === 'meta',
+    )
+    expect(socialMetaTags.length).toBeGreaterThan(0)
   })
 
   /**
