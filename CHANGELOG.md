@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.35.0] - 2025-08-20
+### Features
+
+- add social meta tags to 404 page (#107)
+
+
+
 ## [0.34.0] - 2025-08-19
 ### Features
 
