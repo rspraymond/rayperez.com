@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.36.0] - 2025-08-21
+### Features
+
+- replace home page with centralized social meta (#108)
+
+
+
 ## [0.35.0] - 2025-08-20
 ### Features
 
