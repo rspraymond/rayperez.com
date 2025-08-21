@@ -1,7 +1,6 @@
 import React from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Person } from 'schema-dts'
-import profileImage from '../assets/raymond-perez.jpg'
 import { Box } from '@mui/material'
 import Summary from '../components/Summary.tsx'
 import Links from '../components/Links.tsx'
@@ -10,6 +9,7 @@ import Education from '../components/Education.tsx'
 import Skills from '../components/Skills.tsx'
 import Achievements from '../components/Achievements.tsx'
 import { Helmet } from 'react-helmet'
+import SocialMeta from '../components/SocialMeta.tsx'
 import { PROFILE } from '../constants/profile'
 import { SKILLS } from '../constants/skills'
 
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
               '@type': 'CollegeOrUniversity',
               name: 'Red Rocks Community College',
             },
-            image: profileImage,
+            image: PROFILE.image,
             url: 'https://www.rayperez.com',
             knowsAbout: [
               'Software Engineering',
@@ -165,8 +165,14 @@ const Home: React.FC = () => {
         ]}
       >
         <link rel='canonical' href='https://www.rayperez.com' />
-        <meta property='og:image' content={profileImage} />
       </Helmet>
+      <SocialMeta
+        title={PROFILE.name}
+        description='Software Engineer specializing in modern web development, performance optimization, and scalable architecture.'
+        image={PROFILE.image}
+        url='https://www.rayperez.com'
+        type='profile'
+      />
       <Box>
         <Summary />
         <Links links={links} />

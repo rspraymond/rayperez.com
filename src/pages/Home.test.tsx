@@ -72,12 +72,12 @@ describe('Home Component', () => {
   it('includes structured data for SEO', () => {
     renderWithProvider(<Home />)
 
-    // Check for Helmet component that contains schema.org data
-    const helmet = screen.getByTestId('helmet-mock')
-    expect(helmet).toBeInTheDocument()
+    // Check for Helmet components that contain schema.org data and social meta tags
+    const helmets = screen.getAllByTestId('helmet-mock')
+    expect(helmets.length).toBe(2) // One for structured data, one for social meta tags
 
-    // Check for meta tags
-    const metaTags = screen.getAllByTestId('helmet-mock')
-    expect(metaTags.length).toBeGreaterThan(0)
+    // Check that we have the expected meta tag containers
+    expect(helmets[0]).toBeInTheDocument()
+    expect(helmets[1]).toBeInTheDocument()
   })
 })
