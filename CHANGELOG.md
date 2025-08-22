@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.37.0] - 2025-08-22
+### Features
+
+- add social meta component to blog posts (#109)
+
+
+
 ## [0.36.0] - 2025-08-21
 ### Features
 
