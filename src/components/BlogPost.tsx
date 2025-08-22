@@ -12,9 +12,9 @@ import withCanonical from './WithCanonical'
 import { PROFILE } from '../constants/profile'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { calculateReadingTime, formatReadingTime } from '../utils/readingTime'
-import profileImage from '../assets/raymond-perez.jpg'
 import SocialShareButtons from './SocialShareButtons'
 import { posts } from '../constants/posts'
+import SocialMeta from './SocialMeta'
 
 const AuthorBio = lazy(() => import('./AuthorBio'))
 const TableOfContents = lazy(() => import('./TableOfContents'))
@@ -91,15 +91,20 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
               name: author,
             },
             datePublished: date,
-            image: profileImage,
+            image: PROFILE.image,
           }),
         ]}
       >
-        <meta property='og:image' content={profileImage} />
         <title>
           {title} - {PROFILE.name} - {PROFILE.role}
         </title>
       </Helmet>
+      <SocialMeta
+        title={title}
+        description={`${title} by ${author} - ${readingTimeDisplay} read`}
+        type='article'
+        url={window.location.href}
+      />
       <Box mb={2}>
         <Breadcrumbs aria-label='breadcrumb'>
           <Link component={RouterLink} color='inherit' to='/'>
