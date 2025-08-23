@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.38.0] - 2025-08-23
+### Features
+
+- add social meta to author bio (#110)
+
+
+
 ## [0.37.0] - 2025-08-22
 ### Features
 
