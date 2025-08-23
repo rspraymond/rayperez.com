@@ -7,6 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { Helmet } from 'react-helmet'
 import LazyImage from './LazyImage'
+import SocialMeta from './SocialMeta'
 import { PROFILE } from '../constants/profile'
 import profileImage from '../assets/raymond-perez.jpg'
 import { SKILLS } from '../constants/skills'
@@ -35,6 +36,13 @@ const AuthorBio: React.FC = () => {
 
   return (
     <React.Fragment>
+      <SocialMeta
+        title={`${PROFILE.name} - ${PROFILE.role}`}
+        description={`${PROFILE.name} is a ${PROFILE.role} in Denver, specializing in modern web development, performance optimization, and scalable architecture.`}
+        image={profileImage}
+        url='https://www.rayperez.com'
+        type='profile'
+      />
       <Helmet
         script={[
           helmetJsonLdProp<Person>({
