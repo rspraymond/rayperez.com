@@ -285,6 +285,36 @@ rayperez-site/
 - When modifying data-driven components like `RecentPosts.tsx`, ensure the data is accurate and up-to-date
 - Use the `LazySyntaxHighlighter` component for code blocks in articles instead of importing the syntax highlighter directly
 
+#### Social Media Meta Tags
+
+- **Always use the `SocialMeta` component** for implementing social media meta tags
+- **Never implement meta tags directly** in components using React Helmet
+- The `SocialMeta` component provides comprehensive Open Graph and Twitter Card coverage
+- All props are optional and will use sensible defaults from `SOCIAL_CONFIG`
+- Use appropriate content types: `'website'` for general pages, `'article'` for blog posts, `'profile'` for author pages
+
+**Example usage:**
+
+```tsx
+// Basic usage with defaults
+<SocialMeta />
+
+// Custom article meta tags
+<SocialMeta
+  title="Article Title"
+  description="Custom description for social sharing"
+  type="article"
+/>
+
+// Profile page with custom image
+<SocialMeta
+  title="About Raymond Perez"
+  description="Software engineer and web developer"
+  type="profile"
+  image="/custom-profile-image.jpg"
+/>
+```
+
 ### Page Guidelines
 
 - Place all page components in the `src/pages` directory
@@ -292,9 +322,38 @@ rayperez-site/
 - Follow the established article structure for consistency
 - When adding new article pages, update the post list in `RecentPosts.tsx` to include the new article
 
+### Constants and Configuration
+
+#### Social Media Configuration
+
+- Social media settings are centralized in `src/constants/social.ts`
+- The `SOCIAL_CONFIG` object contains all default values for meta tags
+- Update this file to change site-wide social media branding
+- Profile-specific settings are imported from `src/constants/profile.ts`
+
+**Available configuration options:**
+
+- `siteName`: Site branding for social media shares
+- `defaultDescription`: Fallback description for pages without custom descriptions
+- `defaultImage`: Default image for social media sharing
+- `twitterCreator`: Twitter handle for attribution
+
+**Content types supported:**
+
+- `'website'`: General pages and home page
+- `'article'`: Blog posts and articles
+- `'profile'`: Author and profile pages
+
 ## SEO Guidelines
 
 This project follows several SEO best practices:
+
+### Social Media Meta Tags
+
+- **All pages use the centralized `SocialMeta` component** for consistent social media optimization
+- The component automatically generates comprehensive Open Graph and Twitter Card meta tags
+- No manual meta tag implementation is needed or allowed
+- Social media configuration is centralized in `src/constants/social.ts`
 
 ### Internal Linking
 
