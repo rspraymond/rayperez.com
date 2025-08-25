@@ -1,0 +1,12 @@
+# Ignore changelog to preserve automated formatting
+CHANGELOG.md
+
+# Ignore build artifacts and dependencies
+node_modules/
+dist/
+build/
+coverage/
+
+# Ignore generated files
+*.min.js
+*.min.css
