@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.38.1] - 2025-08-26
+### Bug Fixes
+
+- reorganize author bio (#112)
+
+### Other Changes
+
+- chore: add changelog to prettier ignore
+- chore: update contributing docs with social meta info (#111)
+
+
+
 ## [0.38.0] - 2025-08-23
 ### Features
 
