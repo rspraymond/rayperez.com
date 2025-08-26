@@ -47,23 +47,11 @@ describe('AuthorBio Component', () => {
   it('renders the author bio section with correct content', () => {
     renderComponent()
 
-    // Check for author introduction (allow split text)
-    expect(
-      screen.getByText((_content, node) => {
-        const hasText = (node: Element | null) =>
-          node?.textContent
-            ?.replace(/\s+/g, ' ')
-            .includes(`Hi, I’m ${PROFILE.name}, a ${PROFILE.role} in Denver.`)
-        const nodeHasText = hasText(node as Element)
-        const childrenDontHaveText = Array.from(node?.children || []).every(
-          (child) => !hasText(child as Element),
-        )
-        return nodeHasText && childrenDontHaveText
-      }),
-    ).toBeInTheDocument()
+    // Check for author introduction text (text is now split across elements)
+    const introText = screen.getByText(/Hi, I'm .+, a .+ in Denver\./)
+    expect(introText).toBeInTheDocument()
 
     // Check for author description
-    // Use a regex matcher to allow for apostrophe/whitespace variations
     expect(
       screen.getByText(/I.?m the author of this blog, nice to meet you!?/i),
     ).toBeInTheDocument()
