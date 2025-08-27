@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.38.2] - 2025-08-27
+### Bug Fixes
+
+- refactor blog post to reduce complexity (#113)
+
+
+
 ## [0.38.1] - 2025-08-26
 ### Bug Fixes
 
