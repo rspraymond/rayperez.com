@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.38.3] - 2025-08-28
+### Bug Fixes
+
+- refactor table of contents to reduce complexity (#114)
+
+
+
 ## [0.38.2] - 2025-08-27
 ### Bug Fixes
 
