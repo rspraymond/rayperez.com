@@ -19,38 +19,51 @@ interface HeadingItem {
   level: number
 }
 
+const extractHeadings = (): HeadingItem[] => {
+  const headingElements = document.querySelectorAll('h3, h5')
+  const headingItems: HeadingItem[] = []
+
+  headingElements.forEach((heading, index) => {
+    const text = heading.textContent?.trim()
+    if (!text) return
+
+    // Skip "Key Takeaways" and "Frequently Asked Questions" headings
+    if (text === 'Key Takeaways' || text === 'Frequently Asked Questions') return
+
+    const level = parseInt(heading.tagName.charAt(1))
+    let id = heading.id
+
+    // Generate ID if not present
+    if (!id) {
+      id = `heading-${index}-${text.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+      heading.id = id
+    }
+
+    headingItems.push({ id, text, level })
+  })
+
+  return headingItems
+}
+
+const scrollToHeading = (id: string): void => {
+  const element = document.getElementById(id)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    // Reflect hash in URL without triggering native jump
+    if (typeof window !== 'undefined' && window.history && 'replaceState' in window.history) {
+      window.history.replaceState(null, '', `#${id}`)
+    } else {
+      window.location.hash = id
+    }
+  }
+}
+
 const TableOfContents: React.FC = () => {
   const [headings, setHeadings] = useState<HeadingItem[]>([])
   const [isExpanded, setIsExpanded] = useState(true)
   const hasScrolledOnLoadRef = useRef(false)
 
   useEffect(() => {
-    const extractHeadings = (): HeadingItem[] => {
-      const headingElements = document.querySelectorAll('h3, h5')
-      const headingItems: HeadingItem[] = []
-
-      headingElements.forEach((heading, index) => {
-        const text = heading.textContent?.trim()
-        if (!text) return
-
-        // Skip "Key Takeaways" and "Frequently Asked Questions" headings
-        if (text === 'Key Takeaways' || text === 'Frequently Asked Questions') return
-
-        const level = parseInt(heading.tagName.charAt(1))
-        let id = heading.id
-
-        // Generate ID if not present
-        if (!id) {
-          id = `heading-${index}-${text.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
-          heading.id = id
-        }
-
-        headingItems.push({ id, text, level })
-      })
-
-      return headingItems
-    }
-
     // Extract headings after component mounts and content is rendered
     const timer = setTimeout(() => {
       setHeadings(extractHeadings())
@@ -74,19 +87,6 @@ const TableOfContents: React.FC = () => {
       hasScrolledOnLoadRef.current = true
     }
   }, [headings])
-
-  const handleScrollToHeading = (id: string): void => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      // Reflect hash in URL without triggering native jump
-      if (typeof window !== 'undefined' && window.history && 'replaceState' in window.history) {
-        window.history.replaceState(null, '', `#${id}`)
-      } else {
-        window.location.hash = id
-      }
-    }
-  }
 
   const toggleExpanded = (): void => {
     setIsExpanded(!isExpanded)
@@ -139,7 +139,7 @@ const TableOfContents: React.FC = () => {
           {headings.map((heading) => (
             <ListItem key={heading.id} disablePadding>
               <ListItemButton
-                onClick={() => handleScrollToHeading(heading.id)}
+                onClick={() => scrollToHeading(heading.id)}
                 sx={{
                   pl: heading.level === 3 ? 2 : 3,
                   py: 0.75,
