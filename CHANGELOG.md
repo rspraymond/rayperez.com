@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.38.4] - 2025-08-29
+### Bug Fixes
+
+- refactor graphql article to reduce complexity (#115)
+
+
+
 ## [0.38.3] - 2025-08-28
 ### Bug Fixes
 
