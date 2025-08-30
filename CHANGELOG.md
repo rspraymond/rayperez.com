@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.39.0] - 2025-08-30
+### Features
+
+- create article content renderer component (#116)
+
+
+
 ## [0.38.4] - 2025-08-29
 ### Bug Fixes
 
