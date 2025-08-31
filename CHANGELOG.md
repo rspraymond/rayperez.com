@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.40.0] - 2025-08-31
+### Features
+
+- refactor why inertia for json (#117)
+
+
+
 ## [0.39.0] - 2025-08-30
 ### Features
 
