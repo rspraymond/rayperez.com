@@ -43,6 +43,27 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </List>
   )
 
+  const renderComplexList = (item: ArticleContent): React.ReactElement => (
+    <List key={`${item.type}-${item.complexItems?.length}`}>
+      {item.complexItems?.map((listItem, index) => (
+        <ListItem key={index}>
+          <ListItemText primary={listItem.primary} secondary={listItem.secondary} />
+          {listItem.link && (
+            <Link
+              href={listItem.link.href}
+              target={listItem.link.target || '_blank'}
+              rel={listItem.link.target === '_blank' ? 'noopener noreferrer' : undefined}
+              color='primary'
+              underline='hover'
+            >
+              {listItem.link.title}
+            </Link>
+          )}
+        </ListItem>
+      ))}
+    </List>
+  )
+
   const renderCode = (item: ArticleContent): React.ReactElement => (
     <Paper
       key={`${item.type}-${item.language}`}
@@ -80,6 +101,8 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
         return renderParagraph(item)
       case 'list':
         return renderList(item)
+      case 'complexList':
+        return renderComplexList(item)
       case 'code':
         return renderCode(item)
       case 'divider':

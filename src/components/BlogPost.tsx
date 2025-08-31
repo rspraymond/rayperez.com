@@ -27,9 +27,10 @@ interface BlogPostProps {
   author: string
   date: string
   children: React.ReactNode
+  readingText?: string
 }
 
-const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) => {
+const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children, readingText }) => {
   const { showBackToTop, scrollToTop } = useScrollToTop()
   const location = useLocation()
   const { isBookmarked, toggleBookmark } = useBookmarks()
@@ -37,7 +38,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
   const currentPath = location.pathname
   const isCurrentlyBookmarked = isBookmarked(currentPath)
 
-  const readingTimeDisplay = useReadingTime(children)
+  const readingTimeDisplay = useReadingTime(readingText ?? children)
   const { prevPost, nextPost } = usePostNavigation()
 
   const handleBookmarkClick = () => {
@@ -95,9 +96,13 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children }) =>
       </Box>
       <SocialShareButtons title={title} />
       <Box mb={2}>
-        <Typography variant='body2' color='text.secondary'>
-          {readingTimeDisplay}
-        </Typography>
+        {readingTimeDisplay ? (
+          <Typography variant='body2' color='text.secondary'>
+            {readingTimeDisplay}
+          </Typography>
+        ) : (
+          <LoadingSkeleton testId='reading-time' />
+        )}
       </Box>
       <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
         <TableOfContents />
