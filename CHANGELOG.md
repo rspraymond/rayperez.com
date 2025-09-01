@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.41.0] - 2025-09-01
+### Features
+
+- refactor why graphql (#118)
+
+
+
 ## [0.40.0] - 2025-08-31
 ### Features
 
