@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.42.0] - 2025-09-02
+### Features
+
+- refactor why nestjs to json driven content (#119)
+
+
+
 ## [0.41.0] - 2025-09-01
 ### Features
 
