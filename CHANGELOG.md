@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.43.0] - 2025-09-03
+### Features
+
+- refactor why web dev to json driven content (#120)
+
+
+
 ## [0.42.0] - 2025-09-02
 ### Features
 
