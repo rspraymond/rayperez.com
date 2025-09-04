@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.44.0] - 2025-09-04
+### Features
+
+- refactor why oop to json driven content (#121)
+
+
+
 ## [0.43.0] - 2025-09-03
 ### Features
 
