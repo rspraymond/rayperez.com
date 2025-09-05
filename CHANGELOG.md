@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.45.0] - 2025-09-05
+### Features
+
+- refactor why opinionated to json driven content (#122)
+
+
+
 ## [0.44.0] - 2025-09-04
 ### Features
 
