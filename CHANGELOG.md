@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.46.0] - 2025-09-06
+### Features
+
+- refactor why typescript to json driven content (#123)
+
+
+
 ## [0.45.0] - 2025-09-05
 ### Features
 
