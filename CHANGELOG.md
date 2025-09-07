@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.47.0] - 2025-09-07
+### Features
+
+- refactor why laravel to json driven content (#124)
+
+
+
 ## [0.46.0] - 2025-09-06
 ### Features
 
