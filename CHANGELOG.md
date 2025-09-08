@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.48.0] - 2025-09-08
+### Features
+
+- refactor why mvc to json driven content (#125)
+
+
+
 ## [0.47.0] - 2025-09-07
 ### Features
 
