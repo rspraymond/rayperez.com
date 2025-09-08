@@ -1,0 +1,476 @@
+[
+  { "type": "heading", "variant": "h3", "content": "Key Takeaways", "gutterBottom": true },
+  {
+    "type": "complexList",
+    "complexItems": [
+      {
+        "primary": "Separation of Concerns",
+        "secondary": "MVC separates logic (models), presentation (views), and handling input (controllers), making codebases easier to reason about."
+      },
+      {
+        "primary": "Better Organization",
+        "secondary": "The pattern helps maintain large codebases and enables multiple developers to work in parallel with fewer conflicts."
+      },
+      {
+        "primary": "Improved Testability",
+        "secondary": "Each layer can be unit tested independently, leading to more robust applications."
+      },
+      {
+        "primary": "Appropriate Use",
+        "secondary": "MVC shines in larger projects with long lifecycles, but may be overkill for simple applications."
+      }
+    ]
+  },
+
+  { "type": "divider" },
+
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The Model-View-Controller (MVC) pattern has been a cornerstone of web development for decades. As applications grow in complexity, having a structured approach to organizing code becomes increasingly important. MVC provides a clear separation of responsibilities that helps manage this complexity. In this article, I'll explore why I continue to use MVC in many of my projects, when it's most beneficial, and when you might want to consider alternatives.",
+    "paragraph": true
+  },
+
+  { "type": "divider" },
+
+  { "type": "heading", "variant": "h5", "content": "What is MVC?", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC divides an application into three interconnected components:",
+    "paragraph": true
+  },
+  {
+    "type": "complexList",
+    "complexItems": [
+      {
+        "primary": "Model",
+        "secondary": "Handles data logic and business rules. Models interact with databases, validate data, and contain the core functionality."
+      },
+      {
+        "primary": "View",
+        "secondary": "Responsible for presentation and rendering. Views display data to users and send user actions to the controller."
+      },
+      {
+        "primary": "Controller",
+        "secondary": "Acts as an intermediary between Model and View. Controllers process incoming requests, manipulate data using Models, and determine which View to render."
+      }
+    ]
+  },
+
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "This pattern is common in many web frameworks, from Express.js to Ruby on Rails to Laravel. Let's look at a simple Express.js implementation:",
+    "paragraph": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Controller Example", "gutterBottom": true },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// userController.js\nconst User = require('../models/User');\n\n// Controller methods handle HTTP requests\nexports.getAllUsers = async (req, res) => {\n  try {\n    // Uses the model to fetch data\n    const users = await User.findAll();\n    \n    // Sends response to the view\n    res.render('users/index', { users });\n  } catch (error) {\n    res.status(500).render('error', { message: error.message });\n  }\n};\n\nexports.getUserById = async (req, res) => {\n  try {\n    const user = await User.findById(req.params.id);\n    if (!user) {\n      return res.status(404).render('error', { message: 'User not found' });\n    }\n    res.render('users/show', { user });\n  } catch (error) {\n    res.status(500).render('error', { message: error.message });\n  }\n};"
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Model Example", "gutterBottom": true },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// User.js (Model)\nconst db = require('../database');\n\nclass User {\n  // The model handles data logic and business rules\n  static async findAll() {\n    const query = 'SELECT * FROM users ORDER BY created_at DESC';\n    const result = await db.query(query);\n    return result.rows;\n  }\n\n  static async findById(id) {\n    const query = 'SELECT * FROM users WHERE id = $1';\n    const result = await db.query(query, [id]);\n    return result.rows[0];\n  }\n\n  static async create(userData) {\n    // Data validation would happen here\n    if (!userData.email || !userData.name) {\n      throw new Error('Email and name are required');\n    }\n\n    const query = 'INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *';\n    const result = await db.query(query, [userData.name, userData.email]);\n    return result.rows[0];\n  }\n}\n\nmodule.exports = User;"
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "View Example (using EJS template)",
+    "gutterBottom": true
+  },
+  {
+    "type": "code",
+    "language": "html",
+    "code": "<!-- users/index.ejs -->\n<!DOCTYPE html>\n<html>\n<head>\n  <title>All Users</title>\n</head>\n<body>\n  <h1>Users</h1>\n  <ul>\n    <% users.forEach(user => { %>\n      <li>\n        <a href=\"/users/<%= user.id %>\"><%= user.name %></a>\n        (<%= user.email %>)\n      </li>\n    <% }); %>\n  </ul>\n</body>\n</html>"
+  },
+
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The router would connect HTTP routes to the controller methods:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// routes/userRoutes.js\nconst express = require('express');\nconst router = express.Router();\nconst userController = require('../controllers/userController');\n\nrouter.get('/users', userController.getAllUsers);\nrouter.get('/users/:id', userController.getUserById);\n\nmodule.exports = router;"
+  },
+
+  { "type": "divider" },
+
+  { "type": "heading", "variant": "h5", "content": "Core Benefits of MVC", "gutterBottom": true },
+
+  { "type": "heading", "variant": "h6", "content": "Separation of Concerns", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "By dividing application logic into distinct components, MVC makes it easier to understand and modify code. Each part has a specific responsibility:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Models focus on data handling and business logic",
+      "Views focus on presenting information to users",
+      "Controllers focus on handling user inputs and coordinating between models and views"
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "This separation means you can work on one aspect without needing to understand or modify the others.",
+    "paragraph": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Code Organization", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "As applications grow, having a consistent organizational structure becomes critical. MVC provides a familiar pattern that developers can easily navigate:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "text",
+    "code": "my-application/\n├── controllers/     # Request handlers\n│   ├── userController.js\n│   └── productController.js\n├── models/          # Data and business logic\n│   ├── User.js\n│   └── Product.js\n├── views/           # UI templates\n│   ├── users/\n│   │   ├── index.ejs\n│   │   └── show.ejs\n│   └── products/\n│       ├── index.ejs\n│       └── show.ejs\n├── routes/          # URL routing\n│   ├── userRoutes.js\n│   └── productRoutes.js\n└── app.js           # Main application file"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "This structure makes it easy for new team members to quickly understand where specific functionality lives and how different parts of the application interact.",
+    "paragraph": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Testability", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "With clear boundaries between components, testing becomes more straightforward. You can unit test models without worrying about controllers or views:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// user.test.js\nconst User = require('../models/User');\nconst db = require('../database');\n\n// Mock the database\njest.mock('../database');\n\ndescribe('User Model', () => {\n  beforeEach(() => {\n    jest.clearAllMocks();\n  });\n\n  test('findAll returns all users', async () => {\n    // Mock the database response\n    db.query.mockResolvedValue({\n      rows: [\n        { id: 1, name: 'Alice', email: 'alice@example.com' },\n        { id: 2, name: 'Bob', email: 'bob@example.com' }\n      ]\n    });\n\n    const users = await User.findAll();\n    \n    expect(users.length).toBe(2);\n    expect(db.query).toHaveBeenCalledWith(\n      'SELECT * FROM users ORDER BY created_at DESC'\n    );\n  });\n\n  test('create validates required fields', async () => {\n    await expect(User.create({})).rejects.toThrow('Email and name are required');\n    expect(db.query).not.toHaveBeenCalled();\n  });\n});"
+  },
+
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Similarly, controllers can be tested with mocked models, and views can be tested separately for proper rendering. This isolation leads to more reliable tests and greater confidence in your code.",
+    "paragraph": true
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "DRY Principle (Don't Repeat Yourself)",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC encourages code reuse by centralizing common logic in models and reusable presentation components in views. For example, validation logic stays in models, ensuring it's applied consistently throughout the application:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// Centralized validation in the model\nclass User {\n  static validateUserData(userData) {\n    const errors = {};\n    \n    if (!userData.email) {\n      errors.email = 'Email is required';\n    } else if (!/^\\\\S+@\\\\S+\\\\.\\\\S+$/.test(userData.email)) {\n      errors.email = 'Email format is invalid';\n    }\n    \n    if (!userData.name) {\n      errors.name = 'Name is required';\n    } else if (userData.name.length < 2) {\n      errors.name = 'Name must be at least 2 characters';\n    }\n    \n    return Object.keys(errors).length > 0 ? errors : null;\n  }\n  \n  static async create(userData) {\n    const errors = this.validateUserData(userData);\n    if (errors) {\n      throw new Error(JSON.stringify(errors));\n    }\n    \n    // Proceed with creating the user...\n  }\n  \n  static async update(id, userData) {\n    const errors = this.validateUserData(userData);\n    if (errors) {\n      throw new Error(JSON.stringify(errors));\n    }\n    \n    // Proceed with updating the user...\n  }\n}"
+  },
+
+  { "type": "divider" },
+
+  { "type": "heading", "variant": "h5", "content": "When MVC Helps Most", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC isn't always the right choice, but it shines in certain scenarios:",
+    "paragraph": true
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Larger Projects with Long Lifecycles",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "As projects grow in size and complexity, the structured approach of MVC becomes increasingly valuable. Applications that will be maintained for years benefit from clear organization patterns that remain consistent even as team members change.",
+    "paragraph": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Team Development", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "When multiple developers work on the same codebase, MVC provides natural boundaries that reduce conflicts. Frontend developers can focus on views while backend developers work on models and controllers, minimizing merge conflicts and stepping on each other's toes.",
+    "paragraph": true
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Applications with Changing Requirements",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC's separation of concerns makes it easier to adapt to changing requirements. For example, if you need to change how data is displayed, you can modify views without touching models or controllers. If business logic changes, you can update models without worrying about the presentation layer.",
+    "paragraph": true
+  },
+
+  { "type": "divider" },
+
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "When MVC Might Be Overkill",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Despite its benefits, MVC isn't the right solution for every project:",
+    "paragraph": true
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Static Site Generators and Jamstack Applications",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "For content-focused sites like blogs, documentation, or marketing sites using static site generators (Gatsby, Hugo, Eleventy, etc.), the MVC pattern often doesn't apply well. These sites typically:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Generate static HTML at build time rather than handling dynamic requests",
+      "Use content (often in Markdown) as the data source instead of a traditional database",
+      "Separate concerns through components and data loading hooks rather than MVC"
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Here's an example of a site built with Eleventy, a simpler static site generator, where the traditional MVC pattern doesn't fit:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// .eleventy.js configuration file\nmodule.exports = function(eleventyConfig) {\n  // Process markdown files\n  eleventyConfig.addPassthroughCopy(\"src/assets\");\n  \n  // Add a custom filter\n  eleventyConfig.addFilter(\"dateFormat\", function(date) {\n    return new Date(date).toLocaleDateString('en-US', {\n      year: 'numeric', \n      month: 'long', \n      day: 'numeric'\n    });\n  });\n\n  return {\n    dir: {\n      input: \"src\",\n      output: \"_site\",\n      includes: \"_includes\",\n      layouts: \"_layouts\"\n    }\n  };\n};\n\n// A blog post template (src/_layouts/post.njk)\n---\nlayout: base.njk\n---\n<article class=\"post\">\n  <header>\n    <h1>{{ title }}</h1>\n    <time datetime=\"{{ date | dateISO }}\">{{ date | dateFormat }}</time>\n  </header>\n  \n  <div class=\"content\">\n    {{ content | safe }}\n  </div>\n</article>\n\n// Markdown content file (src/posts/example-post.md)\n---\ntitle: My First Post\ndate: 2023-01-15\nlayout: post.njk\n---\n\nThis is the content of my first blog post.\n\nIt will be converted to HTML at build time."
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Serverless Functions and Microservices",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Small, focused serverless functions and microservices often work better with a more direct approach. These might handle a single responsibility like image processing, authentication, or data transformation:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// AWS Lambda function for image resizing\nconst AWS = require('aws-sdk');\nconst sharp = require('sharp');\nconst s3 = new AWS.S3();\n\nexports.handler = async (event) => {\n  // Get the source image from the event\n  const bucket = event.Records[0].s3.bucket.name;\n  const key = decodeURIComponent(event.Records[0].s3.object.key.replace(/\\+/g, ' '));\n  \n  try {\n    // Download the image\n    const s3Object = await s3.getObject({ Bucket: bucket, Key: key }).promise();\n    \n    // Process the image - resize to thumbnail\n    const resized = await sharp(s3Object.Body)\n      .resize(200, 200, { fit: 'inside' })\n      .toBuffer();\n    \n    // Upload the thumbnail with a new name\n    const thumbnailKey = `thumbnails/${key.split('/').pop()}`;\n    await s3.putObject({\n      Bucket: bucket,\n      Key: thumbnailKey,\n      Body: resized,\n      ContentType: 'image/jpeg'\n    }).promise();\n    \n    return {\n      statusCode: 200,\n      body: JSON.stringify({ message: 'Thumbnail created', key: thumbnailKey })\n    };\n  } catch (error) {\n    console.error(error);\n    return {\n      statusCode: 500,\n      body: JSON.stringify({ message: 'Error processing image' })\n    };\n  }\n};"
+  },
+
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "This serverless function has a single responsibility and a direct input-process-output flow. Adding MVC architecture to something this focused would introduce unnecessary complexity.",
+    "paragraph": true
+  },
+
+  { "type": "divider" },
+
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "How MVC Reduces Development Headaches",
+    "gutterBottom": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Fewer Merge Conflicts", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "With clear separation between components, developers working on different parts of the application are less likely to edit the same files simultaneously, reducing merge conflicts.",
+    "paragraph": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Technology Swapping", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC allows you to swap out components without affecting the entire application. For example, you can change database technologies by updating just the model layer:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// Original User model using PostgreSQL\nclass User {\n  static async findAll() {\n    const query = 'SELECT * FROM users';\n    const result = await postgresDb.query(query);\n    return result.rows;\n  }\n}\n\n// Updated User model using MongoDB\nclass User {\n  static async findAll() {\n    return await mongoDb.collection('users').find().toArray();\n  }\n}\n\n// The controller doesn't need to change!\nexports.getAllUsers = async (req, res) => {\n  try {\n    const users = await User.findAll();\n    res.render('users/index', { users });\n  } catch (error) {\n    res.status(500).render('error', { message: error.message });\n  }\n};"
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Easier Debugging and Maintenance",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "When bugs occur, MVC's structure makes it easier to isolate where the problem is occurring. If data is incorrect, look at the model. If it's not displaying correctly, check the view. If user actions aren't being processed properly, examine the controller.",
+    "paragraph": true
+  },
+
+  { "type": "divider" },
+
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Common Variations and Alternatives",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC isn't the only architectural pattern available, and it's often adapted to fit specific needs:",
+    "paragraph": true
+  },
+
+  { "type": "heading", "variant": "h6", "content": "Service Layer", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Many applications add a service layer between controllers and models to handle complex business logic:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// userService.js\nconst User = require('../models/User');\nconst EmailService = require('./emailService');\n\nclass UserService {\n  static async registerUser(userData) {\n    // Validate data\n    const errors = User.validateUserData(userData);\n    if (errors) {\n      throw new Error(JSON.stringify(errors));\n    }\n    \n    // Create user\n    const user = await User.create(userData);\n    \n    // Send welcome email\n    await EmailService.sendWelcomeEmail(user.email, user.name);\n    \n    // Update analytics\n    await this.trackRegistration(user);\n    \n    return user;\n  }\n  \n  static async trackRegistration(user) {\n    // Track registration in analytics system\n    // ...\n  }\n}\n\n// userController.js\nconst UserService = require('../services/userService');\n\nexports.register = async (req, res) => {\n  try {\n    const user = await UserService.registerUser(req.body);\n    res.redirect('/users/' + user.id);\n  } catch (error) {\n    // Handle errors\n    res.render('users/register', { \n      errors: JSON.parse(error.message),\n      formData: req.body\n    });\n  }\n};"
+  },
+
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "MVVM (Model-View-ViewModel)",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Popular in frontend frameworks, MVVM replaces the controller with a ViewModel that manages view state:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "typescript",
+    "code": "// In a React/TypeScript application using hooks\nimport React, { useState, useEffect } from 'react';\nimport { UserModel } from '../models/UserModel';\n\n// The ViewModel\nconst useUserViewModel = () => {\n  const [users, setUsers] = useState<UserModel[]>([]);\n  const [loading, setLoading] = useState(false);\n  const [error, setError] = useState<string | null>(null);\n\n  const fetchUsers = async () => {\n    setLoading(true);\n    setError(null);\n    try {\n      const data = await UserModel.fetchAll();\n      setUsers(data);\n    } catch (err) {\n      setError('Failed to fetch users');\n      console.error(err);\n    } finally {\n      setLoading(false);\n    }\n  };\n\n  useEffect(() => {\n    fetchUsers();\n  }, []);\n\n  return { users, loading, error, refreshUsers: fetchUsers };\n};\n\n// The View\nconst UserListView: React.FC = () => {\n  const { users, loading, error, refreshUsers } = useUserViewModel();\n\n  if (loading) return <div>Loading...</div>;\n  if (error) return <div>Error: {error}</div>;\n\n  return (\n    <div>\n      <h1>Users</h1>\n      <button onClick={refreshUsers}>Refresh</button>\n      <ul>\n        {users.map(user => (\n          <li key={user.id}>{user.name} ({user.email})</li>\n        ))}\n      </ul>\n    </div>\n  );\n};"
+  },
+
+  { "type": "divider" },
+
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Practical Tips for Using MVC",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "If you decide to use MVC, here are some practical tips to get the most out of it:",
+    "paragraph": true
+  },
+  {
+    "type": "complexList",
+    "complexItems": [
+      {
+        "primary": "Start simple and add complexity only when needed",
+        "secondary": "Begin with basic models, views, and controllers, then refactor as your understanding of the domain grows."
+      },
+      {
+        "primary": "Keep controllers thin",
+        "secondary": "Controllers should primarily coordinate between models and views, with minimal business logic."
+      },
+      {
+        "primary": "Consider adding service layers for complex logic",
+        "secondary": "When business logic gets complex, extract it into service classes that sit between controllers and models."
+      },
+      {
+        "primary": "Document your structure",
+        "secondary": "Make sure new team members understand your approach to MVC and any variations you've adopted."
+      }
+    ]
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "// Example of a thin controller\nexports.createUser = async (req, res) => {\n  try {\n    // Validation and business logic in UserService\n    const user = await UserService.createUser(req.body);\n    \n    // Response handling\n    res.status(201).json(user);\n  } catch (error) {\n    if (error.name === 'ValidationError') {\n      return res.status(400).json({ errors: error.errors });\n    }\n    res.status(500).json({ message: 'Server error' });\n  }\n};"
+  },
+
+  { "type": "divider" },
+
+  { "type": "heading", "variant": "h5", "content": "Conclusion", "gutterBottom": true },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "MVC is a powerful architectural pattern that provides structure and organization to web applications. Its separation of concerns makes codebases more maintainable, testable, and adaptable to change. While it's not the right choice for every project, it shines in team environments and larger applications with long lifecycles.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The key is to use MVC pragmatically—apply it when it adds value, adapt it to your specific needs, and don't be afraid to use simpler approaches for simpler problems. Like any tool, MVC is most effective when used with an understanding of both its strengths and limitations.",
+    "paragraph": true
+  },
+
+  { "type": "divider" },
+
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Frequently Asked Questions",
+    "gutterBottom": true
+  },
+  {
+    "type": "complexList",
+    "complexItems": [
+      {
+        "primary": "Does using MVC make my application slower?",
+        "secondary": "Generally, no. While there's a small overhead from the additional structure, the performance impact is negligible in most web applications. The benefits in maintainability typically far outweigh any minor performance considerations."
+      },
+      {
+        "primary": "Can I use MVC with modern frontend frameworks like React or Vue?",
+        "secondary": "Yes, but they often use variations like MVVM or Flux/Redux patterns. The core principle of separation of concerns remains, but the implementation differs to better suit these frameworks."
+      },
+      {
+        "primary": "How do I know if my project is 'big enough' for MVC?",
+        "secondary": "Consider using MVC if your application has multiple data types with complex relationships, requires a team of developers, or will be maintained long-term. For a weekend project or simple CRUD app, a simpler structure might be more appropriate."
+      }
+    ]
+  }
+]
