@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.49.0] - 2025-09-09
+### Features
+
+- refactor why node to json driven content (#126)
+
+
+
 ## [0.48.0] - 2025-09-08
 ### Features
 
