@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.50.0] - 2025-09-10
+### Features
+
+- refactor why react to json driven content (#127)
+
+
+
 ## [0.49.0] - 2025-09-09
 ### Features
 
