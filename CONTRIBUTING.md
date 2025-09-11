@@ -267,6 +267,8 @@ rayperez-site/
 │   │   └── ...
 │   ├── components/     # Reusable UI components
 │   │   └── ...
+│   ├── data/           # JSON-driven content
+│   │   └── articles/   # Article JSON files (e.g., WhyReactJS.json)
 │   ├── pages/          # Page components (lazy-loaded)
 │   │   └── articles/   # Blog article pages
 │   ├── static/         # Static content
@@ -560,7 +562,8 @@ This section provides guidelines for creating and maintaining articles on the si
 
 ### File Structure
 
-- Place article files in the `src/pages/articles` directory
+- Place article page wrappers in the `src/pages/articles` directory
+- Place article content JSON files in the `src/data/articles` directory
 - Follow the established naming convention (e.g., `Why[Topic].tsx`)
 - Maintain consistency with existing article components
 
@@ -573,14 +576,40 @@ Each article should follow these general principles:
 3. **Code Examples**: Use `LazySyntaxHighlighter` for code examples with proper language specification
 4. **Styling**: Follow the project's style guide for spacing, colors, and typography
 
+#### JSON-Driven Articles
+
+- Articles are rendered from JSON using the `JsonBlogPost` wrapper and `ArticleRenderer`.
+- JSON schema is defined by `ArticleContent` and `ArticleDocument` in `src/types/articleContent.ts`.
+- Store content as `src/data/articles/Why[Topic].json` and import it in the page wrapper.
+
+Example page wrapper:
+
+```tsx
+import React from 'react'
+import JsonBlogPost from '../../components/JsonBlogPost'
+import { ArticleDocument } from '../../types/articleContent'
+import content from '../../data/articles/WhyReactJS.json'
+
+const WhyReactJS: React.FC = () => (
+  <JsonBlogPost
+    title='Why I Choose React'
+    author='Raymond Perez'
+    date='2024-07-04'
+    content={content as ArticleDocument}
+  />
+)
+
+export default WhyReactJS
+```
+
 ### Adding New Articles
 
 When adding a new article:
 
-1. Update the `posts` array in `RecentPosts.tsx`
-2. Maintain only the most recent articles in the list (currently 5)
-3. Ensure URL paths follow the established pattern
-4. Test that navigation works correctly
+1. Add metadata (title, date, path, and lazy import) to `src/constants/posts.ts`
+2. Create the JSON file in `src/data/articles/` following the `ArticleDocument` schema
+3. Create a minimal page wrapper in `src/pages/articles/` that imports the JSON and renders `JsonBlogPost`
+4. Ensure URL paths follow the established pattern and test navigation
 
 ### Article Testing
 
