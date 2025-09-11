@@ -120,8 +120,10 @@ rayperez-site/
 ├── src/
 │   ├── assets/           # Images and other assets
 │   ├── components/       # Reusable components
+│   ├── data/             # JSON-driven content
+│   │   └── articles/     # Article JSON files
 │   ├── pages/            # Page components
-│   │   └── articles/     # Blog article pages
+│   │   └── articles/     # Blog article pages (wrappers)
 │   ├── App.tsx           # Main app component
 │   ├── main.tsx          # Entry point
 │   └── ...
@@ -173,6 +175,29 @@ npm run lint
 - **Bundle Optimization**: Manual chunk splitting in Vite config
 - **Preloading**: Strategic preloading of important routes
 - **Tree Shaking**: Dead code elimination in production builds
+
+## ✍️ Articles are JSON-Driven
+
+- Article content lives in `src/data/articles/*.json` and follows `ArticleDocument` schema.
+- Pages import JSON and render via `JsonBlogPost`, which uses `ArticleRenderer`.
+- Example:
+
+```tsx
+import JsonBlogPost from '../../components/JsonBlogPost'
+import { ArticleDocument } from '../../types/articleContent'
+import content from '../../data/articles/WhyReactJS.json'
+
+export default function WhyReactJS() {
+  return (
+    <JsonBlogPost
+      title='Why I Choose React'
+      author='Raymond Perez'
+      date='2024-07-04'
+      content={content as ArticleDocument}
+    />
+  )
+}
+```
 
 ## 🧰 SEO Features
 
