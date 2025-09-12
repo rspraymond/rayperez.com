@@ -18,15 +18,15 @@ Object.defineProperty(window, 'location', {
   writable: true,
 })
 
-describe('SocialMeta', () => {
-  beforeEach(() => {
-    // Reset window.location.href before each test
-    Object.defineProperty(window, 'location', {
-      value: { href: mockLocation },
-      writable: true,
-    })
+beforeEach(() => {
+  // Reset window.location.href before each test
+  Object.defineProperty(window, 'location', {
+    value: { href: mockLocation },
+    writable: true,
   })
+})
 
+describe('SocialMeta - defaults and fallbacks', () => {
   it('renders with default values when no props are provided', () => {
     render(<SocialMeta />)
 
@@ -80,6 +80,74 @@ describe('SocialMeta', () => {
     )
   })
 
+  it('uses fallback values for missing props', () => {
+    const partialProps = {
+      title: 'Partial Title',
+      type: 'profile' as const,
+    }
+
+    render(<SocialMeta {...partialProps} />)
+
+    // Verify provided values are used
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      partialProps.title,
+    )
+    expect(document.querySelector('meta[property="og:type"]')).toHaveAttribute(
+      'content',
+      partialProps.type,
+    )
+
+    // Verify fallback values are used for missing props
+    expect(document.querySelector('meta[property="og:description"]')).toHaveAttribute(
+      'content',
+      SOCIAL_CONFIG.defaultDescription,
+    )
+    expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      SOCIAL_CONFIG.defaultImage,
+    )
+    expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      mockLocation,
+    )
+    expect(document.querySelector('meta[property="og:site_name"]')).toHaveAttribute(
+      'content',
+      SOCIAL_CONFIG.siteName,
+    )
+  })
+
+  it('handles empty string props gracefully', () => {
+    const emptyProps = {
+      title: '',
+      description: '',
+      image: '',
+      url: '',
+    }
+
+    render(<SocialMeta {...emptyProps} />)
+
+    // Should fall back to default values
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      SOCIAL_CONFIG.siteName,
+    )
+    expect(document.querySelector('meta[property="og:description"]')).toHaveAttribute(
+      'content',
+      SOCIAL_CONFIG.defaultDescription,
+    )
+    expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      SOCIAL_CONFIG.defaultImage,
+    )
+    expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      mockLocation,
+    )
+  })
+})
+
+describe('SocialMeta - custom and types', () => {
   it('renders with custom props when provided', () => {
     const customProps = {
       title: 'Custom Title',
@@ -137,43 +205,6 @@ describe('SocialMeta', () => {
     )
   })
 
-  it('uses fallback values for missing props', () => {
-    const partialProps = {
-      title: 'Partial Title',
-      type: 'profile' as const,
-    }
-
-    render(<SocialMeta {...partialProps} />)
-
-    // Verify provided values are used
-    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
-      'content',
-      partialProps.title,
-    )
-    expect(document.querySelector('meta[property="og:type"]')).toHaveAttribute(
-      'content',
-      partialProps.type,
-    )
-
-    // Verify fallback values are used for missing props
-    expect(document.querySelector('meta[property="og:description"]')).toHaveAttribute(
-      'content',
-      SOCIAL_CONFIG.defaultDescription,
-    )
-    expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
-      'content',
-      SOCIAL_CONFIG.defaultImage,
-    )
-    expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
-      'content',
-      mockLocation,
-    )
-    expect(document.querySelector('meta[property="og:site_name"]')).toHaveAttribute(
-      'content',
-      SOCIAL_CONFIG.siteName,
-    )
-  })
-
   it('supports different content types', () => {
     const types: Array<'website' | 'article' | 'profile'> = ['website', 'article', 'profile']
 
@@ -212,34 +243,5 @@ describe('SocialMeta', () => {
     expectedProperties.forEach((property) => {
       expect(properties).toContain(property)
     })
-  })
-
-  it('handles empty string props gracefully', () => {
-    const emptyProps = {
-      title: '',
-      description: '',
-      image: '',
-      url: '',
-    }
-
-    render(<SocialMeta {...emptyProps} />)
-
-    // Should fall back to default values
-    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
-      'content',
-      SOCIAL_CONFIG.siteName,
-    )
-    expect(document.querySelector('meta[property="og:description"]')).toHaveAttribute(
-      'content',
-      SOCIAL_CONFIG.defaultDescription,
-    )
-    expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
-      'content',
-      SOCIAL_CONFIG.defaultImage,
-    )
-    expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
-      'content',
-      mockLocation,
-    )
   })
 })
