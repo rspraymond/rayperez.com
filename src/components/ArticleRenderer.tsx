@@ -8,9 +8,9 @@ interface ArticleRendererProps {
 }
 
 const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
-  const renderHeading = (item: ArticleContent): React.ReactElement => (
+  const renderHeading = (item: ArticleContent, index: number): React.ReactElement => (
     <Typography
-      key={`${item.type}-${item.content}`}
+      key={`heading-${index}`}
       variant={item.variant || 'h3'}
       component={
         item.variant?.startsWith('h')
@@ -23,9 +23,9 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </Typography>
   )
 
-  const renderParagraph = (item: ArticleContent): React.ReactElement => (
+  const renderParagraph = (item: ArticleContent, index: number): React.ReactElement => (
     <Typography
-      key={`${item.type}-${item.content}`}
+      key={`paragraph-${index}`}
       variant={item.variant || 'body1'}
       paragraph={item.paragraph}
     >
@@ -33,20 +33,20 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </Typography>
   )
 
-  const renderList = (item: ArticleContent): React.ReactElement => (
-    <List key={`${item.type}-${item.items?.join('-')}`}>
-      {item.items?.map((listItem, index) => (
-        <ListItem key={index}>
+  const renderList = (item: ArticleContent, index: number): React.ReactElement => (
+    <List key={`list-${index}`}>
+      {item.items?.map((listItem, idx) => (
+        <ListItem key={`list-item-${index}-${idx}`}>
           <ListItemText primary={listItem} />
         </ListItem>
       ))}
     </List>
   )
 
-  const renderComplexList = (item: ArticleContent): React.ReactElement => (
-    <List key={`${item.type}-${item.complexItems?.length}`}>
-      {item.complexItems?.map((listItem, index) => (
-        <ListItem key={index}>
+  const renderComplexList = (item: ArticleContent, index: number): React.ReactElement => (
+    <List key={`complexList-${index}`}>
+      {item.complexItems?.map((listItem, idx) => (
+        <ListItem key={`complex-item-${index}-${idx}`}>
           <ListItemText primary={listItem.primary} secondary={listItem.secondary} />
           {listItem.link && (
             <Link
@@ -64,9 +64,9 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </List>
   )
 
-  const renderCode = (item: ArticleContent): React.ReactElement => (
+  const renderCode = (item: ArticleContent, index: number): React.ReactElement => (
     <Paper
-      key={`${item.type}-${item.language}`}
+      key={`code-${index}`}
       elevation={item.elevation || 3}
       style={{ marginBottom: '16px', ...item.style }}
     >
@@ -76,13 +76,13 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </Paper>
   )
 
-  const renderDivider = (item: ArticleContent): React.ReactElement => (
-    <Divider key={`${item.type}-${Date.now()}`} sx={{ my: 2 }} />
+  const renderDivider = (_item: ArticleContent, index: number): React.ReactElement => (
+    <Divider key={`divider-${index}`} sx={{ my: 2 }} />
   )
 
-  const renderLink = (item: ArticleContent): React.ReactElement => (
+  const renderLink = (item: ArticleContent, index: number): React.ReactElement => (
     <Link
-      key={`${item.type}-${item.href}`}
+      key={`link-${index}`}
       href={item.href}
       target={item.target || '_blank'}
       rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
@@ -93,28 +93,28 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </Link>
   )
 
-  const renderContent = (item: ArticleContent): React.ReactElement | null => {
+  const renderContent = (item: ArticleContent, index: number): React.ReactElement | null => {
     switch (item.type) {
       case 'heading':
-        return renderHeading(item)
+        return renderHeading(item, index)
       case 'paragraph':
-        return renderParagraph(item)
+        return renderParagraph(item, index)
       case 'list':
-        return renderList(item)
+        return renderList(item, index)
       case 'complexList':
-        return renderComplexList(item)
+        return renderComplexList(item, index)
       case 'code':
-        return renderCode(item)
+        return renderCode(item, index)
       case 'divider':
-        return renderDivider(item)
+        return renderDivider(item, index)
       case 'link':
-        return renderLink(item)
+        return renderLink(item, index)
       default:
         return null
     }
   }
 
-  return <>{content.map(renderContent)}</>
+  return <>{content.map((item, index) => renderContent(item, index))}</>
 }
 
 export default ArticleRenderer
