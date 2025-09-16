@@ -1,6 +1,21 @@
 ## Changelog
 
 
+## [0.50.1] - 2025-09-16
+### Bug Fixes
+
+- eliminate duplicate key warnings (#132)
+
+### Other Changes
+
+- chore: dependency updates
+- chore: add eslint rules (#131)
+- chore: refactor bookmark test (#130)
+- chore: refactor social meta test (#129)
+- chore: update documentation for articles (#128)
+
+
+
 ## [0.50.0] - 2025-09-10
 ### Features
 
