@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.51.0] - 2025-09-18
+### Features
+
+- add seo schema improvements (#133)
+
+### Other Changes
+
+- chore: update readme
+
+
+
 ## [0.50.1] - 2025-09-16
 ### Bug Fixes
 
