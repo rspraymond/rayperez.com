@@ -125,7 +125,15 @@ const Home: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'Person',
             name: PROFILE.name,
+            description: PROFILE.description,
             jobTitle: PROFILE.role,
+            email: PROFILE.email,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: PROFILE.location.city,
+              addressRegion: PROFILE.location.state,
+              addressCountry: PROFILE.location.country,
+            },
             worksFor: {
               '@type': 'Organization',
               name: 'Red Ventures',
