@@ -115,22 +115,39 @@ The first diagram shows how user requests flow through the system. The second di
 
 ```
 rayperez-site/
-├── dist/                 # Build output
-├── public/               # Static assets
+├── dist/                 # Production build output
+├── public/               # Static assets served as-is
 ├── src/
-│   ├── assets/           # Images and other assets
-│   ├── components/       # Reusable components
-│   ├── data/             # JSON-driven content
-│   │   └── articles/     # Article JSON files
-│   ├── pages/            # Page components
-│   │   └── articles/     # Blog article pages (wrappers)
+│   ├── assets/           # Images and project assets
+│   ├── components/       # Reusable UI components
+│   ├── constants/        # App constants and configuration
+│   ├── contexts/         # React contexts (theme, bookmarks)
+│   ├── data/
+│   │   └── articles/     # JSON-driven article content
+│   ├── hooks/            # Custom React hooks
+│   ├── img/              # Legacy/static images
+│   ├── pages/
+│   │   └── articles/     # Blog article page wrappers
+│   ├── test-utils/       # Testing helpers and providers
+│   ├── types/            # Shared TypeScript types
+│   ├── utils/            # Utility functions
 │   ├── App.tsx           # Main app component
-│   ├── main.tsx          # Entry point
-│   └── ...
-├── package.json          # Dependencies and scripts
+│   ├── main.tsx          # Application entry point
+│   ├── setupTests.ts     # Vitest + RTL setup
+│   └── vite-env.d.ts     # Vite TS types
+├── scripts/              # Build/automation scripts
+├── docs/                 # Documentation and ADRs
+├── infrastructure/       # Terraform/infra as code
+├── coverage/             # Test coverage reports
+├── index.html            # Root HTML template
+├── package.json          # Scripts and dependencies
 ├── tsconfig.json         # TypeScript configuration
 ├── vite.config.ts        # Vite configuration
-└── ...
+├── vitest.config.ts      # Vitest configuration
+├── CONTRIBUTING.md       # Contributing guidelines
+├── CHANGELOG.md          # Changelog
+├── LICENSE               # License
+└── README.md             # Project overview
 ```
 
 ## 🔧 Development
