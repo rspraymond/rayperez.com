@@ -17,7 +17,7 @@ const experiences = [
   {
     title: 'Senior Software Engineer',
     company: 'Red Ventures',
-    duration: 'Sep 2021 - Present',
+    duration: 'Sep 2021 - Oct 2025',
     bullets: [
       'Built JavaScript applications with focus on performance monitoring and scalable infrastructure.',
       'Helped develop AI tools for content enhancement.',
