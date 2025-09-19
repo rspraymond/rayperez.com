@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.1] - 2025-09-19
+### Bug Fixes
+
+- update experience
+
+
+
 ## [0.51.0] - 2025-09-18
 ### Features
 
