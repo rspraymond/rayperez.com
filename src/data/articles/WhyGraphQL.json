@@ -18,7 +18,7 @@
     ]
   },
 
-  { "type": "heading", "variant": "h3", "content": "I. Introduction", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Introduction", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
@@ -29,7 +29,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "II. Flexibility and Adaptability",
+    "content": "Flexibility and Adaptability",
     "gutterBottom": true
   },
   {
@@ -87,7 +87,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "III. Simplified API Structure",
+    "content": "Simplified API Structure",
     "gutterBottom": true
   },
   {
@@ -124,7 +124,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "IV. Performance Benefits",
+    "content": "Performance Benefits",
     "gutterBottom": true
   },
   {
@@ -164,7 +164,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "V. Client-Side Development Advantages",
+    "content": "Client-Side Development Advantages",
     "gutterBottom": true
   },
   {
@@ -204,7 +204,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VI. Security and Error Handling",
+    "content": "Security and Error Handling",
     "gutterBottom": true
   },
   {
@@ -258,7 +258,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VII. Use Cases for GraphQL",
+    "content": "Use Cases for GraphQL",
     "gutterBottom": true
   },
   {
@@ -312,7 +312,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VIII. Drawbacks and Considerations",
+    "content": "Drawbacks and Considerations",
     "gutterBottom": true
   },
   {
@@ -357,7 +357,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "IX. Comparing GraphQL and REST",
+    "content": "Comparing GraphQL and REST",
     "gutterBottom": true
   },
   { "type": "heading", "variant": "h6", "content": "A. When to choose REST", "gutterBottom": true },
@@ -398,7 +398,7 @@
     "code": "query {\n  user(id: \"1\") {\n    name\n    posts {\n      title\n      comments {\n        text\n      }\n    }\n  }\n}"
   },
 
-  { "type": "heading", "variant": "h3", "content": "X. Conclusion", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Conclusion", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
