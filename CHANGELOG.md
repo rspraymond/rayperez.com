@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.2] - 2025-09-20
+### Bug Fixes
+
+- remove roman numerals for graphql
+
+
+
 ## [0.51.1] - 2025-09-19
 ### Bug Fixes
 
