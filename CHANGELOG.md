@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.3] - 2025-09-21
+### Bug Fixes
+
+- remove roman numerals from why laravel
+
+
+
 ## [0.51.2] - 2025-09-20
 ### Bug Fixes
 
