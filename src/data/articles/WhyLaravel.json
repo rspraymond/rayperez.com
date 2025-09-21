@@ -40,7 +40,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "II. Ease of Use and Rapid Development",
+    "content": "Ease of Use and Rapid Development",
     "gutterBottom": true
   },
   {
@@ -98,7 +98,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "III. Powerful Built-In Features",
+    "content": "Powerful Built-In Features",
     "gutterBottom": true
   },
   {
@@ -158,7 +158,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "IV. Flexibility and Customization",
+    "content": "Flexibility and Customization",
     "gutterBottom": true
   },
   {
@@ -216,7 +216,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "V. Strong Community and Ecosystem",
+    "content": "Strong Community and Ecosystem",
     "gutterBottom": true
   },
   {
@@ -254,7 +254,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VI. Security and Performance",
+    "content": "Security and Performance",
     "gutterBottom": true
   },
   {
@@ -310,7 +310,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VII. Comparison with Other Frameworks",
+    "content": "Comparison with Other Frameworks",
     "gutterBottom": true
   },
   {
@@ -345,7 +345,7 @@
     "paragraph": true
   },
 
-  { "type": "heading", "variant": "h3", "content": "VIII. Conclusion", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Conclusion", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
