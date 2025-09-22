@@ -19,7 +19,7 @@
   },
   { "type": "divider" },
 
-  { "type": "heading", "variant": "h3", "content": "I. Introduction", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Introduction", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
@@ -30,7 +30,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "II. Structured and Opinionated Framework",
+    "content": "Structured and Opinionated Framework",
     "gutterBottom": true
   },
   {
@@ -65,7 +65,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "III. TypeScript Integration",
+    "content": "TypeScript Integration",
     "gutterBottom": true
   },
   {
@@ -89,7 +89,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "IV. Dependency Injection",
+    "content": "Dependency Injection",
     "gutterBottom": true
   },
   {
@@ -113,7 +113,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "V. Modularity and Scalability",
+    "content": "Modularity and Scalability",
     "gutterBottom": true
   },
   {
@@ -137,7 +137,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VI. Comprehensive Documentation and Community Support",
+    "content": "Comprehensive Documentation and Community Support",
     "gutterBottom": true
   },
   {
@@ -150,7 +150,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VII. Built-in Features and Best Practices",
+    "content": "Built-in Features and Best Practices",
     "gutterBottom": true
   },
   {
@@ -174,7 +174,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "VIII. Ease of Onboarding for New Developers",
+    "content": "Ease of Onboarding for New Developers",
     "gutterBottom": true
   },
   {
@@ -187,7 +187,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "IX. Addressing Common Criticisms",
+    "content": "Addressing Common Criticisms",
     "gutterBottom": true
   },
   {
@@ -197,7 +197,7 @@
     "paragraph": true
   },
 
-  { "type": "heading", "variant": "h3", "content": "X. Conclusion", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Conclusion", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
