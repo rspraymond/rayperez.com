@@ -35,7 +35,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "II. Immutability and Predictability",
+    "content": "Immutability and Predictability",
     "gutterBottom": true
   },
   {
@@ -65,7 +65,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "III. JSX and Templating",
+    "content": "JSX and Templating",
     "gutterBottom": true
   },
   {
@@ -95,7 +95,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "IV. State Management Options",
+    "content": "State Management Options",
     "gutterBottom": true
   },
   {
@@ -130,7 +130,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "V. Handling Legacy Code",
+    "content": "Handling Legacy Code",
     "gutterBottom": true
   },
   {
@@ -154,7 +154,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "VI. Development Speed and Efficiency",
+    "content": "Development Speed and Efficiency",
     "gutterBottom": true
   },
   {
@@ -178,7 +178,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "VII. Job Market and Career Opportunities",
+    "content": "Job Market and Career Opportunities",
     "gutterBottom": true
   },
   {
@@ -191,7 +191,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "VIII. Versatility and Ecosystem",
+    "content": "Versatility and Ecosystem",
     "gutterBottom": true
   },
   {
@@ -215,7 +215,7 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "IX. Comparison with Other Frameworks",
+    "content": "Comparison with Other Frameworks",
     "gutterBottom": true
   },
   {
@@ -247,7 +247,7 @@
     "paragraph": true
   },
 
-  { "type": "heading", "variant": "h5", "content": "X. Conclusion", "gutterBottom": true },
+  { "type": "heading", "variant": "h5", "content": "Conclusion", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
