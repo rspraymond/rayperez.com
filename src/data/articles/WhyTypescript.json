@@ -9,7 +9,7 @@
     ]
   },
 
-  { "type": "heading", "variant": "h3", "content": "I. Introduction", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Introduction", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
@@ -20,7 +20,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "II. Benefits of TypeScript",
+    "content": "Benefits of TypeScript",
     "gutterBottom": true
   },
 
@@ -206,7 +206,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "III. Addressing Common Concerns",
+    "content": "Addressing Common Concerns",
     "gutterBottom": true
   },
 
@@ -247,7 +247,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "IV. Real-World Applications and Success Stories",
+    "content": "Real-World Applications and Success Stories",
     "gutterBottom": true
   },
 
@@ -277,7 +277,7 @@
     "paragraph": true
   },
 
-  { "type": "heading", "variant": "h3", "content": "V. Conclusion", "gutterBottom": true },
+  { "type": "heading", "variant": "h3", "content": "Conclusion", "gutterBottom": true },
   {
     "type": "paragraph",
     "variant": "body1",
