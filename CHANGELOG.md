@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.6] - 2025-09-25
+### Bug Fixes
+
+- remove roman numerals from why typescript
+
+
+
 ## [0.51.5] - 2025-09-23
 ### Bug Fixes
 
