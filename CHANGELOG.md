@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.8] - 2025-09-26
+### Bug Fixes
+
+- update resume
+
+
+
 ## [0.51.7] - 2025-09-26
 ### Bug Fixes
 
