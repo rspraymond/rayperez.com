@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.7] - 2025-09-26
+### Bug Fixes
+
+- remove roman numerals from why nest
+
+
+
 ## [0.51.6] - 2025-09-25
 ### Bug Fixes
 
