@@ -19,9 +19,12 @@ const experiences = [
     company: 'Red Ventures',
     duration: 'Sep 2021 - Oct 2025',
     bullets: [
-      'Built JavaScript applications with focus on performance monitoring and scalable infrastructure.',
-      'Helped develop AI tools for content enhancement.',
-      'Worked on application monitoring and performance tracking.',
+      'Supported React/Express applications for Mortgages serving millions of visitors with real-time rate data across 10+ microservices on AWS ECS with ElastiCache and Lambda functions',
+      'Built AI video streaming service for Bankrate.com using NestJS/GraphQL backend and HTML5 player integration with WordPress/Storyblok CMS',
+      'Architected editorial AI platform enabling writers and editors to research, write, and update content across Bankrate using Vue.js frontend and NestJS backend',
+      'Contributor on core Bankrate platform supporting 2M+ pages and 600k daily visitors using Laravel with Fastly CDN, mentored teams on AI tools (ChatGPT, Cursor) and won AI Hackathon for legacy calculator migration while supporting over 100 code repositories',
+      'Implemented comprehensive monitoring with Datadog/New Relic and OpenTelemetry across all applications, provisioned infrastructure using Terraform',
+      'Mentored junior developers on Laravel best practices and AI implementation strategies while managing cross-team PR reviews',
     ],
   },
   {
@@ -29,9 +32,9 @@ const experiences = [
     company: 'Dealer Inspire',
     duration: 'Feb 2021 - Sep 2021',
     bullets: [
-      'Maintained chatbot and admin interface for dealership websites using Datadog, Bitbucket, and AWS.',
-      'Improved testing pipeline for Laravel applications.',
-      'Completed React and Node.js development tasks.',
+      'Developed Laravel admin interface and Node.js REST API for chatbot system serving hundreds of dealerships nationwide with inventory search and sales lead management',
+      'Supported React chatbot client enabling text communication between customers and dealership employees with real-time inventory sharing and collaboration features',
+      'Implemented parallelized testing pipeline in Bitbucket reducing build times by 30%, deployed Laravel/Node.js stack on AWS ECS with S3 and Redis',
     ],
   },
   {
@@ -39,9 +42,9 @@ const experiences = [
     company: 'RE/MAX',
     duration: 'Aug 2018 - Jan 2021',
     bullets: [
-      'Developed Max Center agent referral system using GitLab, GitHub, Datadog, and TravisCI.',
-      'Implemented test coverage on APIs, improving code quality and reducing bugs.',
-      'Mentored junior developers and fostered team collaboration.',
+      'Developed Laravel REST API backend for Max Center agent referral system serving global agents with SSO integration via Okta and Elasticsearch-powered agent search functionality',
+      'Led Max Center v5 launch upgrading AngularJS to Angular 2, implemented comprehensive PHPUnit testing framework increasing backend test coverage from zero',
+      'Migrated from CAB to GitLab CI/CD pipeline on AWS EC2/RDS/ElastiCache infrastructure, mentored junior developers on Laravel best practices, and resolved production bugs',
     ],
   },
   {
@@ -49,8 +52,10 @@ const experiences = [
     company: 'Schomp Automotive Group',
     duration: 'Jun 2015 - Dec 2017',
     bullets: [
-      'Built features for Laravel business application using Digital Ocean, Bitbucket, and CircleCI.',
-      'Developed third-party integrations to improve dealership efficiency.',
+      'Developed Laravel application with vehicle search, online desking system for payment calculations, and drag-and-drop warranty packaging software with signature agreements',
+      'Built API integrations with dealer management systems (DealerTrack, CDK) using REST and SOAP protocols for vehicle inventory and warranty options import',
+      'Optimized database performance through index optimization, improving application load times',
+      'Deployed Laravel/Apache stack with PHP-FPM, MySQL on Digital Ocean with Bitbucket CI/CD pipeline',
     ],
   },
   {
