@@ -23,7 +23,7 @@ const experiences = [
       'Built AI video streaming service for Bankrate.com using NestJS/GraphQL backend and HTML5 player integration with WordPress/Storyblok CMS',
       'Architected editorial AI platform enabling writers and editors to research, write, and update content across Bankrate using Vue.js frontend and NestJS backend',
       'Contributor on core Bankrate platform supporting 2M+ pages and 600k daily visitors using Laravel with Fastly CDN, mentored teams on AI tools (ChatGPT, Cursor) and won AI Hackathon for legacy calculator migration while supporting over 100 code repositories',
-      'Implemented comprehensive monitoring with Datadog/New Relic and OpenTelemetry across all applications, provisioned infrastructure using Terraform',
+      'Implemented comprehensive monitoring with Datadog/New Relic across all applications, provisioned infrastructure using Terraform',
       'Mentored junior developers on Laravel best practices and AI implementation strategies while managing cross-team PR reviews',
     ],
   },
