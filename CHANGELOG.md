@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.51.10] - 2025-09-28
+### Bug Fixes
+
+- update resume
+- small edit to experience
+
+### Other Changes
+
+- chore: update experience
+
+
+
 ## [0.51.9] - 2025-09-26
 ### Bug Fixes
 
