@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.51.11] - 2025-09-29
+### Bug Fixes
+
+- remove redundant links (#134)
+
+
+
 ## [0.51.10] - 2025-09-28
 ### Bug Fixes
 
