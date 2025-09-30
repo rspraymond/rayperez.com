@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.52.0] - 2025-09-30
+### Features
+
+- create projects component (#135)
+
+
+
 ## [0.51.11] - 2025-09-29
 ### Bug Fixes
 
