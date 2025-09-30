@@ -13,8 +13,8 @@ vi.mock('../components/Summary.tsx', () => ({
   default: () => <div data-testid='summary-component'>Summary Mock</div>,
 }))
 
-vi.mock('../components/Links.tsx', () => ({
-  default: () => <div data-testid='links-component'>Links Mock</div>,
+vi.mock('../components/Projects.tsx', () => ({
+  default: () => <div data-testid='projects-component'>Projects Mock</div>,
 }))
 
 vi.mock('../components/Skills.tsx', () => ({
@@ -56,9 +56,10 @@ describe('Home Component', () => {
   it('renders all main content sections', () => {
     renderWithProvider(<Home />)
 
-    // Verify main content sections are present
+    // Verify main content sections are present in correct order
     expect(screen.getByTestId('summary-component')).toBeInTheDocument()
     expect(screen.getByTestId('skills-component')).toBeInTheDocument()
+    expect(screen.getByTestId('projects-component')).toBeInTheDocument()
     expect(screen.getByTestId('achievements-component')).toBeInTheDocument()
 
     // Check that at least one experience and education component is rendered
