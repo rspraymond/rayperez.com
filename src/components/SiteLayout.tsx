@@ -9,6 +9,7 @@ import { PROFILE } from '../constants/profile'
 const ProfileCard = lazy(() => import('./ProfileCard'))
 const BookmarkedPosts = lazy(() => import('./BookmarkedPosts'))
 const RecentPosts = lazy(() => import('./RecentPosts'))
+const SidebarSocials = lazy(() => import('./SidebarSocials'))
 
 const SiteLayout: React.FC = () => {
   return (
@@ -26,6 +27,14 @@ const SiteLayout: React.FC = () => {
             </Suspense>
             <Suspense fallback={<LoadingSkeleton testId='recent-posts' />}>
               <RecentPosts />
+            </Suspense>
+            <Suspense fallback={<LoadingSkeleton testId='sidebar-socials' />}>
+              <SidebarSocials
+                socials={[
+                  { text: 'Twitter', href: 'https://twitter.com/onlyray7', platform: 'twitter' },
+                  { text: 'Twitch', href: 'https://twitch.tv/onlyray', platform: 'twitch' },
+                ]}
+              />
             </Suspense>
           </Grid>
           <Grid item xs={12} lg={8}>

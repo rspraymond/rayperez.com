@@ -3,7 +3,7 @@ import { helmetJsonLdProp } from 'react-schemaorg'
 import { Person } from 'schema-dts'
 import { Box } from '@mui/material'
 import Summary from '../components/Summary.tsx'
-import Links from '../components/Links.tsx'
+import Projects from '../components/Projects.tsx'
 import Experience from '../components/Experience.tsx'
 import Education from '../components/Education.tsx'
 import Skills from '../components/Skills.tsx'
@@ -111,12 +111,31 @@ const achievements = [
   'Increased dealership efficiency through third-party integrations at Schomp Automotive Group.',
 ]
 
-const links = [
-  { text: 'Prejump', href: 'https://prejump.com' },
-  { text: 'Twitch', href: 'https://twitch.tv/onlyray' },
-  { text: 'Twitter', href: 'https://twitter.com/onlyray7' },
-  { text: 'Twitch Clips Finder', href: 'http://clipsfinder.com' },
-  { text: 'Palworld Fast Travel Map', href: 'https://palworld-map.appsample.com' },
+const projects = [
+  {
+    title: 'Prejump',
+    description:
+      'A comprehensive platform for entrepreneurs and innovators to connect, collaborate, and build meaningful technology solutions.',
+    technologies: ['Laravel', 'Inertia.js', 'React', 'Tailwind CSS', 'TypeScript'],
+    liveUrl: 'https://prejump.com',
+    featured: false,
+  },
+  {
+    title: 'Twitch Clips Finder',
+    description:
+      'A utility tool for discovering and organizing Twitch clips with advanced search and filtering capabilities.',
+    technologies: ['Next.js', 'Material-UI', 'TypeScript', 'Twitch API'],
+    liveUrl: 'http://clipsfinder.com',
+    featured: false,
+  },
+  {
+    title: 'Palworld Fast Travel Map',
+    description:
+      'An interactive map application for Palworld players to quickly navigate and discover fast travel points.',
+    technologies: ['Next.js', 'Material-UI', 'TypeScript', 'Mapbox'],
+    liveUrl: 'https://palworld-map.appsample.com',
+    featured: false,
+  },
 ]
 
 const Home: React.FC = () => {
@@ -186,8 +205,8 @@ const Home: React.FC = () => {
       />
       <Box>
         <Summary />
-        <Links links={links} />
         <Skills skills={SKILLS} />
+        <Projects projects={projects} />
         <Achievements achievements={achievements} />
         {experiences.map((exp, key) => (
           <Experience {...exp} key={key} />
