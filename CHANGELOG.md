@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.52.1] - 2025-10-01
+### Bug Fixes
+
+- use correct tech stack for palworld (#136)
+
+
+
 ## [0.52.0] - 2025-09-30
 ### Features
 
