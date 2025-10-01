@@ -132,7 +132,7 @@ const projects = [
     title: 'Palworld Fast Travel Map',
     description:
       'An interactive map application for Palworld players to quickly navigate and discover fast travel points.',
-    technologies: ['Next.js', 'Material-UI', 'TypeScript', 'Mapbox'],
+    technologies: ['Next.js', 'Material-UI', 'TypeScript', 'Leaflet', 'Google Maps API'],
     liveUrl: 'https://palworld-map.appsample.com',
     featured: false,
   },
