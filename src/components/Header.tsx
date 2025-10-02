@@ -3,6 +3,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import DescriptionIcon from '@mui/icons-material/Description'
 import ThemeToggle from './ThemeToggle'
+import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
 
 function Header() {
   return (
@@ -29,7 +30,7 @@ function Header() {
           <GitHubIcon />
         </IconButton>
         <IconButton
-          href='/raymond-perez-software-engineer-resume.pdf'
+          href={resumePdf}
           color='inherit'
           component='a'
           target='_blank'
