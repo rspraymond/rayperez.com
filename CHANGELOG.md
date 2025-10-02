@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.53.1] - 2025-10-02
+### Bug Fixes
+
+- use correct prejump description
+
+
+
 ## [0.53.0] - 2025-10-02
 ### Features
 
