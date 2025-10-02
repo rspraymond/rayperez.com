@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.53.0] - 2025-10-02
+### Features
+
+- add filename hashing for resume (#137)
+
+
+
 ## [0.52.1] - 2025-10-01
 ### Bug Fixes
 
