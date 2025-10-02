@@ -115,7 +115,7 @@ const projects = [
   {
     title: 'Prejump',
     description:
-      'A comprehensive platform for entrepreneurs and innovators to connect, collaborate, and build meaningful technology solutions.',
+      'A comprehensive training platform for Rocket League players featuring a database of training packs, search functionality, and BakkesMod integration for seamless in-game loading.',
     technologies: ['Laravel', 'Inertia.js', 'React', 'Tailwind CSS', 'TypeScript'],
     liveUrl: 'https://prejump.com',
     featured: false,
