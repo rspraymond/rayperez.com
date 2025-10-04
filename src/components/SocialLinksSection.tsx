@@ -10,19 +10,16 @@ const SOCIAL_LINKS = [
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/raymond-perez-eng/',
     icon: LinkedInIcon,
-    color: '#0077B5',
   },
   {
     name: 'GitHub',
     url: 'https://github.com/rspraymond',
     icon: GitHubIcon,
-    color: '#333',
   },
   {
     name: 'Twitter',
     url: 'https://twitter.com/onlyray7',
     icon: TwitterIcon,
-    color: '#1DA1F2',
   },
 ]
 
@@ -52,7 +49,7 @@ const SocialLinksSection: React.FC = () => (
             color: 'text.secondary',
             textDecoration: 'none',
             '&:hover': {
-              color: social.color,
+              color: 'primary.main',
               textDecoration: 'underline',
             },
           }}
