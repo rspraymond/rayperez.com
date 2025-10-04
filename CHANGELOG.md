@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.53.2] - 2025-10-04
+### Bug Fixes
+
+- enforce consistent hover links for post footer (#138)
+
+### Other Changes
+
+- chore: remove stray file
+
+
+
 ## [0.53.1] - 2025-10-02
 ### Bug Fixes
 
