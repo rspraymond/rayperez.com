@@ -30,6 +30,46 @@
   {
     "type": "heading",
     "variant": "h3",
+    "content": "Framework Comparison",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "headers": ["Feature", "NestJS", "Express.js", "Fastify"],
+      "rows": [
+        ["Architecture", "Modular, Opinionated", "Minimal, Unopinionated", "Plugin-based, Fast"],
+        [
+          "TypeScript Support",
+          "Built-in, First-class",
+          "Optional, Manual setup",
+          "Built-in, Excellent"
+        ],
+        ["Dependency Injection", "Built-in DI Container", "Manual implementation", "Built-in DI"],
+        ["Learning Curve", "Moderate to Steep", "Easy to Moderate", "Easy to Moderate"],
+        ["Performance", "Good", "Good", "Excellent"],
+        [
+          "Built-in Features",
+          "Validation, Guards, Interceptors",
+          "Minimal",
+          "Schema validation, Serialization"
+        ],
+        ["Code Organization", "Enforced structure", "Developer choice", "Plugin-based structure"],
+        [
+          "Testing",
+          "Built-in testing utilities",
+          "Manual setup required",
+          "Built-in testing support"
+        ],
+        ["Documentation", "Comprehensive", "Good", "Good"],
+        ["Community", "Growing, Active", "Large, Mature", "Growing, Active"]
+      ],
+      "caption": "Comparison of popular Node.js frameworks"
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
     "content": "Structured and Opinionated Framework",
     "gutterBottom": true
   },
@@ -150,6 +190,71 @@
   {
     "type": "heading",
     "variant": "h3",
+    "content": "NestJS Key Features Summary",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "headers": ["Feature", "Description", "Benefit"],
+      "rows": [
+        [
+          "Modular Architecture",
+          "Code organized into modules with clear boundaries",
+          "Improved maintainability and scalability"
+        ],
+        [
+          "Dependency Injection",
+          "Built-in DI container for managing dependencies",
+          "Loose coupling and enhanced testability"
+        ],
+        [
+          "TypeScript Integration",
+          "First-class TypeScript support with decorators",
+          "Better type safety and developer experience"
+        ],
+        [
+          "Built-in Validation",
+          "Automatic request validation using class-validator",
+          "Reduced boilerplate and consistent validation"
+        ],
+        [
+          "Exception Handling",
+          "Global exception filters with automatic HTTP responses",
+          "Consistent error handling across the application"
+        ],
+        [
+          "Guards & Interceptors",
+          "Request/response transformation and authorization",
+          "Clean separation of concerns"
+        ],
+        [
+          "Testing Utilities",
+          "Built-in testing module with mocking capabilities",
+          "Easier unit and integration testing"
+        ],
+        [
+          "Microservices Support",
+          "Built-in support for various transport layers",
+          "Easy transition to microservices architecture"
+        ],
+        [
+          "WebSocket Support",
+          "Native WebSocket and Socket.IO integration",
+          "Real-time communication capabilities"
+        ],
+        [
+          "GraphQL Support",
+          "Built-in GraphQL module with decorators",
+          "Flexible API development options"
+        ]
+      ],
+      "caption": "Core NestJS features and their benefits"
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
     "content": "Built-in Features and Best Practices",
     "gutterBottom": true
   },
@@ -184,6 +289,35 @@
     "paragraph": true
   },
 
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "When to Choose Each Framework",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "headers": ["Use Case", "Recommended Framework", "Reasoning"],
+      "rows": [
+        [
+          "Large Enterprise Applications",
+          "NestJS",
+          "Structured architecture, DI, and built-in features"
+        ],
+        ["Rapid Prototyping", "Express.js", "Minimal setup, quick to get started"],
+        ["High-Performance APIs", "Fastify", "Excellent performance and built-in serialization"],
+        ["Microservices Architecture", "NestJS", "Built-in microservices support and modularity"],
+        ["Simple REST APIs", "Express.js or Fastify", "Lightweight and straightforward"],
+        ["Real-time Applications", "NestJS", "Built-in WebSocket and Socket.IO support"],
+        ["GraphQL APIs", "NestJS", "Native GraphQL module with decorators"],
+        ["Learning Node.js", "Express.js", "Minimal complexity, large community"],
+        ["TypeScript Projects", "NestJS or Fastify", "Excellent TypeScript support"],
+        ["Legacy System Integration", "Express.js", "Flexible and adaptable"]
+      ],
+      "caption": "Framework selection guide based on project requirements"
+    }
+  },
   {
     "type": "heading",
     "variant": "h3",
