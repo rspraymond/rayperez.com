@@ -1,5 +1,20 @@
 import React from 'react'
-import { Typography, List, ListItem, ListItemText, Paper, Link, Divider } from '@mui/material'
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Link,
+  Divider,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Box,
+} from '@mui/material'
 import LazySyntaxHighlighter from './LazySyntaxHighlighter'
 import { ArticleContent } from '../types/articleContent'
 
@@ -93,6 +108,59 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </Link>
   )
 
+  const renderTable = (item: ArticleContent, index: number): React.ReactElement => (
+    <Box key={`table-${index}`} sx={{ marginBottom: '16px', ...item.style }}>
+      {item.table?.caption && (
+        <Typography variant='caption' component='div' sx={{ mb: 1, fontStyle: 'italic' }}>
+          {item.table.caption}
+        </Typography>
+      )}
+      <TableContainer component={Paper} elevation={item.elevation || 1}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {item.table?.headers.map((header, headerIndex) => (
+                <TableCell
+                  key={`header-${index}-${headerIndex}`}
+                  variant='head'
+                  sx={{
+                    backgroundColor: 'action.hover',
+                    fontWeight: 'bold',
+                    py: 2,
+                  }}
+                >
+                  <Typography variant='subtitle2' fontWeight='bold'>
+                    {header}
+                  </Typography>
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {item.table?.rows.map((row, rowIndex) => (
+              <TableRow
+                key={`row-${index}-${rowIndex}`}
+                sx={{
+                  backgroundColor: rowIndex % 2 === 0 ? 'background.paper' : 'action.hover',
+                  '&:hover': {
+                    backgroundColor: 'action.selected',
+                  },
+                  transition: 'background-color 0.2s ease-in-out',
+                }}
+              >
+                {row.map((cell, cellIndex) => (
+                  <TableCell key={`cell-${index}-${rowIndex}-${cellIndex}`} sx={{ py: 2 }}>
+                    <Typography variant='body2'>{cell}</Typography>
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  )
+
   const renderContent = (item: ArticleContent, index: number): React.ReactElement | null => {
     switch (item.type) {
       case 'heading':
@@ -109,6 +177,8 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
         return renderDivider(item, index)
       case 'link':
         return renderLink(item, index)
+      case 'table':
+        return renderTable(item, index)
       default:
         return null
     }

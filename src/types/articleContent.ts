@@ -1,5 +1,5 @@
 export interface ArticleContent {
-  type: 'heading' | 'paragraph' | 'list' | 'code' | 'divider' | 'link' | 'complexList'
+  type: 'heading' | 'paragraph' | 'list' | 'code' | 'divider' | 'link' | 'complexList' | 'table'
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption'
   content?: string
   items?: string[]
@@ -21,6 +21,11 @@ export interface ArticleContent {
   paragraph?: boolean
   elevation?: number
   style?: Record<string, string>
+  table?: {
+    headers: string[]
+    rows: string[][]
+    caption?: string
+  }
 }
 
 export type ArticleDocument = ArticleContent[]
