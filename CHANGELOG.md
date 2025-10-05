@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.54.0] - 2025-10-05
+### Features
+
+- add why nest tables (#139)
+
+
+
 ## [0.53.2] - 2025-10-04
 ### Bug Fixes
 
