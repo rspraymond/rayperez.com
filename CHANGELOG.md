@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.54.1] - 2025-10-06
+### Bug Fixes
+
+- add comparison and summary tables to why opinionated (#140)
+
+
+
 ## [0.54.0] - 2025-10-05
 ### Features
 
