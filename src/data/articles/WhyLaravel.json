@@ -17,7 +17,23 @@
       }
     ]
   },
-
+  {
+    "type": "table",
+    "table": {
+      "caption": "Why Choose Laravel - Quick Summary",
+      "headers": ["Aspect", "Laravel Advantage", "Impact"],
+      "rows": [
+        ["Development Speed", "Elegant syntax, built-in features", "Faster time-to-market"],
+        ["Learning Curve", "Intuitive, well-documented", "Quick onboarding for teams"],
+        ["Built-in Features", "ORM, templating, CLI tools", "Reduced boilerplate code"],
+        ["Security", "CSRF, XSS, SQL injection protection", "Production-ready security"],
+        ["Community", "Large, active developer community", "Extensive support and packages"],
+        ["Flexibility", "Modular architecture", "Scales from simple to complex apps"],
+        ["Performance", "Caching, queues, optimization tools", "Handles high-traffic applications"],
+        ["Ecosystem", "Forge, Nova, Vapor, Envoyer", "Complete development environment"]
+      ]
+    }
+  },
   {
     "type": "paragraph",
     "variant": "body1",
@@ -106,6 +122,25 @@
     "variant": "body1",
     "content": "Laravel comes packed with a host of powerful features that streamline and simplify web development. These built-in tools and libraries can significantly enhance your productivity and efficiency. Let's take a look at some of them:",
     "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Laravel Built-In Features Overview",
+      "headers": ["Feature", "Purpose", "Key Benefits"],
+      "rows": [
+        ["Eloquent ORM", "Database interaction", "Simplified queries, relationships, migrations"],
+        ["Blade Templating", "View rendering", "Template inheritance, components, directives"],
+        ["Artisan CLI", "Command-line tools", "Code generation, migrations, testing"],
+        ["Authentication", "User management", "Built-in auth system, guards, policies"],
+        ["Routing", "URL handling", "RESTful routes, middleware, groups"],
+        ["Middleware", "Request filtering", "Authentication, CORS, rate limiting"],
+        ["Caching", "Performance optimization", "Multiple drivers, cache tags, invalidation"],
+        ["Queues", "Background jobs", "Job processing, failed job handling"],
+        ["Events & Listeners", "Application events", "Decoupled architecture, broadcasting"],
+        ["Validation", "Data validation", "Form requests, rules, custom validators"]
+      ]
+    }
   },
 
   { "type": "heading", "variant": "h6", "content": "A. Eloquent ORM", "gutterBottom": true },
@@ -272,7 +307,48 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Laravel comes with several built-in security features that protect your application from common web vulnerabilities. For instance, Laravel's Eloquent ORM uses PDO binding, which protects your application from SQL injection attacks. Laravel also provides a simple way to protect your application from cross-site request forgery (CSRF) attacks. Here's an example of how you can include a CSRF token in a form:",
+    "content": "Laravel comes with several built-in security features that protect your application from common web vulnerabilities. Here's a comprehensive overview of Laravel's security capabilities:",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Laravel Security Features",
+      "headers": ["Security Feature", "Protection Against", "Implementation"],
+      "rows": [
+        [
+          "SQL Injection Protection",
+          "SQL injection attacks",
+          "PDO parameter binding in Eloquent ORM"
+        ],
+        [
+          "CSRF Protection",
+          "Cross-site request forgery",
+          "Automatic token generation and validation"
+        ],
+        ["XSS Protection", "Cross-site scripting", "Automatic output escaping in Blade templates"],
+        [
+          "Authentication System",
+          "Unauthorized access",
+          "Built-in guards, providers, and policies"
+        ],
+        ["Password Hashing", "Password vulnerabilities", "Bcrypt and Argon2 hashing algorithms"],
+        ["Rate Limiting", "Brute force attacks", "Throttle middleware for API and routes"],
+        ["Input Validation", "Malicious input", "Form request validation and sanitization"],
+        ["Session Security", "Session hijacking", "Secure session configuration and encryption"],
+        [
+          "HTTPS Enforcement",
+          "Man-in-the-middle attacks",
+          "Force HTTPS in production environments"
+        ],
+        ["CORS Protection", "Cross-origin attacks", "Configurable CORS middleware"]
+      ]
+    }
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "For instance, Laravel's Eloquent ORM uses PDO binding, which protects your application from SQL injection attacks. Laravel also provides a simple way to protect your application from cross-site request forgery (CSRF) attacks. Here's an example of how you can include a CSRF token in a form:",
     "paragraph": true
   },
   {
@@ -296,7 +372,32 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Laravel provides several tools and techniques for optimizing the performance of your application. For instance, Laravel supports caching out of the box, which can significantly speed up your application by storing the results of database queries or rendering of views. Laravel also provides a queue system for handling tasks in the background, such as sending emails, which can improve the responsiveness of your application. Here's an example of how you can dispatch a job to the queue:",
+    "content": "Laravel provides several tools and techniques for optimizing the performance of your application. Here's a comprehensive overview of Laravel's performance optimization features:",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Laravel Performance Optimization Features",
+      "headers": ["Feature", "Purpose", "Performance Impact"],
+      "rows": [
+        ["Query Caching", "Cache database query results", "Reduces database load by 60-80%"],
+        ["View Caching", "Cache compiled Blade templates", "Faster page rendering"],
+        ["Route Caching", "Cache route definitions", "Faster route resolution"],
+        ["Config Caching", "Cache configuration files", "Reduced file system calls"],
+        ["Queue System", "Background job processing", "Improved user experience"],
+        ["Database Indexing", "Optimize database queries", "Faster query execution"],
+        ["Eager Loading", "Reduce N+1 query problems", "Fewer database queries"],
+        ["Lazy Loading", "Load resources on demand", "Reduced memory usage"],
+        ["HTTP Caching", "Browser and server caching", "Faster content delivery"],
+        ["Asset Optimization", "Minification and compression", "Smaller file sizes"]
+      ]
+    }
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "For instance, Laravel supports caching out of the box, which can significantly speed up your application by storing the results of database queries or rendering of views. Laravel also provides a queue system for handling tasks in the background, such as sending emails, which can improve the responsiveness of your application. Here's an example of how you can dispatch a job to the queue:",
     "paragraph": true
   },
   { "type": "code", "language": "php", "code": "ProcessPodcast::dispatch($podcast);" },
@@ -318,6 +419,28 @@
     "variant": "body1",
     "content": "Choosing a framework often involves comparing it with other available options. Let's see how Laravel stacks up against some other popular PHP frameworks:",
     "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "PHP Framework Comparison",
+      "headers": [
+        "Framework",
+        "Learning Curve",
+        "Built-in Features",
+        "Community Size",
+        "Performance",
+        "Best For"
+      ],
+      "rows": [
+        ["Laravel", "Easy", "Extensive", "Large & Active", "Good", "Rapid development, startups"],
+        ["Symfony", "Steep", "Modular", "Large", "Excellent", "Enterprise, complex apps"],
+        ["CodeIgniter", "Easy", "Minimal", "Medium", "Fast", "Simple projects, legacy"],
+        ["CakePHP", "Medium", "Good", "Medium", "Good", "Rapid prototyping"],
+        ["Zend/Laminas", "Steep", "Modular", "Medium", "Excellent", "Enterprise, large teams"],
+        ["Yii", "Medium", "Good", "Small", "Fast", "High-performance apps"]
+      ]
+    }
   },
   { "type": "heading", "variant": "h6", "content": "A. Laravel vs. Symfony", "gutterBottom": true },
   {
