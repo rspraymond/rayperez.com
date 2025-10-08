@@ -106,6 +106,45 @@
   { "type": "divider" },
 
   { "type": "heading", "variant": "h5", "content": "Core Benefits of MVC", "gutterBottom": true },
+  {
+    "type": "table",
+    "table": {
+      "caption": "MVC Benefits Quick Reference",
+      "headers": ["Benefit", "Description", "Impact"],
+      "rows": [
+        [
+          "Separation of Concerns",
+          "Clear boundaries between data, presentation, and logic",
+          "Easier to understand and modify code"
+        ],
+        [
+          "Code Organization",
+          "Consistent structure across the application",
+          "Faster development and easier navigation"
+        ],
+        [
+          "Testability",
+          "Each component can be tested independently",
+          "More reliable applications with better test coverage"
+        ],
+        [
+          "DRY Principle",
+          "Centralized logic reduces code duplication",
+          "Easier maintenance and fewer bugs"
+        ],
+        [
+          "Team Collaboration",
+          "Natural boundaries for different developers",
+          "Fewer merge conflicts and parallel development"
+        ],
+        [
+          "Technology Flexibility",
+          "Components can be swapped without affecting others",
+          "Easier to adapt to changing requirements"
+        ]
+      ]
+    }
+  },
 
   { "type": "heading", "variant": "h6", "content": "Separation of Concerns", "gutterBottom": true },
   {
@@ -195,6 +234,45 @@
     "content": "MVC isn't always the right choice, but it shines in certain scenarios:",
     "paragraph": true
   },
+  {
+    "type": "table",
+    "table": {
+      "caption": "When to Use MVC",
+      "headers": ["Scenario", "Why MVC Fits", "Key Advantages"],
+      "rows": [
+        [
+          "Large Projects",
+          "Complex applications need clear organization",
+          "Maintainable structure as codebase grows"
+        ],
+        [
+          "Team Development",
+          "Multiple developers need clear boundaries",
+          "Parallel development with fewer conflicts"
+        ],
+        [
+          "Long-term Maintenance",
+          "Applications that will be maintained for years",
+          "Consistent patterns that survive team changes"
+        ],
+        [
+          "Changing Requirements",
+          "Business logic and UI requirements evolve",
+          "Easy to modify one layer without affecting others"
+        ],
+        [
+          "Multiple Data Types",
+          "Complex relationships between different entities",
+          "Clear separation of data logic and presentation"
+        ],
+        [
+          "Enterprise Applications",
+          "Business applications with complex workflows",
+          "Professional structure that scales with complexity"
+        ]
+      ]
+    }
+  },
 
   {
     "type": "heading",
@@ -243,6 +321,37 @@
     "variant": "body1",
     "content": "Despite its benefits, MVC isn't the right solution for every project:",
     "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "When MVC is Overkill",
+      "headers": ["Project Type", "Better Approach", "Reason"],
+      "rows": [
+        [
+          "Static Sites",
+          "Static site generators (Gatsby, Hugo)",
+          "No dynamic server-side processing needed"
+        ],
+        [
+          "Simple CRUD Apps",
+          "Direct database-to-API approach",
+          "Minimal business logic doesn't justify structure"
+        ],
+        [
+          "Serverless Functions",
+          "Single-purpose functions",
+          "Each function handles one specific task"
+        ],
+        ["Prototypes", "Rapid development frameworks", "Speed more important than structure"],
+        [
+          "Microservices",
+          "Service-oriented architecture",
+          "Each service is already focused and small"
+        ],
+        ["Simple APIs", "Direct routing and handlers", "Minimal complexity doesn't need separation"]
+      ]
+    }
   },
 
   {
@@ -358,6 +467,38 @@
     "variant": "body1",
     "content": "MVC isn't the only architectural pattern available, and it's often adapted to fit specific needs:",
     "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Architectural Patterns Comparison",
+      "headers": ["Pattern", "Best For", "Key Difference from MVC"],
+      "rows": [
+        ["MVC", "Traditional web applications", "Three-layer separation (Model-View-Controller)"],
+        [
+          "MVVM",
+          "Frontend frameworks (React, Vue)",
+          "ViewModel replaces Controller for state management"
+        ],
+        ["MVP", "Desktop applications", "Presenter handles all UI logic, View is passive"],
+        [
+          "Service Layer",
+          "Complex business logic",
+          "Adds service layer between Controller and Model"
+        ],
+        [
+          "Flux/Redux",
+          "State-heavy frontend apps",
+          "Unidirectional data flow with centralized state"
+        ],
+        [
+          "Microservices",
+          "Large distributed systems",
+          "Service-oriented instead of layer-oriented"
+        ],
+        ["Event-Driven", "Real-time applications", "Components communicate through events"]
+      ]
+    }
   },
 
   { "type": "heading", "variant": "h6", "content": "Service Layer", "gutterBottom": true },
