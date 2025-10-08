@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.54.2] - 2025-10-08
+### Bug Fixes
+
+- add comparison and summary tables to why mvc (#142)
+
+
+
 ## [0.54.1] - 2025-10-06
 ### Bug Fixes
 
