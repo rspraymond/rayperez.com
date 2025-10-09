@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.0] - 2025-10-09
+### Features
+
+- create section card (#143)
+
+
+
 ## [0.54.2] - 2025-10-08
 ### Bug Fixes
 
