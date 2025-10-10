@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.1] - 2025-10-10
+### Bug Fixes
+
+- refactor summary component to use section card (#144)
+
+
+
 ## [0.55.0] - 2025-10-09
 ### Features
 
