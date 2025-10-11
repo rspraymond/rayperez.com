@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.2] - 2025-10-11
+### Bug Fixes
+
+- refactor acheivements component to use section card (#145)
+
+
+
 ## [0.55.1] - 2025-10-10
 ### Bug Fixes
 
