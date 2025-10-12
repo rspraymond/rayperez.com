@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.3] - 2025-10-12
+### Bug Fixes
+
+- refactor experience component to use section card (#146)
+
+
+
 ## [0.55.2] - 2025-10-11
 ### Bug Fixes
 
