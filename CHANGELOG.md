@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.4] - 2025-10-13
+### Bug Fixes
+
+- refactor skills component to use section card (#147)
+
+
+
 ## [0.55.3] - 2025-10-12
 ### Bug Fixes
 
