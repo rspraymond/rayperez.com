@@ -1,8 +1,9 @@
 import React from 'react'
-import { Card, CardContent, CardActions, Typography, Button, Box, Chip } from '@mui/material'
+import { CardContent, CardActions, Typography, Button, Box, Chip } from '@mui/material'
 import CodeIcon from '@mui/icons-material/Code'
 import LaunchIcon from '@mui/icons-material/Launch'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import SectionCard from './SectionCard'
 
 type Project = {
   title: string
@@ -15,18 +16,8 @@ type Project = {
 
 const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => {
   return (
-    <Card sx={{ mt: 2, mb: 2 }}>
-      <CardContent sx={{ pb: 0 }}>
-        <Typography
-          variant='h5'
-          component='h2'
-          sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}
-        >
-          <CodeIcon sx={{ mr: 1, color: 'text.secondary' }} fontSize='medium' aria-hidden='true' />
-          Projects
-        </Typography>
-      </CardContent>
-      <CardContent>
+    <SectionCard title='Projects' icon={CodeIcon} marginTop={16} marginBottom={16}>
+      <CardContent sx={{ p: 0 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {projects.map((project, index) => (
             <Box
@@ -114,7 +105,7 @@ const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => {
           ))}
         </Box>
       </CardContent>
-    </Card>
+    </SectionCard>
   )
 }
 
