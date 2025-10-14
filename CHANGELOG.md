@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.5] - 2025-10-14
+### Bug Fixes
+
+- refactor projects component to use section card (#148)
+
+
+
 ## [0.55.4] - 2025-10-13
 ### Bug Fixes
 
