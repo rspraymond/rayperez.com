@@ -1,14 +1,7 @@
 import React from 'react'
-import {
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material'
+import { Button, CardActions, useTheme, useMediaQuery } from '@mui/material'
 import LinkOutlinedIcon from '@mui/icons-material/LinkOutlined'
+import SectionCard from './SectionCard'
 
 type Link = {
   text: string
@@ -20,21 +13,7 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
-    <Card sx={{ mt: 2, mb: 2 }}>
-      <CardContent sx={{ pb: 0 }}>
-        <Typography
-          variant='h5'
-          component='h2'
-          sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}
-        >
-          <LinkOutlinedIcon
-            sx={{ mr: 1, color: 'text.secondary' }}
-            fontSize='medium'
-            aria-hidden='true'
-          />
-          Links
-        </Typography>
-      </CardContent>
+    <SectionCard title='Links' icon={LinkOutlinedIcon} marginTop={16} marginBottom={16}>
       <CardActions
         disableSpacing
         sx={{
@@ -61,7 +40,7 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
           </Button>
         ))}
       </CardActions>
-    </Card>
+    </SectionCard>
   )
 }
 
