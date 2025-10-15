@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.55.6] - 2025-10-15
+### Bug Fixes
+
+- refactor links component to use section card (#149)
+
+
+
 ## [0.55.5] - 2025-10-14
 ### Bug Fixes
 
