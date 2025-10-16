@@ -7,11 +7,17 @@ const lightTheme = createTheme({
   palette: {
     mode: 'light',
   },
+  shape: {
+    borderRadius: 12,
+  },
 })
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+  },
+  shape: {
+    borderRadius: 12,
   },
 })
 
