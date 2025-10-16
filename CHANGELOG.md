@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.56.0] - 2025-10-16
+### Features
+
+- add modern border radius to theme configuration (#150)
+
+
+
 ## [0.55.6] - 2025-10-15
 ### Bug Fixes
 
