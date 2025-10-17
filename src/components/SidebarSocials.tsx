@@ -118,7 +118,7 @@ const SidebarSocials: React.FC<SidebarSocialsProps> = ({ socials = [] }) => {
       sx={{
         p: 0,
         mb: 3,
-        borderRadius: 2,
+        borderRadius: 3,
         overflow: 'hidden',
         border: `1px solid ${theme.palette.divider}`,
       }}
