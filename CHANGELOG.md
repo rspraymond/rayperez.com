@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.57.0] - 2025-10-17
+### Features
+
+- update sidebar card components with modern border radius (#151)
+
+
+
 ## [0.56.0] - 2025-10-16
 ### Features
 
