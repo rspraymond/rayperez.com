@@ -26,7 +26,7 @@ const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => {
                 p: 2,
                 border: 1,
                 borderColor: 'divider',
-                borderRadius: 2,
+                borderRadius: 3,
                 bgcolor: 'background.paper',
                 transition: 'all 0.2s ease-in-out',
                 '&:hover': {
