@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.58.0] - 2025-10-18
+### Features
+
+- update projects component border radius to 24px for modern design (#152)
+
+
+
 ## [0.57.0] - 2025-10-17
 ### Features
 
