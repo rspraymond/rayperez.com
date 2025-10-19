@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.58.1] - 2025-10-19
+### Bug Fixes
+
+- add comparison and summary tables to why laravel (#141)
+
+
+
 ## [0.58.0] - 2025-10-18
 ### Features
 
