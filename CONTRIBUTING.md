@@ -466,6 +466,32 @@ For container padding and margins:
 - Desktop: Use `theme.spacing(3)` (24px) minimum
 - Mobile: Use `theme.spacing(2)` (16px) minimum
 
+### Border Radius
+
+The project uses a modern border radius scale aligned with 2026 design trends:
+
+- `borderRadius: 1` (8px) - For compact elements, inputs, and small components
+- `borderRadius: 2` (16px) - Default Material UI value for standard elements
+- `borderRadius: 3` (24px) - For main card components, providing a modern, soft appearance
+
+This scale supports emerging design trends like glassmorphism and enhanced 3D depth effects.
+
+**Main Card Components** (`RecentPosts`, `BookmarkedPosts`, `SidebarSocials`, `Projects`):
+
+```tsx
+const StyledCard = styled(Paper)(({ theme }) => ({
+  borderRadius: 3, // 24px - Modern card appearance
+  backgroundColor: theme.palette.background.paper,
+}))
+```
+
+When to use each value:
+
+- Use `borderRadius: 3` (24px) for main card components and elevated surfaces
+- Use `borderRadius: 2` (16px) for standard components and containers
+- Use `borderRadius: 1` (8px) for compact elements and micro-interactions
+- Use `borderRadius: '50%'` only for circular elements (profile images)
+
 ### Component Styling
 
 - Use Material UI's `sx` prop for styling components
@@ -489,7 +515,7 @@ const MyComponent: React.FC = () => {
       sx={{
         p: 2,
         bgcolor: 'background.paper',
-        borderRadius: 1,
+        borderRadius: 3,
       }}
     >
       {/* Component content */}
