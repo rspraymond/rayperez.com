@@ -9,6 +9,18 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
     include: ['**/*.{test,spec}.{ts,tsx}'],
+
+    // Parallelization settings (validated approach)
+    fileParallelism: true, // Explicitly enable file-level parallelism
+    maxConcurrency: 5, // Conservative: max 5 test files running concurrently
+    pool: 'threads', // Use worker threads for isolation
+    poolOptions: {
+      threads: {
+        singleThread: false, // Ensure parallel execution
+        useAtomics: true, // Better thread communication performance
+      },
+    },
+
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'json', 'html'],
