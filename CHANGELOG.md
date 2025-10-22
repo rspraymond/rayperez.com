@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.58.2] - 2025-10-22
+### Bug Fixes
+
+- update dependencies
+
+### Other Changes
+
+- chore: optimize tests with parallelization (#153)
+- chore: update docs for new radius
+
+
+
 ## [0.58.1] - 2025-10-19
 ### Bug Fixes
 
