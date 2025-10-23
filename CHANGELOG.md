@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.59.0] - 2025-10-23
+### Features
+
+- update experience (#154)
+
+
+
 ## [0.58.2] - 2025-10-22
 ### Bug Fixes
 
