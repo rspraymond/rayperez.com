@@ -16,8 +16,14 @@ import { SKILLS } from '../constants/skills'
 const experiences = [
   {
     title: 'Senior Software Engineer',
+    company: 'Pronomix',
+    duration: 'Oct 2025 - Present',
+    bullets: ['Recently joined to contribute to AI-driven programmatic advertising solutions.'],
+  },
+  {
+    title: 'Senior Software Engineer',
     company: 'Red Ventures',
-    duration: 'Sep 2021 - Oct 2025',
+    duration: 'Sep 2021 - Sep 2025',
     bullets: [
       'Supported React/Express applications for Mortgages serving millions of visitors with real-time rate data across 10+ microservices on AWS ECS with ElastiCache and Lambda functions',
       'Built AI video streaming service for Bankrate.com using NestJS/GraphQL backend and HTML5 player integration with WordPress/Storyblok CMS',
