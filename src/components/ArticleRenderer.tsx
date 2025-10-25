@@ -84,6 +84,7 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
       key={`code-${index}`}
       elevation={item.elevation || 3}
       style={{ marginBottom: '16px', ...item.style }}
+      sx={{ borderRadius: 3, overflow: 'hidden' }}
     >
       <LazySyntaxHighlighter language={item.language || 'text'}>
         {item.code || ''}
