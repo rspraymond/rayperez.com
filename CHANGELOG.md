@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.60.0] - 2025-10-25
+### Features
+
+- update border radius of code examples (#155)
+
+
+
 ## [0.59.1] - 2025-10-24
 ### Bug Fixes
 
