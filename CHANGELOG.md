@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.60.1] - 2025-10-26
+### Bug Fixes
+
+- centralize person schema (#156)
+
+
+
 ## [0.60.0] - 2025-10-25
 ### Features
 
