@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet'
 import SocialMeta from '../components/SocialMeta.tsx'
 import { PROFILE } from '../constants/profile'
 import { SKILLS } from '../constants/skills'
+import { PERSON_SCHEMA } from '../constants/schema'
 
 const experiences = [
   {
@@ -149,55 +150,18 @@ const Home: React.FC = () => {
     <React.Fragment>
       <Helmet
         script={[
-          helmetJsonLdProp<Person>({
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            name: PROFILE.name,
-            description: PROFILE.description,
-            jobTitle: PROFILE.role,
-            email: PROFILE.email,
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: PROFILE.location.city,
-              addressRegion: PROFILE.location.state,
-              addressCountry: PROFILE.location.country,
-            },
-            worksFor: {
-              '@type': 'Organization',
-              name: 'Red Ventures',
-            },
-            alumniOf: {
-              '@type': 'CollegeOrUniversity',
-              name: 'Red Rocks Community College',
-            },
-            image: PROFILE.image,
-            url: 'https://www.rayperez.com',
-            knowsAbout: [
-              'Software Engineering',
-              'Web Development',
-              'React.js',
-              'Node.js',
-              'TypeScript',
-              'Laravel',
-              'GraphQL',
-              'NestJS',
-              'Object-Oriented Programming',
-            ],
-            hasOccupation: [
-              {
-                '@type': 'Occupation',
-                name: 'Senior Software Engineer',
-                occupationalCategory: 'Software Development',
+          helmetJsonLdProp<Person>(
+            Object.assign({}, PERSON_SCHEMA, {
+              description: PROFILE.description,
+              email: PROFILE.email,
+              address: {
+                '@type': 'PostalAddress' as const,
+                addressLocality: PROFILE.location.city,
+                addressRegion: PROFILE.location.state,
+                addressCountry: PROFILE.location.country,
               },
-            ],
-            sameAs: [
-              'https://prejump.com',
-              'https://twitch.tv/onlyray',
-              'https://github.com/rspraymond',
-              'https://www.linkedin.com/in/raymond-perez-eng/',
-              'https://twitter.com/onlyray7',
-            ],
-          }),
+            }),
+          ),
         ]}
       >
         <link rel='canonical' href='https://www.rayperez.com' />

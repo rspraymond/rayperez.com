@@ -10,6 +10,7 @@ import SocialLinksSection from './SocialLinksSection'
 import { PROFILE } from '../constants/profile'
 import profileImage from '../assets/raymond-perez.jpg'
 import { SKILLS } from '../constants/skills'
+import { PERSON_SCHEMA } from '../constants/schema'
 
 const AuthorBio: React.FC = () => {
   return (
@@ -23,37 +24,11 @@ const AuthorBio: React.FC = () => {
       />
       <Helmet
         script={[
-          helmetJsonLdProp<Person>({
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            name: PROFILE.name,
-            jobTitle: PROFILE.role,
-            worksFor: {
-              '@type': 'Organization',
-              name: 'Red Ventures',
-            },
-            alumniOf: {
-              '@type': 'CollegeOrUniversity',
-              name: 'Red Rocks Community College',
-            },
-            image: profileImage,
-            url: 'https://www.rayperez.com',
-            knowsAbout: SKILLS.map((s) => s.label),
-            hasOccupation: [
-              {
-                '@type': 'Occupation',
-                name: 'Senior Software Engineer',
-                occupationalCategory: 'Software Development',
-              },
-            ],
-            sameAs: [
-              'https://prejump.com',
-              'https://twitch.tv/onlyray',
-              'https://github.com/rspraymond',
-              'https://www.linkedin.com/in/raymond-perez-eng/',
-              'https://twitter.com/onlyray7',
-            ],
-          }),
+          helmetJsonLdProp<Person>(
+            Object.assign({}, PERSON_SCHEMA, {
+              image: profileImage,
+            }),
+          ),
         ]}
       />
       <Divider sx={{ my: { xs: 4, sm: 6 } }} />
