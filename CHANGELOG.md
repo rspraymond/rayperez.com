@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.60.2] - 2025-10-27
+### Bug Fixes
+
+- update works for schema (#157)
+
+
+
 ## [0.60.1] - 2025-10-26
 ### Bug Fixes
 
