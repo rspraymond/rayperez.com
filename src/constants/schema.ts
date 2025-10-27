@@ -8,7 +8,7 @@ export const PERSON_SCHEMA = {
   jobTitle: PROFILE.role,
   worksFor: {
     '@type': 'Organization',
-    name: 'Red Ventures',
+    name: 'Pronomix',
   },
   alumniOf: {
     '@type': 'CollegeOrUniversity',
