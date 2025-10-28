@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.61.0] - 2025-10-28
+### Features
+
+- update header ui (#158)
+
+
+
 ## [0.60.2] - 2025-10-27
 ### Bug Fixes
 
