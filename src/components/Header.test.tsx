@@ -29,9 +29,10 @@ describe('Header', () => {
     // Get all links
     const links = screen.getAllByRole('link')
 
-    // Check that all links open in new tab
+    // Check that all links open in new tab and have rel attribute
     links.forEach((link) => {
       expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
     // Check that there's a LinkedIn link
@@ -47,13 +48,20 @@ describe('Header', () => {
     expect(resumeLink).toBeInTheDocument()
   })
 
-  it('provides accessible label for the resume button', () => {
+  it('provides accessible labels for all social media buttons', () => {
     renderWithTheme(<Header />)
+
+    // Check that the LinkedIn button has an accessible label
+    const linkedInButton = screen.getByLabelText('LinkedIn Profile')
+    expect(linkedInButton).toBeInTheDocument()
+
+    // Check that the GitHub button has an accessible label
+    const githubButton = screen.getByLabelText('GitHub Profile')
+    expect(githubButton).toBeInTheDocument()
 
     // Check that the resume button has an accessible label
     const resumeButton = screen.getByLabelText('Resume')
     expect(resumeButton).toBeInTheDocument()
-    expect(resumeButton).toHaveAccessibleName('Resume')
   })
 
   it('renders theme toggle with proper accessibility', () => {
