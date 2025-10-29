@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.62.0] - 2025-10-29
+### Features
+
+- add feed generator (#159)
+
+
+
 ## [0.61.0] - 2025-10-28
 ### Features
 
