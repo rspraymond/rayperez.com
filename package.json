@@ -18,6 +18,7 @@
     "test:coverage": "vitest run --coverage",
     "test:sequential": "vitest run --no-file-parallelism",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",
+    "generate-rss": "tsx scripts/generate-rss-feed.ts",
     "changelog": "tsx scripts/generate-changelog.ts"
   },
   "dependencies": {
