@@ -1,9 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { execSync } from 'child_process'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'post-build-generate-rss',
+      closeBundle() {
+        execSync('npx tsx scripts/generate-rss-feed.ts', { stdio: 'inherit' })
+      },
+    },
+  ],
   server: {
     warmup: {
       // Preload the entry points

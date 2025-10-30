@@ -39,3 +39,6 @@ crash.log
 # Coverage reports
 coverage
 .nyc_output
+
+# RSS feed
+public/feed.xml
