@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.63.0] - 2025-10-30
+### Features
+
+- add feed generation into vite build (#160)
+
+
+
 ## [0.62.0] - 2025-10-29
 ### Features
 
