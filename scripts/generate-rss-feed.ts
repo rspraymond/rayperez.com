@@ -90,7 +90,7 @@ ${items}
   </channel>
 </rss>`
 
-  const outputPath = path.resolve(__dirname, '../public/feed.xml')
+  const outputPath = path.resolve(__dirname, '../dist/feed.xml')
   fs.writeFileSync(outputPath, rss, 'utf8')
   console.log(`✅ RSS feed generated with ${sortedPosts.length} posts at ${outputPath}`)
 }
