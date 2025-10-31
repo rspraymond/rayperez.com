@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.64.0] - 2025-10-31
+### Features
+
+- add feed url to public index (#161)
+
+
+
 ## [0.63.0] - 2025-10-30
 ### Features
 
