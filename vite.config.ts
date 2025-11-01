@@ -12,6 +12,12 @@ export default defineConfig({
         execSync('npx tsx scripts/generate-rss-feed.ts', { stdio: 'inherit' })
       },
     },
+    {
+      name: 'post-build-generate-sitemap',
+      closeBundle() {
+        execSync('npx tsx scripts/generate-sitemap.ts', { stdio: 'inherit' })
+      },
+    },
   ],
   server: {
     warmup: {
