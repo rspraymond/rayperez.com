@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.64.1] - 2025-11-01
+### Bug Fixes
+
+- add sitemap to build generation (#162)
+
+
+
 ## [0.64.0] - 2025-10-31
 ### Features
 
