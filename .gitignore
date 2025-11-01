@@ -42,3 +42,6 @@ coverage
 
 # RSS feed
 public/feed.xml
+
+# Generated sitemap
+public/sitemap.xml
