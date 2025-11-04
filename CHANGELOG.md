@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.65.0] - 2025-11-04
+### Features
+
+- add summary and comparison tables to why oop (#163)
+
+### Other Changes
+
+- chore: add test coverage for article text
+- chore: add test coverage for reading time calculation
+
+
+
 ## [0.64.1] - 2025-11-01
 ### Bug Fixes
 
