@@ -19,6 +19,46 @@
   },
 
   {
+    "type": "heading",
+    "variant": "h6",
+    "content": "OOP Principles at a Glance",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Quick reference for the four core OOP principles.",
+      "headers": ["Principle", "What it means", "In PHP (1-liner)", "Why it helps"],
+      "rows": [
+        [
+          "Encapsulation",
+          "Bundle data with behavior; hide internals via visibility.",
+          "Use private properties with public methods.",
+          "Prevents invalid state; simplifies reasoning."
+        ],
+        [
+          "Inheritance",
+          "Derive a class from a base to share behavior.",
+          "class Child extends Parent",
+          "Reuses code; beware fragile base—prefer composition when possible."
+        ],
+        [
+          "Polymorphism",
+          "Same interface; different implementations.",
+          "interface Logger { ... } class FileLogger implements Logger",
+          "Swap implementations; improves testability and flexibility."
+        ],
+        [
+          "Abstraction",
+          "Expose essentials; hide details behind contracts.",
+          "Abstract classes and interfaces define APIs.",
+          "Reduces coupling; clarifies intent."
+        ]
+      ]
+    }
+  },
+
+  {
     "type": "paragraph",
     "variant": "body1",
     "paragraph": true,
@@ -279,6 +319,52 @@
     "variant": "body1",
     "paragraph": true,
     "content": "While OOP has been a dominant paradigm in software development for decades, it's not the only one. Today's software development landscape is a melting pot of various paradigms, each with its unique strengths and use cases."
+  },
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Paradigm Comparison (At a Glance)",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "High-level comparison of common programming paradigms (not exhaustive).",
+      "headers": ["Aspect", "OOP", "Functional", "Procedural"],
+      "rows": [
+        [
+          "State",
+          "Mutable objects with encapsulated state.",
+          "Immutable data; pure functions; avoid shared state.",
+          "Global/local variables; shared mutable state."
+        ],
+        [
+          "Composition & reuse",
+          "Composition and interfaces; inheritance when appropriate.",
+          "Function composition; higher-order functions.",
+          "Procedures/modules; reuse via calls."
+        ],
+        [
+          "Typical fit",
+          "Domain modeling, GUIs, long-lived stateful apps.",
+          "Data transformation, concurrency, predictable logic.",
+          "Scripts, small utilities, straightforward flows."
+        ],
+        [
+          "Error handling",
+          "Exceptions; class invariants.",
+          "Result/Either types; explicit handling.",
+          "Return codes or exceptions; manual checks."
+        ],
+        [
+          "Concurrency",
+          "Harder with shared mutable state.",
+          "Easier with immutability and no side effects.",
+          "Manual synchronization; race risks."
+        ],
+        ["Examples", "Java, C#, PHP, C++.", "Haskell, Elm; FP in JS/Python.", "C, Bash."]
+      ]
+    }
   },
   {
     "type": "heading",
