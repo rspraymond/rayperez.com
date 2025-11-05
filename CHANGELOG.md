@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.66.0] - 2025-11-05
+### Features
+
+- add test coverage badge (#164)
+
+
+
 ## [0.65.0] - 2025-11-04
 ### Features
 
