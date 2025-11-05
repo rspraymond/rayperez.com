@@ -241,7 +241,7 @@ Raymond Perez:
 
 ## Testing
 
-[![Test Coverage](https://img.shields.io/badge/coverage-70%25-yellow)](coverage)
+[![Test Coverage](https://img.shields.io/badge/coverage-88.4%25-green)](coverage)
 
 This project enforces a minimum 70% code coverage threshold. Tests are run using Vitest and React Testing Library.
 
