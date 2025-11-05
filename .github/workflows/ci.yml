@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
   pull_request:
@@ -17,11 +19,15 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'pull_request'
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+          persist-credentials: true
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -34,6 +40,20 @@ jobs:
 
       - name: Run Tests with Coverage
         run: npm run test:coverage
+
+      - name: Update Coverage Badge
+        run: npx tsx scripts/update-coverage-badge.ts
+
+      - name: Commit Coverage Badge Update
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update test coverage badge"
+            git push
+          fi
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
