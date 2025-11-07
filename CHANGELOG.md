@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.66.1] - 2025-11-07
+### Bug Fixes
+
+- add test coverage for json blog post (#165)
+
+### Other Changes
+
+- chore: move up test badge
+
+
+
 ## [0.66.0] - 2025-11-05
 ### Features
 
