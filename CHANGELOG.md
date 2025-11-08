@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.66.2] - 2025-11-08
+### Bug Fixes
+
+- add test coverage for lazy component (#166)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.66.1] - 2025-11-07
 ### Bug Fixes
 
