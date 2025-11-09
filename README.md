@@ -2,7 +2,7 @@
 
 A personal portfolio and technical blog built with React, TypeScript, and Vite.
 
-[![Test Coverage](https://img.shields.io/badge/coverage-90.4%25-green)](coverage)
+[![Test Coverage](https://img.shields.io/badge/coverage-91.6%25-green)](coverage)
 
 ## 🚀 Features
 
