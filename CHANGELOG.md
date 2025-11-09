@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.66.3] - 2025-11-09
+### Bug Fixes
+
+- add test coverage for social share component (#167)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.66.2] - 2025-11-08
 ### Bug Fixes
 
