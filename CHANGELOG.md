@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.66.4] - 2025-11-10
+### Bug Fixes
+
+- add test coverage for syntax highlighter (#168)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.66.3] - 2025-11-09
 ### Bug Fixes
 
