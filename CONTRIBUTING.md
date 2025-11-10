@@ -246,6 +246,16 @@ describe('YourComponent', () => {
 - For utility functions, focus on testing inputs and outputs
 - For complex business logic, consider using multiple test cases with different inputs
 
+### Deterministic UI Tests
+
+When writing tests for UI components, especially those with heavy dependencies or complex rendering:
+
+- **Mock heavy or unstable dependencies**: Mock libraries like syntax highlighters, chart libraries, or other complex rendering libraries to ensure tests are fast and deterministic. Use lightweight mock implementations that expose stable attributes (e.g., `data-*` attributes) for assertions.
+- **Prefer stable selectors**: Use ARIA roles, labels, and stable `data-*` attributes for querying elements rather than snapshots or implementation details. This makes tests more resilient to styling changes.
+- **Avoid timeouts and animations**: Tests should not rely on timeouts or animation delays. If timing is necessary, use fake timers with `vi.useFakeTimers()` and restore them in `afterEach`.
+- **Ensure test independence**: Tests must be independent and not order-dependent. Each test should set up its own state and clean up after itself. Use `test:sequential` only for debugging, not as a permanent solution.
+- **Mock context providers**: When testing components that depend on context (like theme), mock the context hook directly rather than wrapping in providers when possible, using mutable variables to test different states.
+
 ### When to Add Tests
 
 - Always add tests for new components and features
