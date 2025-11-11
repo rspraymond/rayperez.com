@@ -14,38 +14,43 @@ describe('Header', () => {
     // Check for title
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
 
-    // Check for theme toggle button (1 button)
+    // Check for theme toggle button
     const buttons = screen.getAllByRole('button')
     expect(buttons).toHaveLength(1)
 
-    // Check for navigation links (3 total)
-    const navButtons = screen.getAllByRole('link')
-    expect(navButtons).toHaveLength(3)
+    // Check for expected navigation links by their accessible labels
+    expect(screen.getByLabelText('LinkedIn Profile')).toBeInTheDocument()
+    expect(screen.getByLabelText('GitHub Profile')).toBeInTheDocument()
+    expect(screen.getByLabelText('Resume')).toBeInTheDocument()
+    expect(screen.getByLabelText('RSS Feed')).toBeInTheDocument()
   })
 
   it('renders social media and resume links with correct attributes', () => {
     renderWithTheme(<Header />)
 
-    // Get all links
-    const links = screen.getAllByRole('link')
+    // Check LinkedIn link
+    const linkedInLink = screen.getByLabelText('LinkedIn Profile')
+    expect(linkedInLink).toHaveAttribute('href', expect.stringContaining('linkedin.com'))
+    expect(linkedInLink).toHaveAttribute('target', '_blank')
+    expect(linkedInLink).toHaveAttribute('rel', 'noopener noreferrer')
 
-    // Check that all links open in new tab and have rel attribute
-    links.forEach((link) => {
-      expect(link).toHaveAttribute('target', '_blank')
-      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
-    })
+    // Check GitHub link
+    const githubLink = screen.getByLabelText('GitHub Profile')
+    expect(githubLink).toHaveAttribute('href', expect.stringContaining('github.com'))
+    expect(githubLink).toHaveAttribute('target', '_blank')
+    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
 
-    // Check that there's a LinkedIn link
-    const linkedInLink = links.find((link) => link.getAttribute('href')?.includes('linkedin.com'))
-    expect(linkedInLink).toBeInTheDocument()
+    // Check resume link
+    const resumeLink = screen.getByLabelText('Resume')
+    expect(resumeLink).toHaveAttribute('href', expect.stringContaining('.pdf'))
+    expect(resumeLink).toHaveAttribute('target', '_blank')
+    expect(resumeLink).toHaveAttribute('rel', 'noopener noreferrer')
 
-    // Check that there's a GitHub link
-    const githubLink = links.find((link) => link.getAttribute('href')?.includes('github.com'))
-    expect(githubLink).toBeInTheDocument()
-
-    // Check that there's a resume link
-    const resumeLink = links.find((link) => link.getAttribute('href')?.includes('.pdf'))
-    expect(resumeLink).toBeInTheDocument()
+    // Check RSS feed link
+    const rssLink = screen.getByLabelText('RSS Feed')
+    expect(rssLink).toHaveAttribute('href', '/feed.xml')
+    expect(rssLink).toHaveAttribute('target', '_blank')
+    expect(rssLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('provides accessible labels for all social media buttons', () => {
@@ -62,6 +67,10 @@ describe('Header', () => {
     // Check that the resume button has an accessible label
     const resumeButton = screen.getByLabelText('Resume')
     expect(resumeButton).toBeInTheDocument()
+
+    // Check that the RSS feed button has an accessible label
+    const rssButton = screen.getByLabelText('RSS Feed')
+    expect(rssButton).toBeInTheDocument()
   })
 
   it('renders theme toggle with proper accessibility', () => {

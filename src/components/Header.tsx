@@ -2,6 +2,7 @@ import { Box, Typography, IconButton, useTheme } from '@mui/material'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import DescriptionIcon from '@mui/icons-material/Description'
+import RssFeedIcon from '@mui/icons-material/RssFeed'
 import ThemeToggle from './ThemeToggle'
 import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
 
@@ -62,6 +63,17 @@ function Header() {
           size='small'
         >
           <DescriptionIcon fontSize='small' />
+        </IconButton>
+        <IconButton
+          href='/feed.xml'
+          color='inherit'
+          component='a'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='RSS Feed'
+          size='small'
+        >
+          <RssFeedIcon fontSize='small' />
         </IconButton>
       </Box>
     </Box>
