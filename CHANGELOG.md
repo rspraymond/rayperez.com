@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.67.0] - 2025-11-11
+### Features
+
+- add rss link to header (#169)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.66.4] - 2025-11-10
 ### Bug Fixes
 
