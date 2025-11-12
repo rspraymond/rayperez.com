@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.67.1] - 2025-11-12
+### Bug Fixes
+
+- add test coverage for article renderer (#170)
+
+
+
 ## [0.67.0] - 2025-11-11
 ### Features
 
