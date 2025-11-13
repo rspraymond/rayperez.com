@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.67.2] - 2025-11-13
+### Bug Fixes
+
+- add page title update for navigating home (#171)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.67.1] - 2025-11-12
 ### Bug Fixes
 
