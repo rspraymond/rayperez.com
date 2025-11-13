@@ -165,6 +165,7 @@ const Home: React.FC = () => {
         ]}
       >
         <link rel='canonical' href='https://www.rayperez.com' />
+        <title>Raymond Perez - Senior Software Engineer</title>
       </Helmet>
       <SocialMeta
         title={PROFILE.name}
