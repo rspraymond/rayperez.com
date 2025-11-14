@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.67.3] - 2025-11-14
+### Bug Fixes
+
+- update gha concurrency to only cancel pr builds (#172)
+
+
+
 ## [0.67.2] - 2025-11-13
 ### Bug Fixes
 
