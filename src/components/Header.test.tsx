@@ -1,18 +1,25 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { BrowserRouter } from 'react-router-dom'
 import Header from './Header'
 import { ThemeProvider } from '../contexts/ThemeContext'
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider>{component}</ThemeProvider>)
+  return render(
+    <BrowserRouter>
+      <ThemeProvider>{component}</ThemeProvider>
+    </BrowserRouter>,
+  )
 }
 
 describe('Header', () => {
   it('renders the header with title, theme toggle, and navigation buttons', () => {
     renderWithTheme(<Header />)
 
-    // Check for title
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
+    // Check for title link
+    const titleLink = screen.getByText('Raymond Perez')
+    expect(titleLink).toBeInTheDocument()
+    expect(titleLink).toHaveAttribute('href', '/')
 
     // Check for theme toggle button
     const buttons = screen.getAllByRole('button')
