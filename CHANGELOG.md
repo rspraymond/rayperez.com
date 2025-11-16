@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.68.0] - 2025-11-16
+### Features
+
+- add header link for name (#174)
+
+### Other Changes
+
+- chore: update lock file (#173)
+
+
+
 ## [0.67.3] - 2025-11-14
 ### Bug Fixes
 
