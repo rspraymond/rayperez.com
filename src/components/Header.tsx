@@ -1,4 +1,5 @@
-import { Box, Typography, IconButton, useTheme } from '@mui/material'
+import { Box, IconButton, useTheme, Link } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import DescriptionIcon from '@mui/icons-material/Description'
@@ -27,9 +28,22 @@ function Header() {
           gap: 1,
         }}
       >
-        <Typography component='h1' variant='h6' sx={{ flexGrow: 1, fontWeight: 400 }}>
+        <Link
+          component={RouterLink}
+          to='/'
+          underline='hover'
+          color='inherit'
+          sx={{
+            flexGrow: 1,
+            fontWeight: 400,
+            fontSize: theme.typography.h6.fontSize,
+            lineHeight: theme.typography.h6.lineHeight,
+            fontFamily: theme.typography.h6.fontFamily,
+            textDecoration: 'none',
+          }}
+        >
           Raymond Perez
-        </Typography>
+        </Link>
         <ThemeToggle />
         <IconButton
           href='https://www.linkedin.com/in/raymond-perez-eng/'
