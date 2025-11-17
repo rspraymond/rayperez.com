@@ -18,6 +18,64 @@ Thank you for considering contributing to this project! This document outlines t
 - [Article Guidelines](#article-guidelines)
 - [Release Process](#release-process)
 
+## Quick Reference
+
+### Common Commands
+
+| Command                 | Purpose                               | When to Run                             |
+| ----------------------- | ------------------------------------- | --------------------------------------- |
+| `npm run dev`           | Start Vite dev server with hot reload | Local development                       |
+| `npm run preview`       | Preview production build locally      | Final QA before shipping                |
+| `npm run build`         | Type-check and build optimized bundle | Before PR to ensure build passes        |
+| `npm run lint`          | Run ESLint with strict settings       | Before committing to catch issues       |
+| `npm run lint:fix`      | Auto-fix lint issues when possible    | After lint failures or large refactors  |
+| `npm run format`        | Apply Prettier formatting             | Before committing markdown/code changes |
+| `npm run test`          | Execute entire Vitest suite once      | Pre-PR regression check                 |
+| `npm run test:watch`    | Watch mode for Vitest                 | Active TDD / feature work               |
+| `npm run test:coverage` | Generate coverage report              | Before submitting PRs (enforces ≥70%)   |
+
+### Branch Prefix Cheatsheet
+
+| Prefix      | Description                                  | Example                     |
+| ----------- | -------------------------------------------- | --------------------------- |
+| `feature/`  | New product or UI functionality              | `feature/recent-posts-cta`  |
+| `fix/`      | Bug fixes or regressions                     | `fix/mobile-sidebar-toggle` |
+| `docs/`     | Documentation-only changes                   | `docs/add-schema-notes`     |
+| `refactor/` | Structural improvements without new features | `refactor/use-query-hook`   |
+| `style/`    | Pure styling or visual polish                | `style/hero-spacing`        |
+| `test/`     | Adding or updating automated tests           | `test/article-renderer`     |
+
+### Commit Message Snapshot
+
+| Guideline  | Do                                | Avoid                              |
+| ---------- | --------------------------------- | ---------------------------------- |
+| Tense      | Present tense (`Add feature`)     | Past tense (`Added feature`)       |
+| Voice      | Imperative mood (`Update styles`) | Descriptive (`Updates styles`)     |
+| Length     | Keep subject ≤72 characters       | Overflowing first lines            |
+| References | Mention issues/PRs after body     | Embedding issue numbers in subject |
+| Detail     | Use bullet body for context       | Leaving rationale unexplained      |
+
+### Test Coverage Targets
+
+| Metric     | Threshold | Notes                                |
+| ---------- | --------- | ------------------------------------ |
+| Statements | ≥70%      | Enforced via CI                      |
+| Branches   | ≥70%      | Include conditional paths            |
+| Functions  | ≥70%      | Cover hooks and utilities            |
+| Lines      | ≥70%      | Measured via `npm run test:coverage` |
+
+### Key File Locations
+
+| Purpose               | File/Directory                         |
+| --------------------- | -------------------------------------- |
+| Lazy loading fallback | `src/assets/LoadingFallback.tsx`       |
+| Code block renderer   | `src/assets/LazySyntaxHighlighter.tsx` |
+| Recent posts sidebar  | `src/assets/RecentPosts.tsx`           |
+| Social meta defaults  | `src/constants/social.ts`              |
+| Article metadata      | `src/constants/posts.ts`               |
+| JSON article content  | `src/data/articles/`                   |
+| Article wrappers      | `src/pages/articles/`                  |
+
 ## Development Setup
 
 ### Prerequisites
@@ -137,12 +195,14 @@ When reporting issues, please use the provided issue templates and include:
 
 Use the following format for branch names:
 
-- `feature/short-description` - For new features
-- `fix/short-description` - For bug fixes
-- `docs/short-description` - For documentation changes
-- `refactor/short-description` - For code refactoring
-- `style/short-description` - For styling changes
-- `test/short-description` - For adding or updating tests
+| Prefix                       | Description                                     | Example                     |
+| ---------------------------- | ----------------------------------------------- | --------------------------- |
+| `feature/short-description`  | New features or major UI additions              | `feature/home-hero-updates` |
+| `fix/short-description`      | Bug fixes, regressions, production issues       | `fix/collapse-animation`    |
+| `docs/short-description`     | Documentation changes only                      | `docs/seo-guidelines`       |
+| `refactor/short-description` | Internal improvements without new functionality | `refactor/usePosts-hook`    |
+| `style/short-description`    | Pure styling or design tweaks                   | `style/sidebar-spacing`     |
+| `test/short-description`     | Adding or updating automated tests              | `test/socialmeta-component` |
 
 ## Commit Message Guidelines
 
@@ -171,12 +231,14 @@ This project uses Vitest and React Testing Library for testing components and fu
 
 ### Test Coverage Requirements
 
-The project enforces a minimum 70% code coverage threshold for:
+The project enforces a minimum 70% code coverage threshold for every metric:
 
-- Statements
-- Branches
-- Functions
-- Lines
+| Metric     | Threshold | Rationale                                             |
+| ---------- | --------- | ----------------------------------------------------- |
+| Statements | ≥70%      | Ensures overall feature behavior is exercised         |
+| Branches   | ≥70%      | Validates conditional logic and error paths           |
+| Functions  | ≥70%      | Confirms hooks and utilities are invoked during tests |
+| Lines      | ≥70%      | Acts as the final aggregate guardrail                 |
 
 Code that doesn't meet these thresholds will fail the CI build. You can check your coverage locally by running:
 
@@ -236,9 +298,12 @@ describe('YourComponent', () => {
 
 ### Running Tests
 
-- `npm test`: Run all tests once
-- `npm run test:watch`: Run tests in watch mode during development
-- `npm run test:coverage`: Generate test coverage report
+| Command                   | Description                                       | When to Use                              |
+| ------------------------- | ------------------------------------------------- | ---------------------------------------- |
+| `npm test`                | Executes the full Vitest suite once and exits     | Pre-commit regression check              |
+| `npm run test:watch`      | Runs Vitest in watch mode with interactive reruns | Iterative development and TDD            |
+| `npm run test:coverage`   | Runs the suite with Istanbul instrumentation      | Before PRs to validate 70% thresholds    |
+| `npm run test:sequential` | Executes tests without file parallelism           | Debugging flaky tests or race conditions |
 
 ### Testing Hooks and Custom Logic
 
@@ -352,9 +417,11 @@ rayperez-site/
 
 **Content types supported:**
 
-- `'website'`: General pages and home page
-- `'article'`: Blog posts and articles
-- `'profile'`: Author and profile pages
+| Type        | Description                                                          | Use When                                    |
+| ----------- | -------------------------------------------------------------------- | ------------------------------------------- |
+| `'website'` | Default Open Graph/Twitter card for general pages                    | Home page, project overviews, landing pages |
+| `'article'` | Includes article-specific metadata such as published date and author | Blog posts and long-form content            |
+| `'profile'` | Optimized for individuals with profile data                          | About/author pages                          |
 
 ## SEO Guidelines
 
@@ -409,12 +476,14 @@ This section details the design guidelines and styling standards that should be 
 
 The site uses a dark theme with the following color palette:
 
-- **Primary Background**: `#121212` - Used for page backgrounds and the loading screen
-- **Secondary Background**: `#2d2d2d` - Used for code blocks, cards, and elevated surfaces
-- **Primary Text**: `#ffffff` (with various opacity levels) - Main text color
-- **Secondary Text**: Material UI's `text.secondary` - Used for less prominent text
-- **Primary Accent**: Material UI's `primary.main` - Used for icons, links, and emphasis
-- **Dividers**: Material UI's `divider` - Used for separating content sections
+| Color                | Value / Token                  | Usage                                 |
+| -------------------- | ------------------------------ | ------------------------------------- |
+| Primary Background   | `#121212`                      | Page backgrounds, loading screen      |
+| Secondary Background | `#2d2d2d`                      | Code blocks, cards, elevated surfaces |
+| Primary Text         | `#ffffff` (varying opacity)    | Main text                             |
+| Secondary Text       | `theme.palette.text.secondary` | Supporting text, captions             |
+| Primary Accent       | `theme.palette.primary.main`   | Links, icons, highlights              |
+| Dividers             | `theme.palette.divider`        | Section separators, subtle borders    |
 
 When creating new components:
 
@@ -448,12 +517,15 @@ const MyComponent: React.FC = () => {
 
 - Use Material UI's Typography component for consistent text styling
 - Follow this hierarchy for content:
-  - `h1`: Main page titles
-  - `h2`: Section headings
-  - `h3`: Subsection headings
-  - `body1`: Primary content text
-  - `body2`: Secondary content text
-  - `caption`: Caption text for images and notes
+
+| Variant   | Component                                  | Use Case                           |
+| --------- | ------------------------------------------ | ---------------------------------- |
+| `h1`      | `<Typography variant="h1" component="h1">` | Page titles                        |
+| `h2`      | `<Typography variant="h2" component="h2">` | Section headings                   |
+| `h3`      | `<Typography variant="h3" component="h3">` | Subsection headings                |
+| `body1`   | `<Typography variant="body1">`             | Primary narrative content          |
+| `body2`   | `<Typography variant="body2">`             | Secondary or supportive text       |
+| `caption` | `<Typography variant="caption">`           | Captions, footnotes, figure labels |
 
 Example:
 
@@ -467,9 +539,12 @@ Example:
 
 - Use Material UI's spacing system through the `theme.spacing()` function
 - Common spacing values:
-  - `theme.spacing(1)` - 8px - Minimum spacing between related elements
-  - `theme.spacing(2)` - 16px - Standard spacing between components
-  - `theme.spacing(3)` - 24px - Section spacing
+
+| Value              | Pixels | Primary Use                                | Typical Context                          |
+| ------------------ | ------ | ------------------------------------------ | ---------------------------------------- |
+| `theme.spacing(1)` | 8px    | Tight grouping between related UI elements | Icon + label pairs, inline chips         |
+| `theme.spacing(2)` | 16px   | Default spacing between components         | Stack spacing, grid gutters on mobile    |
+| `theme.spacing(3)` | 24px   | Section separation and card padding        | Page sections, desktop container padding |
 
 For container padding and margins:
 
@@ -480,9 +555,12 @@ For container padding and margins:
 
 The project uses a modern border radius scale aligned with 2026 design trends:
 
-- `borderRadius: 1` (8px) - For compact elements, inputs, and small components
-- `borderRadius: 2` (16px) - Default Material UI value for standard elements
-- `borderRadius: 3` (24px) - For main card components, providing a modern, soft appearance
+| Value                 | Pixels | Recommended Use                              | Example Components                          |
+| --------------------- | ------ | -------------------------------------------- | ------------------------------------------- |
+| `borderRadius: 1`     | 8px    | Compact elements, inputs, micro-interactions | Buttons, chip-like controls                 |
+| `borderRadius: 2`     | 16px   | Default Material UI elements and containers  | Forms, modal bodies                         |
+| `borderRadius: 3`     | 24px   | Hero cards and elevated surfaces             | `RecentPosts`, `Projects`, `SidebarSocials` |
+| `borderRadius: '50%'` | Circle | Strictly for circular imagery                | Profile avatars                             |
 
 This scale supports emerging design trends like glassmorphism and enhanced 3D depth effects.
 
@@ -495,18 +573,16 @@ const StyledCard = styled(Paper)(({ theme }) => ({
 }))
 ```
 
-When to use each value:
-
-- Use `borderRadius: 3` (24px) for main card components and elevated surfaces
-- Use `borderRadius: 2` (16px) for standard components and containers
-- Use `borderRadius: 1` (8px) for compact elements and micro-interactions
-- Use `borderRadius: '50%'` only for circular elements (profile images)
-
 ### Component Styling
 
 - Use Material UI's `sx` prop for styling components
 - For complex or reusable styles, create a dedicated styles object
 - Follow this structure for component files with styles:
+
+| Approach              | Pros                                                                                 | Cons                                                               | When to Use                                           |
+| --------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------ | ----------------------------------------------------- |
+| `styled()` components | Co-locates styles with reusable primitives, theme-aware by default, enables variants | Less flexible for one-off overrides, additional component wrappers | Shared patterns across the app (cards, layout shells) |
+| `sx` prop             | Inline, readable, great for component-specific tweaks, supports responsive objects   | Can become verbose if reused, harder to share between components   | Localized styling, prototypes, conditional styles     |
 
 ```tsx
 import { Box, styled } from '@mui/material'
@@ -540,9 +616,12 @@ const MyComponent: React.FC = () => {
 
 - Use Material UI's `Paper` component for cards and elevated content
 - Apply consistent elevation levels:
-  - Level 1 (`elevation={1}`): For most cards and containers
-  - Level 2-3 (`elevation={2-3}`): For highlighted or interactive elements
-  - Level 4+ (`elevation={4+}`): Reserved for modals and dialogs
+
+| Elevation         | Use Case                            | Example Components                 |
+| ----------------- | ----------------------------------- | ---------------------------------- |
+| `elevation={1}`   | Default cards and containers        | Recent posts, social blocks        |
+| `elevation={2-3}` | Highlighted or interactive elements | Hoverable cards, featured callouts |
+| `elevation={4+}`  | Modals, dialogs, transient overlays | Dialogs, command palettes          |
 
 #### Navigation and Links
 
@@ -561,18 +640,24 @@ const MyComponent: React.FC = () => {
 
 - Use Material UI icons (`@mui/icons-material`) for all iconography
 - Keep icons at standard sizes:
-  - `fontSize="small"` - For inline or compact areas
-  - `fontSize="medium"` (default) - For most interface elements
-  - `fontSize="large"` - For prominent features and headers
+
+| Size                | Description                 | Typical Context                           |
+| ------------------- | --------------------------- | ----------------------------------------- |
+| `fontSize="small"`  | Compact or inline icons     | Buttons with dense content, inline labels |
+| `fontSize="medium"` | Default size for general UI | Navigation lists, cards                   |
+| `fontSize="large"`  | Prominent visual anchors    | Section headers, hero callouts            |
 
 ### Responsiveness
 
 - Use Material UI's `Grid` system for complex layouts
 - Implement responsive breakpoints consistently:
-  - `xs`: 0-599px (mobile)
-  - `sm`: 600-899px (tablet)
-  - `md`: 900-1199px (desktop)
-  - `lg`: 1200px+ (large desktop)
+
+| Breakpoint | Range      | Device Type   | Common Usage                                |
+| ---------- | ---------- | ------------- | ------------------------------------------- |
+| `xs`       | 0-599px    | Mobile        | Single-column layouts, collapsed navigation |
+| `sm`       | 600-899px  | Tablet        | Two-column grids, stacked sidebars          |
+| `md`       | 900-1199px | Desktop       | Standard desktop layout, sidebars visible   |
+| `lg`       | 1200px+    | Large Desktop | Wide hero sections, multi-column dashboards |
 
 Example:
 
