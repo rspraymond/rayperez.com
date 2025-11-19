@@ -25,7 +25,7 @@ const Experience: React.FC<Experience> = ({ title, company, duration, bullets })
         }),
       ]}
     />
-    <SectionCard title={title} icon={WorkOutlineIcon}>
+    <SectionCard title={title} icon={WorkOutlineIcon} marginTop={0} marginBottom={0}>
       <Typography variant='subtitle1' color='textSecondary' component='p'>
         {company} - {duration}
       </Typography>

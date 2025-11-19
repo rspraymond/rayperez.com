@@ -1,7 +1,7 @@
 import React from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Person } from 'schema-dts'
-import { Box } from '@mui/material'
+import { Container, Grid } from '@mui/material'
 import Summary from '../components/Summary.tsx'
 import Projects from '../components/Projects.tsx'
 import Experience from '../components/Experience.tsx'
@@ -174,18 +174,39 @@ const Home: React.FC = () => {
         url='https://www.rayperez.com'
         type='profile'
       />
-      <Box>
-        <Summary />
-        <Skills skills={SKILLS} />
-        <Projects projects={projects} />
-        <Achievements achievements={achievements} />
-        {experiences.map((exp, key) => (
-          <Experience {...exp} key={key} />
-        ))}
-        {educations.map((edu, key) => (
-          <Education {...edu} key={key} />
-        ))}
-      </Box>
+      <Container
+        component='main'
+        maxWidth='md'
+        sx={{
+          py: { xs: 4, md: 6 },
+          px: { xs: 2, sm: 3 },
+        }}
+      >
+        <Grid container spacing={{ xs: 3, md: 4 }}>
+          <Grid item xs={12}>
+            <Summary />
+          </Grid>
+          <Grid item xs={12}>
+            <Skills skills={SKILLS} />
+          </Grid>
+          <Grid item xs={12}>
+            <Projects projects={projects} />
+          </Grid>
+          <Grid item xs={12}>
+            <Achievements achievements={achievements} />
+          </Grid>
+          {experiences.map((exp) => (
+            <Grid item xs={12} key={`${exp.company}-${exp.duration}`}>
+              <Experience {...exp} />
+            </Grid>
+          ))}
+          {educations.map((edu) => (
+            <Grid item xs={12} key={`${edu.school}-${edu.degree}`}>
+              <Education {...edu} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </React.Fragment>
   )
 }

@@ -59,7 +59,8 @@ describe('Education', () => {
     const cardContent = container.querySelector('.MuiCardContent-root')
     expect(cardContent).toBeInTheDocument()
 
-    // Verify the card has appropriate margin using getAttribute
-    expect(card?.getAttribute('style')).toContain('margin-top: 16px')
+    // Verify the card is flush with its container to let parent layout control spacing
+    const computedStyles = card ? window.getComputedStyle(card) : null
+    expect(computedStyles?.marginTop).toBe('0px')
   })
 })

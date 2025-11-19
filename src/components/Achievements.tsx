@@ -8,7 +8,7 @@ type Achievements = {
 }
 
 const Achievements: React.FC<Achievements> = ({ achievements }) => (
-  <SectionCard title='Achievements' icon={EmojiEventsOutlinedIcon}>
+  <SectionCard title='Achievements' icon={EmojiEventsOutlinedIcon} marginTop={0} marginBottom={0}>
     {achievements.map((achievement, key) => (
       <Box marginTop={2} key={key}>
         <Typography variant='body1'>{achievement}</Typography>

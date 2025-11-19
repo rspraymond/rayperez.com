@@ -14,10 +14,10 @@ function Header() {
     <Box
       sx={{
         p: 2,
-        mb: 3,
         borderRadius: theme.shape.borderRadius,
         backgroundColor: theme.palette.background.paper,
         border: `1px solid ${theme.palette.divider}`,
+        width: '100%',
       }}
     >
       <Box
