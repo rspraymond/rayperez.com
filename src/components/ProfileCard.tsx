@@ -1,4 +1,4 @@
-import { Box, Skeleton, Button } from '@mui/material'
+import { Box, Skeleton, Button, Typography } from '@mui/material'
 import React from 'react'
 import LazyImage from './LazyImage'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
@@ -19,8 +19,14 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
       display='flex'
       flexDirection='column'
       alignItems='center'
-      style={{ margin: '1rem', padding: '1rem' }}
       data-testid='profile-card-component'
+      sx={{
+        width: '100%',
+        p: 3,
+        borderRadius: 3,
+        borderColor: 'divider',
+        textAlign: 'center',
+      }}
     >
       <Box
         sx={{
@@ -28,6 +34,7 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
           overflow: 'hidden',
           width: 200,
           height: 200,
+          position: 'relative',
         }}
       >
         {isImageLoading && (
@@ -49,9 +56,9 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
           onLoadStateChange={setIsImageLoading}
         />
       </Box>
-      <Box component='header' style={{ textAlign: 'center', marginTop: '1rem' }}>
-        <p>{role}</p>
-      </Box>
+      <Typography variant='body1' color='text.secondary' sx={{ mt: 2 }}>
+        {role}
+      </Typography>
       <Button
         variant='outlined'
         color='primary'

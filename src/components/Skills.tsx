@@ -12,7 +12,13 @@ type Skills = {
 }
 
 const Skills: React.FC<Skills> = ({ skills }) => (
-  <SectionCard title='Skills' icon={BuildOutlinedIcon} headingId='skills-heading'>
+  <SectionCard
+    title='Skills'
+    icon={BuildOutlinedIcon}
+    headingId='skills-heading'
+    marginTop={0}
+    marginBottom={0}
+  >
     {skills.map((skill, index) => (
       <Chip
         label={skill.label}

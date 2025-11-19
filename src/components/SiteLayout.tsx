@@ -13,11 +13,24 @@ const SidebarSocials = lazy(() => import('./SidebarSocials'))
 
 const SiteLayout: React.FC = () => {
   return (
-    <Container maxWidth={false}>
+    <Container
+      maxWidth='xl'
+      sx={{
+        py: { xs: 3, md: 5 },
+        px: { xs: 2, md: 4 },
+      }}
+    >
       <CssBaseline />
-      <Box my={2}>
-        <Grid container spacing={2} direction='row-reverse' alignItems='flex-start'>
-          <Grid item xs={12} lg={4}>
+      <Grid container spacing={{ xs: 3, md: 4 }} direction='row-reverse' alignItems='flex-start'>
+        <Grid item xs={12} lg={4} component='aside'>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: { xs: 2.5, md: 3 },
+              width: '100%',
+            }}
+          >
             <Header />
             <Suspense fallback={<LoadingSkeleton testId='profile-card' />}>
               <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
@@ -36,12 +49,12 @@ const SiteLayout: React.FC = () => {
                 ]}
               />
             </Suspense>
-          </Grid>
-          <Grid item xs={12} lg={8}>
-            <Outlet />
-          </Grid>
+          </Box>
         </Grid>
-      </Box>
+        <Grid item xs={12} lg={8} component='section' sx={{ width: '100%' }}>
+          <Outlet />
+        </Grid>
+      </Grid>
     </Container>
   )
 }

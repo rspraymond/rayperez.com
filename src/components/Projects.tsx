@@ -16,7 +16,7 @@ type Project = {
 
 const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => {
   return (
-    <SectionCard title='Projects' icon={CodeIcon} marginTop={16} marginBottom={16}>
+    <SectionCard title='Projects' icon={CodeIcon} marginTop={0} marginBottom={0}>
       <CardContent sx={{ p: 0 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {projects.map((project, index) => (
