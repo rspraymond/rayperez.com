@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.69.0] - 2025-11-19
+### Features
+
+- improve home page spacing (#177)
+
+### Other Changes
+
+- chore: update dev dependencies (#176)
+- chore: add tables to contributing docs (#175)
+
+
+
 ## [0.68.0] - 2025-11-16
 ### Features
 
