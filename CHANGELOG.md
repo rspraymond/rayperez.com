@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.70.0] - 2025-11-20
+### Features
+
+- improve article spacing (#178)
+
+
+
 ## [0.69.0] - 2025-11-19
 ### Features
 
