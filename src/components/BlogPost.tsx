@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { BlogPosting } from 'schema-dts'
-import { Box, Typography, IconButton, Tooltip } from '@mui/material'
+import { Box, Container, Stack, Typography, IconButton, Tooltip } from '@mui/material'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import { Helmet } from 'react-helmet'
@@ -72,46 +72,57 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children, read
         type='article'
         url={window.location.href}
       />
-      <BlogBreadcrumbs title={title} />
-      <Box display='flex' alignItems='center' justifyContent='space-between' mb={2}>
-        <Typography variant='h2' component='h1' sx={{ flexGrow: 1 }}>
-          {title}
-        </Typography>
-        <Tooltip title={isCurrentlyBookmarked ? 'Remove Bookmark' : 'Bookmark Article'}>
-          <IconButton
-            onClick={handleBookmarkClick}
-            aria-label={isCurrentlyBookmarked ? 'remove bookmark' : 'bookmark article'}
-            sx={{
-              color: isCurrentlyBookmarked ? 'primary.main' : 'text.secondary',
-              ml: 2,
-              '&:hover': {
-                color: 'primary.main',
-                bgcolor: 'action.hover',
-              },
-            }}
-          >
-            {isCurrentlyBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <SocialShareButtons title={title} />
-      <Box mb={2}>
-        {readingTimeDisplay ? (
-          <Typography variant='body2' color='text.secondary'>
-            {readingTimeDisplay}
-          </Typography>
-        ) : (
-          <LoadingSkeleton testId='reading-time' />
-        )}
-      </Box>
-      <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
-        <TableOfContents />
-      </Suspense>
-      {children}
-      <Suspense fallback={<LoadingSkeleton testId='author-bio' />}>
-        <AuthorBio />
-      </Suspense>
-      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+      <Container
+        component='article'
+        maxWidth='md'
+        sx={{
+          py: { xs: 4, md: 6 },
+          px: { xs: 2, sm: 3 },
+        }}
+      >
+        <Stack spacing={{ xs: 3, md: 4 }}>
+          <BlogBreadcrumbs title={title} />
+          <Box display='flex' alignItems='center' justifyContent='space-between'>
+            <Typography variant='h2' component='h1' sx={{ flexGrow: 1 }}>
+              {title}
+            </Typography>
+            <Tooltip title={isCurrentlyBookmarked ? 'Remove Bookmark' : 'Bookmark Article'}>
+              <IconButton
+                onClick={handleBookmarkClick}
+                aria-label={isCurrentlyBookmarked ? 'remove bookmark' : 'bookmark article'}
+                sx={{
+                  color: isCurrentlyBookmarked ? 'primary.main' : 'text.secondary',
+                  ml: 2,
+                  '&:hover': {
+                    color: 'primary.main',
+                    bgcolor: 'action.hover',
+                  },
+                }}
+              >
+                {isCurrentlyBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <SocialShareButtons title={title} />
+          <Box>
+            {readingTimeDisplay ? (
+              <Typography variant='body2' color='text.secondary'>
+                {readingTimeDisplay}
+              </Typography>
+            ) : (
+              <LoadingSkeleton testId='reading-time' />
+            )}
+          </Box>
+          <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
+            <TableOfContents />
+          </Suspense>
+          <Box component='section'>{children}</Box>
+          <Suspense fallback={<LoadingSkeleton testId='author-bio' />}>
+            <AuthorBio />
+          </Suspense>
+          <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+        </Stack>
+      </Container>
       <BackToTopButton show={showBackToTop} onClick={scrollToTop} />
     </React.Fragment>
   )
