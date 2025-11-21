@@ -13,6 +13,8 @@ import SocialMeta from '../components/SocialMeta.tsx'
 import { PROFILE } from '../constants/profile'
 import { SKILLS } from '../constants/skills'
 import { PERSON_SCHEMA } from '../constants/schema'
+import { useScrollToTop } from '../hooks/useScrollToTop'
+import BackToTopButton from '../components/BackToTopButton'
 
 const experiences = [
   {
@@ -146,6 +148,8 @@ const projects = [
 ]
 
 const Home: React.FC = () => {
+  const { showBackToTop, scrollToTop } = useScrollToTop()
+
   return (
     <React.Fragment>
       <Helmet
@@ -207,6 +211,7 @@ const Home: React.FC = () => {
           ))}
         </Grid>
       </Container>
+      <BackToTopButton show={showBackToTop} onClick={scrollToTop} />
     </React.Fragment>
   )
 }
