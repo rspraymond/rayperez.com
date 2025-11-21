@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.71.0] - 2025-11-21
+### Features
+
+- add scroll-to-top to home page (#179)
+
+
+
 ## [0.70.0] - 2025-11-20
 ### Features
 
