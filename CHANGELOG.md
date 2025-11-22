@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.72.0] - 2025-11-22
+### Features
+
+- add semantic markup to name (#180)
+
+
+
 ## [0.71.0] - 2025-11-21
 ### Features
 
