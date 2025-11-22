@@ -1,5 +1,5 @@
-import { Box, IconButton, useTheme, Link } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Box, IconButton, useTheme, Link, Typography } from '@mui/material'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import DescriptionIcon from '@mui/icons-material/Description'
@@ -9,6 +9,8 @@ import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
 
 function Header() {
   const theme = useTheme()
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   return (
     <Box
@@ -28,22 +30,50 @@ function Header() {
           gap: 1,
         }}
       >
-        <Link
-          component={RouterLink}
-          to='/'
-          underline='hover'
-          color='inherit'
-          sx={{
-            flexGrow: 1,
-            fontWeight: 400,
-            fontSize: theme.typography.h6.fontSize,
-            lineHeight: theme.typography.h6.lineHeight,
-            fontFamily: theme.typography.h6.fontFamily,
-            textDecoration: 'none',
-          }}
-        >
-          Raymond Perez
-        </Link>
+        {isHomePage ? (
+          <Typography
+            component='h1'
+            itemScope
+            itemType='https://schema.org/Person'
+            sx={{
+              flexGrow: 1,
+              fontWeight: 400,
+              fontSize: theme.typography.h6.fontSize,
+              lineHeight: theme.typography.h6.lineHeight,
+              fontFamily: theme.typography.h6.fontFamily,
+            }}
+          >
+            <Link
+              component={RouterLink}
+              to='/'
+              underline='hover'
+              color='inherit'
+              sx={{ textDecoration: 'none' }}
+              itemProp='name'
+            >
+              Raymond Perez
+            </Link>
+          </Typography>
+        ) : (
+          <Link
+            component={RouterLink}
+            to='/'
+            underline='hover'
+            color='inherit'
+            itemScope
+            itemType='https://schema.org/Person'
+            sx={{
+              flexGrow: 1,
+              fontWeight: 400,
+              fontSize: theme.typography.h6.fontSize,
+              lineHeight: theme.typography.h6.lineHeight,
+              fontFamily: theme.typography.h6.fontFamily,
+              textDecoration: 'none',
+            }}
+          >
+            <span itemProp='name'>Raymond Perez</span>
+          </Link>
+        )}
         <ThemeToggle />
         <IconButton
           href='https://www.linkedin.com/in/raymond-perez-eng/'
