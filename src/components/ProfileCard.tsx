@@ -20,6 +20,8 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
       flexDirection='column'
       alignItems='center'
       data-testid='profile-card-component'
+      itemScope
+      itemType='https://schema.org/Person'
       sx={{
         width: '100%',
         p: 3,
@@ -56,7 +58,7 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
           onLoadStateChange={setIsImageLoading}
         />
       </Box>
-      <Typography variant='body1' color='text.secondary' sx={{ mt: 2 }}>
+      <Typography variant='body1' color='text.secondary' sx={{ mt: 2 }} itemProp='jobTitle'>
         {role}
       </Typography>
       <Button
