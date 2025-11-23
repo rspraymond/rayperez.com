@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.73.0] - 2025-11-23
+### Features
+
+- add semantic markup to job title (#181)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.72.0] - 2025-11-22
 ### Features
 
