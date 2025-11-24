@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Prejump",
+    "description": "A comprehensive training platform for Rocket League players featuring a database of training packs, search functionality, and BakkesMod integration for seamless in-game loading.",
+    "technologies": ["Laravel", "Inertia.js", "React", "Tailwind CSS", "TypeScript"],
+    "liveUrl": "https://prejump.com",
+    "featured": false
+  },
+  {
+    "title": "Twitch Clips Finder",
+    "description": "A utility tool for discovering and organizing Twitch clips with advanced search and filtering capabilities.",
+    "technologies": ["Next.js", "Material-UI", "TypeScript", "Twitch API"],
+    "liveUrl": "http://clipsfinder.com",
+    "featured": false
+  },
+  {
+    "title": "Palworld Fast Travel Map",
+    "description": "An interactive map application for Palworld players to quickly navigate and discover fast travel points.",
+    "technologies": ["Next.js", "Material-UI", "TypeScript", "Leaflet", "Google Maps API"],
+    "liveUrl": "https://palworld-map.appsample.com",
+    "featured": false
+  }
+]
