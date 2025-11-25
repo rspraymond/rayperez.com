@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.74.0] - 2025-11-25
+### Features
+
+- migrate home components to json data (#183)
+
+### Other Changes
+
+- chore: extract hardcoded content into json (#182)
+
+
+
 ## [0.73.0] - 2025-11-23
 ### Features
 
