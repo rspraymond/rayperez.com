@@ -50,4 +50,25 @@ describe('Summary', () => {
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
     expect(screen.getByText(/Raymond Perez/i)).toBeInTheDocument()
   })
+
+  test('renders content from data file', () => {
+    renderComponent()
+
+    // Verify that the summary text from the JSON file is rendered
+    // Check for unique phrases from the summary data (text is split across elements)
+    expect(screen.getByText(/I am/i)).toBeInTheDocument()
+    expect(screen.getByText('Raymond Perez')).toBeInTheDocument()
+    expect(screen.getByText(/full-stack development/i)).toBeInTheDocument()
+    expect(screen.getByText(/opinionated frameworks/i)).toBeInTheDocument()
+  })
+
+  test('maintains schema.org markup with name', () => {
+    renderComponent()
+
+    // Verify the name span has the correct itemProp attribute
+    const nameSpan = screen.getByText('Raymond Perez')
+    expect(nameSpan).toHaveAttribute('itemProp', 'name')
+    expect(nameSpan.closest('p')).toHaveAttribute('itemScope')
+    expect(nameSpan.closest('p')).toHaveAttribute('itemType', 'https://schema.org/Person')
+  })
 })

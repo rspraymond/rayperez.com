@@ -2,29 +2,42 @@ import { Link, Typography } from '@mui/material'
 import React from 'react'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import SectionCard from './SectionCard'
+import summaryData from '../data/content/summary.json'
+import type { ProfessionalSummary } from '../types/contentData'
 
-const Summary: React.FC = () => (
-  <SectionCard title='Professional Summary' icon={PersonOutlineIcon} marginTop={0} marginBottom={0}>
-    <Typography
-      variant='body2'
-      color='textSecondary'
-      component='p'
-      itemScope
-      itemType='https://schema.org/Person'
+const Summary: React.FC = () => {
+  const summary = summaryData as ProfessionalSummary
+  const nameText = 'Raymond Perez'
+  const linkText = 'opinionated frameworks'
+  const linkHref = '/why-opinionated'
+
+  const nameParts = summary.text.split(nameText)
+  const linkParts = nameParts[1].split(linkText)
+
+  return (
+    <SectionCard
+      title='Professional Summary'
+      icon={PersonOutlineIcon}
+      marginTop={0}
+      marginBottom={0}
     >
-      I am <span itemProp='name'>Raymond Perez</span>, a software engineer and entrepreneur focused
-      on building impactful technology solutions. I specialize in full-stack development with
-      expertise in PHP (Laravel), React, Node.js, and cloud infrastructure (AWS, Datadog, New
-      Relic). I build scalable applications using{' '}
-      <Link href='/why-opinionated' key='/why-opinionated' color='primary' underline='hover'>
-        opinionated frameworks
-      </Link>{' '}
-      and modern development practices. I actively contribute to entrepreneurial communities and
-      seek partnerships with innovators who share my vision for technology-driven solutions that
-      address real-world challenges. Let's connect to explore collaboration opportunities or discuss
-      how we can build something meaningful together.
-    </Typography>
-  </SectionCard>
-)
+      <Typography
+        variant='body2'
+        color='textSecondary'
+        component='p'
+        itemScope
+        itemType='https://schema.org/Person'
+      >
+        {nameParts[0]}
+        <span itemProp='name'>{nameText}</span>
+        {linkParts[0]}
+        <Link href={linkHref} key={linkHref} color='primary' underline='hover'>
+          {linkText}
+        </Link>
+        {linkParts[1]}
+      </Typography>
+    </SectionCard>
+  )
+}
 
 export default Summary

@@ -3,6 +3,8 @@ import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
 import Home from './Home'
 import { BookmarkProvider } from '../contexts/BookmarkContext'
+import experiencesData from '../data/content/experiences.json'
+import educationData from '../data/content/education.json'
 
 // Mock the Helmet component
 vi.mock('react-helmet', () => ({
@@ -62,12 +64,12 @@ describe('Home Component', () => {
     expect(screen.getByTestId('projects-component')).toBeInTheDocument()
     expect(screen.getByTestId('achievements-component')).toBeInTheDocument()
 
-    // Check that at least one experience and education component is rendered
+    // Check that the correct number of experience and education components are rendered from data files
     const experiences = screen.getAllByTestId('experience-component')
     const educations = screen.getAllByTestId('education-component')
 
-    expect(experiences.length).toBeGreaterThan(0)
-    expect(educations.length).toBeGreaterThan(0)
+    expect(experiences.length).toBe(experiencesData.length)
+    expect(educations.length).toBe(educationData.length)
   })
 
   it('includes structured data for SEO', () => {
