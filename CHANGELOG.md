@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.75.0] - 2025-11-26
+### Features
+
+- migrate profile card to read from json (#184)
+
+
+
 ## [0.74.0] - 2025-11-25
 ### Features
 
