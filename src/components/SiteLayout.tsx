@@ -3,8 +3,6 @@ import { Container, CssBaseline, Box, Grid } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import LoadingSkeleton from './LoadingSkeleton'
-import profileImage from '../assets/raymond-perez.jpg'
-import { PROFILE } from '../constants/profile'
 
 const ProfileCard = lazy(() => import('./ProfileCard'))
 const BookmarkedPosts = lazy(() => import('./BookmarkedPosts'))
@@ -33,7 +31,7 @@ const SiteLayout: React.FC = () => {
           >
             <Header />
             <Suspense fallback={<LoadingSkeleton testId='profile-card' />}>
-              <ProfileCard image={profileImage} name={PROFILE.name} role={PROFILE.role} />
+              <ProfileCard />
             </Suspense>
             <Suspense fallback={<LoadingSkeleton testId='bookmarked-posts' />}>
               <BookmarkedPosts />

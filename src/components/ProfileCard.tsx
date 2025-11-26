@@ -2,16 +2,13 @@ import { Box, Skeleton, Button, Typography } from '@mui/material'
 import React from 'react'
 import LazyImage from './LazyImage'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import profileData from '../data/content/profile.json'
+import profileImage from '../assets/raymond-perez.jpg'
+import { Profile } from '../types/contentData'
 
-type ProfileProps = {
-  image: string
-  name: string
-  role: string
-  resumeUrl?: string
-}
-
-const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
+const ProfileCard: React.FC = () => {
   const [isImageLoading, setIsImageLoading] = React.useState(true)
+  const profile = profileData as Profile
 
   return (
     <Box
@@ -49,9 +46,9 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
           />
         )}
         <LazyImage
-          src={image}
-          alt={`${name}'s profile picture`}
-          title={`${name}'s profile picture`}
+          src={profileImage}
+          alt={`${profile.name}'s profile picture`}
+          title={`${profile.name}'s profile picture`}
           width={200}
           height={200}
           priority
@@ -59,7 +56,7 @@ const ProfileCard: React.FC<ProfileProps> = ({ image, name, role }) => {
         />
       </Box>
       <Typography variant='body1' color='text.secondary' sx={{ mt: 2 }} itemProp='jobTitle'>
-        {role}
+        {profile.role}
       </Typography>
       <Button
         variant='outlined'
