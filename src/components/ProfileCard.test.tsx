@@ -7,30 +7,45 @@ vi.mock('./LazyImage', () => ({
   default: ({ src, alt }) => <img src={src} alt={alt} data-testid='lazy-image' />,
 }))
 
+// Mock profile data
+vi.mock('../data/content/profile.json', () => ({
+  default: {
+    name: 'Test User',
+    role: 'Software Engineer',
+    image: '/assets/test-image.jpg',
+    email: 'test@example.com',
+    location: {
+      city: 'Test City',
+      state: 'TS',
+      country: 'US',
+    },
+    description: 'Test description',
+    twitterCreator: '@testuser',
+  },
+}))
+
+// Mock profile image import
+vi.mock('../assets/raymond-perez.jpg', () => ({
+  default: '/assets/raymond-perez.jpg',
+}))
+
 describe('ProfileCard', () => {
   it('renders profile information correctly', () => {
-    // Arrange
-    const testProps = {
-      image: '/test-image.jpg',
-      name: 'Test User',
-      role: 'Software Engineer',
-    }
-
-    // Act
-    render(<ProfileCard {...testProps} />)
+    // Arrange & Act
+    render(<ProfileCard />)
 
     // Assert
     const image = screen.getByTestId('lazy-image')
-    const roleText = screen.getByText(testProps.role)
+    const roleText = screen.getByText('Software Engineer')
 
     expect(image).toBeInTheDocument()
-    expect(image).toHaveAttribute('src', testProps.image)
-    expect(image).toHaveAttribute('alt', `${testProps.name}'s profile picture`)
+    expect(image).toHaveAttribute('src', '/assets/raymond-perez.jpg')
+    expect(image).toHaveAttribute('alt', "Test User's profile picture")
     expect(roleText).toBeInTheDocument()
   })
 
   it('renders a LinkedIn connect CTA with correct attributes', () => {
-    render(<ProfileCard image='/test-image.jpg' name='Test User' role='Software Engineer' />)
+    render(<ProfileCard />)
 
     const cta = screen.getByRole('link', { name: /connect.*linkedin/i })
     expect(cta).toBeInTheDocument()
