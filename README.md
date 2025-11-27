@@ -125,7 +125,8 @@ rayperez-site/
 │   ├── constants/        # App constants and configuration
 │   ├── contexts/         # React contexts (theme, bookmarks)
 │   ├── data/
-│   │   └── articles/     # JSON-driven article content
+│   │   ├── articles/     # JSON-driven article content
+│   │   └── content/      # Structured site content (profile, projects, experiences, etc.)
 │   ├── hooks/            # Custom React hooks
 │   ├── img/              # Legacy/static images
 │   ├── pages/
@@ -233,6 +234,17 @@ export default function WhyReactJS() {
   )
 }
 ```
+
+## 📊 Content Data
+
+Site content (profile, projects, achievements, experiences, education) is stored in structured JSON files in `src/data/content/`. These files serve as the **source of truth** for site content and are:
+
+- **Version-controlled**: All content changes are tracked in Git
+- **Type-safe**: Validated against TypeScript interfaces in `src/types/contentData.ts`
+- **Automatically validated**: CI pipeline runs validation tests on every push and pull request
+- **Consistently consumed**: Components read directly from these files
+
+For detailed workflow instructions on updating content data, see the [Content Flow section](CONTRIBUTING.md#content-flow) in CONTRIBUTING.md.
 
 ## 🧰 SEO Features
 

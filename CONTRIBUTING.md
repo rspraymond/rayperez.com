@@ -743,6 +743,66 @@ When adding a new article:
 
 Add your post's metadata (title, date, path, and component import) to `src/constants/posts.ts`. This array is the single source for routing, navigation, and the sidebar. No other changes are needed.
 
+## Content Flow
+
+This section explains how to update site content that is stored in structured data files. The content data in `src/data/content/` is the **source of truth** for site content, ensuring consistency across the site and other assets.
+
+### Content Data Overview
+
+Site content is stored in structured JSON files in `src/data/content/`. These files are version-controlled and validated by automated tests. All components that display this content read directly from these files.
+
+### Content Data Files
+
+| File                | Content Type                                                          | Used By                 |
+| ------------------- | --------------------------------------------------------------------- | ----------------------- |
+| `profile.json`      | Profile information (name, role, image, email, location, description) | `ProfileCard` component |
+| `summary.json`      | Professional summary text                                             | `Summary` component     |
+| `projects.json`     | Project portfolio items (title, description, technologies, URLs)      | `Home` page             |
+| `achievements.json` | Achievement list items                                                | `Home` page             |
+| `experiences.json`  | Work experience entries (title, company, duration, bullets)           | `Home` page             |
+| `education.json`    | Education entries (degree, school, duration, details)                 | `Home` page             |
+
+### Updating Content Data
+
+1. **Edit the appropriate JSON file** in `src/data/content/`
+2. **Follow the TypeScript schema** defined in `src/types/contentData.ts`
+3. **Run validation tests** to ensure your changes are valid:
+   ```bash
+   npm test src/types/contentData.test.ts
+   ```
+4. **Verify the changes** by running the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Content Data Schema
+
+All content data files must conform to their TypeScript interfaces defined in `src/types/contentData.ts`:
+
+- `Profile` - Profile information with location object
+- `ProfessionalSummary` - Single text field for summary
+- `Project[]` - Array of project objects with required and optional fields
+- `Achievement[]` - Array of achievement text items
+- `Experience[]` - Array of experience entries with bullets
+- `Education[]` - Array of education entries
+
+### Validation and CI
+
+Content data files are automatically validated:
+
+- **Local validation**: Run `npm test` to validate content data schema
+- **CI validation**: The CI pipeline automatically runs content data validation tests on every push and pull request
+- **Type checking**: TypeScript ensures all JSON files match their interfaces during build
+
+If content data validation fails, the CI build will fail, preventing invalid content from being merged.
+
+### Workflow Best Practices
+
+1. **Update content data first**: When updating site content, always update the JSON files in `src/data/content/` first
+2. **Test locally**: Run tests and verify changes in the development server before committing
+3. **Keep data structured**: Maintain consistent formatting and structure across all content files
+4. **Version control**: All content changes should be committed with meaningful commit messages
+
 ## Release Process
 
 For information about the release process, versioning, and deployment, see [RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md).
