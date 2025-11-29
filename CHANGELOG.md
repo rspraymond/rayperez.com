@@ -1,6 +1,19 @@
 ## Changelog
 
 
+## [0.76.0] - 2025-11-29
+### Features
+
+- improve unordered list design for articles (#186)
+
+### Other Changes
+
+- chore: update test coverage badge
+- chore: improve test coverage on blog post component (#185)
+- chore: update docs for data
+
+
+
 ## [0.75.0] - 2025-11-26
 ### Features
 
