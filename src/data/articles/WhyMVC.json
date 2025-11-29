@@ -2,6 +2,7 @@
   { "type": "heading", "variant": "h3", "content": "Key Takeaways", "gutterBottom": true },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "Separation of Concerns",
@@ -599,6 +600,7 @@
   },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "Does using MVC make my application slower?",

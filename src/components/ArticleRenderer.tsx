@@ -1,9 +1,6 @@
 import React from 'react'
 import {
   Typography,
-  List,
-  ListItem,
-  ListItemText,
   Paper,
   Link,
   Divider,
@@ -16,6 +13,7 @@ import {
   Box,
 } from '@mui/material'
 import LazySyntaxHighlighter from './LazySyntaxHighlighter'
+import ArticleList, { ArticleComplexList } from './ArticleList'
 import { ArticleContent } from '../types/articleContent'
 
 interface ArticleRendererProps {
@@ -49,34 +47,15 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
   )
 
   const renderList = (item: ArticleContent, index: number): React.ReactElement => (
-    <List key={`list-${index}`}>
-      {item.items?.map((listItem, idx) => (
-        <ListItem key={`list-item-${index}-${idx}`}>
-          <ListItemText primary={listItem} />
-        </ListItem>
-      ))}
-    </List>
+    <ArticleList key={`list-${index}`} items={item.items || []} hideBullets={item.hideBullets} />
   )
 
   const renderComplexList = (item: ArticleContent, index: number): React.ReactElement => (
-    <List key={`complexList-${index}`}>
-      {item.complexItems?.map((listItem, idx) => (
-        <ListItem key={`complex-item-${index}-${idx}`}>
-          <ListItemText primary={listItem.primary} secondary={listItem.secondary} />
-          {listItem.link && (
-            <Link
-              href={listItem.link.href}
-              target={listItem.link.target || '_blank'}
-              rel={listItem.link.target === '_blank' ? 'noopener noreferrer' : undefined}
-              color='primary'
-              underline='hover'
-            >
-              {listItem.link.title}
-            </Link>
-          )}
-        </ListItem>
-      ))}
-    </List>
+    <ArticleComplexList
+      key={`complexList-${index}`}
+      items={item.complexItems || []}
+      hideBullets={item.hideBullets}
+    />
   )
 
   const renderCode = (item: ArticleContent, index: number): React.ReactElement => (

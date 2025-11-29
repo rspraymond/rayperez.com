@@ -37,7 +37,8 @@ describe('ArticleRenderer - List Content', () => {
 
     render(<ArticleRenderer content={content} />)
 
-    expect(document.querySelector('ul')).toBeInTheDocument()
+    const list = screen.getByRole('list')
+    expect(list).toBeInTheDocument()
   })
 })
 

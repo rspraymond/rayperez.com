@@ -2,6 +2,7 @@
   { "type": "heading", "variant": "h3", "content": "Key Takeaways", "gutterBottom": true },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "React's Emphasis on Immutability and Predictability",
@@ -269,6 +270,7 @@
   },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "What is React?",
