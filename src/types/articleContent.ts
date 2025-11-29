@@ -21,6 +21,7 @@ export interface ArticleContent {
   paragraph?: boolean
   elevation?: number
   style?: Record<string, string>
+  hideBullets?: boolean
   table?: {
     headers: string[]
     rows: string[][]

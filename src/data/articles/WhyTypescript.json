@@ -2,6 +2,7 @@
   { "type": "heading", "variant": "h2", "content": "Key Takeaways", "gutterBottom": true },
   {
     "type": "list",
+    "hideBullets": true,
     "items": [
       "Error Prevention: TypeScript's compile-time type checking helps catch errors early in the development process, reducing the number of bugs that make it to the runtime environment. This feature not only saves developers time spent on debugging but also enhances the quality of the code.",
       "Improved Code Readability and Maintainability: TypeScript's type annotations serve as self-documenting code, making it easier for developers, especially new ones, to understand the codebase. It also enforces consistent data types across the codebase, improving code clarity and maintainability.",
@@ -293,6 +294,7 @@
   },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "What is TypeScript and how is it different from JavaScript?",

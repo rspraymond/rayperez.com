@@ -2,6 +2,7 @@
   { "type": "heading", "variant": "h3", "content": "Key Takeaways", "gutterBottom": true },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "NestJS's Structured Approach",
@@ -347,6 +348,7 @@
   },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "What is NestJS?",

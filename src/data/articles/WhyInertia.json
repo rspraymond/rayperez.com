@@ -2,6 +2,7 @@
   { "type": "heading", "variant": "h3", "content": "Key Takeaways", "gutterBottom": true },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "Pragmatic Frontend Integration for Backend Developers",
@@ -398,6 +399,7 @@
   },
   {
     "type": "complexList",
+    "hideBullets": true,
     "complexItems": [
       {
         "primary": "What is Inertia.js?",
