@@ -1,0 +1,510 @@
+[
+  { "type": "heading", "variant": "h2", "content": "Key Takeaways", "gutterBottom": true },
+  {
+    "type": "list",
+    "hideBullets": true,
+    "items": [
+      "Fewer Runtime Bugs: Type safety catches errors before code runs, preventing common mistakes like passing wrong data types or accessing undefined properties.",
+      "Clearer Team Communication: Type annotations serve as documentation, making it easier for team members to understand code without reading implementation details.",
+      "Safer Refactoring: When you change code, type safety tools show exactly where updates are needed, reducing the risk of breaking existing functionality."
+    ]
+  },
+
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Type safety is one of the most practical tools in modern software development. It helps prevent bugs, makes code easier to understand, and speeds up development. This article explains what type safety is, why it matters, and how to use it in your projects.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "You don't need to be a computer science expert to benefit from type safety. Whether you're working with TypeScript, PHP with PHPStan, or any other language, type safety tools help you write better code with less effort.",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Key Benefits of Type Safety",
+      "headers": ["Benefit", "Description", "Impact"],
+      "rows": [
+        [
+          "Fewer Bugs",
+          "Catches errors before code runs",
+          "Less debugging time, fewer production issues"
+        ],
+        [
+          "Better Documentation",
+          "Types serve as inline documentation",
+          "Easier onboarding, clearer code intent"
+        ],
+        [
+          "Safer Refactoring",
+          "Shows exactly where changes are needed",
+          "Confidence when updating code"
+        ],
+        [
+          "Improved Tooling",
+          "Better autocomplete and suggestions",
+          "Faster development, fewer typos"
+        ],
+        [
+          "Team Collaboration",
+          "Clear contracts between code parts",
+          "Easier code reviews, less confusion"
+        ],
+        [
+          "Early Error Detection",
+          "Problems found during development",
+          "Faster feedback, lower costs"
+        ]
+      ]
+    }
+  },
+
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "What Is Type Safety?",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Type safety means your code checks that data types match what functions expect. For example, if a function needs a number, type safety prevents you from passing a string. This catches errors before your code runs.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Here's a simple example in JavaScript without type safety:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "function calculateTotal(price, quantity) {\n  return price + quantity;\n}\n\n// This runs without error, but gives wrong result\ncalculateTotal(\"10\", 5); // Returns \"105\" (string) instead of 15 (number)"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "With type safety in TypeScript, this error is caught immediately:",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "typescript",
+    "code": "function calculateTotal(price: number, quantity: number): number {\n  return price + quantity;\n}\n\n// TypeScript shows an error here\ncalculateTotal(\"10\", 5); // Error: Argument of type 'string' is not assignable to parameter of type 'number'"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The type system tells you about the problem before you run the code. This saves time and prevents bugs from reaching production.",
+    "paragraph": true
+  },
+
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Static vs Dynamic Type Safety",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "There are two main approaches to type safety: static and dynamic.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Static Type Safety",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Static type safety checks types before code runs. Tools like TypeScript, PHPStan for PHP, or Rust's compiler analyze your code and report errors during development. This catches problems early, when they're easiest to fix.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Benefits of static type safety:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Errors found before code runs",
+      "Better autocomplete and suggestions in your editor",
+      "Faster refactoring with confidence",
+      "Code serves as documentation"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Dynamic Type Safety",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Dynamic type safety checks types while code runs. Languages like Python or JavaScript check types at runtime. This is flexible but means errors might only appear when specific code paths execute.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Many developers combine both approaches. For example, you can use TypeScript for static checking, then add runtime validation for data from external sources like APIs.",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Static vs Dynamic Type Safety Comparison",
+      "headers": ["Aspect", "Static Type Safety", "Dynamic Type Safety"],
+      "rows": [
+        ["When Errors Are Found", "Before code runs (compile time)", "While code runs (runtime)"],
+        [
+          "Error Detection",
+          "Catches errors early in development",
+          "Errors appear when code executes"
+        ],
+        ["Performance Impact", "No runtime overhead", "Minimal runtime overhead"],
+        ["Flexibility", "Less flexible, more structured", "More flexible, less structured"],
+        [
+          "Tooling Support",
+          "Excellent autocomplete and refactoring",
+          "Limited compile-time tooling"
+        ],
+        ["Learning Curve", "Requires learning type syntax", "Easier to start, learn as you go"],
+        ["Best For", "Large projects, team collaboration", "Rapid prototyping, small projects"],
+        ["Examples", "TypeScript, PHPStan, Rust, Java", "Python, JavaScript, Ruby"]
+      ]
+    }
+  },
+
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Why Type Safety Matters for My Stack",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Type safety tools are available for most modern languages and frameworks. Here are practical examples from common stacks:",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "TypeScript for JavaScript",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "TypeScript adds type safety to JavaScript. You can start with plain JavaScript and gradually add types. Many teams adopt TypeScript incrementally, adding types to new code while keeping existing JavaScript unchanged.",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "typescript",
+    "code": "// Without types\nfunction getUser(id) {\n  return users.find(u => u.id === id);\n}\n\n// With types\ninterface User {\n  id: number;\n  name: string;\n  email: string;\n}\n\nfunction getUser(id: number): User | undefined {\n  return users.find(u => u.id === id);\n}"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The type annotation makes it clear what getUser expects and returns. Your editor can autocomplete properties and catch mistakes.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "PHPStan and Psalm for PHP",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "PHP has evolved to support type hints, and tools like PHPStan and Psalm add static analysis. These tools check your PHP code without running it, finding type errors and other issues.",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "php",
+    "code": "// PHP 7+ with type hints\nfunction calculateTotal(float $price, int $quantity): float {\n    return $price * $quantity;\n}\n\n// PHPStan/Psalm can catch errors like:\ncalculateTotal(\"10\", 5); // Error: Expected float, got string"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "PHPStan and Psalm work with existing PHP code. You can add them to any project and configure how strict the checks should be.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Other Languages",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Most modern languages have type safety features:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Python: Type hints with mypy for static checking",
+      "Go: Built-in static typing",
+      "Rust: Strong type system with memory safety",
+      "Java: Static typing with generics",
+      "Kotlin: Null safety and type inference"
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The specific tools vary, but the benefits are similar: fewer bugs, clearer code, and better tooling support.",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Type Safety Tools by Language",
+      "headers": ["Language", "Tool", "Type", "Best For"],
+      "rows": [
+        ["JavaScript", "TypeScript", "Static", "Web applications, React/Vue projects"],
+        ["PHP", "PHPStan / Psalm", "Static", "Laravel, WordPress, existing PHP code"],
+        ["Python", "mypy + type hints", "Static", "Data science, web backends"],
+        ["Go", "Built-in compiler", "Static", "System tools, microservices"],
+        ["Rust", "Built-in compiler", "Static", "Performance-critical systems"],
+        ["Java", "Built-in compiler", "Static", "Enterprise applications"],
+        ["Kotlin", "Built-in compiler", "Static", "Android, JVM applications"],
+        ["C#", "Built-in compiler", "Static", ".NET applications"]
+      ]
+    }
+  },
+
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Getting Started With Type Safety",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "You don't need to rewrite everything to benefit from type safety. Here's a practical approach:",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Start Small",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Begin with new code. Add type annotations to functions you write today. Don't worry about adding types to everything at once.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Use Gradual Adoption",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Many type systems support gradual adoption. TypeScript allows JavaScript files alongside TypeScript files. PHPStan can be configured to check only specific directories. Start where type safety provides the most value.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Enable Strict Options Gradually",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Most type safety tools have strictness levels. Start with basic checks, then enable stricter rules as your codebase becomes more type-safe. This prevents being overwhelmed by too many errors at once.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Focus on High-Value Areas",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Prioritize type safety in areas where errors are most costly:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "API boundaries and data validation",
+      "Business logic and calculations",
+      "Shared code used by multiple developers",
+      "Complex data structures"
+    ]
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Getting Started Checklist",
+      "headers": ["Step", "Action", "Priority"],
+      "rows": [
+        ["1", "Choose a type safety tool for your language", "High"],
+        ["2", "Add types to new code you write", "High"],
+        ["3", "Configure tool with basic strictness level", "Medium"],
+        ["4", "Focus on high-value areas (APIs, business logic)", "Medium"],
+        ["5", "Gradually increase strictness over time", "Low"],
+        ["6", "Add types to existing code when you touch it", "Low"],
+        ["7", "Enable stricter rules as codebase improves", "Low"]
+      ]
+    }
+  },
+
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Common Concerns About Type Safety",
+    "gutterBottom": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Does It Slow Down Development?",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Adding types takes a bit more time upfront, but it saves time overall. You spend less time debugging and more time writing features. Type safety tools also provide autocomplete and catch errors immediately, which speeds up development.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "Is It Hard to Learn?",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Basic type safety is straightforward. You're mostly adding annotations about what data your functions expect. Advanced features exist, but you don't need them to get value from type safety. Start simple and learn more as needed.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h5",
+    "content": "What About Existing Code?",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "You don't need to rewrite existing code. Most type systems work alongside untyped code. Add types to new code and gradually improve existing code when you touch it. This makes adoption practical for real projects.",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Type Safety Concerns - Quick Answers",
+      "headers": ["Concern", "Reality", "Solution"],
+      "rows": [
+        [
+          "Slows down development",
+          "Saves time overall through fewer bugs",
+          "Start with basic types, learn gradually"
+        ],
+        [
+          "Hard to learn",
+          "Basic types are straightforward",
+          "Begin simple, add complexity as needed"
+        ],
+        [
+          "Requires rewriting code",
+          "Works alongside existing code",
+          "Add types incrementally to new code"
+        ],
+        ["Too strict", "Configurable strictness levels", "Start lenient, increase over time"],
+        [
+          "Not worth the effort",
+          "Pays off with fewer bugs and clearer code",
+          "Try on small project first"
+        ]
+      ]
+    }
+  },
+
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "Frequently Asked Questions",
+    "gutterBottom": true
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "What is type safety and why does it matter?",
+        "secondary": "Type safety ensures that your code checks data types match what functions expect. It catches errors before code runs, prevents bugs, makes code easier to understand, and improves the development experience. Type safety matters because it saves time debugging and helps teams work together more effectively."
+      },
+      {
+        "primary": "What's the difference between static and dynamic type safety?",
+        "secondary": "Static type safety checks types before code runs using tools like TypeScript or PHPStan. Dynamic type safety checks types while code runs, as in Python or JavaScript. Static checking finds errors earlier, while dynamic checking is more flexible. Many projects use both approaches."
+      },
+      {
+        "primary": "Do I need to rewrite my existing code to use type safety?",
+        "secondary": "No, you don't need to rewrite existing code. Most type systems work alongside untyped code. You can add types to new code and gradually improve existing code when you touch it. This makes adoption practical for real projects without requiring a complete rewrite."
+      },
+      {
+        "primary": "Which type safety tool should I use?",
+        "secondary": "The tool depends on your language. For JavaScript, use TypeScript. For PHP, use PHPStan or Psalm. For Python, use type hints with mypy. Most modern languages have type safety tools available. Start with the most popular tool for your language stack."
+      },
+      {
+        "primary": "Does type safety slow down development?",
+        "secondary": "Adding types takes a bit more time upfront, but it saves time overall. You spend less time debugging and more time writing features. Type safety tools also provide autocomplete and catch errors immediately, which speeds up development in the long run."
+      },
+      {
+        "primary": "Is type safety hard to learn?",
+        "secondary": "Basic type safety is straightforward. You're mostly adding annotations about what data your functions expect. Advanced features exist, but you don't need them to get value from type safety. Start simple with basic type annotations and learn more advanced features as needed."
+      },
+      {
+        "primary": "Can I use type safety with legacy codebases?",
+        "secondary": "Yes, most type safety tools support gradual adoption. TypeScript allows JavaScript files alongside TypeScript files. PHPStan can be configured to check only specific directories. You can start where type safety provides the most value and expand gradually."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Type safety is a practical tool that helps you write better code. It catches errors early, makes code easier to understand, and improves the development experience. Whether you're using TypeScript, PHPStan, or another tool, type safety provides real benefits without requiring deep theoretical knowledge.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The best approach is to start small and adopt type safety gradually. Focus on new code and high-value areas. As you become more comfortable, you can expand type safety to more of your codebase. The investment pays off with fewer bugs, clearer code, and faster development.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "If you're not using type safety yet, pick one tool for your stack and try it on a small project. You'll likely find that the benefits outweigh the initial learning curve.",
+    "paragraph": true
+  }
+]

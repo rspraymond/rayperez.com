@@ -9,6 +9,12 @@ export interface PostMeta {
 
 export const posts: PostMeta[] = [
   {
+    title: 'Why Type Safety Matters',
+    date: '2025-11-29',
+    path: '/why-type-safety',
+    Component: lazy(() => import('../pages/articles/WhyTypeSafety')),
+  },
+  {
     title: 'Why I Use MVC Pattern',
     date: '2024-10-05',
     path: '/why-mvc-pattern',
