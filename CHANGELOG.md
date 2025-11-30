@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.77.0] - 2025-11-30
+### Features
+
+- add why typesafety article (#187)
+
+
+
 ## [0.76.0] - 2025-11-29
 ### Features
 
