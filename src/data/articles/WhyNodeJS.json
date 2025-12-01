@@ -18,6 +18,27 @@
       }
     ]
   },
+  {
+    "type": "table",
+    "table": {
+      "headers": ["Benefit", "Key Points"],
+      "rows": [
+        [
+          "Unified Language Stack",
+          "JavaScript for both frontend and backend, simplified development process, reduced learning curve, increased efficiency"
+        ],
+        [
+          "Rich Ecosystem",
+          "Vast array of npm packages, strong community support, flexibility and versatility for various development needs"
+        ],
+        [
+          "Practical Performance",
+          "Adequate for most applications, cost-effective, highly scalable, excellent for real-time apps with multiple simultaneous connections"
+        ]
+      ],
+      "caption": "Summary of Node.js key benefits"
+    }
+  },
 
   { "type": "heading", "variant": "h5", "content": "Introduction", "gutterBottom": true },
   {
@@ -129,6 +150,21 @@
     "content": "Node.js is not just for web applications. It's a versatile platform that can be used for mobile, desktop, and even IoT applications. Plus, it's easy to integrate with other technologies and services, making it a flexible choice for any project.",
     "paragraph": true
   },
+  {
+    "type": "table",
+    "table": {
+      "headers": ["Metric", "Value"],
+      "rows": [
+        ["npm Packages", "Over 2.5 million packages available"],
+        ["Weekly Downloads", "Billions of downloads per week"],
+        ["GitHub Stars", "Over 100,000 stars on official repository"],
+        ["Community Size", "Millions of developers worldwide"],
+        ["Package Manager", "npm (largest software registry)"],
+        ["Framework Options", "Express, NestJS, Fastify, Koa, and many more"]
+      ],
+      "caption": "Node.js ecosystem metrics and statistics"
+    }
+  },
 
   {
     "type": "heading",
@@ -172,6 +208,86 @@
     "variant": "body1",
     "content": "Node.js is built with scalability in mind. It can handle a large number of simultaneous connections, making it a great choice for real-time applications like chat apps, collaborative tools, or online gaming.",
     "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "headers": [
+        "Feature",
+        "Node.js",
+        "Python/Django",
+        "Java/Spring",
+        "Ruby on Rails",
+        "PHP/Laravel",
+        "Go"
+      ],
+      "rows": [
+        [
+          "Performance",
+          "High (V8 engine, non-blocking I/O)",
+          "Moderate (interpreted, synchronous)",
+          "High (compiled, multi-threaded)",
+          "Moderate (interpreted, synchronous)",
+          "Moderate (interpreted, synchronous)",
+          "High (compiled, concurrent)"
+        ],
+        [
+          "Language Consistency",
+          "JavaScript (full-stack)",
+          "Python (backend only)",
+          "Java (backend only)",
+          "Ruby (backend only)",
+          "PHP (backend only)",
+          "Go (backend only)"
+        ],
+        [
+          "Scalability",
+          "Excellent (event-driven, microservices)",
+          "Good (requires configuration)",
+          "Excellent (multi-threading)",
+          "Moderate (small to medium scale)",
+          "Moderate (small to medium scale)",
+          "Excellent (goroutines, concurrent)"
+        ],
+        [
+          "Real-Time Support",
+          "Excellent (built-in WebSockets)",
+          "Limited (requires additional setup)",
+          "Good (requires setup)",
+          "Limited (requires additional setup)",
+          "Limited (requires additional setup)",
+          "Good (concurrent model)"
+        ],
+        [
+          "Learning Curve",
+          "Moderate (if familiar with JavaScript)",
+          "Easy (readable syntax)",
+          "Steep (verbose, complex)",
+          "Easy (convention over configuration)",
+          "Easy (widely documented)",
+          "Moderate (simple syntax, concurrency concepts)"
+        ],
+        [
+          "Ecosystem",
+          "Extensive (npm, largest registry)",
+          "Rich (pip, many libraries)",
+          "Robust (Maven, enterprise-focused)",
+          "Mature (Gems, established)",
+          "Mature (Composer, established)",
+          "Growing (Go modules, modern)"
+        ],
+        [
+          "Use Cases",
+          "Real-time apps, APIs, microservices",
+          "Data science, web apps, AI/ML",
+          "Enterprise apps, large systems",
+          "Rapid prototyping, web apps",
+          "Web applications, CMS",
+          "Cloud services, microservices, CLI tools"
+        ]
+      ],
+      "caption": "Comparison of Node.js with other popular backend technologies"
+    }
   },
 
   {
@@ -244,10 +360,98 @@
     "gutterBottom": true
   },
   {
+    "type": "table",
+    "table": {
+      "headers": ["Application Type", "Node.js Suitability", "Notes"],
+      "rows": [
+        [
+          "Real-Time Applications",
+          "Excellent",
+          "Chat apps, gaming servers, collaborative tools - ideal for high concurrency"
+        ],
+        [
+          "REST APIs & Microservices",
+          "Excellent",
+          "Fast development, easy scaling, good for service-oriented architecture"
+        ],
+        [
+          "Streaming Applications",
+          "Excellent",
+          "Non-blocking I/O perfect for data streaming and media processing"
+        ],
+        [
+          "IoT Applications",
+          "Good",
+          "Lightweight runtime, good for device communication and data collection"
+        ],
+        [
+          "Single Page Applications (SPA)",
+          "Excellent",
+          "Unified JavaScript stack, seamless frontend-backend integration"
+        ],
+        [
+          "Data-Intensive Applications",
+          "Good",
+          "Efficient for I/O-bound operations, but CPU-intensive tasks may need optimization"
+        ],
+        [
+          "Enterprise Applications",
+          "Good",
+          "Suitable with proper architecture, though some prefer Java for large enterprises"
+        ],
+        [
+          "CPU-Intensive Tasks",
+          "Not Ideal",
+          "Single-threaded nature limits performance; consider Go, Rust, or Java"
+        ]
+      ],
+      "caption": "Node.js suitability for different application types"
+    }
+  },
+  {
     "type": "paragraph",
     "variant": "body1",
     "content": "Many successful companies have chosen Node.js for their backend needs. Companies like LinkedIn, Netflix, and Uber have all benefited from using Node.js, citing improved performance, faster development cycles, and enhanced scalability as key benefits.",
     "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "headers": ["Company", "Use Case", "Outcome"],
+      "rows": [
+        [
+          "LinkedIn",
+          "Mobile backend server-side",
+          "Reduced servers from 30 to 3, achieved 20x faster application performance"
+        ],
+        [
+          "Netflix",
+          "Backend services and UI layer",
+          "Reduced startup time by 70%, improved scalability for millions of users"
+        ],
+        [
+          "Uber",
+          "Real-time matching system",
+          "Handles millions of requests efficiently, improved response times"
+        ],
+        [
+          "PayPal",
+          "Account overview page",
+          "35% decrease in response time, doubled requests per second"
+        ],
+        [
+          "Walmart",
+          "High-traffic e-commerce platform",
+          "Handled over 1.5 billion requests on Black Friday, improved performance"
+        ],
+        [
+          "eBay",
+          "Real-time product features",
+          "Improved real-time capabilities, better orchestration of services"
+        ]
+      ],
+      "caption": "Real-world Node.js adoption and results from major companies"
+    }
   },
   {
     "type": "heading",
