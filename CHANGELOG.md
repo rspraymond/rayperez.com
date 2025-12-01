@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.78.0] - 2025-12-01
+### Features
+
+- add comparison tables to why node article (#188)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.77.0] - 2025-11-30
 ### Features
 
