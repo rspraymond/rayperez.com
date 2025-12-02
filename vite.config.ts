@@ -18,6 +18,12 @@ export default defineConfig({
         execSync('npx tsx scripts/generate-sitemap.ts', { stdio: 'inherit' })
       },
     },
+    {
+      name: 'post-build-generate-resume-manifest',
+      closeBundle() {
+        execSync('npx tsx scripts/generate-resume-manifest.ts', { stdio: 'inherit' })
+      },
+    },
   ],
   server: {
     warmup: {
