@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.79.0] - 2025-12-02
+### Features
+
+- add redirect logic for resume (#189)
+
+
+
 ## [0.78.0] - 2025-12-01
 ### Features
 
