@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.79.1] - 2025-12-03
+### Bug Fixes
+
+- override s3 routing for pdf files (#190)
+
+
+
 ## [0.79.0] - 2025-12-02
 ### Features
 
