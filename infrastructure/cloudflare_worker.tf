@@ -8,34 +8,38 @@ export default {
     const path = url.pathname
     const isGet = request.method === "GET"
     
-    // Handle PDF resume redirects
-    const resumePattern = /^\/raymond-perez-software-engineer-resume(-.*)?\.pdf$/
-    if (isGet && resumePattern.test(path)) {
-      try {
-        // Fetch manifest to get current hashed filename
-        const manifestUrl = new URL('/resume-manifest.json', url.origin)
-        const manifestResponse = await fetch(manifestUrl.toString())
-        
-        if (manifestResponse.ok) {
-          const manifest = await manifestResponse.json()
-          if (manifest.hashedFilename) {
-            const redirectUrl = new URL(`/assets/${manifest.hashedFilename}`, url.origin)
-            // Preserve query parameters
-            if (url.search) {
-              redirectUrl.search = url.search
+    // Intercept ALL PDF requests before they reach S3
+    // This prevents S3 routing rules from redirecting PDF 404s to SPA routing
+    if (isGet && path.endsWith('.pdf')) {
+      // Handle resume PDF redirects
+      const resumePattern = /^\/raymond-perez-software-engineer-resume(-.*)?\.pdf$/
+      if (resumePattern.test(path)) {
+        try {
+          // Fetch manifest to get current hashed filename
+          const manifestUrl = new URL('/resume-manifest.json', url.origin)
+          const manifestResponse = await fetch(manifestUrl.toString())
+          
+          if (manifestResponse.ok) {
+            const manifest = await manifestResponse.json()
+            if (manifest.hashedFilename) {
+              const redirectUrl = new URL(`/assets/${manifest.hashedFilename}`, url.origin)
+              // Preserve query parameters
+              if (url.search) {
+                redirectUrl.search = url.search
+              }
+              return Response.redirect(redirectUrl.toString(), 301)
             }
-            return Response.redirect(redirectUrl.toString(), 301)
           }
+        } catch (error) {
+          // If manifest fetch fails, log error and return 404
+          // Don't let PDF requests pass through to S3
+          console.error('Failed to fetch resume manifest:', error)
         }
-      } catch (error) {
-        // If manifest fetch fails, log error but let request pass through
-        // This allows S3 to handle the request (which may have its own redirect rules)
-        console.error('Failed to fetch resume manifest:', error)
       }
       
-      // If we reach here, manifest fetch failed or was invalid
-      // Let the request pass through to origin (S3) to handle
-      // S3 routing rules may handle old hashes, or it will return 404
+      // For all PDFs (resume or other), if we reach here, return 404
+      // This ensures PDF 404s are handled by the Worker, not S3 routing rules
+      return new Response('Not Found', { status: 404 })
     }
     
     // SPA rewrite logic for HTML requests
