@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.79.2] - 2025-12-04
+### Bug Fixes
+
+- move pdf redirect to s3 routing rules (#191)
+
+
+
 ## [0.79.1] - 2025-12-03
 ### Bug Fixes
 
