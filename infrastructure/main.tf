@@ -24,6 +24,10 @@ resource "aws_s3_bucket_ownership_controls" "bucket_ownership" {
   }
 }
 
+locals {
+  resume_manifest = jsondecode(file("${path.module}/../dist/resume-manifest.json"))
+}
+
 resource "aws_s3_bucket_website_configuration" "website_config" {
   bucket = aws_s3_bucket.bucket.id
 
@@ -37,6 +41,16 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
 
   routing_rules = <<EOF
 [
+  {
+    "Condition": {
+      "KeyPrefixEquals": "raymond-perez-software-engineer-resume.pdf"
+    },
+    "Redirect": {
+      "Protocol": "https",
+      "HostName": "www.rayperez.com",
+      "ReplaceKeyWith": "assets/${local.resume_manifest.hashedFilename}"
+    }
+  },
   {
     "Condition": {
       "HttpErrorCodeReturnedEquals": "404"
