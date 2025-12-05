@@ -27,6 +27,36 @@ describe('ArticleRenderer - List Content', () => {
     expect(screen.getByText('Item 3')).toBeInTheDocument()
   })
 
+  it('renders list with bullets hidden', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'list',
+        items: ['Hidden Bullet Item'],
+        hideBullets: true,
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('Hidden Bullet Item')).toBeInTheDocument()
+    expect(screen.queryByText('–')).not.toBeInTheDocument()
+  })
+
+  it('renders list with bullets explicitly shown', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'list',
+        items: ['Visible Bullet Item'],
+        hideBullets: false,
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('Visible Bullet Item')).toBeInTheDocument()
+    expect(screen.getAllByText('–')).toHaveLength(1)
+  })
+
   it('handles empty items array', () => {
     const content: ArticleContent[] = [
       {
@@ -62,6 +92,48 @@ describe('ArticleRenderer - ComplexList Basic', () => {
 
     expect(screen.getByText('Primary Item 1')).toBeInTheDocument()
     expect(screen.getByText('Primary Item 2')).toBeInTheDocument()
+  })
+
+  it('renders complexList with bullets hidden', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'complexList',
+        hideBullets: true,
+        complexItems: [
+          {
+            primary: 'No Bullet Primary',
+            secondary: 'No Bullet Secondary',
+          },
+        ],
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('No Bullet Primary')).toBeInTheDocument()
+    expect(screen.getByText('No Bullet Secondary')).toBeInTheDocument()
+    expect(screen.queryByText('–')).not.toBeInTheDocument()
+  })
+
+  it('renders complexList with bullets explicitly shown', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'complexList',
+        hideBullets: false,
+        complexItems: [
+          {
+            primary: 'Bullet Primary',
+            secondary: 'Bullet Secondary',
+          },
+        ],
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('Bullet Primary')).toBeInTheDocument()
+    expect(screen.getByText('Bullet Secondary')).toBeInTheDocument()
+    expect(screen.getAllByText('–')).toHaveLength(1)
   })
 
   it('renders complexList with primary and secondary text', () => {

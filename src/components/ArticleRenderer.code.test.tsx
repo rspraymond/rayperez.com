@@ -92,4 +92,37 @@ describe('ArticleRenderer - Code Content', () => {
     expect(syntaxHighlighter).toBeInTheDocument()
     expect(syntaxHighlighter).toHaveAttribute('data-language', 'typescript')
   })
+
+  it('falls back to default elevation when elevation is 0', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'code',
+        language: 'typescript',
+        code: 'const zeroElevation = true',
+        elevation: 0,
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    const codeContainer = screen.getByTestId('syntax-highlighter').parentElement
+    expect(codeContainer?.closest("div[class*='MuiPaper-elevation3']")).not.toBeNull()
+  })
+
+  it('merges style prop and overrides defaults', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'code',
+        language: 'typescript',
+        code: 'const styled = true',
+        style: { marginBottom: '24px', backgroundColor: 'rgb(1, 1, 1)' },
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    const codeContainer = screen.getByTestId('syntax-highlighter').parentElement
+    expect(codeContainer).toHaveStyle('margin-bottom: 24px')
+    expect(codeContainer).toHaveStyle('background-color: rgb(1, 1, 1)')
+  })
 })
