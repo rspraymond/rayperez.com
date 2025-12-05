@@ -116,4 +116,36 @@ describe('ArticleRenderer - Link Content', () => {
     expect(link).toHaveAttribute('target', '_blank')
     expect(link).not.toHaveAttribute('rel')
   })
+
+  it('prefers title over content when both are provided', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'link',
+        title: 'Preferred Title',
+        content: 'Fallback Content',
+        href: 'https://example.com/prefer-title',
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('Preferred Title')).toBeInTheDocument()
+    expect(screen.queryByText('Fallback Content')).not.toBeInTheDocument()
+  })
+
+  it('omits rel attribute when target is undefined but defaults to _blank', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'link',
+        title: 'Implicit Blank Target',
+        href: 'https://example.com/implicit-blank',
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    const link = screen.getByText('Implicit Blank Target')
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).not.toHaveAttribute('rel')
+  })
 })

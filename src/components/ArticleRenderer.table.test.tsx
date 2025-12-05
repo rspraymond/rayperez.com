@@ -89,6 +89,70 @@ describe('ArticleRenderer - Table Content', () => {
     expect(screen.getByText('Value 2')).toBeInTheDocument()
   })
 
+  it('renders table with default elevation when missing', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'table',
+        table: {
+          headers: ['Default Elevation Header'],
+          rows: [['Row Value']],
+        },
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    const table = screen.getByRole('table')
+    expect(table).toBeInTheDocument()
+    expect(table.closest('div[class*="MuiPaper-elevation1"]')).not.toBeNull()
+  })
+
+  it('renders table with empty headers array', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'table',
+        table: {
+          headers: [],
+          rows: [['Row without headers']],
+        },
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('Row without headers')).toBeInTheDocument()
+    expect(screen.queryAllByRole('columnheader')).toHaveLength(0)
+  })
+
+  it('renders table with empty rows array', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'table',
+        table: {
+          headers: ['Header Only'],
+          rows: [],
+        },
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByText('Header Only')).toBeInTheDocument()
+    expect(screen.queryAllByRole('row')).toHaveLength(1)
+  })
+
+  it('handles table content when table definition is missing', () => {
+    const content: ArticleContent[] = [
+      {
+        type: 'table',
+      },
+    ]
+
+    render(<ArticleRenderer content={content} />)
+
+    expect(screen.getByRole('table')).toBeInTheDocument()
+  })
+
   it('applies zebra striping to table rows', () => {
     const content: ArticleContent[] = [
       {

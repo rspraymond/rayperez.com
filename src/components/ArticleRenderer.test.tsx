@@ -106,3 +106,62 @@ describe('ArticleRenderer - Edge Cases', () => {
     expect(syntaxHighlighter).toHaveTextContent('')
   })
 })
+
+describe('ArticleRenderer - Integration', () => {
+  it('renders all content types in the provided order', () => {
+    const content: ArticleContent[] = [
+      { type: 'heading', variant: 'h2', content: 'Integration Heading' },
+      { type: 'paragraph', content: 'Integration paragraph content', paragraph: true },
+      { type: 'list', items: ['List Item One', 'List Item Two'] },
+      {
+        type: 'complexList',
+        complexItems: [
+          {
+            primary: 'Complex Primary',
+            secondary: 'Complex Secondary',
+            link: { href: 'https://example.com/complex', title: 'Complex Link', target: '_blank' },
+          },
+        ],
+      },
+      { type: 'code', language: 'javascript', code: 'console.info("integration")' },
+      { type: 'divider' },
+      { type: 'link', title: 'Integration Link', href: 'https://example.com/integration' },
+      {
+        type: 'table',
+        table: {
+          headers: ['Col 1', 'Col 2'],
+          rows: [
+            ['Row 1 Col 1', 'Row 1 Col 2'],
+            ['Row 2 Col 1', 'Row 2 Col 2'],
+          ],
+        },
+      },
+    ]
+
+    const { container } = render(<ArticleRenderer content={content} />)
+
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Integration Heading' }),
+    ).toBeInTheDocument()
+    expect(screen.getByText('Integration paragraph content')).toBeInTheDocument()
+    expect(screen.getByText('List Item One')).toBeInTheDocument()
+    expect(screen.getByText('Complex Primary')).toBeInTheDocument()
+    expect(screen.getByText('console.info("integration")')).toBeInTheDocument()
+    expect(screen.getByText('Integration Link')).toBeInTheDocument()
+    expect(screen.getByText('Col 1')).toBeInTheDocument()
+    expect(screen.getByText('Row 2 Col 2')).toBeInTheDocument()
+
+    const textContent = container.textContent || ''
+    const order = [
+      textContent.indexOf('Integration Heading'),
+      textContent.indexOf('Integration paragraph content'),
+      textContent.indexOf('List Item One'),
+      textContent.indexOf('Complex Primary'),
+      textContent.indexOf('console.info("integration")'),
+      textContent.indexOf('Integration Link'),
+      textContent.indexOf('Col 1'),
+    ]
+
+    expect(order.every((value, index, arr) => index === 0 || value > arr[index - 1])).toBe(true)
+  })
+})
