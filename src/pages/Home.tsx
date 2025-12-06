@@ -4,7 +4,7 @@ import { Person } from 'schema-dts'
 import { Container, Grid } from '@mui/material'
 import Summary from '../components/Summary.tsx'
 import Projects from '../components/Projects.tsx'
-import Experience from '../components/Experience.tsx'
+import Experiences from '../components/Experiences.tsx'
 import Education from '../components/Education.tsx'
 import Skills from '../components/Skills.tsx'
 import Achievements from '../components/Achievements.tsx'
@@ -83,11 +83,9 @@ const Home: React.FC = () => {
           <Grid item xs={12}>
             <Achievements achievements={achievements} />
           </Grid>
-          {experiences.map((exp) => (
-            <Grid item xs={12} key={`${exp.company}-${exp.duration}`}>
-              <Experience {...exp} />
-            </Grid>
-          ))}
+          <Grid item xs={12}>
+            <Experiences experiences={experiences} />
+          </Grid>
           {educations.map((edu) => (
             <Grid item xs={12} key={`${edu.school}-${edu.degree}`}>
               <Education {...edu} />

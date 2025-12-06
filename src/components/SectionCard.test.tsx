@@ -70,4 +70,15 @@ describe('SectionCard', () => {
     const heading = screen.getByText('Test Section')
     expect(heading.tagName).toBe('H2')
   })
+
+  it('renders heading as h3 when headingComponent is provided', () => {
+    render(
+      <SectionCard title='Test Section' icon={CodeIcon} headingComponent='h3'>
+        <div>Test content</div>
+      </SectionCard>,
+    )
+
+    const heading = screen.getByText('Test Section')
+    expect(heading.tagName).toBe('H3')
+  })
 })
