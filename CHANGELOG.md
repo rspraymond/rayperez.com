@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.80.0] - 2025-12-06
+### Features
+
+- group experience cards (#193)
+
+### Other Changes
+
+- chore: improve test coverage of article renderer (#192)
+
+
+
 ## [0.79.2] - 2025-12-04
 ### Bug Fixes
 
