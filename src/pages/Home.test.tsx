@@ -27,10 +27,14 @@ vi.mock('../components/Achievements.tsx', () => ({
   default: () => <div data-testid='achievements-component'>Achievements Mock</div>,
 }))
 
-vi.mock('../components/Experience.tsx', () => ({
-  default: ({ title, company }) => (
-    <div data-testid='experience-component'>
-      {title} at {company}
+vi.mock('../components/Experiences.tsx', () => ({
+  default: ({ experiences }) => (
+    <div data-testid='experiences-component'>
+      {experiences.map((exp, index) => (
+        <div data-testid='experience-component' key={`${exp.company}-${index}`}>
+          {exp.title} at {exp.company}
+        </div>
+      ))}
     </div>
   ),
 }))
@@ -77,7 +81,7 @@ describe('Home Component', () => {
 
     // Check for Helmet components that contain schema.org data and social meta tags
     const helmets = screen.getAllByTestId('helmet-mock')
-    expect(helmets.length).toBe(2) // One for structured data, one for social meta tags
+    expect(helmets.length).toBe(2) // Structured data and social meta tags
 
     // Check that we have the expected meta tag containers
     expect(helmets[0]).toBeInTheDocument()
