@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.81.0] - 2025-12-07
+### Features
+
+- refactor education markup (#194)
+
+
+
 ## [0.80.0] - 2025-12-06
 ### Features
 
