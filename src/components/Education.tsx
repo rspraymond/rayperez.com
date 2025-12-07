@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 
 type Education = {
@@ -9,24 +9,18 @@ type Education = {
 }
 
 const Education: React.FC<Education> = ({ degree, school, duration, details }) => (
-  <Card
-    sx={{
-      mt: 0,
-      borderRadius: 3,
-      bgcolor: 'background.paper',
-    }}
-  >
-    <CardContent>
-      <Typography variant='h5' gutterBottom component='h2'>
-        {degree}
-      </Typography>
-      <Typography variant='subtitle1' color='textSecondary' component='p'>
-        {school} - {duration}
-      </Typography>
-      <Box marginTop={2}>
+  <>
+    <Typography variant='h6' component='h3' sx={{ fontWeight: 600, mb: 0.5 }}>
+      {degree}
+    </Typography>
+    <Typography variant='body2' color='text.secondary' sx={{ mb: details ? 1 : 0 }}>
+      {school} - {duration}
+    </Typography>
+    {details && (
+      <Box marginTop={1.5}>
         <Typography variant='body1'>{details}</Typography>
       </Box>
-    </CardContent>
-  </Card>
+    )}
+  </>
 )
 export default Education
