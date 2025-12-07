@@ -35,16 +35,16 @@ describe('Education', () => {
     // Assert
     // Check for correct Material-UI typography classes
     const headingElement = screen.getByText(props.degree)
-    expect(headingElement.classList.toString()).toContain('MuiTypography-h5')
+    expect(headingElement.classList.toString()).toContain('MuiTypography-h6')
 
     const subtitleElement = screen.getByText(`${props.school} - ${props.duration}`)
-    expect(subtitleElement.classList.toString()).toContain('MuiTypography-subtitle1')
+    expect(subtitleElement.classList.toString()).toContain('MuiTypography-body2')
 
     const detailsElement = screen.getByText(props.details)
     expect(detailsElement.classList.toString()).toContain('MuiTypography-body1')
   })
 
-  it('renders within a card with proper spacing', () => {
+  it('renders without a card wrapper', () => {
     // Arrange
     const props = createEducationProps()
 
@@ -52,15 +52,11 @@ describe('Education', () => {
     const { container } = render(<Education {...props} />)
 
     // Assert
-    // Check for Card component and its structure
+    // Verify no Card component is present (component now renders content directly)
     const card = container.querySelector('.MuiCard-root')
-    expect(card).toBeInTheDocument()
+    expect(card).not.toBeInTheDocument()
 
     const cardContent = container.querySelector('.MuiCardContent-root')
-    expect(cardContent).toBeInTheDocument()
-
-    // Verify the card is flush with its container to let parent layout control spacing
-    const computedStyles = card ? window.getComputedStyle(card) : null
-    expect(computedStyles?.marginTop).toBe('0px')
+    expect(cardContent).not.toBeInTheDocument()
   })
 })

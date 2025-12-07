@@ -5,7 +5,7 @@ import { Container, Grid } from '@mui/material'
 import Summary from '../components/Summary.tsx'
 import Projects from '../components/Projects.tsx'
 import Experiences from '../components/Experiences.tsx'
-import Education from '../components/Education.tsx'
+import Educations from '../components/Educations.tsx'
 import Skills from '../components/Skills.tsx'
 import Achievements from '../components/Achievements.tsx'
 import { Helmet } from 'react-helmet'
@@ -86,11 +86,9 @@ const Home: React.FC = () => {
           <Grid item xs={12}>
             <Experiences experiences={experiences} />
           </Grid>
-          {educations.map((edu) => (
-            <Grid item xs={12} key={`${edu.school}-${edu.degree}`}>
-              <Education {...edu} />
-            </Grid>
-          ))}
+          <Grid item xs={12}>
+            <Educations educations={educations} />
+          </Grid>
         </Grid>
       </Container>
       <BackToTopButton show={showBackToTop} onClick={scrollToTop} />

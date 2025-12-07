@@ -39,10 +39,14 @@ vi.mock('../components/Experiences.tsx', () => ({
   ),
 }))
 
-vi.mock('../components/Education.tsx', () => ({
-  default: ({ degree, school }) => (
-    <div data-testid='education-component'>
-      {degree} from {school}
+vi.mock('../components/Educations.tsx', () => ({
+  default: ({ educations }) => (
+    <div data-testid='educations-component'>
+      {educations.map((edu, index) => (
+        <div data-testid='education-component' key={`${edu.school}-${index}`}>
+          {edu.degree} from {edu.school}
+        </div>
+      ))}
     </div>
   ),
 }))
@@ -74,6 +78,7 @@ describe('Home Component', () => {
 
     expect(experiences.length).toBe(experiencesData.length)
     expect(educations.length).toBe(educationData.length)
+    expect(screen.getByTestId('educations-component')).toBeInTheDocument()
   })
 
   it('includes structured data for SEO', () => {
