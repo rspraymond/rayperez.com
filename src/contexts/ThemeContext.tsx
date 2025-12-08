@@ -6,9 +6,34 @@ import { ThemeContext } from './createThemeContext'
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
+    background: {
+      default: '#f5f7fb',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#0f172a',
+      secondary: '#334155',
+    },
+    divider: '#e2e8f0',
   },
   shape: {
     borderRadius: 12,
+  },
+  components: {
+    MuiCard: {
+      defaultProps: {
+        elevation: 0,
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundImage: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
+          border: `1px solid ${theme.palette.divider}`,
+          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
+        }),
+      },
+    },
   },
 })
 
