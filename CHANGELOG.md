@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.82.0] - 2025-12-08
+### Features
+
+- add color depth to light theme (#195)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.81.0] - 2025-12-07
 ### Features
 
