@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.83.0] - 2025-12-09
+### Features
+
+- adjust color depth to dark theme (#196)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.82.0] - 2025-12-08
 ### Features
 
