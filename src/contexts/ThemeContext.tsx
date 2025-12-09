@@ -40,9 +40,34 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    background: {
+      default: '#0f1218',
+      paper: '#171c26',
+    },
+    text: {
+      primary: '#e5e7eb',
+      secondary: '#9aa4b5',
+    },
+    divider: 'rgba(255, 255, 255, 0.08)',
   },
   shape: {
     borderRadius: 12,
+  },
+  components: {
+    MuiCard: {
+      defaultProps: {
+        elevation: 0,
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundImage: 'linear-gradient(180deg, #1c2130 0%, #111622 100%)',
+          border: `1px solid ${theme.palette.divider}`,
+          boxShadow: '0 12px 36px rgba(0, 0, 0, 0.32)',
+        }),
+      },
+    },
   },
 })
 
