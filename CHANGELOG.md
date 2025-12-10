@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.83.1] - 2025-12-10
+### Bug Fixes
+
+- create collapisble headers component (#197)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.83.0] - 2025-12-09
 ### Features
 
