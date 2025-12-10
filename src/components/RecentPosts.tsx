@@ -1,25 +1,19 @@
 import React, { useState, useEffect, memo, useMemo } from 'react'
 import {
-  Typography,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Divider,
-  Box,
   ListItemIcon,
   useTheme,
-  IconButton,
-  Collapse,
   useMediaQuery,
   Theme,
 } from '@mui/material'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import ArticleIcon from '@mui/icons-material/Article'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import { posts as allPosts } from '../constants/posts'
+import SidebarCollapsibleCard from './SidebarCollapsibleCard'
 
 // Define the structure of each post
 export interface Post {
@@ -106,52 +100,16 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts = recentPosts }) => {
   )
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 0,
-        borderRadius: 3,
-        overflow: 'hidden',
-        border: `1px solid ${theme.palette.divider}`,
-        width: '100%',
-      }}
+    <SidebarCollapsibleCard
+      title='Recent Posts'
+      icon={<ArticleIcon fontSize='small' />}
+      expanded={expanded}
+      onToggle={handleToggle}
+      collapseLabel='collapse posts'
+      expandLabel='expand posts'
     >
-      <Box
-        sx={{
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <ArticleIcon fontSize='small' />
-          <Typography variant='h6' component='h2' fontWeight='500'>
-            Recent Posts
-          </Typography>
-        </Box>
-        <IconButton
-          size='small'
-          onClick={handleToggle}
-          sx={{
-            color: theme.palette.primary.contrastText,
-            opacity: 0.8,
-            '&:hover': {
-              opacity: 1,
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-            },
-          }}
-          aria-expanded={expanded}
-          aria-label={expanded ? 'collapse posts' : 'expand posts'}
-        >
-          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-      </Box>
-
-      <Collapse in={expanded} timeout='auto'>
-        <List disablePadding>{memoizedPosts}</List>
-      </Collapse>
-    </Paper>
+      <List disablePadding>{memoizedPosts}</List>
+    </SidebarCollapsibleCard>
   )
 }
 

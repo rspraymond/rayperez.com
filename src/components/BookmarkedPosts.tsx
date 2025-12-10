@@ -1,24 +1,18 @@
 import React, { useState, memo, useMemo } from 'react'
 import {
-  Typography,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Link,
   Divider,
-  Box,
   ListItemIcon,
   useTheme,
-  IconButton,
-  Collapse,
   Theme,
 } from '@mui/material'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import { useBookmarks, BookmarkedArticle } from '../hooks/useBookmarks'
+import SidebarCollapsibleCard from './SidebarCollapsibleCard'
 
 interface BookmarkItemProps {
   bookmark: BookmarkedArticle
@@ -86,52 +80,16 @@ const BookmarkedPosts: React.FC = () => {
   }
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 0,
-        borderRadius: 3,
-        overflow: 'hidden',
-        border: `1px solid ${theme.palette.divider}`,
-        width: '100%',
-      }}
+    <SidebarCollapsibleCard
+      title={`Bookmarked Articles (${bookmarks.length})`}
+      icon={<BookmarkIcon fontSize='small' sx={{ color: theme.palette.primary.main }} />}
+      expanded={expanded}
+      onToggle={handleToggle}
+      collapseLabel='collapse bookmarks'
+      expandLabel='expand bookmarks'
     >
-      <Box
-        sx={{
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <BookmarkIcon fontSize='small' sx={{ color: theme.palette.primary.main }} />
-          <Typography variant='h6' component='h2' fontWeight='500'>
-            Bookmarked Articles ({bookmarks.length})
-          </Typography>
-        </Box>
-        <IconButton
-          size='small'
-          onClick={handleToggle}
-          sx={{
-            color: theme.palette.primary.contrastText,
-            opacity: 0.8,
-            '&:hover': {
-              opacity: 1,
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-            },
-          }}
-          aria-expanded={expanded}
-          aria-label={expanded ? 'collapse bookmarks' : 'expand bookmarks'}
-        >
-          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-      </Box>
-
-      <Collapse in={expanded} timeout='auto'>
-        <List disablePadding>{memoizedBookmarks}</List>
-      </Collapse>
-    </Paper>
+      <List disablePadding>{memoizedBookmarks}</List>
+    </SidebarCollapsibleCard>
   )
 }
 

@@ -1,24 +1,18 @@
 import React, { useState, useEffect, memo, useMemo } from 'react'
 import {
-  Typography,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Divider,
-  Box,
   ListItemIcon,
   useTheme,
-  IconButton,
-  Collapse,
   useMediaQuery,
   Theme,
 } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import SidebarCollapsibleCard from './SidebarCollapsibleCard'
 
 type Social = {
   text: string
@@ -113,52 +107,16 @@ const SidebarSocials: React.FC<SidebarSocialsProps> = ({ socials = [] }) => {
   }
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 0,
-        borderRadius: 3,
-        overflow: 'hidden',
-        border: `1px solid ${theme.palette.divider}`,
-        width: '100%',
-      }}
+    <SidebarCollapsibleCard
+      title='Socials'
+      icon={<ShareIcon fontSize='small' />}
+      expanded={expanded}
+      onToggle={handleToggle}
+      collapseLabel='collapse socials'
+      expandLabel='expand socials'
     >
-      <Box
-        sx={{
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <ShareIcon fontSize='small' />
-          <Typography variant='h6' component='h2' fontWeight='500'>
-            Socials
-          </Typography>
-        </Box>
-        <IconButton
-          size='small'
-          onClick={handleToggle}
-          sx={{
-            color: theme.palette.primary.contrastText,
-            opacity: 0.8,
-            '&:hover': {
-              opacity: 1,
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-            },
-          }}
-          aria-expanded={expanded}
-          aria-label={expanded ? 'collapse socials' : 'expand socials'}
-        >
-          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-      </Box>
-
-      <Collapse in={expanded} timeout='auto'>
-        <List disablePadding>{memoizedSocials}</List>
-      </Collapse>
-    </Paper>
+      <List disablePadding>{memoizedSocials}</List>
+    </SidebarCollapsibleCard>
   )
 }
 
