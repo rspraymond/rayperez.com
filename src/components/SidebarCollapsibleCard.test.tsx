@@ -7,7 +7,10 @@ import SidebarCollapsibleCard from './SidebarCollapsibleCard'
 
 const renderWithTheme = (ui: React.ReactElement) => {
   const theme = createTheme()
-  return render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>)
+  return {
+    theme,
+    ...render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>),
+  }
 }
 
 describe('SidebarCollapsibleCard', () => {
@@ -29,6 +32,27 @@ describe('SidebarCollapsibleCard', () => {
     expect(screen.getByTestId('ArticleIcon')).toBeInTheDocument()
     expect(screen.getByText('Content')).toBeInTheDocument()
     expect(screen.getByLabelText('collapse posts')).toBeInTheDocument()
+  })
+
+  it('uses high-contrast theme text color for the toggle icon', () => {
+    const { theme } = renderWithTheme(
+      <SidebarCollapsibleCard
+        title='Recent Posts'
+        icon={<ArticleIcon fontSize='small' />}
+        expanded
+        onToggle={() => {}}
+        collapseLabel='collapse posts'
+        expandLabel='expand posts'
+      >
+        <div>Content</div>
+      </SidebarCollapsibleCard>,
+    )
+
+    const toggleButton = screen.getByLabelText('collapse posts')
+    const computedStyle = window.getComputedStyle(toggleButton)
+
+    expect(computedStyle.color).toBe(theme.palette.text.primary)
+    expect(computedStyle.opacity).toBe('0.92')
   })
 
   it('toggles aria-labels when expanded state changes', () => {

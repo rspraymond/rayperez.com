@@ -65,11 +65,17 @@ const SidebarCollapsibleCard: React.FC<SidebarCollapsibleCardProps> = ({
           size='small'
           onClick={onToggle}
           sx={{
-            color: theme.palette.primary.contrastText,
-            opacity: 0.8,
+            color: theme.palette.text.primary,
+            opacity: 0.92,
+            transition: 'color 120ms ease, background-color 120ms ease, opacity 120ms ease',
             '&:hover': {
               opacity: 1,
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
+              color: theme.palette.text.primary,
+              bgcolor: theme.palette.action.hover,
+            },
+            '&:focus-visible': {
+              outline: `2px solid ${theme.palette.primary.main}`,
+              outlineOffset: 2,
             },
           }}
           aria-expanded={expanded}
