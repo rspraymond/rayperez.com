@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.83.2] - 2025-12-11
+### Bug Fixes
+
+- improve toggle visbility (#198)
+
+
+
 ## [0.83.1] - 2025-12-10
 ### Bug Fixes
 
