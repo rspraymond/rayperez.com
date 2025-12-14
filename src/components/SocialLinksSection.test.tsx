@@ -43,7 +43,10 @@ describe('SocialLinksSection Component', () => {
 
     expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/raymond-perez-eng/')
     expect(githubLink).toHaveAttribute('href', 'https://github.com/rspraymond')
-    expect(twitterLink).toHaveAttribute('href', 'https://twitter.com/onlyray7')
+    expect(twitterLink).toHaveAttribute(
+      'href',
+      'https://twitter.com/intent/follow?screen_name=onlyray7',
+    )
   })
 
   it('applies proper accessibility attributes to social links', () => {
