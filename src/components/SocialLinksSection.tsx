@@ -18,7 +18,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: 'Twitter',
-    url: 'https://twitter.com/onlyray7',
+    url: 'https://twitter.com/intent/follow?screen_name=onlyray7',
     icon: TwitterIcon,
   },
 ]

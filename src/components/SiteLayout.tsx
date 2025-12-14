@@ -42,7 +42,11 @@ const SiteLayout: React.FC = () => {
             <Suspense fallback={<LoadingSkeleton testId='sidebar-socials' />}>
               <SidebarSocials
                 socials={[
-                  { text: 'Twitter', href: 'https://twitter.com/onlyray7', platform: 'twitter' },
+                  {
+                    text: 'Twitter',
+                    href: 'https://twitter.com/intent/follow?screen_name=onlyray7',
+                    platform: 'twitter',
+                  },
                   { text: 'Twitch', href: 'https://twitch.tv/onlyray', platform: 'twitch' },
                 ]}
               />
