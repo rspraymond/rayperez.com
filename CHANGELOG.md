@@ -1,6 +1,20 @@
 ## Changelog
 
 
+## [0.84.0] - 2025-12-14
+### Features
+
+- add social intent for twitter (#201)
+
+### Other Changes
+
+- chore: update test coverage badge
+- chore: add table of contents (#200)
+- chore: update test coverage badge
+- chore: improve test coverage of educations component (#199)
+
+
+
 ## [0.83.2] - 2025-12-11
 ### Bug Fixes
 
