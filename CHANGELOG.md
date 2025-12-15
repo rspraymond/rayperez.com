@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.84.1] - 2025-12-15
+### Bug Fixes
+
+- remove acheivement
+
+
+
 ## [0.84.0] - 2025-12-14
 ### Features
 
