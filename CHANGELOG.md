@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.85.0] - 2025-12-16
+### Features
+
+- add copy code button (#202)
+
+
+
 ## [0.84.1] - 2025-12-15
 ### Bug Fixes
 
