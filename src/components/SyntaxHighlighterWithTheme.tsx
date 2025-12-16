@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialDark, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useTheme } from '../contexts/useTheme'
-import { Box, Dialog, IconButton, Tooltip } from '@mui/material'
+import { Box, Dialog, IconButton, Tooltip, Snackbar } from '@mui/material'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import CloseIcon from '@mui/icons-material/Close'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 
 interface SyntaxHighlighterWithThemeProps {
   language: string
@@ -18,6 +19,18 @@ const SyntaxHighlighterWithTheme: React.FC<SyntaxHighlighterWithThemeProps> = ({
   const { themeMode } = useTheme()
   const syntaxTheme = themeMode === 'light' ? materialLight : materialDark
   const [fullscreen, setFullscreen] = useState(false)
+  const [snackbarOpen, setSnackbarOpen] = useState(false)
+
+  const handleCopy = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard && children) {
+      navigator.clipboard.writeText(children)
+      setSnackbarOpen(true)
+    }
+  }
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false)
+  }
 
   const codeBlock = (
     <Box sx={{ position: 'relative' }}>
@@ -25,16 +38,28 @@ const SyntaxHighlighterWithTheme: React.FC<SyntaxHighlighterWithThemeProps> = ({
         {children}
       </SyntaxHighlighter>
       {!fullscreen && (
-        <Tooltip title='Fullscreen' placement='top'>
-          <IconButton
-            aria-label='Enter fullscreen'
-            size='small'
-            onClick={() => setFullscreen(true)}
-            sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}
-          >
-            <FullscreenIcon fontSize='small' />
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title='Copy code' placement='top'>
+            <IconButton
+              aria-label='Copy code'
+              size='small'
+              onClick={handleCopy}
+              sx={{ position: 'absolute', top: 8, right: 40, zIndex: 1 }}
+            >
+              <ContentCopyIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Fullscreen' placement='top'>
+            <IconButton
+              aria-label='Enter fullscreen'
+              size='small'
+              onClick={() => setFullscreen(true)}
+              sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}
+            >
+              <FullscreenIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+        </>
       )}
     </Box>
   )
@@ -55,6 +80,15 @@ const SyntaxHighlighterWithTheme: React.FC<SyntaxHighlighterWithThemeProps> = ({
         }}
       >
         <Box sx={{ position: 'relative', height: '100vh', width: '100vw', bgcolor: 'inherit' }}>
+          <Tooltip title='Copy code' placement='left'>
+            <IconButton
+              aria-label='Copy code'
+              onClick={handleCopy}
+              sx={{ position: 'absolute', top: 16, right: 64, zIndex: 2 }}
+            >
+              <ContentCopyIcon fontSize='medium' />
+            </IconButton>
+          </Tooltip>
           <Tooltip title='Close fullscreen' placement='left'>
             <IconButton
               aria-label='Exit fullscreen'
@@ -71,6 +105,23 @@ const SyntaxHighlighterWithTheme: React.FC<SyntaxHighlighterWithThemeProps> = ({
           </Box>
         </Box>
       </Dialog>
+      <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        autoHideDuration={1500}
+        message='Code copied'
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundImage: 'none',
+            bgcolor: themeMode === 'light' ? 'grey.900' : 'grey.800',
+            color: 'common.white',
+          },
+          '& .MuiSnackbarContent-message': {
+            color: 'common.white',
+          },
+        }}
+      />
     </>
   )
 }
