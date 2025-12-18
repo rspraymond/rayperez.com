@@ -1,6 +1,19 @@
 ## Changelog
 
 
+## [0.86.0] - 2025-12-18
+### Features
+
+- improve syntax highlighting ui depth (#204)
+
+### Other Changes
+
+- chore: update test coverage badge
+- chore: improve test coverage of syntax highlighter component (#203)
+- chore: update test coverage badge
+
+
+
 ## [0.85.0] - 2025-12-16
 ### Features
 
