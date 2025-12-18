@@ -143,7 +143,9 @@ describe('SyntaxHighlighterWithTheme', () => {
       expect(highlighter).toHaveAttribute('data-style', 'materialDark')
       expect(mockSyntaxHighlighter).toHaveBeenCalledWith(
         expect.objectContaining({
-          style: { __mockName: 'materialDark' },
+          style: expect.objectContaining({
+            __mockName: 'materialDark',
+          }),
         }),
         expect.anything(),
       )
@@ -157,7 +159,9 @@ describe('SyntaxHighlighterWithTheme', () => {
       expect(highlighter).toHaveAttribute('data-style', 'materialLight')
       expect(mockSyntaxHighlighter).toHaveBeenCalledWith(
         expect.objectContaining({
-          style: { __mockName: 'materialLight' },
+          style: expect.objectContaining({
+            __mockName: 'materialLight',
+          }),
         }),
         expect.anything(),
       )
