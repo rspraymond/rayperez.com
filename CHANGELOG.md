@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.87.0] - 2025-12-19
+### Features
+
+- add screen reader annoucements for bookmark actions (#205)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.86.0] - 2025-12-18
 ### Features
 
