@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useState } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { BlogPosting } from 'schema-dts'
 import { Box, Container, Stack, Typography, IconButton, Tooltip } from '@mui/material'
@@ -37,16 +37,38 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children, read
 
   const currentPath = location.pathname
   const isCurrentlyBookmarked = isBookmarked(currentPath)
+  const [announcement, setAnnouncement] = useState<string>('')
 
   const readingTimeDisplay = useReadingTime(readingText ?? children)
   const { prevPost, nextPost } = usePostNavigation()
 
   const handleBookmarkClick = () => {
+    const wasBookmarked = isCurrentlyBookmarked
     toggleBookmark(title, currentPath)
+    setAnnouncement(wasBookmarked ? 'Bookmark removed' : 'Article bookmarked')
+    setTimeout(() => setAnnouncement(''), 1000)
   }
 
   return (
     <React.Fragment>
+      <Box
+        component='div'
+        aria-live='polite'
+        role='status'
+        sx={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          borderWidth: 0,
+        }}
+      >
+        {announcement}
+      </Box>
       <Helmet
         script={[
           helmetJsonLdProp<BlogPosting>({
