@@ -168,8 +168,42 @@ This project implements several performance optimizations that should be maintai
 2. Make your changes and commit them with [meaningful commit messages](#commit-message-guidelines)
 3. Push your branch to your fork on GitHub
 4. Open a pull request against the `main` branch of the original repository
-5. Fill out the pull request template with details about your changes
+5. Fill out the pull request template with details about your changes (see [Pull Request Template](#pull-request-template))
 6. Wait for review and address any feedback
+
+### Pull Request Template
+
+When creating a pull request, GitHub will automatically populate the description with our PR template. The template includes:
+
+**Required Sections:**
+
+- **Opening Summary**: A brief one-sentence description following the pattern "This PR [action verb] [what it does]..."
+- **Changes**: A list of specific modifications made in this PR, using bullet points with dashes
+
+**Optional Sections:**
+
+- **Impact**: Explain user-facing or technical benefits (include when there's a clear benefit to highlight)
+- **Testing**: Describe how the changes were tested
+- **Screenshots**: Add screenshots for UI changes
+- **Related Issues**: Reference related issues using `Closes #issue-number`
+
+**Example Structure:**
+
+```markdown
+This PR adds copy-to-clipboard functionality to code blocks.
+
+## Changes
+
+- Add copy button next to fullscreen in normal and fullscreen views
+- Integrate Clipboard API with browser compatibility check
+- Add snackbar notification confirming copy action
+
+## Impact
+
+Readers can copy code examples with one click, improving usability when viewing technical content.
+```
+
+The PR template is located at `.github/PULL_REQUEST_TEMPLATE.md`. Remove any sections that don't apply to your PR.
 
 ### Pull Request Requirements
 
