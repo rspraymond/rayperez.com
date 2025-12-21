@@ -5,6 +5,7 @@ import Header from './Header'
 import LoadingSkeleton from './LoadingSkeleton'
 
 const ProfileCard = lazy(() => import('./ProfileCard'))
+const GitHubStats = lazy(() => import('./GitHubStats'))
 const BookmarkedPosts = lazy(() => import('./BookmarkedPosts'))
 const RecentPosts = lazy(() => import('./RecentPosts'))
 const SidebarSocials = lazy(() => import('./SidebarSocials'))
@@ -38,6 +39,9 @@ const SiteLayout: React.FC = () => {
             </Suspense>
             <Suspense fallback={<LoadingSkeleton testId='recent-posts' />}>
               <RecentPosts />
+            </Suspense>
+            <Suspense fallback={<LoadingSkeleton testId='github-stats' />}>
+              <GitHubStats />
             </Suspense>
             <Suspense fallback={<LoadingSkeleton testId='sidebar-socials' />}>
               <SidebarSocials
