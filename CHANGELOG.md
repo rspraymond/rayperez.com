@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.88.0] - 2025-12-21
+### Features
+
+- add github stats widget (#206)
+
+### Other Changes
+
+- chore: add pull request template
+- chore: update test coverage badge
+
+
+
 ## [0.87.0] - 2025-12-19
 ### Features
 
