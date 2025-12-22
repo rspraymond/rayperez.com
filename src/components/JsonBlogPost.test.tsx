@@ -89,7 +89,7 @@ describe('JsonBlogPost', () => {
   })
 
   describe('rendering', () => {
-    it('renders without errors with valid props', () => {
+    it('renders without errors with valid props', async () => {
       render(
         <BrowserRouter>
           <JsonBlogPost {...defaultProps} />
@@ -98,9 +98,13 @@ describe('JsonBlogPost', () => {
 
       expect(screen.getByTestId('blog-post')).toBeInTheDocument()
       expect(screen.getByTestId('article-renderer')).toBeInTheDocument()
+
+      await act(async () => {
+        vi.runAllTimers()
+      })
     })
 
-    it('passes correct props to BlogPost component', () => {
+    it('passes correct props to BlogPost component', async () => {
       render(
         <BrowserRouter>
           <JsonBlogPost {...defaultProps} />
@@ -110,9 +114,13 @@ describe('JsonBlogPost', () => {
       expect(screen.getByTestId('blog-post-title')).toHaveTextContent('Test Blog Title')
       expect(screen.getByTestId('blog-post-author')).toHaveTextContent('Test Author')
       expect(screen.getByTestId('blog-post-date')).toHaveTextContent('2023-01-01')
+
+      await act(async () => {
+        vi.runAllTimers()
+      })
     })
 
-    it('renders ArticleRenderer with correct content prop', () => {
+    it('renders ArticleRenderer with correct content prop', async () => {
       render(
         <BrowserRouter>
           <JsonBlogPost {...defaultProps} />
@@ -121,11 +129,15 @@ describe('JsonBlogPost', () => {
 
       expect(mockArticleRenderer).toHaveBeenCalledWith({ content: mockContent })
       expect(screen.getByTestId('article-renderer')).toBeInTheDocument()
+
+      await act(async () => {
+        vi.runAllTimers()
+      })
     })
   })
 
   describe('async text flattening', () => {
-    it('initially renders with readingText as undefined', () => {
+    it('initially renders with readingText as undefined', async () => {
       render(
         <BrowserRouter>
           <JsonBlogPost {...defaultProps} />
@@ -133,6 +145,10 @@ describe('JsonBlogPost', () => {
       )
 
       expect(screen.getByTestId('blog-post-reading-text')).toHaveTextContent('undefined')
+
+      await act(async () => {
+        vi.runAllTimers()
+      })
     })
 
     it('sets readingText after timeout using flattened text', async () => {
@@ -170,7 +186,7 @@ describe('JsonBlogPost', () => {
   })
 
   describe('effect lifecycle', () => {
-    it('clears timeout on component unmount', () => {
+    it('clears timeout on component unmount', async () => {
       const setTimeoutSpy = vi.spyOn(global, 'setTimeout')
       const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout')
       const { unmount } = render(
@@ -180,6 +196,11 @@ describe('JsonBlogPost', () => {
       )
 
       expect(setTimeoutSpy).toHaveBeenCalled()
+
+      await act(async () => {
+        vi.runAllTimers()
+      })
+
       unmount()
       expect(clearTimeoutSpy).toHaveBeenCalled()
 
@@ -222,46 +243,57 @@ describe('JsonBlogPost', () => {
       expect(mockFlattenArticleText).toHaveBeenCalledWith(newContent)
     })
   })
+})
 
-  describe('edge cases', () => {
-    it('handles empty content array', async () => {
-      const emptyContent: ArticleDocument = []
+describe('JsonBlogPost - edge cases', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockFlattenArticleText.mockReturnValue('Flattened article text for reading time')
+    vi.useFakeTimers()
+  })
 
-      mockFlattenArticleText.mockReturnValue('')
+  afterEach(() => {
+    vi.runOnlyPendingTimers()
+    vi.useRealTimers()
+  })
 
-      render(
-        <BrowserRouter>
-          <JsonBlogPost {...defaultProps} content={emptyContent} />
-        </BrowserRouter>,
-      )
+  it('handles empty content array', async () => {
+    const emptyContent: ArticleDocument = []
 
-      await act(async () => {
-        vi.runAllTimers()
-      })
+    mockFlattenArticleText.mockReturnValue('')
 
-      expect(mockFlattenArticleText).toHaveBeenCalledWith(emptyContent)
-      expect(screen.getByTestId('article-renderer')).toBeInTheDocument()
-      expect(mockArticleRenderer).toHaveBeenCalledWith({ content: emptyContent })
+    render(
+      <BrowserRouter>
+        <JsonBlogPost {...defaultProps} content={emptyContent} />
+      </BrowserRouter>,
+    )
+
+    await act(async () => {
+      vi.runAllTimers()
     })
 
-    it('handles complex content with multiple types', async () => {
-      mockFlattenArticleText.mockReturnValue('Complex flattened content')
+    expect(mockFlattenArticleText).toHaveBeenCalledWith(emptyContent)
+    expect(screen.getByTestId('article-renderer')).toBeInTheDocument()
+    expect(mockArticleRenderer).toHaveBeenCalledWith({ content: emptyContent })
+  })
 
-      render(
-        <BrowserRouter>
-          <JsonBlogPost {...defaultProps} content={complexContent} />
-        </BrowserRouter>,
-      )
+  it('handles complex content with multiple types', async () => {
+    mockFlattenArticleText.mockReturnValue('Complex flattened content')
 
-      await act(async () => {
-        vi.runAllTimers()
-      })
+    render(
+      <BrowserRouter>
+        <JsonBlogPost {...defaultProps} content={complexContent} />
+      </BrowserRouter>,
+    )
 
-      expect(mockFlattenArticleText).toHaveBeenCalledWith(complexContent)
-      expect(screen.getByTestId('blog-post-reading-text')).toHaveTextContent(
-        'Complex flattened content',
-      )
-      expect(mockArticleRenderer).toHaveBeenCalledWith({ content: complexContent })
+    await act(async () => {
+      vi.runAllTimers()
     })
+
+    expect(mockFlattenArticleText).toHaveBeenCalledWith(complexContent)
+    expect(screen.getByTestId('blog-post-reading-text')).toHaveTextContent(
+      'Complex flattened content',
+    )
+    expect(mockArticleRenderer).toHaveBeenCalledWith({ content: complexContent })
   })
 })
