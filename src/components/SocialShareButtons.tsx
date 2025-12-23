@@ -27,6 +27,11 @@ const getShareUrl = (platform: 'twitter' | 'linkedin' | 'facebook', title: strin
 const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
   const url = typeof window !== 'undefined' ? window.location.href : ''
   const [snackbarOpen, setSnackbarOpen] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleShare = (platform: 'twitter' | 'linkedin' | 'facebook') => {
     const shareUrl = getShareUrl(platform, title, url)
@@ -80,13 +85,15 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
           </IconButton>
         </Tooltip>
       </Box>
-      <Snackbar
-        open={snackbarOpen}
-        onClose={handleSnackbarClose}
-        autoHideDuration={1500}
-        message='Link copied'
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      />
+      {mounted && (
+        <Snackbar
+          open={snackbarOpen}
+          onClose={handleSnackbarClose}
+          autoHideDuration={1500}
+          message='Link copied'
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        />
+      )}
     </>
   )
 }
