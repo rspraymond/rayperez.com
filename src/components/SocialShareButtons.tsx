@@ -51,40 +51,42 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({ title }) => {
 
   return (
     <>
-      <Box display='flex' gap={1} mb={2}>
-        <Tooltip title='Copy link'>
-          <IconButton aria-label='Copy link' onClick={handleCopy} size='small'>
-            <ContentCopyIcon fontSize='small' />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title='Share on Twitter'>
-          <IconButton
-            aria-label='Share on Twitter'
-            onClick={() => handleShare('twitter')}
-            size='small'
-          >
-            <TwitterIcon fontSize='small' />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title='Share on LinkedIn'>
-          <IconButton
-            aria-label='Share on LinkedIn'
-            onClick={() => handleShare('linkedin')}
-            size='small'
-          >
-            <LinkedInIcon fontSize='small' />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title='Share on Facebook'>
-          <IconButton
-            aria-label='Share on Facebook'
-            onClick={() => handleShare('facebook')}
-            size='small'
-          >
-            <FacebookIcon fontSize='small' />
-          </IconButton>
-        </Tooltip>
-      </Box>
+      {mounted && (
+        <Box display='flex' gap={1} mb={2}>
+          <Tooltip title='Copy link'>
+            <IconButton aria-label='Copy link' onClick={handleCopy} size='small'>
+              <ContentCopyIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Share on Twitter'>
+            <IconButton
+              aria-label='Share on Twitter'
+              onClick={() => handleShare('twitter')}
+              size='small'
+            >
+              <TwitterIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Share on LinkedIn'>
+            <IconButton
+              aria-label='Share on LinkedIn'
+              onClick={() => handleShare('linkedin')}
+              size='small'
+            >
+              <LinkedInIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Share on Facebook'>
+            <IconButton
+              aria-label='Share on Facebook'
+              onClick={() => handleShare('facebook')}
+              size='small'
+            >
+              <FacebookIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      )}
       {mounted && (
         <Snackbar
           open={snackbarOpen}
