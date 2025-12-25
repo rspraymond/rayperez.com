@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import '@testing-library/jest-dom'
 import LazySyntaxHighlighter from './LazySyntaxHighlighter'
@@ -29,12 +29,17 @@ describe('LazySyntaxHighlighter', () => {
     vi.restoreAllMocks()
   })
 
-  it('should show loading indicator initially', () => {
+  it('should show loading indicator initially', async () => {
     // Arrange & Act
     render(<LazySyntaxHighlighter {...testProps} />)
 
-    // Assert
+    // Assert - immediately check for loading state
     expect(screen.getByRole('progressbar')).toBeInTheDocument()
+
+    // Wait for any pending Suspense updates to complete
+    await act(async () => {
+      await Promise.resolve()
+    })
   })
 
   it('should render the syntax highlighter with correct props after loading', async () => {
