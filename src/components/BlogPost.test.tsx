@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, act, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { BrowserRouter } from 'react-router-dom'
@@ -113,24 +113,32 @@ describe('BlogPost', () => {
   })
 
   describe('Basic Rendering', () => {
-    it('renders with all required components and skeletons', () => {
+    it('renders with all required components and skeletons', async () => {
       render(
         <BrowserRouter>
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
 
-      expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
-      expect(screen.getByTestId('author-bio')).toBeInTheDocument()
+      await waitFor(() => {
+        expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
+        expect(screen.getByTestId('author-bio')).toBeInTheDocument()
+      })
+
       expect(screen.getByTestId('blog-content')).toBeInTheDocument()
     })
 
-    it('displays the correct blog title and content', () => {
+    it('displays the correct blog title and content', async () => {
       render(
         <BrowserRouter>
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
+
+      await waitFor(() => {
+        expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
+        expect(screen.getByTestId('author-bio')).toBeInTheDocument()
+      })
 
       expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Test Blog Title')
       expect(screen.getByTestId('blog-content')).toBeInTheDocument()
@@ -142,12 +150,16 @@ describe('BlogPost', () => {
       expect(breadcrumbTitle).toBeInTheDocument()
     })
 
-    it('includes SEO metadata with title and structured data', () => {
+    it('includes SEO metadata with title and structured data', async () => {
       render(
         <BrowserRouter>
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
+
+      await act(async () => {
+        await Promise.resolve()
+      })
 
       const helmets = screen.getAllByTestId('helmet')
       expect(helmets.length).toBeGreaterThan(0)
@@ -166,7 +178,7 @@ describe('BlogPost', () => {
   })
 
   describe('Bookmark State Branch', () => {
-    it('renders bookmark border icon when article is not bookmarked', () => {
+    it('renders bookmark border icon when article is not bookmarked', async () => {
       mockIsBookmarked.mockReturnValue(false)
 
       render(
@@ -175,13 +187,17 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       const bookmarkButton = screen.getByRole('button', { name: 'bookmark article' })
       expect(bookmarkButton).toBeInTheDocument()
       expect(screen.getByTestId('BookmarkBorderIcon')).toBeInTheDocument()
       expect(screen.queryByTestId('BookmarkIcon')).not.toBeInTheDocument()
     })
 
-    it('renders bookmark icon when article is bookmarked', () => {
+    it('renders bookmark icon when article is bookmarked', async () => {
       mockIsBookmarked.mockReturnValue(true)
 
       render(
@@ -189,6 +205,10 @@ describe('BlogPost', () => {
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
+
+      await act(async () => {
+        await Promise.resolve()
+      })
 
       const bookmarkButton = screen.getByRole('button', { name: 'remove bookmark' })
       expect(bookmarkButton).toBeInTheDocument()
@@ -207,6 +227,10 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       const bookmarkButton = screen.getByRole('button', { name: 'bookmark article' })
       await user.click(bookmarkButton)
 
@@ -216,7 +240,7 @@ describe('BlogPost', () => {
   })
 
   describe('Reading Time Display Branch', () => {
-    it('renders reading time when available', () => {
+    it('renders reading time when available', async () => {
       mockReadingTimeDisplay.mockReturnValue('5 min read')
 
       render(
@@ -225,11 +249,15 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByText('5 min read')).toBeInTheDocument()
       expect(screen.queryByTestId('reading-time')).not.toBeInTheDocument()
     })
 
-    it('renders LoadingSkeleton when reading time is not available', () => {
+    it('renders LoadingSkeleton when reading time is not available', async () => {
       mockReadingTimeDisplay.mockReturnValue(null)
 
       render(
@@ -238,11 +266,15 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByTestId('reading-time')).toBeInTheDocument()
       expect(screen.queryByText(/min read/)).not.toBeInTheDocument()
     })
 
-    it('renders LoadingSkeleton when reading time is empty string', () => {
+    it('renders LoadingSkeleton when reading time is empty string', async () => {
       mockReadingTimeDisplay.mockReturnValue('')
 
       render(
@@ -251,10 +283,14 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByTestId('reading-time')).toBeInTheDocument()
     })
 
-    it('uses readingText prop when provided', () => {
+    it('uses readingText prop when provided', async () => {
       mockReadingTimeDisplay.mockReturnValue('3 min read')
 
       render(
@@ -263,11 +299,15 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByText('3 min read')).toBeInTheDocument()
       expect(mockReadingTimeDisplay).toHaveBeenCalled()
     })
 
-    it('falls back to children when readingText is not provided', () => {
+    it('falls back to children when readingText is not provided', async () => {
       mockReadingTimeDisplay.mockReturnValue('5 min read')
 
       render(
@@ -276,13 +316,17 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByText('5 min read')).toBeInTheDocument()
       expect(mockReadingTimeDisplay).toHaveBeenCalled()
     })
   })
 
   describe('BackToTopButton Visibility', () => {
-    it('does not render button when showBackToTop is false', () => {
+    it('does not render button when showBackToTop is false', async () => {
       mockShowBackToTop.mockReturnValue(false)
 
       const { container } = render(
@@ -291,10 +335,14 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(container.querySelector('[aria-label="back to top"]')).not.toBeInTheDocument()
     })
 
-    it('renders button when showBackToTop is true', () => {
+    it('renders button when showBackToTop is true', async () => {
       mockShowBackToTop.mockReturnValue(true)
 
       render(
@@ -303,12 +351,16 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByRole('button', { name: 'back to top' })).toBeInTheDocument()
     })
   })
 
   describe('PostNavigation Combinations', () => {
-    it('renders navigation with both prev and next posts', () => {
+    it('renders navigation with both prev and next posts', async () => {
       mockPrevPost.mockReturnValue({ title: 'Previous Article', path: '/previous' })
       mockNextPost.mockReturnValue({ title: 'Next Article', path: '/next' })
 
@@ -318,6 +370,10 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.getByText('Previous')).toBeInTheDocument()
       expect(screen.getByText('Previous Article')).toBeInTheDocument()
       expect(screen.getByText('Next')).toBeInTheDocument()
@@ -325,7 +381,7 @@ describe('BlogPost', () => {
       expect(screen.getByText('Back to Home')).toBeInTheDocument()
     })
 
-    it('renders navigation with only prev post', () => {
+    it('renders navigation with only prev post', async () => {
       mockPrevPost.mockReturnValue({ title: 'Previous Article', path: '/previous' })
       mockNextPost.mockReturnValue(undefined)
 
@@ -334,6 +390,10 @@ describe('BlogPost', () => {
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
+
+      await act(async () => {
+        await Promise.resolve()
+      })
 
       expect(screen.getByText('Previous')).toBeInTheDocument()
       expect(screen.getByText('Previous Article')).toBeInTheDocument()
@@ -341,7 +401,7 @@ describe('BlogPost', () => {
       expect(screen.getByText('Back to Home')).toBeInTheDocument()
     })
 
-    it('renders navigation with only next post', () => {
+    it('renders navigation with only next post', async () => {
       mockPrevPost.mockReturnValue(undefined)
       mockNextPost.mockReturnValue({ title: 'Next Article', path: '/next' })
 
@@ -351,13 +411,17 @@ describe('BlogPost', () => {
         </BrowserRouter>,
       )
 
+      await act(async () => {
+        await Promise.resolve()
+      })
+
       expect(screen.queryByText('Previous')).not.toBeInTheDocument()
       expect(screen.getByText('Next')).toBeInTheDocument()
       expect(screen.getByText('Next Article')).toBeInTheDocument()
       expect(screen.getByText('Back to Home')).toBeInTheDocument()
     })
 
-    it('handles case when neither post exists', () => {
+    it('handles case when neither post exists', async () => {
       mockPrevPost.mockReturnValue(undefined)
       mockNextPost.mockReturnValue(undefined)
 
@@ -366,6 +430,10 @@ describe('BlogPost', () => {
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
+
+      await act(async () => {
+        await Promise.resolve()
+      })
 
       expect(screen.queryByText('Previous')).not.toBeInTheDocument()
       expect(screen.queryByText('Next')).not.toBeInTheDocument()
@@ -374,28 +442,32 @@ describe('BlogPost', () => {
   })
 
   describe('Suspense Fallbacks', () => {
-    it('verifies LoadingSkeleton appears for TableOfContents when lazy loading', () => {
+    it('verifies LoadingSkeleton appears for TableOfContents when lazy loading', async () => {
       render(
         <BrowserRouter>
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
 
-      // The Suspense fallback should show LoadingSkeleton with testId
-      // Since we're mocking the component, it renders immediately, but the testId is still present
-      expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
+      await waitFor(() => {
+        // The Suspense fallback should show LoadingSkeleton with testId
+        // Since we're mocking the component, it renders immediately, but the testId is still present
+        expect(screen.getByTestId('table-of-contents')).toBeInTheDocument()
+      })
     })
 
-    it('verifies LoadingSkeleton appears for AuthorBio when lazy loading', () => {
+    it('verifies LoadingSkeleton appears for AuthorBio when lazy loading', async () => {
       render(
         <BrowserRouter>
           <BlogPost {...defaultProps} />
         </BrowserRouter>,
       )
 
-      // The Suspense fallback should show LoadingSkeleton with testId
-      // Since we're mocking the component, it renders immediately, but the testId is still present
-      expect(screen.getByTestId('author-bio')).toBeInTheDocument()
+      await waitFor(() => {
+        // The Suspense fallback should show LoadingSkeleton with testId
+        // Since we're mocking the component, it renders immediately, but the testId is still present
+        expect(screen.getByTestId('author-bio')).toBeInTheDocument()
+      })
     })
   })
 })
