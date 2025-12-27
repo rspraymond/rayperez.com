@@ -9,7 +9,8 @@ import {
   useMediaQuery,
   Theme,
 } from '@mui/material'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import RouterLinkRef from '../utils/RouterLink'
 import ArticleIcon from '@mui/icons-material/Article'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 import { posts as allPosts } from '../constants/posts'
@@ -44,7 +45,7 @@ const PostItem = memo(({ post, index, theme }: PostItemProps) => {
     <React.Fragment>
       {index > 0 && <Divider component='li' variant='inset' />}
       <ListItem
-        component={RouterLink}
+        component={RouterLinkRef}
         to={post.path}
         aria-current={isActive ? 'page' : undefined}
         sx={{

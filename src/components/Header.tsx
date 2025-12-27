@@ -1,5 +1,6 @@
 import { Box, IconButton, useTheme, Link, Typography } from '@mui/material'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import RouterLinkRef from '../utils/RouterLink'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import DescriptionIcon from '@mui/icons-material/Description'
@@ -44,7 +45,7 @@ function Header() {
             }}
           >
             <Link
-              component={RouterLink}
+              component={RouterLinkRef}
               to='/'
               underline='hover'
               color='inherit'
@@ -56,7 +57,7 @@ function Header() {
           </Typography>
         ) : (
           <Link
-            component={RouterLink}
+            component={RouterLinkRef}
             to='/'
             underline='hover'
             color='inherit'
