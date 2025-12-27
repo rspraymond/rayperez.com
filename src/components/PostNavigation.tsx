@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography, Link } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import RouterLinkRef from '../utils/RouterLink'
 interface PostNavigationProps {
   prevPost?: {
     title: string
@@ -23,7 +23,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({ prevPost, nextPost }) =
             Previous
           </Typography>
           <Link
-            component={RouterLink}
+            component={RouterLinkRef}
             to={prevPost.path}
             underline='hover'
             color='primary'
@@ -37,7 +37,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({ prevPost, nextPost }) =
       )}
       <Box>
         <Link
-          component={RouterLink}
+          component={RouterLinkRef}
           to='/'
           underline='hover'
           color='primary'
@@ -54,7 +54,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({ prevPost, nextPost }) =
             Next
           </Typography>
           <Link
-            component={RouterLink}
+            component={RouterLinkRef}
             to={nextPost.path}
             underline='hover'
             color='primary'
