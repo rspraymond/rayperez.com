@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
+import { forwardRef } from 'react'
 import App from './App'
 
 // Mock the lazy-loaded components
@@ -26,12 +27,14 @@ vi.mock('react-router-dom', () => {
     Outlet: () => <div data-testid='outlet' />,
     useNavigate: () => navigate,
     useLocation: () => ({ pathname: '/', search: '', hash: '', state: null, key: 'default' }),
-    Link: ({
-      children,
-      ...props
-    }: React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>) => (
-      <a {...props}>{children}</a>
-    ),
+    Link: forwardRef<
+      HTMLAnchorElement,
+      React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>
+    >(({ children, ...props }, ref) => (
+      <a ref={ref} {...props}>
+        {children}
+      </a>
+    )),
   }
 })
 
