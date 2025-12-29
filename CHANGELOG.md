@@ -1,6 +1,25 @@
 ## Changelog
 
 
+## [0.89.0] - 2025-12-29
+### Features
+
+- add location references (#214)
+
+### Other Changes
+
+- chore: fix link ref in test (#213)
+- chore: fix ref forwarding on link components (#212)
+- chore: fix async timing issue on blog tests (#211)
+- chore: fix test by handling react suspense (#210)
+- chore: wrap social share in mounted check to prevent hydration issues (#209)
+- chore: update test coverage badge
+- chore: fix hydration mismatch on social share (#208)
+- chore: fix json blog post timer in tests (#207)
+- chore: update test coverage badge
+
+
+
 ## [0.88.0] - 2025-12-21
 ### Features
 
