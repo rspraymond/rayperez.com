@@ -58,6 +58,9 @@ const ProfileCard: React.FC = () => {
       <Typography variant='body1' color='text.secondary' sx={{ mt: 2 }} itemProp='jobTitle'>
         {profile.role}
       </Typography>
+      <Typography variant='body2' color='text.secondary' sx={{ mt: 1 }} itemProp='address'>
+        {profile.location.city}, {profile.location.state}
+      </Typography>
       <Button
         variant='outlined'
         color='primary'

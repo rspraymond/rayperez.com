@@ -17,7 +17,7 @@ const AuthorBio: React.FC = () => {
     <React.Fragment>
       <SocialMeta
         title={`${PROFILE.name} - ${PROFILE.role}`}
-        description={`${PROFILE.name} is a ${PROFILE.role} in Denver, specializing in modern web development, performance optimization, and scalable architecture.`}
+        description={`${PROFILE.name} is a ${PROFILE.role} in Denver, Colorado, specializing in modern web development and scalable architecture.`}
         image={profileImage}
         url='https://www.rayperez.com'
         type='profile'
@@ -69,7 +69,7 @@ const AuthorBio: React.FC = () => {
           </Avatar>
           <Box flex={1} width='100%'>
             <Typography variant='body1' component='p' gutterBottom>
-              Hi, I'm {PROFILE.name}, a {PROFILE.role} in Denver.
+              Hi, I'm {PROFILE.name}, a {PROFILE.role} in Denver, Colorado.
             </Typography>
             <Typography variant='body2' color='text.secondary' sx={{ mb: 1 }}>
               I'm the author of this blog, nice to meet you!

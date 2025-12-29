@@ -47,9 +47,13 @@ describe('AuthorBio Component', () => {
   it('renders the author bio section with correct content', () => {
     renderComponent()
 
-    // Check for author introduction text (text is now split across elements)
-    const introText = screen.getByText(/Hi, I'm .+, a .+ in Denver\./)
+    // Check for author introduction text - flexible regex that handles location variations
+    const introText = screen.getByText(/Hi, I'm .+, a .+ in .+\./)
     expect(introText).toBeInTheDocument()
+
+    // Verify it contains the profile name and role
+    expect(introText.textContent).toContain(PROFILE.name)
+    expect(introText.textContent).toContain(PROFILE.role)
 
     // Check for author description
     expect(

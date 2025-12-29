@@ -53,11 +53,11 @@ const Home: React.FC = () => {
         ]}
       >
         <link rel='canonical' href='https://www.rayperez.com' />
-        <title>Raymond Perez - Senior Software Engineer</title>
+        <title>Raymond Perez - Senior Software Engineer in Denver, Colorado</title>
       </Helmet>
       <SocialMeta
         title={PROFILE.name}
-        description='Software Engineer specializing in modern web development, performance optimization, and scalable architecture.'
+        description='Software Engineer in Denver, Colorado specializing in modern web development, performance optimization, and scalable architecture.'
         image={PROFILE.image}
         url='https://www.rayperez.com'
         type='profile'
