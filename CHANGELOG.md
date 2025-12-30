@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.90.0] - 2025-12-30
+### Features
+
+- extract data from presentation on home component (#215)
+
+
+
 ## [0.89.0] - 2025-12-29
 ### Features
 
