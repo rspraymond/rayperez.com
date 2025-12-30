@@ -1,6 +1,7 @@
 export interface Location {
   city: string
   state: string
+  stateName?: string
   country: string
 }
 
