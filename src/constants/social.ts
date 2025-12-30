@@ -1,5 +1,7 @@
 import { PROFILE } from './profile'
 
+export const SITE_URL = 'https://www.rayperez.com' as const
+
 export const SOCIAL_CONFIG = {
   siteName: 'Raymond Perez - Software Engineer',
   defaultDescription:

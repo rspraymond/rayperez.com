@@ -7,6 +7,7 @@ export const PROFILE = {
   location: {
     city: 'Denver',
     state: 'CO',
+    stateName: 'Colorado',
     country: 'US',
   },
   description:

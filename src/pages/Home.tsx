@@ -13,6 +13,7 @@ import SocialMeta from '../components/SocialMeta.tsx'
 import { PROFILE } from '../constants/profile'
 import { SKILLS } from '../constants/skills'
 import { PERSON_SCHEMA } from '../constants/schema'
+import { SITE_URL } from '../constants/social'
 import { useScrollToTop } from '../hooks/useScrollToTop'
 import BackToTopButton from '../components/BackToTopButton'
 import projectsData from '../data/content/projects.json'
@@ -52,14 +53,14 @@ const Home: React.FC = () => {
           ),
         ]}
       >
-        <link rel='canonical' href='https://www.rayperez.com' />
-        <title>Raymond Perez - Senior Software Engineer in Denver, Colorado</title>
+        <link rel='canonical' href={SITE_URL} />
+        <title>{`${PROFILE.name} - ${PROFILE.role} in ${PROFILE.location.city}, ${PROFILE.location.stateName}`}</title>
       </Helmet>
       <SocialMeta
         title={PROFILE.name}
-        description='Software Engineer in Denver, Colorado specializing in modern web development, performance optimization, and scalable architecture.'
+        description={`${PROFILE.role} in ${PROFILE.location.city}, ${PROFILE.location.stateName} specializing in modern web development, performance optimization, and scalable architecture.`}
         image={PROFILE.image}
-        url='https://www.rayperez.com'
+        url={SITE_URL}
         type='profile'
       />
       <Container
