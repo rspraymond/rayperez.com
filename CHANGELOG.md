@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.91.0] - 2025-12-31
+### Features
+
+- add markdown link parsing to summary section (#216)
+
+
+
 ## [0.90.0] - 2025-12-30
 ### Features
 
