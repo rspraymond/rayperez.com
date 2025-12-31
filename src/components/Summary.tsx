@@ -3,16 +3,41 @@ import React from 'react'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import SectionCard from './SectionCard'
 import summaryData from '../data/content/summary.json'
-import type { ProfessionalSummary } from '../types/contentData'
+import profileData from '../data/content/profile.json'
+import type { ProfessionalSummary, Profile } from '../types/contentData'
+import { parseMarkdownLinks, type TextSegment } from '../utils/parseMarkdownLinks'
 
 const Summary: React.FC = () => {
   const summary = summaryData as ProfessionalSummary
-  const nameText = 'Raymond Perez'
-  const linkText = 'opinionated frameworks'
-  const linkHref = '/why-opinionated'
+  const profile = profileData as Profile
+  const nameText = profile.name
 
-  const nameParts = summary.text.split(nameText)
-  const linkParts = nameParts[1].split(linkText)
+  const segments = parseMarkdownLinks(summary.text)
+
+  const renderSegment = (segment: TextSegment, index: number): React.ReactNode => {
+    if (segment.type === 'link') {
+      return (
+        <Link href={segment.href} key={`link-${index}`} color='primary' underline='hover'>
+          {segment.content}
+        </Link>
+      )
+    }
+
+    // For text segments, check if they contain the name and wrap it for schema.org
+    const text = segment.content
+    if (text.includes(nameText)) {
+      const nameParts = text.split(nameText)
+      return (
+        <React.Fragment key={`text-${index}`}>
+          {nameParts[0]}
+          <span itemProp='name'>{nameText}</span>
+          {nameParts[1]}
+        </React.Fragment>
+      )
+    }
+
+    return <React.Fragment key={`text-${index}`}>{text}</React.Fragment>
+  }
 
   return (
     <SectionCard
@@ -28,13 +53,7 @@ const Summary: React.FC = () => {
         itemScope
         itemType='https://schema.org/Person'
       >
-        {nameParts[0]}
-        <span itemProp='name'>{nameText}</span>
-        {linkParts[0]}
-        <Link href={linkHref} key={linkHref} color='primary' underline='hover'>
-          {linkText}
-        </Link>
-        {linkParts[1]}
+        {segments.map((segment, index) => renderSegment(segment, index))}
       </Typography>
     </SectionCard>
   )
