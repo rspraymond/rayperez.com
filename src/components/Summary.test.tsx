@@ -24,7 +24,7 @@ describe('Summary', () => {
     expect(contentElement).toBeInTheDocument()
   })
 
-  test('contains a link to opinionated frameworks page', () => {
+  test('contains a link to opinionated frameworks page from markdown', () => {
     renderComponent()
 
     const link = screen.getByText(/opinionated frameworks/i)
@@ -70,5 +70,15 @@ describe('Summary', () => {
     expect(nameSpan).toHaveAttribute('itemProp', 'name')
     expect(nameSpan.closest('p')).toHaveAttribute('itemScope')
     expect(nameSpan.closest('p')).toHaveAttribute('itemType', 'https://schema.org/Person')
+  })
+
+  test('parses and renders markdown links correctly', () => {
+    renderComponent()
+
+    // Verify markdown link syntax is parsed
+    const link = screen.getByText('opinionated frameworks')
+    expect(link).toBeInTheDocument()
+    expect(link.closest('a')).toHaveAttribute('href', '/why-opinionated')
+    expect(link.closest('a')).toHaveClass('MuiLink-root')
   })
 })
