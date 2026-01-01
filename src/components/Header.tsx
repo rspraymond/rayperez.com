@@ -7,6 +7,7 @@ import DescriptionIcon from '@mui/icons-material/Description'
 import RssFeedIcon from '@mui/icons-material/RssFeed'
 import ThemeToggle from './ThemeToggle'
 import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
+import { PROFILE } from '../constants/profile'
 
 function Header() {
   const theme = useTheme()
@@ -52,7 +53,7 @@ function Header() {
               sx={{ textDecoration: 'none' }}
               itemProp='name'
             >
-              Raymond Perez
+              {PROFILE.name}
             </Link>
           </Typography>
         ) : (
@@ -72,7 +73,7 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            <span itemProp='name'>Raymond Perez</span>
+            <span itemProp='name'>{PROFILE.name}</span>
           </Link>
         )}
         <ThemeToggle />
