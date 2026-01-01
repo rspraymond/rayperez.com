@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.92.0] - 2026-01-01
+### Features
+
+- replace hard coded name in header (#217)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.91.0] - 2025-12-31
 ### Features
 
