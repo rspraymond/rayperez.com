@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Person } from 'schema-dts'
 import { Container, Grid } from '@mui/material'
 import Summary from '../components/Summary.tsx'
 import Projects from '../components/Projects.tsx'
-import Experiences from '../components/Experiences.tsx'
 import Educations from '../components/Educations.tsx'
 import Skills from '../components/Skills.tsx'
 import Achievements from '../components/Achievements.tsx'
@@ -16,6 +15,7 @@ import { PERSON_SCHEMA } from '../constants/schema'
 import { SITE_URL } from '../constants/social'
 import { useScrollToTop } from '../hooks/useScrollToTop'
 import BackToTopButton from '../components/BackToTopButton'
+import LoadingSkeleton from '../components/LoadingSkeleton'
 import projectsData from '../data/content/projects.json'
 import achievementsData from '../data/content/achievements.json'
 import experiencesData from '../data/content/experiences.json'
@@ -26,6 +26,8 @@ import type {
   Experience as ExperienceType,
   Education as EducationType,
 } from '../types/contentData'
+
+const Experiences = lazy(() => import('../components/Experiences.tsx'))
 
 const projects = projectsData as Project[]
 const experiences = experiencesData as ExperienceType[]
@@ -85,7 +87,9 @@ const Home: React.FC = () => {
             <Achievements achievements={achievements} />
           </Grid>
           <Grid item xs={12}>
-            <Experiences experiences={experiences} />
+            <Suspense fallback={<LoadingSkeleton testId='experiences' />}>
+              <Experiences experiences={experiences} />
+            </Suspense>
           </Grid>
           <Grid item xs={12}>
             <Educations educations={educations} />

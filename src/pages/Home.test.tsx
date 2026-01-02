@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
 import Home from './Home'
@@ -63,7 +63,7 @@ describe('Home Component', () => {
     expect(screen.getByTestId('summary-component')).toBeInTheDocument()
   })
 
-  it('renders all main content sections', () => {
+  it('renders all main content sections', async () => {
     renderWithProvider(<Home />)
 
     // Verify main content sections are present in correct order
@@ -71,6 +71,11 @@ describe('Home Component', () => {
     expect(screen.getByTestId('skills-component')).toBeInTheDocument()
     expect(screen.getByTestId('projects-component')).toBeInTheDocument()
     expect(screen.getByTestId('achievements-component')).toBeInTheDocument()
+
+    // Wait for lazy-loaded Experiences component to render
+    await waitFor(() => {
+      expect(screen.getByTestId('experiences-component')).toBeInTheDocument()
+    })
 
     // Check that the correct number of experience and education components are rendered from data files
     const experiences = screen.getAllByTestId('experience-component')
