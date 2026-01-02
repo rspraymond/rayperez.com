@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.93.0] - 2026-01-02
+### Features
+
+- lazy load experience on home page (#218)
+
+
+
 ## [0.92.0] - 2026-01-01
 ### Features
 
