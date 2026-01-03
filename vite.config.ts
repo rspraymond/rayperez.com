@@ -35,12 +35,19 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Split vendor chunks
+          // Critical - must load initially
           'react-vendor': ['react', 'react-dom'],
+
+          // Can be deferred
           'react-router': ['react-router-dom', 'history'],
           'mui-core': ['@mui/material', '@emotion/react', '@emotion/styled'],
+
+          // Lazy load - only when needed
           'mui-icons': ['@mui/icons-material'],
-          markdown: ['marked', 'react-syntax-highlighter'],
+
+          // On-demand
+          'syntax-highlighter': ['react-syntax-highlighter'],
+          marked: ['marked'],
           data: ['react-query', 'react-schemaorg', 'schema-dts'],
           'ui-utils': ['react-helmet'],
         },
@@ -54,7 +61,7 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    // Enable chunking
-    chunkSizeWarningLimit: 600,
+    // Optimize chunk sizes
+    chunkSizeWarningLimit: 500,
   },
 })

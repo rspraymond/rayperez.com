@@ -41,12 +41,24 @@ const { mockSyntaxHighlighter } = vi.hoisted(() => {
       </pre>
     )
   })
+  const registerLanguage = vi.fn()
+  Object.assign(mockFn, { registerLanguage })
   return { mockSyntaxHighlighter: mockFn }
 })
 
-vi.mock('react-syntax-highlighter', () => ({
-  Prism: mockSyntaxHighlighter,
+vi.mock('react-syntax-highlighter/dist/esm/prism-light', () => ({
+  default: mockSyntaxHighlighter,
 }))
+
+// Mock language imports (not used in tests, but needed to prevent import errors)
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/javascript', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/typescript', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/tsx', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/php', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/markup', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/graphql', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/json', () => ({ default: {} }))
+vi.mock('react-syntax-highlighter/dist/esm/languages/prism/bash', () => ({ default: {} }))
 
 vi.mock('react-syntax-highlighter/dist/esm/styles/prism', () => ({
   materialLight: { __mockName: 'materialLight' },

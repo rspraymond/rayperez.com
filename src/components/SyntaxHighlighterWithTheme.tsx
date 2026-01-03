@@ -1,11 +1,31 @@
 import React, { useState, useMemo } from 'react'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light'
 import { materialDark, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useTheme as useCustomTheme } from '../contexts/useTheme'
 import { Box, Dialog, IconButton, Tooltip, Snackbar, useTheme } from '@mui/material'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import CloseIcon from '@mui/icons-material/Close'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+
+// Import only the languages actually used in articles
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
+import php from 'react-syntax-highlighter/dist/esm/languages/prism/php'
+import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup'
+import graphql from 'react-syntax-highlighter/dist/esm/languages/prism/graphql'
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash'
+
+// Register languages (only once at module load)
+SyntaxHighlighter.registerLanguage('javascript', javascript)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
+SyntaxHighlighter.registerLanguage('tsx', tsx)
+SyntaxHighlighter.registerLanguage('php', php)
+SyntaxHighlighter.registerLanguage('html', html)
+SyntaxHighlighter.registerLanguage('graphql', graphql)
+SyntaxHighlighter.registerLanguage('json', json)
+SyntaxHighlighter.registerLanguage('bash', bash)
 
 interface SyntaxHighlighterWithThemeProps {
   language: string
