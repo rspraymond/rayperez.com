@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.93.1] - 2026-01-03
+### Bug Fixes
+
+- optimize chunk size for syntax highlighter (#219)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.93.0] - 2026-01-02
 ### Features
 
