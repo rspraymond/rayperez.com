@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.93.2] - 2026-01-05
+### Bug Fixes
+
+- lazy load mui on error boundary (#221)
+
+
+
 ## [0.93.1] - 2026-01-03
 ### Bug Fixes
 
