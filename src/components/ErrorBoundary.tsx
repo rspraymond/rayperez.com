@@ -1,6 +1,8 @@
 import React, { Component, ReactNode } from 'react'
-import { Box, Typography, Button } from '@mui/material'
-import { ErrorOutline } from '@mui/icons-material'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import ErrorOutline from '@mui/icons-material/ErrorOutline'
 
 interface Props {
   children: ReactNode
