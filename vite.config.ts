@@ -40,7 +40,12 @@ export default defineConfig({
 
           // Can be deferred
           'react-router': ['react-router-dom', 'history'],
-          'mui-core': ['@mui/material', '@emotion/react', '@emotion/styled'],
+          'mui-core': [
+            '@mui/material',
+            '@mui/material/styles',
+            '@emotion/react',
+            '@emotion/styled',
+          ],
 
           // Lazy load - only when needed
           'mui-icons': ['@mui/icons-material'],
