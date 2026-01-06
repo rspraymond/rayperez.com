@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.93.3] - 2026-01-06
+### Bug Fixes
+
+- add home and not found as lazy loaded components (#220)
+
+
+
 ## [0.93.2] - 2026-01-05
 ### Bug Fixes
 
