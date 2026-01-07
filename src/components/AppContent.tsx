@@ -30,7 +30,15 @@ const AppContent: React.FC = () => {
               }
             />
             {posts.map((post) => (
-              <Route key={post.path} path={post.path} element={<post.Component />} />
+              <Route
+                key={post.path}
+                path={post.path}
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <post.Component />
+                  </Suspense>
+                }
+              />
             ))}
           </Route>
           <Route
