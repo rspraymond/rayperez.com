@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.93.4] - 2026-01-07
+### Bug Fixes
+
+- lazy load route components (#222)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.93.3] - 2026-01-06
 ### Bug Fixes
 
