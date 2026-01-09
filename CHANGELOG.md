@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.93.5] - 2026-01-09
+### Bug Fixes
+
+- use https for clipsfinder (#224)
+
+### Other Changes
+
+- chore: update test coverage badge
+- chore: add unit tests for site layout component (#223)
+
+
+
 ## [0.93.4] - 2026-01-07
 ### Bug Fixes
 
