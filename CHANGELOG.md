@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.94.0] - 2026-01-10
+### Features
+
+- add summary tables to why typescript (#225)
+
+
+
 ## [0.93.5] - 2026-01-09
 ### Bug Fixes
 
