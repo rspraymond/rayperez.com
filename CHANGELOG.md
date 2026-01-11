@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.94.1] - 2026-01-11
+### Bug Fixes
+
+- edit profile photo
+
+
+
 ## [0.94.0] - 2026-01-10
 ### Features
 
