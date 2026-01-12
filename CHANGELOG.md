@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.94.2] - 2026-01-12
+### Bug Fixes
+
+- update react router (#226)
+
+
+
 ## [0.94.1] - 2026-01-11
 ### Bug Fixes
 
