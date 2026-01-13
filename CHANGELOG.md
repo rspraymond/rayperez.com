@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.95.0] - 2026-01-13
+### Features
+
+- add prejump case study (#227)
+
+
+
 ## [0.94.2] - 2026-01-12
 ### Bug Fixes
 
