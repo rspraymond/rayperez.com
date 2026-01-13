@@ -1,0 +1,13 @@
+{
+  "project": "Prejump.com",
+  "role": "Co-Founder & Technology Lead",
+  "timeline": "Ongoing",
+  "techStack": ["Laravel", "React", "TypeScript", "Inertia.js", "NestJS", "MySQL", "Tailwind CSS"],
+  "links": [
+    {
+      "url": "https://prejump.com",
+      "label": "Visit Prejump.com",
+      "ariaLabel": "Visit Prejump.com, Rocket League training pack platform (opens in new window)"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import LoadingFallback from './LoadingFallback'
 import PrintStyles from './PrintStyles'
 import { useTheme } from '../contexts/useTheme'
 import { posts } from '../constants/posts'
+import { caseStudies } from '../constants/caseStudies'
 import HashRedirectHandler from './HashRedirectHandler'
 import SiteLayout from './SiteLayout'
 
@@ -36,6 +37,17 @@ const AppContent: React.FC = () => {
                 element={
                   <Suspense fallback={<LoadingFallback />}>
                     <post.Component />
+                  </Suspense>
+                }
+              />
+            ))}
+            {caseStudies.map((caseStudy) => (
+              <Route
+                key={caseStudy.path}
+                path={caseStudy.path}
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <caseStudy.Component />
                   </Suspense>
                 }
               />

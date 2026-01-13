@@ -4,6 +4,7 @@
     "description": "A comprehensive training platform for Rocket League players featuring a database of training packs, search functionality, and BakkesMod integration for seamless in-game loading.",
     "technologies": ["Laravel", "Inertia.js", "React", "Tailwind CSS", "TypeScript"],
     "liveUrl": "https://prejump.com",
+    "caseStudyUrl": "/case-studies/prejump",
     "featured": false
   },
   {

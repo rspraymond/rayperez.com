@@ -1,0 +1,704 @@
+[
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "Executive Summary",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "In the world of competitive Rocket League, where players constantly seek to improve their skills, finding the right training packs was once a frustrating journey through scattered Reddit threads, Discord servers, and YouTube descriptions. [Prejump.com](https://prejump.com) emerged as a solution to this problem, transforming how players discover and access training content.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "This case study tells the story of building a comprehensive training platform that centralizes over 2,200 curated training packs through a modern web application, Discord bot integration, and seamless BakkesMod connectivity. The platform was co-founded by Mikal \"Wayprotein\" Gay, a Grand Champion player and training pack creator whose packs have been featured in official Rocket League Community Spotlights, and myself, bringing complementary expertise: Way as the subject matter expert on Rocket League training packs and coaching, and myself as the technology expert responsible for the platform's architecture and implementation.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Built with Laravel, Inertia.js, React, and TypeScript, the platform represents our collaborative journey from identifying a community need to delivering a technical solution that serves active players. Way's deep understanding of training pack content, player needs, and community dynamics informed every feature, while his contributions extended beyond content curation to core code development.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Key Achievements",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Platform achievements at a glance",
+      "headers": ["Achievement", "Impact"],
+      "rows": [
+        ["2,200+ Training Packs", "Largest centralized database of Rocket League training content"],
+        [
+          "Discord Bot Integration",
+          "Training pack discovery directly in Discord servers where players gather"
+        ],
+        ["BakkesMod Integration", "Single click loading eliminates manual code entry"]
+      ]
+    }
+  },
+  { "type": "divider" },
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "The Problem",
+    "gutterBottom": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Context: Fragmented Training Resources",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The story begins in the Rocket League community, a vibrant ecosystem of over 100 million players worldwide where competitive improvement drives constant skill development. Training packs, custom scenarios that allow players to practice specific mechanics like aerials, dribbling, or saves, are essential tools for skill development. Yet, despite their importance, these resources existed in chaos.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "We understood this problem from the inside. Expertise in training pack creation, player development, and community needs became the foundation for what would become Prejump.com.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "The Challenge",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Through subject matter expertise, we identified that Rocket League players faced significant obstacles when trying to find relevant training packs:",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Problems players faced before Prejump.com",
+      "headers": ["Problem", "Impact"],
+      "rows": [
+        [
+          "Scattered resources",
+          "Training packs spread across Reddit, Discord, YouTube, and various websites made discovery time consuming"
+        ],
+        [
+          "No centralized search",
+          "Players searched multiple sources with no way to filter by difficulty, creator, or training focus"
+        ],
+        [
+          "Manual code entry",
+          "Players manually entered training pack codes into Rocket League, creating friction in the training workflow"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Quantifying the Impact",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The scale of the problem became clear: over 2,200 training packs existed across the community, but they were scattered across multiple platforms without centralization, making them difficult to discover and access. This fragmentation created a barrier between players and the resources they needed to improve.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Recognizing this challenge, our vision for Prejump.com began to take shape. Subject matter expertise in training packs and player development, combined with my technical expertise in building scalable web platforms, created a partnership where each of us could focus on our strengths while contributing across the entire project. Understanding of what players actually needed informed every technical decision, while contributions to core code development ensured the platform reflected both technical excellence and deep domain knowledge.",
+    "paragraph": true
+  },
+  { "type": "divider" },
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "The Solution",
+    "gutterBottom": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Platform Overview",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Our solution emerged as a comprehensive platform designed to meet players where they are. Rather than forcing users to adapt to a single interface, we built Prejump.com to provide multiple pathways to training packs, each optimized for different contexts and workflows. Insights into how players actually discover and use training packs shaped these pathways, ensuring the platform solved real problems rather than theoretical ones.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "We addressed these challenges through a comprehensive platform that combines:",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Platform access points",
+      "headers": ["Access Point", "Technology", "Use Case"],
+      "rows": [
+        [
+          "Web Application",
+          "Laravel, React, Inertia.js",
+          "Responsive interface for browsing and searching training packs"
+        ],
+        [
+          "Discord Bot",
+          "NestJS, TypeScript",
+          "Direct access to training packs from Discord servers"
+        ],
+        [
+          "BakkesMod Plugin",
+          "C++ BakkesMod SDK, WebSocket",
+          "Single click loading directly into Rocket League, built by Way"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Key Features",
+    "gutterBottom": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Search & Discovery",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Search and discovery capabilities",
+      "headers": ["Feature", "Description"],
+      "rows": [
+        [
+          "Full Text Search",
+          "Search across 2,200+ training packs to find exactly what players need"
+        ],
+        [
+          "Filtering",
+          "Filter by difficulty (beginner, intermediate, advanced) and tags (aerials, dribbling, saves, freestyle)"
+        ],
+        ["Creator Search", "Find training packs from favorite content creators"]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Discord Bot Integration",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The Discord bot serves as a critical access point, bringing training pack discovery directly into Discord servers where Rocket League players already gather. We built it as a separate service using NestJS and TypeScript, and the bot provides:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "The /packs command enables searching training packs with comprehensive filters including query, difficulty, tags, and creator",
+      "Rich embed responses provide training pack codes, descriptions, and direct links to Prejump.com for deeper exploration",
+      "Seamless integration with Discord's slash command system ensures the bot feels native to the Discord experience"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "BakkesMod Integration",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The BakkesMod plugin, built by Way, serves as the bridge between Prejump.com and Rocket League, enabling seamless training pack loading directly from the web platform. Built in C++ using the BakkesMod SDK, the plugin establishes a WebSocket connection with Prejump.com, allowing players to load training packs with a single click from the browser.",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "WebSocket server integration enables real time communication between the web platform and Rocket League, allowing instant training pack loading",
+      "Custom GUI provides an intuitive interface within BakkesMod for managing training packs and accessing platform features",
+      "Direct loading of training packs into Rocket League eliminates the need for manual code entry, creating a frictionless workflow"
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The plugin's architecture demonstrates deep understanding of both the BakkesMod ecosystem and player training workflows. Way's expertise in training pack creation and player development informed the plugin's design, ensuring it addresses real player needs while maintaining compatibility with BakkesMod's plugin system.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "User Experience",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Responsive design ensures the platform works seamlessly on both desktop and mobile devices",
+      "Powerful search functionality enables players to quickly find training packs matching their specific needs",
+      "An intuitive interface with a public discover page makes browsing featured packs effortless for both new and experienced players"
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "With these features in place, we transformed the platform from concept to reality. Building a solution that could handle 2,200+ training packs while remaining fast and intuitive required careful architectural decisions. My role as the technology expert focused on system design, performance optimization, and scalable architecture, while Way's contributions as both content expert and core code developer ensured the platform remained grounded in real player needs throughout development.",
+    "paragraph": true
+  },
+  { "type": "divider" },
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "Challenges & Solutions",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Our path from concept to working platform was not without obstacles. Each challenge revealed something important about the problem space and pushed our solution toward greater robustness and user value. The partnership between domain expertise and technical expertise meant we could tackle problems from multiple angles: understanding what players needed and how to build it effectively.",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Challenges and solutions summary",
+      "headers": ["Challenge", "Solution Approach", "Outcome"],
+      "rows": [
+        [
+          "Aggregating 2,200+ Training Packs",
+          "Automated collection tools, data validation, manual curation workflow",
+          "Comprehensive database with verified, categorized packs"
+        ],
+        [
+          "Search Performance at Scale",
+          "Database indexes, caching layer, optimized query patterns",
+          "Fast, responsive search with complex filters"
+        ],
+        [
+          "Discord Bot Architecture",
+          "Separate NestJS service, TypeScript DTOs, rich embed responses",
+          "Independent scaling with reliable API connections"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Challenge 1: Aggregating 2,200+ Training Packs",
+    "gutterBottom": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Problem",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "We found training packs scattered across multiple sources with inconsistent formats, missing metadata, and varying quality. Manual collection would be prohibitively time consuming. Knowledge of training pack sources, quality standards, and community curation practices informed our approach to aggregation and validation.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Solution",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Developed automated tools for major sources to efficiently collect training packs at scale, with expertise guiding which sources to prioritize",
+      "Implemented data validation to ensure all pack codes are valid before being added to the database, with quality standards informed by training pack creation experience",
+      "Created a manual curation workflow combined with an admin panel for quality control and content management, leveraging subject matter expertise in training pack evaluation"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Result",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "What began as scattered resources across multiple platforms became a comprehensive database of 2,200+ verified, categorized training packs with consistent metadata. The aggregation challenge transformed into a strength: a centralized resource that no single source could match. Curation expertise ensured quality, while contributions to the codebase helped build the tools that made this aggregation possible.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Challenge 2: Search Performance at Scale",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "With thousands of training packs in the database, the next challenge emerged for us: making discovery fast and intuitive. A slow search would undermine the entire value proposition.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Problem",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "We needed full text search across 2,200+ records with multiple filters (tags, difficulty, creator) to be performant to provide good user experience.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Solution",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Implemented database indexes on frequently searched columns to dramatically improve query performance",
+      "Added a caching layer for common searches to reduce database load and provide instant results",
+      "Used optimized query patterns and database full text search capabilities to handle complex filters efficiently"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Result",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Through careful optimization, I improved search performance to handle complex filters and large result sets efficiently. The technical work paid off in user experience: players could find what they needed quickly, without waiting. Understanding of how players search for training packs informed the filter design and search functionality, ensuring the technical implementation served real user needs.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Challenge 3: Discord Bot Architecture & Scalability",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "As the Discord bot gained traction, a new challenge appeared: we needed to architect the bot as a separate service that could scale independently while maintaining fast response times and reliable connections to the main Prejump.com API. This wasn't just a technical problem. It was a user experience problem that could frustrate players at the moment they needed the platform most. Experience with Discord communities and bot interactions informed the design, while I handled the technical architecture.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Problem",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "We needed the Discord bot to be a separate service that could scale independently while maintaining fast response times and reliable connections to the main Prejump.com API. As a chat bot, Discord receives messages and sends them to the bot, which then responds with training pack information.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Solution",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Built the bot as a separate NestJS application enabling independent scaling and deployment without affecting the main platform",
+      "Designed the bot to handle incoming messages from Discord and respond with training pack information through reliable API connections to the main platform, with contributions to both the command design and core code",
+      "Created TypeScript DTOs for type safe command handling and designed rich embed responses that drive traffic back to the main platform, with content expertise shaping the embed format and information presentation"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Result",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The separate service architecture provided flexibility and reliability. The bot handles incoming messages efficiently, responding with training pack information through reliable API connections. Contributions to the bot's codebase, combined with understanding of what information players need in Discord, shaped rich embeds that not only provide immediate information but also drive traffic back to the main platform, creating a cohesive ecosystem between the bot and web application.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "These three critical challenges, when solved, didn't just fix problems. They strengthened the platform and deepened its value to the community. Each obstacle became an opportunity to build something more robust and user focused. The partnership between subject matter expertise and technical expertise meant we could approach each challenge with both domain knowledge and technical capability.",
+    "paragraph": true
+  },
+  { "type": "divider" },
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "Results & Impact",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Our journey from problem identification to solution delivery culminated in a platform that transformed how Rocket League players discover training content. The impact extends beyond technical metrics to the real experience of players using the platform. This success came from the partnership between deep understanding of the Rocket League training pack ecosystem and technical expertise in building scalable platforms.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Quantitative Metrics",
+    "gutterBottom": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Platform Scale",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Platform metrics",
+      "headers": ["Metric", "Value", "Significance"],
+      "rows": [
+        [
+          "Registered Users",
+          "3,000+",
+          "Demonstrates platform value to the Rocket League community"
+        ],
+        [
+          "Training Packs",
+          "2,200+",
+          "Largest centralized database of Rocket League training content"
+        ],
+        [
+          "Categorization",
+          "Tag based system",
+          "Organizes packs from multiple creators for efficient discovery"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Discord Bot",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Built as a separate NestJS service with TypeScript, the bot can scale independently from the main platform",
+      "Available on [Top.gg](https://top.gg/bot/854183558645809182) platform for easy server integration, making it accessible to Discord communities",
+      "Comprehensive commands with rich embed responses provide training pack codes and direct links, creating a seamless bridge between Discord and the web platform"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Technical Architecture",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": ["Optimized frontend and backend", "Scalable architecture designed to handle growth"]
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Community Impact",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The true measure of success isn't just in the numbers, but in how the platform changes the daily experience of Rocket League players. The centralized resource eliminates the frustration of searching multiple platforms. The BakkesMod integration removes friction from the training workflow. The Discord bot brings training packs into the spaces where players already gather. These aren't just features. They're solutions to real problems that players face every day, informed by subject matter expertise and built with technical excellence.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Technical Achievements",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Behind the user facing features lies a technical foundation built for reliability, maintainability, and growth. These achievements represent not just what we built, but how we built it, with attention to quality that ensures the platform can evolve with the community's needs. Contributions as both content expert and core code developer ensured the technical foundation remained aligned with real player needs throughout development.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Code Quality",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Code quality practices",
+      "headers": ["Practice", "Tool", "Benefit"],
+      "rows": [
+        ["Testing", "PHPUnit and Jest", "Ensures reliability and prevents regressions"],
+        ["Static Analysis", "PHPStan", "Type safety and early error detection"],
+        ["Code Standards", "Laravel best practices", "Maintainable and consistent codebase"]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Architecture",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Architectural decisions",
+      "headers": ["Decision", "Rationale", "Outcome"],
+      "rows": [
+        [
+          "Scalable system design",
+          "Support growth from thousands to millions of users",
+          "No architectural changes needed as platform scales"
+        ],
+        [
+          "Modern tech stack",
+          "Current best practices with flexibility",
+          "Easy to enhance and maintain"
+        ],
+        [
+          "Separation of concerns",
+          "Clear service layers and efficient database design",
+          "Maintainability and performance"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Innovation",
+    "gutterBottom": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "Innovative features",
+      "headers": ["Feature", "Description", "Impact"],
+      "rows": [
+        [
+          "Multiple Access Points",
+          "Web platform, Discord bot, and BakkesMod integration",
+          "Meets players wherever they train"
+        ],
+        [
+          "Centralized Database",
+          "Advanced search and filtering capabilities",
+          "Solves fragmentation problem at its core"
+        ],
+        [
+          "Community Driven Model",
+          "Content grows with community needs",
+          "Platform evolves with Rocket League players"
+        ]
+      ]
+    }
+  },
+  { "type": "divider" },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Frequently Asked Questions",
+    "gutterBottom": true
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "Why Laravel and Inertia.js?",
+        "secondary": "Laravel provided a robust backend framework with excellent tooling for database management, API development, and authentication. Inertia.js enabled us to build a single page application experience without the complexity of a separate API layer, allowing for faster development and a more cohesive codebase."
+      },
+      {
+        "primary": "How did you handle training pack aggregation?",
+        "secondary": "We developed automated tools to collect training packs from major sources, implemented data validation to ensure pack codes were valid, and created a manual curation workflow with an admin panel for quality control. This combination of automation and human oversight ensured both scale and quality."
+      },
+      {
+        "primary": "Why build the Discord bot as a separate service?",
+        "secondary": "Separating the Discord bot as its own NestJS service enabled independent scaling and deployment. This architecture allows the bot to handle Discord specific concerns without affecting the main platform, and provides flexibility to scale each service based on its own traffic patterns."
+      },
+      {
+        "primary": "What was the biggest technical challenge?",
+        "secondary": "Search performance at scale was the most critical challenge. With 2,200+ training packs and multiple filter options, we needed to implement database indexes, caching layers, and optimized query patterns to ensure fast, responsive search results."
+      }
+    ]
+  },
+  { "type": "divider" },
+  {
+    "type": "heading",
+    "variant": "h2",
+    "content": "Conclusion",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The story of Prejump.com is one of transformation: from fragmented resources to a centralized platform, from scattered information to organized, searchable content, from multiple disconnected tools to an integrated ecosystem. It's a story that demonstrates how technical skills, when combined with deep domain expertise, can create genuine value for a community.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "What began as recognition of a community problem became a platform that serves over 3,000 registered users. The journey from identifying fragmented training resources to building a centralized, searchable platform demonstrates the full cycle of software engineering: problem identification, solution design, technical implementation, and continuous improvement. This success came from the partnership between Way's subject matter expertise and my technical expertise in building scalable platforms, with both of us contributing to core code development throughout the project.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Key Achievements",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "A centralized platform with 2,200+ training packs indexed and searchable solves the fragmentation problem that plagued the community",
+      "Multiple access points through web application, Discord bot, and BakkesMod integration meet players wherever they train",
+      "Modern, scalable architecture demonstrates full stack capabilities while serving as a valuable resource for the Rocket League training community"
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Reflection",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Prejump.com demonstrates full stack development, API integration across multiple platforms, and problem solving that addresses real user needs. The partnership between Way's subject matter expertise and my technical expertise enabled us to build a platform that serves the Rocket League community while maintaining code quality and scalable architecture.",
+    "paragraph": true
+  }
+]

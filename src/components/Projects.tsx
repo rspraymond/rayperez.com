@@ -3,6 +3,8 @@ import { CardContent, CardActions, Typography, Button, Box, Chip } from '@mui/ma
 import CodeIcon from '@mui/icons-material/Code'
 import LaunchIcon from '@mui/icons-material/Launch'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import ArticleIcon from '@mui/icons-material/Article'
+import { Link } from 'react-router-dom'
 import SectionCard from './SectionCard'
 
 type Project = {
@@ -11,6 +13,7 @@ type Project = {
   technologies: string[]
   liveUrl: string
   githubUrl?: string
+  caseStudyUrl?: string
   featured?: boolean
 }
 
@@ -98,6 +101,19 @@ const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => {
                     aria-label={`View ${project.title} source code on GitHub (opens in new window)`}
                   >
                     Source Code
+                  </Button>
+                )}
+                {project.caseStudyUrl && (
+                  <Button
+                    size='small'
+                    color='secondary'
+                    component={Link}
+                    to={project.caseStudyUrl}
+                    startIcon={<ArticleIcon fontSize='small' />}
+                    sx={{ textTransform: 'none' }}
+                    aria-label={`View case study for ${project.title}`}
+                  >
+                    View Case Study
                   </Button>
                 )}
               </CardActions>

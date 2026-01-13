@@ -16,6 +16,7 @@ Thank you for considering contributing to this project! This document outlines t
 - [SEO Guidelines](#seo-guidelines)
 - [Style Guide](#style-guide)
 - [Article Guidelines](#article-guidelines)
+- [Case Study Guidelines](#case-study-guidelines)
 - [Release Process](#release-process)
 
 ## Quick Reference
@@ -75,6 +76,9 @@ Thank you for considering contributing to this project! This document outlines t
 | Article metadata      | `src/constants/posts.ts`               |
 | JSON article content  | `src/data/articles/`                   |
 | Article wrappers      | `src/pages/articles/`                  |
+| Case study metadata   | `src/constants/caseStudies.ts`         |
+| Case study content    | `src/data/case-studies/`               |
+| Case study pages      | `src/pages/case-studies/`              |
 
 ## Development Setup
 
@@ -377,9 +381,11 @@ rayperez-site/
 │   ├── components/     # Reusable UI components
 │   │   └── ...
 │   ├── data/           # JSON-driven content
-│   │   └── articles/   # Article JSON files (e.g., WhyReactJS.json)
+│   │   ├── articles/   # Article JSON files (e.g., WhyReactJS.json)
+│   │   └── case-studies/ # Case study content and metadata JSON files
 │   ├── pages/          # Page components (lazy-loaded)
-│   │   └── articles/   # Blog article pages
+│   │   ├── articles/   # Blog article pages
+│   │   └── case-studies/ # Case study page components
 │   ├── static/         # Static content
 │   ├── App.tsx         # Main App component with route definitions
 │   └── main.tsx        # Entry point with preloading configuration
@@ -430,8 +436,10 @@ rayperez-site/
 
 - Place all page components in the `src/pages` directory
 - Article pages should go in the `src/pages/articles` directory
+- Case study pages should go in the `src/pages/case-studies` directory
 - Follow the established article structure for consistency
 - When adding new article pages, update the post list in `RecentPosts.tsx` to include the new article
+- Case studies are automatically routed when added to `src/constants/caseStudies.ts`
 
 ### Constants and Configuration
 
@@ -777,6 +785,157 @@ When adding a new article:
 
 Add your post's metadata (title, date, path, and component import) to `src/constants/posts.ts`. This array is the single source for routing, navigation, and the sidebar. No other changes are needed.
 
+## Case Study Guidelines
+
+Case studies provide detailed documentation of project work, including problem-solving approaches, technical decisions, and outcomes. They integrate with the projects list to offer deeper insights into specific projects.
+
+### File Structure
+
+- Case study page components: `src/pages/case-studies/`
+- Case study content JSON: `src/data/case-studies/[name].json`
+- Case study metadata JSON: `src/data/case-studies/[name]-metadata.json`
+- Case study routing: `src/constants/caseStudies.ts`
+- Type definitions: `src/types/caseStudy.ts`
+
+### Case Study Components
+
+A case study consists of three parts:
+
+1. **Metadata** (`[name]-metadata.json`): Project details displayed in a sidebar card
+2. **Content** (`[name].json`): The narrative content using the same `ArticleDocument` schema as articles
+3. **Page Component** (`[name].tsx`): Wrapper that combines metadata and content
+
+### Creating a New Case Study
+
+#### Step 1: Create Metadata File
+
+Create `src/data/case-studies/[name]-metadata.json`:
+
+```json
+{
+  "project": "Project Name",
+  "role": "Your Role",
+  "timeline": "Duration or Status",
+  "techStack": ["Technology 1", "Technology 2"],
+  "links": [
+    {
+      "url": "https://example.com",
+      "label": "Visit Project",
+      "ariaLabel": "Visit Project Name (opens in new window)"
+    }
+  ]
+}
+```
+
+#### Step 2: Create Content File
+
+Create `src/data/case-studies/[name].json` following the `ArticleDocument` schema (same as articles). You can use markdown-style links in paragraph content: `[link text](https://url.com)`.
+
+#### Step 3: Create Page Component
+
+Create `src/pages/case-studies/[Name].tsx`:
+
+```tsx
+import React from 'react'
+import JsonBlogPost from '../../components/JsonBlogPost'
+import { ArticleContent } from '../../types/articleContent'
+import { caseStudies } from '../../constants/caseStudies'
+import articleContent from '../../data/case-studies/[name].json'
+import caseStudyMetadata from '../../data/case-studies/[name]-metadata.json'
+import { PROFILE } from '../../constants/profile'
+import { Box, Typography, Chip, Stack, Link, Card, CardContent, Divider } from '@mui/material'
+import LaunchIcon from '@mui/icons-material/Launch'
+import { useLocation } from 'react-router-dom'
+import { CaseStudyMetadata } from '../../types/caseStudy'
+
+const metadata = caseStudyMetadata as CaseStudyMetadata
+
+const [Name]: React.FC = () => {
+  const location = useLocation()
+  const caseStudy = caseStudies.find((cs) => cs.path === location.pathname)
+
+  if (!caseStudy) {
+    return (
+      <JsonBlogPost
+        title='Case Study Title'
+        author={PROFILE.name}
+        date='YYYY-MM-DD'
+        content={articleContent as ArticleContent[]}
+      />
+    )
+  }
+
+  const metadataCard = (
+    <Card
+      elevation={2}
+      sx={{ borderRadius: 3, border: 1, borderColor: 'divider', bgcolor: 'background.paper' }}
+    >
+      <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
+        {/* Metadata card content - see Prejump.tsx for full example */}
+      </CardContent>
+    </Card>
+  )
+
+  return (
+    <JsonBlogPost
+      title={caseStudy.title}
+      author={PROFILE.name}
+      date={caseStudy.date}
+      content={articleContent as ArticleContent[]}
+      metadata={metadataCard}
+    />
+  )
+}
+
+export default [Name]
+```
+
+#### Step 4: Register Route
+
+Add the case study to `src/constants/caseStudies.ts`:
+
+```tsx
+{
+  title: 'Case Study Title',
+  date: 'YYYY-MM-DD',
+  path: '/case-studies/[name]',
+  project: 'Project Name',
+  role: 'Your Role',
+  timeline: 'Duration or Status',
+  Component: lazy(() => import('../pages/case-studies/[Name]')),
+}
+```
+
+#### Step 5: Link from Project
+
+Add `caseStudyUrl` to the project entry in `src/data/content/projects.json`:
+
+```json
+{
+  "title": "Project Name",
+  "caseStudyUrl": "/case-studies/[name]"
+  // ... other project fields
+}
+```
+
+### Case Study Content Guidelines
+
+- Use the same `ArticleDocument` schema as articles
+- Include sections like: Executive Summary, Problem, Solution, Challenges & Solutions, Results & Impact, Conclusion
+- Use markdown-style links in paragraph content: `[text](url)`
+- Include tables, lists, and code examples as appropriate
+- Focus on technical decisions, problem-solving, and measurable outcomes
+
+### Integration with Projects
+
+- Projects can optionally link to case studies via the `caseStudyUrl` field
+- The `Projects` component automatically displays a "View Case Study" button when `caseStudyUrl` is present
+- Case studies are accessible via direct URL even without project links
+
+### Example
+
+See `src/pages/case-studies/Prejump.tsx` and `src/data/case-studies/prejump.json` for a complete reference implementation.
+
 ## Content Flow
 
 This section explains how to update site content that is stored in structured data files. The content data in `src/data/content/` is the **source of truth** for site content, ensuring consistency across the site and other assets.
@@ -787,14 +946,14 @@ Site content is stored in structured JSON files in `src/data/content/`. These fi
 
 ### Content Data Files
 
-| File                | Content Type                                                          | Used By                 |
-| ------------------- | --------------------------------------------------------------------- | ----------------------- |
-| `profile.json`      | Profile information (name, role, image, email, location, description) | `ProfileCard` component |
-| `summary.json`      | Professional summary text                                             | `Summary` component     |
-| `projects.json`     | Project portfolio items (title, description, technologies, URLs)      | `Home` page             |
-| `achievements.json` | Achievement list items                                                | `Home` page             |
-| `experiences.json`  | Work experience entries (title, company, duration, bullets)           | `Home` page             |
-| `education.json`    | Education entries (degree, school, duration, details)                 | `Home` page             |
+| File                | Content Type                                                                            | Used By                 |
+| ------------------- | --------------------------------------------------------------------------------------- | ----------------------- |
+| `profile.json`      | Profile information (name, role, image, email, location, description)                   | `ProfileCard` component |
+| `summary.json`      | Professional summary text                                                               | `Summary` component     |
+| `projects.json`     | Project portfolio items (title, description, technologies, URLs, optional caseStudyUrl) | `Home` page             |
+| `achievements.json` | Achievement list items                                                                  | `Home` page             |
+| `experiences.json`  | Work experience entries (title, company, duration, bullets)                             | `Home` page             |
+| `education.json`    | Education entries (degree, school, duration, details)                                   | `Home` page             |
 
 ### Updating Content Data
 

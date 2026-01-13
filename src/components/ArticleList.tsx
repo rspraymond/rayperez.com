@@ -8,8 +8,10 @@ import {
   Box,
   Link,
   useTheme,
+  Typography,
 } from '@mui/material'
 import { SxProps, Theme } from '@mui/material/styles'
+import { parseMarkdownLinks } from '../utils/parseMarkdownLinks'
 
 export interface ArticleListProps {
   items: string[]
@@ -108,12 +110,38 @@ const ArticleList: React.FC<ArticleListProps> = ({
             </ListItemIcon>
           )}
           <ListItemText
-            primary={item}
-            primaryTypographyProps={{
-              variant: 'body1',
-              lineHeight: 1.7,
-              color: 'text.primary',
-            }}
+            primary={
+              <Typography
+                variant='body1'
+                sx={{
+                  lineHeight: 1.7,
+                  color: 'text.primary',
+                }}
+              >
+                {parseMarkdownLinks(item).map((segment, segIndex) =>
+                  segment.type === 'link' ? (
+                    <Link
+                      key={`link-${index}-${segIndex}`}
+                      href={segment.href}
+                      target='_blank'
+                      rel={
+                        segment.href?.includes('top.gg')
+                          ? 'noopener noreferrer nofollow'
+                          : 'noopener noreferrer'
+                      }
+                      color='primary'
+                      underline='hover'
+                    >
+                      {segment.content}
+                    </Link>
+                  ) : (
+                    <React.Fragment key={`text-${index}-${segIndex}`}>
+                      {segment.content}
+                    </React.Fragment>
+                  ),
+                )}
+              </Typography>
+            }
             sx={{
               m: 0,
             }}
