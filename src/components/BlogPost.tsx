@@ -28,9 +28,17 @@ interface BlogPostProps {
   date: string
   children: React.ReactNode
   readingText?: string
+  metadata?: React.ReactNode
 }
 
-const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children, readingText }) => {
+const BlogPost: React.FC<BlogPostProps> = ({
+  title,
+  author,
+  date,
+  children,
+  readingText,
+  metadata,
+}) => {
   const { showBackToTop, scrollToTop } = useScrollToTop()
   const location = useLocation()
   const { isBookmarked, toggleBookmark } = useBookmarks()
@@ -135,6 +143,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, author, date, children, read
               <LoadingSkeleton testId='reading-time' />
             )}
           </Box>
+          {metadata && <Box sx={{ mb: 2 }}>{metadata}</Box>}
           <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
             <TableOfContents />
           </Suspense>

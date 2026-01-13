@@ -9,9 +9,10 @@ interface JsonBlogPostProps {
   author: string
   date: string
   content: ArticleDocument
+  metadata?: React.ReactNode
 }
 
-const JsonBlogPost: React.FC<JsonBlogPostProps> = ({ title, author, date, content }) => {
+const JsonBlogPost: React.FC<JsonBlogPostProps> = ({ title, author, date, content, metadata }) => {
   const [readingText, setReadingText] = React.useState<string | undefined>(undefined)
 
   React.useEffect(() => {
@@ -22,7 +23,13 @@ const JsonBlogPost: React.FC<JsonBlogPostProps> = ({ title, author, date, conten
   }, [content])
 
   return (
-    <BlogPost title={title} author={author} date={date} readingText={readingText}>
+    <BlogPost
+      title={title}
+      author={author}
+      date={date}
+      readingText={readingText}
+      metadata={metadata}
+    >
       <ArticleRenderer content={content} />
     </BlogPost>
   )

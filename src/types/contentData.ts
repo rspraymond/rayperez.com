@@ -25,6 +25,7 @@ export interface Project {
   technologies: string[]
   liveUrl: string
   githubUrl?: string
+  caseStudyUrl?: string
   featured: boolean
 }
 

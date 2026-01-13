@@ -15,6 +15,7 @@ import {
 import LazySyntaxHighlighter from './LazySyntaxHighlighter'
 import ArticleList, { ArticleComplexList } from './ArticleList'
 import { ArticleContent } from '../types/articleContent'
+import { parseMarkdownLinks } from '../utils/parseMarkdownLinks'
 
 interface ArticleRendererProps {
   content: ArticleContent[]
@@ -36,15 +37,37 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
     </Typography>
   )
 
-  const renderParagraph = (item: ArticleContent, index: number): React.ReactElement => (
-    <Typography
-      key={`paragraph-${index}`}
-      variant={item.variant || 'body1'}
-      paragraph={item.paragraph}
-    >
-      {item.content}
-    </Typography>
-  )
+  const renderParagraph = (item: ArticleContent, index: number): React.ReactElement => {
+    const segments = parseMarkdownLinks(item.content || '')
+    return (
+      <Typography
+        key={`paragraph-${index}`}
+        variant={item.variant || 'body1'}
+        paragraph={item.paragraph}
+      >
+        {segments.map((segment, segIndex) =>
+          segment.type === 'link' ? (
+            <Link
+              key={`link-${index}-${segIndex}`}
+              href={segment.href}
+              target='_blank'
+              rel={
+                segment.href?.includes('top.gg')
+                  ? 'noopener noreferrer nofollow'
+                  : 'noopener noreferrer'
+              }
+              color='primary'
+              underline='hover'
+            >
+              {segment.content}
+            </Link>
+          ) : (
+            <React.Fragment key={`text-${index}-${segIndex}`}>{segment.content}</React.Fragment>
+          ),
+        )}
+      </Typography>
+    )
+  }
 
   const renderList = (item: ArticleContent, index: number): React.ReactElement => (
     <ArticleList key={`list-${index}`} items={item.items || []} hideBullets={item.hideBullets} />
