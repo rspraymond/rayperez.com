@@ -81,7 +81,7 @@ interface RecentPostsProps {
 
 const RecentPosts: React.FC<RecentPostsProps> = ({ posts = recentPosts }) => {
   const theme = useTheme()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
   const [expanded, setExpanded] = useState(isDesktop)
 
   // Update expanded state when screen size changes

@@ -80,7 +80,7 @@ interface SidebarSocialsProps {
 
 const SidebarSocials: React.FC<SidebarSocialsProps> = ({ socials = [] }) => {
   const theme = useTheme()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
   const [expanded, setExpanded] = useState(isDesktop)
 
   // Update expanded state when screen size changes

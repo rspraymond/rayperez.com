@@ -11,7 +11,7 @@ const GRAPH_API_BASE_URL = 'https://github-readme-activity-graph.vercel.app/grap
 
 const GitHubStats: React.FC = () => {
   const theme = useTheme()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
   const [expanded, setExpanded] = useState(isDesktop)
   const [modalOpen, setModalOpen] = useState(false)
 

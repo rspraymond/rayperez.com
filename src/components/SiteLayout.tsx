@@ -15,18 +15,23 @@ const SiteLayout: React.FC = () => {
     <Container
       maxWidth='xl'
       sx={{
-        py: { xs: 3, md: 5 },
-        px: { xs: 2, md: 4 },
+        py: { xs: 3, sm: 4, md: 4, lg: 5 },
+        px: { xs: 2, sm: 3, md: 3, lg: 4 },
       }}
     >
       <CssBaseline />
-      <Grid container spacing={{ xs: 3, md: 4 }} direction='row-reverse' alignItems='flex-start'>
-        <Grid item xs={12} lg={4} component='aside'>
+      <Grid
+        container
+        spacing={{ xs: 3, sm: 3.5, md: 3.5, lg: 4 }}
+        direction='row-reverse'
+        alignItems='flex-start'
+      >
+        <Grid item xs={12} md={4} component='aside'>
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: { xs: 2.5, md: 3 },
+              gap: { xs: 2.5, sm: 3, md: 3, lg: 3 },
               width: '100%',
             }}
           >
@@ -57,7 +62,7 @@ const SiteLayout: React.FC = () => {
             </Suspense>
           </Box>
         </Grid>
-        <Grid item xs={12} lg={8} component='section' sx={{ width: '100%' }}>
+        <Grid item xs={12} md={8} component='section' sx={{ width: '100%' }}>
           <Outlet />
         </Grid>
       </Grid>
