@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.95.1] - 2026-01-14
+### Bug Fixes
+
+- lower breakpoint for sidebar layout (#228)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.95.0] - 2026-01-13
 ### Features
 
