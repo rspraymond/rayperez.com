@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { posts } from '../src/constants/posts.js'
+import { caseStudies } from '../src/constants/caseStudies.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -29,7 +30,20 @@ function generateSitemap(): void {
     })
     .join('\n')
 
-  const urls = [homeUrl, postUrls].filter(Boolean).join('\n')
+  // Case study routes
+  const caseStudyUrls = caseStudies
+    .map((caseStudy) => {
+      const url = `${baseUrl}${caseStudy.path}`
+      // Use the date from case study (already in YYYY-MM-DD format)
+      const lastmod = caseStudy.date
+      return `  <url>
+    <loc>${url}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`
+    })
+    .join('\n')
+
+  const urls = [homeUrl, postUrls, caseStudyUrls].filter(Boolean).join('\n')
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -38,7 +52,7 @@ ${urls}
 
   const outputPath = path.resolve(__dirname, '../dist/sitemap.xml')
   fs.writeFileSync(outputPath, sitemap, 'utf8')
-  const totalUrls = 1 + posts.length // Home + posts
+  const totalUrls = 1 + posts.length + caseStudies.length // Home + posts + case studies
   console.log(`✅ Sitemap generated with ${totalUrls} URLs at ${outputPath}`)
 }
 
