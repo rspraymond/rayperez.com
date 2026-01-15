@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.96.0] - 2026-01-15
+### Features
+
+- add case studies to sitemap (#229)
+
+
+
 ## [0.95.1] - 2026-01-14
 ### Bug Fixes
 
