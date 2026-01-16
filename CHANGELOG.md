@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.96.1] - 2026-01-16
+### Bug Fixes
+
+- remove dash from material ui
+
+
+
 ## [0.96.0] - 2026-01-15
 ### Features
 
