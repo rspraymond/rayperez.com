@@ -21,7 +21,7 @@ describe('ArticleRenderer - Divider Content', () => {
 
     render(<ArticleRenderer content={content} />)
 
-    // Material-UI Divider renders as an hr element
+    // Material UI Divider renders as an hr element
     expect(document.querySelector('hr')).toBeInTheDocument()
   })
 })

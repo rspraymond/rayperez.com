@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import Links from './Links'
 
-// Mock Material-UI's useMediaQuery and useTheme hooks
+// Mock Material UI's useMediaQuery and useTheme hooks
 vi.mock('@mui/material', async () => {
   const actual = await vi.importActual('@mui/material')
   return {

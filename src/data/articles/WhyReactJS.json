@@ -161,7 +161,7 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "React's robust ecosystem significantly contributes to development speed and efficiency. With a plethora of libraries and tools available, developers can easily find solutions to common problems, reducing the time spent on boilerplate code. For instance, libraries like Formik or React Hook Form simplify form handling, while libraries like React Router make routing a breeze. Moreover, the availability of UI libraries like Material-UI or Ant Design can significantly speed up the development of user interfaces.",
+    "content": "React's robust ecosystem significantly contributes to development speed and efficiency. With a plethora of libraries and tools available, developers can easily find solutions to common problems, reducing the time spent on boilerplate code. For instance, libraries like Formik or React Hook Form simplify form handling, while libraries like React Router make routing a breeze. Moreover, the availability of UI libraries like Material UI or Ant Design can significantly speed up the development of user interfaces.",
     "paragraph": true
   },
   {
@@ -198,7 +198,7 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "React's versatility and extensive ecosystem are other compelling reasons for its preference. React is not just a library for building web applications. It can also be used for mobile app development with React Native, static site generation with Gatsby, server-side rendering with Next.js, and much more. This versatility allows developers to leverage their React knowledge across a wide range of applications, thereby enhancing their productivity and efficiency. Moreover, React's ecosystem is rich and vibrant, with a plethora of libraries and tools that can enhance your development experience. From state management libraries like Redux and MobX, to UI libraries like Material-UI and Ant Design, to testing libraries like Jest and Enzyme, React's ecosystem has something for every need.",
+    "content": "React's versatility and extensive ecosystem are other compelling reasons for its preference. React is not just a library for building web applications. It can also be used for mobile app development with React Native, static site generation with Gatsby, server-side rendering with Next.js, and much more. This versatility allows developers to leverage their React knowledge across a wide range of applications, thereby enhancing their productivity and efficiency. Moreover, React's ecosystem is rich and vibrant, with a plethora of libraries and tools that can enhance your development experience. From state management libraries like Redux and MobX, to UI libraries like Material UI and Ant Design, to testing libraries like Jest and Enzyme, React's ecosystem has something for every need.",
     "paragraph": true
   },
   {

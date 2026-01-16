@@ -33,7 +33,7 @@ describe('Education', () => {
     render(<Education {...props} />)
 
     // Assert
-    // Check for correct Material-UI typography classes
+    // Check for correct Material UI typography classes
     const headingElement = screen.getByText(props.degree)
     expect(headingElement.classList.toString()).toContain('MuiTypography-h6')
 
