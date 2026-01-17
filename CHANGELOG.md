@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.97.0] - 2026-01-17
+### Features
+
+- add site footer (#230)
+
+
+
 ## [0.96.1] - 2026-01-16
 ### Bug Fixes
 
