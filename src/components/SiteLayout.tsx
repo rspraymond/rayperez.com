@@ -3,6 +3,7 @@ import { Container, CssBaseline, Box, Grid } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import LoadingSkeleton from './LoadingSkeleton'
+import Footer from './Footer'
 
 const ProfileCard = lazy(() => import('./ProfileCard'))
 const GitHubStats = lazy(() => import('./GitHubStats'))
@@ -66,6 +67,7 @@ const SiteLayout: React.FC = () => {
           <Outlet />
         </Grid>
       </Grid>
+      <Footer />
     </Container>
   )
 }
