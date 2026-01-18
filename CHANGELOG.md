@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.97.1] - 2026-01-18
+### Bug Fixes
+
+- remove rss feed from header (#231)
+
+
+
 ## [0.97.0] - 2026-01-17
 ### Features
 
