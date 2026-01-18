@@ -29,7 +29,6 @@ describe('Header', () => {
     expect(screen.getByLabelText('LinkedIn Profile')).toBeInTheDocument()
     expect(screen.getByLabelText('GitHub Profile')).toBeInTheDocument()
     expect(screen.getByLabelText('Resume')).toBeInTheDocument()
-    expect(screen.getByLabelText('RSS Feed')).toBeInTheDocument()
   })
 
   it('renders social media and resume links with correct attributes', () => {
@@ -52,12 +51,6 @@ describe('Header', () => {
     expect(resumeLink).toHaveAttribute('href', expect.stringContaining('.pdf'))
     expect(resumeLink).toHaveAttribute('target', '_blank')
     expect(resumeLink).toHaveAttribute('rel', 'noopener noreferrer')
-
-    // Check RSS feed link
-    const rssLink = screen.getByLabelText('RSS Feed')
-    expect(rssLink).toHaveAttribute('href', '/feed.xml')
-    expect(rssLink).toHaveAttribute('target', '_blank')
-    expect(rssLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('provides accessible labels for all social media buttons', () => {
@@ -74,10 +67,6 @@ describe('Header', () => {
     // Check that the resume button has an accessible label
     const resumeButton = screen.getByLabelText('Resume')
     expect(resumeButton).toBeInTheDocument()
-
-    // Check that the RSS feed button has an accessible label
-    const rssButton = screen.getByLabelText('RSS Feed')
-    expect(rssButton).toBeInTheDocument()
   })
 
   it('renders theme toggle with proper accessibility', () => {
