@@ -63,7 +63,15 @@ const SiteLayout: React.FC = () => {
             </Suspense>
           </Box>
         </Grid>
-        <Grid item xs={12} md={8} component='section' sx={{ width: '100%' }}>
+        <Grid
+          item
+          xs={12}
+          md={8}
+          component='main'
+          id='main-content'
+          tabIndex={-1}
+          sx={{ width: '100%' }}
+        >
           <Outlet />
         </Grid>
       </Grid>

@@ -84,4 +84,12 @@ describe('NotFound', () => {
     const homeButton = screen.getByText('Go to Home Page')
     expect(homeButton.closest('a')).toHaveAttribute('href', '/')
   })
+
+  it('renders root with id main-content and tabIndex -1 for focus target', () => {
+    renderComponent()
+
+    const main = screen.getByRole('main')
+    expect(main).toHaveAttribute('id', 'main-content')
+    expect(main).toHaveAttribute('tabIndex', '-1')
+  })
 })

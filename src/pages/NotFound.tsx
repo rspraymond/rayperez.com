@@ -7,6 +7,9 @@ import SocialMeta from '../components/SocialMeta'
 const NotFound: React.FC = () => {
   return (
     <Box
+      component='main'
+      id='main-content'
+      tabIndex={-1}
       display='flex'
       flexDirection='column'
       alignItems='center'

@@ -7,6 +7,7 @@ import { useTheme } from '../contexts/useTheme'
 import { posts } from '../constants/posts'
 import { caseStudies } from '../constants/caseStudies'
 import HashRedirectHandler from './HashRedirectHandler'
+import ScrollAndFocusReset from './ScrollAndFocusReset'
 import SiteLayout from './SiteLayout'
 
 const Home = lazy(() => import('../pages/Home'))
@@ -20,6 +21,7 @@ const AppContent: React.FC = () => {
       <PrintStyles />
       <BrowserRouter>
         <HashRedirectHandler />
+        <ScrollAndFocusReset />
         <Routes>
           <Route element={<SiteLayout />}>
             <Route
