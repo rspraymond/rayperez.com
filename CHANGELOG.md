@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.98.0] - 2026-01-19
+### Features
+
+- reset focus on route change (#232)
+
+
+
 ## [0.97.1] - 2026-01-18
 ### Bug Fixes
 
