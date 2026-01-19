@@ -66,6 +66,22 @@ describe('SiteLayout', () => {
     expect(screen.getByTestId('mock-sidebar-socials')).toBeInTheDocument()
   })
 
+  it('renders main content with id main-content and tabIndex -1 for focus target', () => {
+    renderWithProviders(
+      <MemoryRouter>
+        <Routes>
+          <Route path='/' element={<SiteLayout />}>
+            <Route index element={<div>outlet content</div>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>,
+    )
+
+    const main = screen.getByRole('main')
+    expect(main).toHaveAttribute('id', 'main-content')
+    expect(main).toHaveAttribute('tabIndex', '-1')
+  })
+
   it('passes expected socials props to SidebarSocials', () => {
     renderWithProviders(
       <MemoryRouter>

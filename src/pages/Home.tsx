@@ -66,7 +66,7 @@ const Home: React.FC = () => {
         type='profile'
       />
       <Container
-        component='main'
+        component='div'
         maxWidth='md'
         sx={{
           py: { xs: 4, md: 6 },
