@@ -10,7 +10,7 @@
   {
     "title": "Twitch Clips Finder",
     "description": "A utility tool for discovering and organizing Twitch clips with advanced search and filtering capabilities.",
-    "technologies": ["Next.js", "Material UI", "TypeScript", "Twitch API"],
+    "technologies": ["Laravel", "Inertia.js", "React", "Material UI", "TypeScript", "Twitch API"],
     "liveUrl": "https://clipsfinder.com",
     "featured": false
   },
