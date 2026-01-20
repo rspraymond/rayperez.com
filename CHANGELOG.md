@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.98.1] - 2026-01-20
+### Bug Fixes
+
+- update clipsfinder tech stack (#233)
+
+
+
 ## [0.98.0] - 2026-01-19
 ### Features
 
