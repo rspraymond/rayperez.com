@@ -2,8 +2,12 @@
   {
     "title": "Senior Software Engineer",
     "company": "Pronomix",
-    "duration": "Oct 2025 - Present",
-    "bullets": ["Recently joined to contribute to AI-driven programmatic advertising solutions."]
+    "duration": "Oct 2025 - Jan 2026",
+    "bullets": [
+      "Added CI/CD code analysis for laravel, enabling safer releases.",
+      "Built ETL process for Amazon ad revenue reporting: Laravel scheduled command consuming SQS, MySQL and internal API mapping clicks to revenue for attribution and ad insights.",
+      "Built Slack notification system with CloudWatch, Lambda (Node.js, TypeScript), and CloudFormation for error alerts, improving telemetry and incident response."
+    ]
   },
   {
     "title": "Senior Software Engineer",
