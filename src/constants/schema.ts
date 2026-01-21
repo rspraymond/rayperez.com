@@ -6,10 +6,6 @@ export const PERSON_SCHEMA = {
   '@type': 'Person',
   name: PROFILE.name,
   jobTitle: PROFILE.role,
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Pronomix',
-  },
   alumniOf: {
     '@type': 'CollegeOrUniversity',
     name: 'Red Rocks Community College',
