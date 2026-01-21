@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.98.2] - 2026-01-21
+### Bug Fixes
+
+- update experience (#234)
+
+
+
 ## [0.98.1] - 2026-01-20
 ### Bug Fixes
 
