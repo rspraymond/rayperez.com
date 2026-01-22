@@ -23,7 +23,7 @@ function generateResumeManifest(): void {
 
   // Scan for PDF files matching the resume pattern
   const files = fs.readdirSync(assetsDir)
-  const resumePattern = /^raymond-perez-software-engineer-resume-([A-Za-z0-9]+)\.pdf$/
+  const resumePattern = /^raymond-perez-software-engineer-resume-([A-Za-z0-9_-]+)\.pdf$/
   const resumeFile = files.find((file) => resumePattern.test(file))
 
   if (!resumeFile) {
