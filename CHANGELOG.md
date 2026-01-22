@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.98.3] - 2026-01-22
+### Bug Fixes
+
+- update resume (#235)
+
+
+
 ## [0.98.2] - 2026-01-21
 ### Bug Fixes
 
