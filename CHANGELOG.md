@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.99.0] - 2026-01-24
+### Features
+
+- update why nest article to address criticisms (#237)
+
+### Other Changes
+
+- chore: update lodash (#236)
+
+
+
 ## [0.98.3] - 2026-01-22
 ### Bug Fixes
 
