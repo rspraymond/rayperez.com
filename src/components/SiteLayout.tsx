@@ -70,7 +70,17 @@ const SiteLayout: React.FC = () => {
           component='main'
           id='main-content'
           tabIndex={-1}
-          sx={{ width: '100%' }}
+          sx={{
+            width: '100%',
+            // Hide focus outline for programmatic focus, show only for keyboard navigation
+            '&:focus': {
+              outline: 'none',
+            },
+            '&:focus-visible': {
+              outline: `2px solid ${(theme) => theme.palette.primary.main}`,
+              outlineOffset: 2,
+            },
+          }}
         >
           <Outlet />
         </Grid>
