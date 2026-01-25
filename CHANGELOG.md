@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.99.1] - 2026-01-25
+### Bug Fixes
+
+- eliminate unintended focus (#238)
+
+
+
 ## [0.99.0] - 2026-01-24
 ### Features
 
