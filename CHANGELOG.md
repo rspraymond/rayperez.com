@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.100.0] - 2026-01-26
+### Features
+
+- add code examples to why opinionated article (#239)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.99.1] - 2026-01-25
 ### Bug Fixes
 
