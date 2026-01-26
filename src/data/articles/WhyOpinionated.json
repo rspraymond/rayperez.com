@@ -6,15 +6,15 @@
     "complexItems": [
       {
         "primary": "Structured Efficiency",
-        "secondary": "Opinionated frameworks streamline development by enforcing best practices and providing built-in solutions, reducing decision fatigue and accelerating development cycles."
+        "secondary": "Opinionated frameworks streamline development by enforcing best practices and providing built in solutions, reducing decision fatigue and accelerating development cycles."
       },
       {
         "primary": "Safety and Consistency",
         "secondary": "By adhering to predefined conventions, these frameworks ensure consistency, making maintenance and scalability more manageable."
       },
       {
-        "primary": "Long-term Productivity Gains",
-        "secondary": "Despite an initial learning curve, the long-term benefits include greater productivity and efficiency, thanks to a cohesive environment and community support."
+        "primary": "Long Term Productivity Gains",
+        "secondary": "Despite an initial learning curve, the long term benefits include greater productivity and efficiency, thanks to a cohesive environment and community support."
       }
     ]
   },
@@ -52,28 +52,28 @@
       "rows": [
         [
           "Consistency & Standards",
-          "Enforced best practices and coding conventions",
-          "Reduces errors and technical debt"
+          "Enforced Best Practices And Coding Conventions",
+          "Reduces Errors And Technical Debt"
         ],
         [
           "Efficiency & Productivity",
-          "Faster development cycles with built-in solutions",
-          "Accelerates time-to-market"
+          "Faster Development Cycles With Built In Solutions",
+          "Accelerates Time To Market"
         ],
         [
           "Safety & Security",
-          "Secure defaults and robust error handling",
-          "Protects against vulnerabilities"
+          "Secure Defaults And Robust Error Handling",
+          "Protects Against Vulnerabilities"
         ],
         [
           "Maintainability",
-          "Structured codebase with clear patterns",
-          "Easier long-term maintenance"
+          "Structured Codebase With Clear Patterns",
+          "Easier Long Term Maintenance"
         ],
         [
           "Team Collaboration",
-          "Common conventions across team members",
-          "Faster onboarding and knowledge sharing"
+          "Common Conventions Across Team Members",
+          "Faster Onboarding And Knowledge Sharing"
         ]
       ]
     }
@@ -113,9 +113,26 @@
   {
     "type": "list",
     "items": [
-      "Faster Development Cycles: With a clear structure and predefined components, developers can quickly move from concept to implementation. This speed is crucial in today's fast-paced tech environment, where time-to-market can be a significant competitive advantage.",
-      "Built-in Solutions for Common Problems: Opinionated frameworks often come with built-in solutions for recurring challenges, such as authentication, routing, and data management. This means developers spend less time reinventing the wheel and more time on innovation."
+      "Faster Development Cycles: With a clear structure and predefined components, developers can quickly move from concept to implementation. This speed is crucial in today's fast paced tech environment, where time to market can be a significant competitive advantage.",
+      "Built In Solutions for Common Problems: Opinionated frameworks often come with built in solutions for recurring challenges, such as authentication, routing, and data management. This means developers spend less time reinventing the wheel and more time on innovation."
     ]
+  },
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Code Example: Validation (Laravel vs Slim)",
+    "gutterBottom": true
+  },
+  {
+    "type": "code",
+    "language": "php",
+    "code": "// Laravel (Opinionated)\n$request->validate(['email' => 'required|email']);\n\n// Slim (Unopinionated)\n$data = $request->getParsedBody();\nif (!isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {\n    return $response->withStatus(422);\n}"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "While micro frameworks like Slim are lightweight, they require more manual implementation for standard tasks like validation, whereas Laravel provides these out of the box with safe defaults.",
+    "paragraph": true
   },
 
   {
@@ -133,9 +150,26 @@
   {
     "type": "list",
     "items": [
-      "Secure Defaults and Error Handling: By offering secure default settings and robust error-handling mechanisms, these frameworks help protect applications from vulnerabilities and ensure smooth operation.",
+      "Secure Defaults and Error Handling: By offering secure default settings and robust error handling mechanisms, these frameworks help protect applications from vulnerabilities and ensure smooth operation.",
       "Easier Maintenance and Scalability: The structured nature of opinionated frameworks makes it easier to maintain and scale applications. With a clear architecture and consistent coding practices, teams can onboard new developers more quickly and adapt to changing requirements with ease."
     ]
+  },
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Code Example: Middleware",
+    "gutterBottom": true
+  },
+  {
+    "type": "code",
+    "language": "php",
+    "code": "Route::get('/admin', function () {\n    // Admin logic\n})->middleware('auth', 'admin');"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Middleware provides a consistent way to filter HTTP requests entering your application, ensuring security concerns are handled uniformly across all routes.",
+    "paragraph": true
   },
 
   {
@@ -147,7 +181,7 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Laravel stands out as a shining example of an opinionated framework that has won the hearts of developers worldwide. Known for its elegant syntax and developer-friendly approach, Laravel embodies a philosophy of simplicity and power. It offers a comprehensive suite of tools that cater to a wide range of development needs, from small projects to large-scale enterprise applications.",
+    "content": "Laravel stands out as a shining example of an opinionated framework that has won the hearts of developers worldwide. Known for its elegant syntax and developer friendly approach, Laravel embodies a philosophy of simplicity and power. It offers a comprehensive suite of tools that cater to a wide range of development needs, from small projects to large scale enterprise applications.",
     "paragraph": true
   },
   { "type": "heading", "variant": "h6", "content": "Code Example: Routing", "gutterBottom": true },
@@ -168,7 +202,7 @@
     "content": "Code Example: Eloquent ORM",
     "gutterBottom": true
   },
-  { "type": "code", "language": "php", "code": "$users = App\\\\Models\\\\User::all();" },
+  { "type": "code", "language": "php", "code": "$users = App\\Models\\User::all();" },
   {
     "type": "paragraph",
     "variant": "body1",
@@ -178,7 +212,24 @@
   {
     "type": "heading",
     "variant": "h6",
-    "content": "Built-in Tools and Features",
+    "content": "Code Example: Artisan CLI",
+    "gutterBottom": true
+  },
+  {
+    "type": "code",
+    "language": "bash",
+    "code": "php artisan make:model Post -mcr"
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "This single command generates a Model, a database Migration, a Controller, and Resource routes, illustrating how opinionated frameworks automate repetitive tasks to boost developer productivity.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Built In Tools and Features",
     "gutterBottom": true
   },
   {
@@ -189,53 +240,53 @@
       "rows": [
         [
           "Eloquent ORM",
-          "Active Record implementation for database operations",
-          "Simplifies database interactions with intuitive syntax"
+          "Active Record Implementation For Database Operations",
+          "Simplifies Database Interactions With Intuitive Syntax"
         ],
         [
           "Authentication",
-          "Complete user authentication system",
-          "Secure login/registration with minimal configuration"
+          "Complete User Authentication System",
+          "Secure Login Registration With Minimal Configuration"
         ],
         [
           "Routing",
-          "Expressive routing with middleware support",
-          "Clean URL structure and request handling"
+          "Expressive Routing With Middleware Support",
+          "Clean URL Structure And Request Handling"
         ],
         [
           "Validation",
-          "Built-in validation rules and error handling",
-          "Data integrity with minimal boilerplate code"
+          "Built In validation rules and error handling",
+          "Data Integrity With Minimal Boilerplate Code"
         ],
         [
           "Artisan CLI",
-          "Command-line interface for common tasks",
-          "Automates repetitive development tasks"
+          "Command Line Interface For Common Tasks",
+          "Automates Repetitive Development Tasks"
         ],
         [
           "Blade Templating",
-          "Lightweight templating engine",
-          "Clean, readable templates with inheritance"
+          "Lightweight Templating Engine",
+          "Clean Readable Templates With Inheritance"
         ],
-        ["Task Scheduling", "Cron-like task scheduling", "Automated background job processing"],
+        ["Task Scheduling", "Cron Like Task Scheduling", "Automated Background Job Processing"],
         [
           "Event Broadcasting",
-          "Real-time event broadcasting",
-          "WebSocket support for live updates"
+          "Real Time Event Broadcasting",
+          "WebSocket Support For Live Updates"
         ],
         [
           "Database Migrations",
-          "Version control for database schema",
-          "Collaborative database development"
+          "Version Control For Database Schema",
+          "Collaborative Database Development"
         ],
-        ["Testing Suite", "Built-in PHPUnit integration", "Comprehensive testing capabilities"]
+        ["Testing Suite", "Built In PHPUnit Integration", "Comprehensive Testing Capabilities"]
       ]
     }
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Laravel's robust ecosystem includes a plethora of built-in tools and features that address common development challenges:",
+    "content": "Laravel's robust ecosystem includes a plethora of built in tools and features that address common development challenges:",
     "paragraph": true
   },
   {
@@ -243,7 +294,7 @@
     "items": [
       "Authentication: Laravel offers a complete authentication system out of the box, allowing developers to implement secure login and registration processes with minimal effort.",
       "Validation: With Laravel's validation rules, ensuring data integrity becomes a breeze, reducing the risk of errors and inconsistencies.",
-      "Additional Features: From task scheduling to event broadcasting, Laravel provides a rich set of functionalities that empower developers to build feature-rich applications without the overhead of integrating multiple third-party libraries."
+      "Additional Features: From task scheduling to event broadcasting, Laravel provides a rich set of functionalities that empower developers to build feature rich applications without the overhead of integrating multiple third party libraries."
     ]
   },
 
@@ -254,6 +305,40 @@
     "gutterBottom": true
   },
   {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "To understand the difference, let's look at how you might handle a common task like starting a server with basic routing and security in both worlds.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Unopinionated (Express.js)",
+    "gutterBottom": true
+  },
+  {
+    "type": "code",
+    "language": "javascript",
+    "code": "const express = require('express');\nconst helmet = require('helmet');\nconst app = express();\n\napp.use(helmet()); // Manual security setup\napp.get('/', (req, res) => res.send('Hello World'));\n\napp.listen(3000);"
+  },
+  {
+    "type": "heading",
+    "variant": "h6",
+    "content": "Opinionated (NestJS)",
+    "gutterBottom": true
+  },
+  {
+    "type": "code",
+    "language": "typescript",
+    "code": "@Controller()\nexport class AppController {\n  @Get()\n  getHello(): string {\n    return 'Hello World';\n  }\n}\n// Dependency injection and modular structure are built in."
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "In Express, you decide how to structure your files and manage dependencies. In NestJS, the architecture is predefined (Controllers, Providers, Modules), ensuring a consistent codebase across large teams.",
+    "paragraph": true
+  },
+  {
     "type": "table",
     "table": {
       "caption": "Opinionated vs Unopinionated: The Real Differences",
@@ -262,15 +347,15 @@
         [
           "Learning Curve",
           "Steeper initially, but standardized",
-          "Gentler start, but more decisions required"
+          "Gentler Start But More Decisions Required"
         ],
-        ["Development Speed", "Faster once learned", "Slower due to decision-making overhead"],
-        ["Flexibility", "Limited but sufficient for most cases", "High flexibility, more choices"],
-        ["Best Practices", "Built-in and enforced", "Developer must research and implement"],
+        ["Development Speed", "Faster once learned", "Slower Due To Decision Making Overhead"],
+        ["Flexibility", "Limited but sufficient for most cases", "High Flexibility More Choices"],
+        ["Best Practices", "Built In and enforced", "Developer must research and implement"],
         ["Team Onboarding", "Faster due to conventions", "Slower due to custom patterns"],
         ["Maintenance", "Easier with consistent patterns", "More complex with varied approaches"],
-        ["Community Support", "Strong, focused community", "Diverse, fragmented community"],
-        ["Examples", "Laravel, Rails, Django", "Express.js, Flask, Sinatra"]
+        ["Community Support", "Strong, focused community", "Diverse Fragmented Community"],
+        ["Examples", "Laravel, NestJS, Django", "Express.js, Flask, Sinatra"]
       ]
     }
   },
@@ -292,13 +377,13 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Another point of contention is the learning curve associated with adopting an opinionated framework. While it may take time to become proficient, the long-term benefits are undeniable:",
+    "content": "Another point of contention is the learning curve associated with adopting an opinionated framework. While it may take time to become proficient, the long term benefits are undeniable:",
     "paragraph": true
   },
   {
     "type": "list",
     "items": [
-      "Long-term Productivity Gains: Investing time in learning a framework like Laravel pays off in the long run. Once developers are familiar with its conventions and tools, they can work more efficiently and effectively, leading to increased productivity and faster project delivery."
+      "Long term Productivity Gains: Investing time in learning a framework like Laravel pays off in the long run. Once developers are familiar with its conventions and tools, they can work more efficiently and effectively, leading to increased productivity and faster project delivery."
     ]
   },
   {
@@ -353,7 +438,7 @@
         [
           "Safety First",
           "Security by design and secure defaults",
-          "Built-in protection against vulnerabilities"
+          "Built In protection against vulnerabilities"
         ],
         [
           "Quality Control",
@@ -413,15 +498,15 @@
           "Laravel",
           "Opinionated",
           "PHP",
-          "Elegant syntax, built-in tools",
+          "Elegant syntax, built in tools",
           "Web applications, APIs"
         ],
         [
-          "Ruby on Rails",
+          "NestJS",
           "Opinionated",
-          "Ruby",
-          "Convention over configuration",
-          "Rapid prototyping, startups"
+          "TypeScript",
+          "Angular Inspired Architecture DI",
+          "Enterprise JS applications"
         ],
         [
           "Django",
@@ -434,23 +519,24 @@
           "Spring Boot",
           "Opinionated",
           "Java",
-          "Enterprise features, microservices",
-          "Large-scale applications"
+          "Enterprise Features Microservices",
+          "Large scale applications"
         ],
         [
           "Express.js",
           "Unopinionated",
           "JavaScript",
-          "Minimal, flexible",
+          "Minimal Flexible",
           "APIs, custom architectures"
         ],
         [
-          "Flask",
+          "Fastify",
           "Unopinionated",
-          "Python",
-          "Lightweight, customizable",
-          "Small projects, learning"
-        ]
+          "JavaScript",
+          "High Performance Low Overhead",
+          "Fast APIs Microservices"
+        ],
+        ["Flask", "Unopinionated", "Python", "Lightweight Customizable", "Small Projects Learning"]
       ]
     }
   },
@@ -458,7 +544,7 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "As we draw this exploration to a close, the evidence clearly demonstrates that opinionated frameworks like Laravel offer measurable benefits that align closely with proven engineering principles. Research shows that teams using opinionated frameworks experience significantly faster development cycles after the initial learning period, with fewer security vulnerabilities due to built-in best practices and secure defaults.",
+    "content": "As we draw this exploration to a close, the evidence clearly demonstrates that opinionated frameworks like Laravel offer measurable benefits that align closely with proven engineering principles. Experience shows that teams using opinionated frameworks experience significantly faster development cycles after the initial learning period, with fewer security vulnerabilities due to built in best practices and secure defaults.",
     "paragraph": true
   },
   {
@@ -485,17 +571,12 @@
       "caption": "Your Decision Matrix: Which Framework Fits Your Situation?",
       "headers": ["Scenario", "Choose Opinionated", "Choose Unopinionated", "Reasoning"],
       "rows": [
-        [
-          "Team Size",
-          "Large teams (5+ developers)",
-          "Small teams (1-4 developers)",
-          "Consistency vs flexibility trade-off"
-        ],
+        ["Team Size", "Large Teams", "Small Teams", "Consistency vs flexibility trade off"],
         [
           "Project Timeline",
           "Tight deadlines",
           "Flexible timeline",
-          "Speed vs customization needs"
+          "Speed Vs Customization Needs"
         ],
         [
           "Team Experience",
@@ -507,19 +588,19 @@
           "Project Complexity",
           "Standard web applications",
           "Highly specialized needs",
-          "Convention vs custom requirements"
+          "Convention Vs Custom Requirements"
         ],
         [
-          "Long-term Maintenance",
-          "Long-term projects",
-          "Short-term prototypes",
-          "Maintainability vs rapid iteration"
+          "Long term Maintenance",
+          "Long term projects",
+          "Short term prototypes",
+          "Maintainability Vs Rapid Iteration"
         ],
         [
           "Learning Investment",
           "Willing to invest in learning",
           "Need immediate productivity",
-          "Learning curve vs immediate results"
+          "Learning Curve Vs Immediate Results"
         ]
       ]
     }
@@ -541,7 +622,7 @@
       },
       {
         "primary": "How does Laravel exemplify an opinionated framework?",
-        "secondary": "Laravel exemplifies an opinionated framework through its elegant syntax, comprehensive toolset, and adherence to best practices. It offers built-in solutions for common development tasks, such as routing, authentication, and database management, allowing developers to focus on building features rather than reinventing the wheel."
+        "secondary": "Laravel exemplifies an opinionated framework through its elegant syntax, comprehensive toolset, and adherence to best practices. It offers built in solutions for common development tasks, such as routing, authentication, and database management, allowing developers to focus on building features rather than reinventing the wheel."
       },
       {
         "primary": "Are opinionated frameworks too restrictive?",
@@ -549,11 +630,11 @@
       },
       {
         "primary": "What are the benefits of using Laravel over other frameworks?",
-        "secondary": "Laravel provides a rich ecosystem with over 70,000 GitHub stars, active community support, and a focus on developer experience. Its built-in tools and features, such as Eloquent ORM and secure authentication, simplify complex tasks and enhance productivity. Studies show Laravel projects typically have 30-40% fewer security vulnerabilities compared to custom-built solutions."
+        "secondary": "Laravel provides a rich ecosystem with active community support and a strong focus on developer experience. Its built in tools and features, such as Eloquent ORM and secure authentication, simplify complex tasks and enhance productivity. Research consistently shows that using established frameworks significantly reduces the risk of security vulnerabilities compared to custom built solutions by leveraging community driven audits and secure defaults."
       },
       {
-        "primary": "How do opinionated frameworks impact long-term project maintenance?",
-        "secondary": "Opinionated frameworks promote consistency and adherence to best practices, which simplifies long-term maintenance and scalability. With a clear structure and standardized codebase, teams can onboard new developers more easily and adapt to evolving project requirements."
+        "primary": "How do opinionated frameworks impact long term project maintenance?",
+        "secondary": "Opinionated frameworks promote consistency and adherence to best practices, which simplifies long term maintenance and scalability. With a clear structure and standardized codebase, teams can onboard new developers more easily and adapt to evolving project requirements."
       }
     ]
   },
@@ -591,7 +672,7 @@
       },
       {
         "primary": "Laravel Authentication",
-        "secondary": "Overview of Laravel's built-in authentication system.",
+        "secondary": "Overview of Laravel's built in authentication system.",
         "link": {
           "href": "https://laravel.com/docs/authentication",
           "title": "Read Authentication Guide",
@@ -600,7 +681,7 @@
       },
       {
         "primary": "Laracasts",
-        "secondary": "Community-driven platform for learning Laravel and modern web development.",
+        "secondary": "Community driven platform for learning Laravel and modern web development.",
         "link": { "href": "https://laracasts.com", "title": "Learn more", "target": "_blank" }
       }
     ]
