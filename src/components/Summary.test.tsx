@@ -58,7 +58,7 @@ describe('Summary', () => {
     // Check for unique phrases from the summary data (text is split across elements)
     expect(screen.getByText(/I am/i)).toBeInTheDocument()
     expect(screen.getByText('Raymond Perez')).toBeInTheDocument()
-    expect(screen.getByText(/full-stack development/i)).toBeInTheDocument()
+    expect(screen.getByText(/full stack development/i)).toBeInTheDocument()
     expect(screen.getByText(/opinionated frameworks/i)).toBeInTheDocument()
   })
 
