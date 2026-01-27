@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.100.1] - 2026-01-27
+### Bug Fixes
+
+- cleanup summary (#240)
+
+
+
 ## [0.100.0] - 2026-01-26
 ### Features
 
