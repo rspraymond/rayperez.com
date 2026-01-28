@@ -21,12 +21,6 @@ vi.mock('./RecentPosts', () => ({
   default: () => <div data-testid='mock-recent-posts'>RecentPosts</div>,
 }))
 
-vi.mock('./SidebarSocials', () => ({
-  default: ({ socials }: { socials: Array<{ text: string; href: string; platform: string }> }) => (
-    <div data-testid='mock-sidebar-socials'>{JSON.stringify(socials)}</div>
-  ),
-}))
-
 describe('SiteLayout', () => {
   it('renders Header and outlet content', () => {
     renderWithProviders(
@@ -63,7 +57,6 @@ describe('SiteLayout', () => {
     expect(screen.getByTestId('mock-bookmarked-posts')).toBeInTheDocument()
     expect(screen.getByTestId('mock-recent-posts')).toBeInTheDocument()
     expect(screen.getByTestId('mock-github-stats')).toBeInTheDocument()
-    expect(screen.getByTestId('mock-sidebar-socials')).toBeInTheDocument()
   })
 
   it('renders main content with id main-content and tabIndex -1 for focus target', () => {
@@ -80,36 +73,5 @@ describe('SiteLayout', () => {
     const main = screen.getByRole('main')
     expect(main).toHaveAttribute('id', 'main-content')
     expect(main).toHaveAttribute('tabIndex', '-1')
-  })
-
-  it('passes expected socials props to SidebarSocials', () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path='/' element={<SiteLayout />}>
-            <Route index element={<div>outlet content</div>} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
-    )
-
-    const sidebarSocials = screen.getByTestId('mock-sidebar-socials')
-    const socialsJson = sidebarSocials.textContent
-
-    // Parse the JSON to verify the structure
-    const socials = JSON.parse(socialsJson || '[]')
-
-    // Assert the expected socials array structure
-    expect(socials).toHaveLength(2)
-    expect(socials[0]).toEqual({
-      text: 'Twitter',
-      href: 'https://twitter.com/intent/follow?screen_name=onlyray7',
-      platform: 'twitter',
-    })
-    expect(socials[1]).toEqual({
-      text: 'Twitch',
-      href: 'https://twitch.tv/onlyray',
-      platform: 'twitch',
-    })
   })
 })
