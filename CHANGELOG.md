@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.101.0] - 2026-01-28
+### Features
+
+- move social links to footer (#241)
+
+
+
 ## [0.100.1] - 2026-01-27
 ### Bug Fixes
 
