@@ -9,7 +9,6 @@ const ProfileCard = lazy(() => import('./ProfileCard'))
 const GitHubStats = lazy(() => import('./GitHubStats'))
 const BookmarkedPosts = lazy(() => import('./BookmarkedPosts'))
 const RecentPosts = lazy(() => import('./RecentPosts'))
-const SidebarSocials = lazy(() => import('./SidebarSocials'))
 
 const SiteLayout: React.FC = () => {
   return (
@@ -48,18 +47,6 @@ const SiteLayout: React.FC = () => {
             </Suspense>
             <Suspense fallback={<LoadingSkeleton testId='github-stats' />}>
               <GitHubStats />
-            </Suspense>
-            <Suspense fallback={<LoadingSkeleton testId='sidebar-socials' />}>
-              <SidebarSocials
-                socials={[
-                  {
-                    text: 'Twitter',
-                    href: 'https://twitter.com/intent/follow?screen_name=onlyray7',
-                    platform: 'twitter',
-                  },
-                  { text: 'Twitch', href: 'https://twitch.tv/onlyray', platform: 'twitch' },
-                ]}
-              />
             </Suspense>
           </Box>
         </Grid>
