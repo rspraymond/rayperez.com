@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.101.1] - 2026-01-30
+### Bug Fixes
+
+- render recent posts as list items (#243)
+
+### Other Changes
+
+- chore: update test coverage badge
+- chore: add test coverage for case study (#242)
+
+
+
 ## [0.101.0] - 2026-01-28
 ### Features
 
