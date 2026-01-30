@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo, useMemo } from 'react'
 import {
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
   Divider,
   ListItemIcon,
@@ -44,32 +45,34 @@ const PostItem = memo(({ post, index, theme }: PostItemProps) => {
   return (
     <React.Fragment>
       {index > 0 && <Divider component='li' variant='inset' />}
-      <ListItem
-        component={RouterLinkRef}
-        to={post.path}
-        aria-current={isActive ? 'page' : undefined}
-        sx={{
-          py: 1.5,
-          px: 2,
-          color: 'text.primary',
-          textDecoration: 'none',
-          transition: 'all 0.2s ease',
-          '&:hover': {
-            bgcolor: 'action.hover',
-            transform: 'translateX(4px)',
-          },
-        }}
-      >
-        <ListItemIcon sx={{ minWidth: 32, color: theme.palette.primary.main }}>
-          <ArrowRightAltIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary={post.title}
-          primaryTypographyProps={{
-            variant: 'body2',
-            fontWeight: 'medium',
+      <ListItem disablePadding sx={{ display: 'list-item' }}>
+        <ListItemButton
+          component={RouterLinkRef}
+          to={post.path}
+          aria-current={isActive ? 'page' : undefined}
+          sx={{
+            py: 1.5,
+            px: 2,
+            color: 'text.primary',
+            textDecoration: 'none',
+            transition: 'all 0.2s ease',
+            '&:hover': {
+              bgcolor: 'action.hover',
+              transform: 'translateX(4px)',
+            },
           }}
-        />
+        >
+          <ListItemIcon sx={{ minWidth: 32, color: theme.palette.primary.main }}>
+            <ArrowRightAltIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={post.title}
+            primaryTypographyProps={{
+              variant: 'body2',
+              fontWeight: 'medium',
+            }}
+          />
+        </ListItemButton>
       </ListItem>
     </React.Fragment>
   )
