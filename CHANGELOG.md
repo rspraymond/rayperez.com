@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.101.2] - 2026-01-31
+### Bug Fixes
+
+- update resume
+
+
+
 ## [0.101.1] - 2026-01-30
 ### Bug Fixes
 
