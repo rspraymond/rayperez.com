@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.101.3] - 2026-02-01
+### Bug Fixes
+
+- refactor skills into an unordered list (#244)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.101.2] - 2026-01-31
 ### Bug Fixes
 
