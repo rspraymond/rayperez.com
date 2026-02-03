@@ -1,6 +1,6 @@
 import { ThemeProvider as MuiThemeProvider } from '@mui/material'
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import LoadingFallback from './LoadingFallback'
 import PrintStyles from './PrintStyles'
 import { useTheme } from '../contexts/useTheme'
@@ -19,52 +19,50 @@ const AppContent: React.FC = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <PrintStyles />
-      <BrowserRouter>
-        <HashRedirectHandler />
-        <ScrollAndFocusReset />
-        <Routes>
-          <Route element={<SiteLayout />}>
-            <Route
-              path='/'
-              element={
-                <Suspense fallback={<LoadingFallback />}>
-                  <Home />
-                </Suspense>
-              }
-            />
-            {posts.map((post) => (
-              <Route
-                key={post.path}
-                path={post.path}
-                element={
-                  <Suspense fallback={<LoadingFallback />}>
-                    <post.Component />
-                  </Suspense>
-                }
-              />
-            ))}
-            {caseStudies.map((caseStudy) => (
-              <Route
-                key={caseStudy.path}
-                path={caseStudy.path}
-                element={
-                  <Suspense fallback={<LoadingFallback />}>
-                    <caseStudy.Component />
-                  </Suspense>
-                }
-              />
-            ))}
-          </Route>
+      <HashRedirectHandler />
+      <ScrollAndFocusReset />
+      <Routes>
+        <Route element={<SiteLayout />}>
           <Route
-            path='*'
+            path='/'
             element={
               <Suspense fallback={<LoadingFallback />}>
-                <NotFound />
+                <Home />
               </Suspense>
             }
           />
-        </Routes>
-      </BrowserRouter>
+          {posts.map((post) => (
+            <Route
+              key={post.path}
+              path={post.path}
+              element={
+                <Suspense fallback={<LoadingFallback />}>
+                  <post.Component />
+                </Suspense>
+              }
+            />
+          ))}
+          {caseStudies.map((caseStudy) => (
+            <Route
+              key={caseStudy.path}
+              path={caseStudy.path}
+              element={
+                <Suspense fallback={<LoadingFallback />}>
+                  <caseStudy.Component />
+                </Suspense>
+              }
+            />
+          ))}
+        </Route>
+        <Route
+          path='*'
+          element={
+            <Suspense fallback={<LoadingFallback />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
+      </Routes>
     </MuiThemeProvider>
   )
 }
