@@ -4,7 +4,7 @@ import { BlogPosting } from 'schema-dts'
 import { Box, Container, Stack, Typography, IconButton, Tooltip } from '@mui/material'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import LoadingSkeleton from './LoadingSkeleton'
 import withCanonical from './WithCanonical'
@@ -100,7 +100,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
         title={title}
         description={`${title} by ${author} - ${readingTimeDisplay} read`}
         type='article'
-        url={window.location.href}
+        url={typeof window !== 'undefined' ? window.location.href : ''}
       />
       <Container
         component='article'

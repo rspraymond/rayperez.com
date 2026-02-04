@@ -1,4 +1,5 @@
 import { PROFILE } from './profile'
+import { DEFAULT_SEO_KEYWORDS } from './seo'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'
 import React from 'react'
@@ -11,6 +12,7 @@ export const SOCIAL_CONFIG = {
     'Software Engineer specializing in modern web development, performance optimization, and scalable architecture.',
   defaultImage: PROFILE.image,
   twitterCreator: PROFILE.twitterCreator,
+  keywords: DEFAULT_SEO_KEYWORDS,
 } as const
 
 export interface SocialLink {

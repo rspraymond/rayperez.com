@@ -9,8 +9,8 @@ const preloadHome = () => {
   import('./pages/Home.tsx')
 }
 
-// Export createApp factory for vite-ssg
-export const createApp = ViteReactSSG(
+// Export createRoot factory for vite-ssg
+const createRoot = ViteReactSSG(
   {
     routes: [
       {
@@ -37,3 +37,5 @@ export const createApp = ViteReactSSG(
     }
   },
 )
+
+export { createRoot }
