@@ -72,10 +72,11 @@ interface BlogPostProps {
 }
 
 // Mock the dependencies
-vi.mock('react-helmet', () => ({
+vi.mock('react-helmet-async', () => ({
   Helmet: ({ children }: { children: React.ReactNode }) => (
     <div data-testid='helmet'>{children}</div>
   ),
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
 vi.mock('./TableOfContents', () => ({

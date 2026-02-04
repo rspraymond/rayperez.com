@@ -1,5 +1,7 @@
+import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it } from 'vitest'
+import { HelmetProvider } from 'react-helmet-async'
 import Experiences from './Experiences'
 
 const fixture = [
@@ -12,14 +14,16 @@ describe('Experiences', () => {
     document.head.innerHTML = ''
   })
 
+  const renderWithHelmet = (ui: React.ReactElement) => render(<HelmetProvider>{ui}</HelmetProvider>)
+
   it('renders the Career heading', () => {
-    render(<Experiences experiences={fixture} />)
+    renderWithHelmet(<Experiences experiences={fixture} />)
 
     expect(screen.getByText('Career')).toBeInTheDocument()
   })
 
   it('renders one card per experience with company and duration', () => {
-    render(<Experiences experiences={fixture} />)
+    renderWithHelmet(<Experiences experiences={fixture} />)
 
     expect(screen.getByText('C1 - D1')).toBeInTheDocument()
     expect(screen.getByText('C2 - D2')).toBeInTheDocument()
@@ -28,20 +32,20 @@ describe('Experiences', () => {
   })
 
   it('renders bullets from props', () => {
-    render(<Experiences experiences={fixture} />)
+    renderWithHelmet(<Experiences experiences={fixture} />)
 
     expect(screen.getByText('B1')).toBeInTheDocument()
     expect(screen.getByText('B2')).toBeInTheDocument()
   })
 
   it('handles empty experiences gracefully', () => {
-    render(<Experiences experiences={[]} />)
+    renderWithHelmet(<Experiences experiences={[]} />)
 
     expect(screen.getByText('No experiences to display.')).toBeInTheDocument()
   })
 
   it('renders one ld+json Occupation script per experience', async () => {
-    render(<Experiences experiences={fixture} />)
+    renderWithHelmet(<Experiences experiences={fixture} />)
 
     await waitFor(() => {
       const ldJsonScripts = document.querySelectorAll('script[type="application/ld+json"]')

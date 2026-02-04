@@ -7,10 +7,11 @@ import NotFound from './NotFound'
  * Mock React Helmet to avoid warnings and test metadata
  * This simple mock allows us to test that Helmet is used without testing the library itself
  */
-vi.mock('react-helmet', () => ({
+vi.mock('react-helmet-async', () => ({
   Helmet: ({ children }: { children: React.ReactNode }) => (
     <div data-testid='helmet'>{children}</div>
   ),
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
 describe('NotFound', () => {
