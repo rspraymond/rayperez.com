@@ -3,11 +3,12 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import withCanonical from './WithCanonical'
 
 // Mock Helmet to be able to inspect its props
-vi.mock('react-helmet', () => {
+vi.mock('react-helmet-async', () => {
   return {
     Helmet: ({ children }: { children: React.ReactNode }) => (
       <div data-testid='helmet'>{children}</div>
     ),
+    HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   }
 })
 

@@ -9,10 +9,11 @@ import { PROFILE } from '../constants/profile'
 import profileImage from '../assets/raymond-perez.jpg'
 
 // Mock the Helmet component
-vi.mock('react-helmet', () => ({
+vi.mock('react-helmet-async', () => ({
   Helmet: ({ children }: { children: React.ReactNode }) => (
     <div data-testid='helmet'>{children}</div>
   ),
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
 // Mock the LazyImage component

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { SOCIAL_CONFIG, ContentType } from '../constants/social'
 
 export interface MetaTag {
-  property: string
+  name?: string
+  property?: string
   content: string
 }
 
@@ -15,6 +16,7 @@ export interface SocialMetaProps {
   type?: ContentType
   twitterCreator?: string
   siteName?: string
+  keywords?: string
 }
 
 const SocialMeta: React.FC<SocialMetaProps> = ({
@@ -25,21 +27,24 @@ const SocialMeta: React.FC<SocialMetaProps> = ({
   type = 'website',
   twitterCreator,
   siteName,
+  keywords,
 }) => {
   const getFallbackValues = (): Required<SocialMetaProps> => ({
     title: title || SOCIAL_CONFIG.siteName,
     description: description || SOCIAL_CONFIG.defaultDescription,
     image: image || SOCIAL_CONFIG.defaultImage,
-    url: url || window.location.href,
+    url: url || (typeof window !== 'undefined' ? window.location.href : ''),
     type: type || 'website',
     twitterCreator: twitterCreator || SOCIAL_CONFIG.twitterCreator,
     siteName: siteName || SOCIAL_CONFIG.siteName,
+    keywords: keywords || SOCIAL_CONFIG.keywords,
   })
 
   const generateMetaTags = (): MetaTag[] => {
     const values = getFallbackValues()
 
     return [
+      { name: 'keywords', content: values.keywords },
       // Open Graph tags
       { property: 'og:title', content: values.title },
       { property: 'og:description', content: values.description },
@@ -58,13 +63,36 @@ const SocialMeta: React.FC<SocialMetaProps> = ({
   }
 
   const metaTags = generateMetaTags()
+  const values = getFallbackValues()
+  const metaPayload = JSON.stringify({
+    title: values.title,
+    description: values.description,
+    image: values.image,
+    url: values.url,
+    type: values.type,
+    keywords: values.keywords,
+    twitterCreator: values.twitterCreator,
+    siteName: values.siteName,
+  })
 
   return (
-    <Helmet>
-      {metaTags.map((tag, index) => (
-        <meta key={index} property={tag.property} content={tag.content} />
-      ))}
-    </Helmet>
+    <>
+      <Helmet>
+        {metaTags.map((tag, index) => (
+          <meta
+            key={index}
+            {...(tag.property ? { property: tag.property } : {})}
+            {...(tag.name ? { name: tag.name } : {})}
+            content={tag.content}
+          />
+        ))}
+      </Helmet>
+      <script
+        type='application/json'
+        data-ssg-meta
+        dangerouslySetInnerHTML={{ __html: metaPayload }}
+      />
+    </>
   )
 }
 

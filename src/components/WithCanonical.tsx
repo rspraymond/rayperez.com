@@ -1,5 +1,5 @@
 import { ComponentType } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 /**
  * Higher-order component (HOC) for adding a canonical link to a component.
@@ -14,12 +14,12 @@ import { Helmet } from 'react-helmet'
  */
 const withCanonical = <P extends object>(Component: ComponentType<P>) => {
   return (props: P) => {
-    const canonicalUrl = window.location.href.toString()
+    const canonicalUrl = typeof window !== 'undefined' ? window.location.href.toString() : ''
 
     return (
       <>
         <Helmet>
-          <link rel='canonical' href={canonicalUrl.replace('/#!', '')} />
+          {canonicalUrl && <link rel='canonical' href={canonicalUrl.replace('/#!', '')} />}
         </Helmet>
         <Component {...props} />
       </>

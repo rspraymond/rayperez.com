@@ -4,11 +4,12 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import SocialMeta from './SocialMeta'
 import { SOCIAL_CONFIG } from '../constants/social'
 
-// Mock react-helmet
-vi.mock('react-helmet', () => ({
+// Mock react-helmet-async
+vi.mock('react-helmet-async', () => ({
   Helmet: ({ children }: { children: React.ReactNode }) => (
     <div data-testid='helmet'>{children}</div>
   ),
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
 // Mock window.location.href

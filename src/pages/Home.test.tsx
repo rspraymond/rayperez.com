@@ -7,8 +7,9 @@ import experiencesData from '../data/content/experiences.json'
 import educationData from '../data/content/education.json'
 
 // Mock the Helmet component
-vi.mock('react-helmet', () => ({
+vi.mock('react-helmet-async', () => ({
   Helmet: ({ children }) => <div data-testid='helmet-mock'>{children}</div>,
+  HelmetProvider: ({ children }) => <>{children}</>,
 }))
 
 vi.mock('../components/Summary.tsx', () => ({

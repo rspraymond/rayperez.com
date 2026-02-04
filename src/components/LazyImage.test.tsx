@@ -210,7 +210,7 @@ describe('LazyImage onLoadStateChange callback', () => {
     fireImageLoad(img)
 
     expect(onLoadStateChange).toHaveBeenCalledWith(false)
-    expect(onLoadStateChange).toHaveBeenCalledTimes(2)
+    expect(onLoadStateChange).toHaveBeenCalledTimes(1)
   })
 
   it('calls onLoadStateChange with false on error', () => {
@@ -222,7 +222,7 @@ describe('LazyImage onLoadStateChange callback', () => {
     fireImageError(img)
 
     expect(onLoadStateChange).toHaveBeenCalledWith(false)
-    expect(onLoadStateChange).toHaveBeenCalledTimes(2)
+    expect(onLoadStateChange).toHaveBeenCalledTimes(1)
   })
 
   it('does not error when callback is not provided', () => {

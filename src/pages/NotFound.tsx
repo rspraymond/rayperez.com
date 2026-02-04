@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import SocialMeta from '../components/SocialMeta'
 
 const NotFound: React.FC = () => {

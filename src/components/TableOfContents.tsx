@@ -52,7 +52,7 @@ const scrollToHeading = (id: string): void => {
     // Reflect hash in URL without triggering native jump
     if (typeof window !== 'undefined' && window.history && 'replaceState' in window.history) {
       window.history.replaceState(null, '', `#${id}`)
-    } else {
+    } else if (typeof window !== 'undefined') {
       window.location.hash = id
     }
   }

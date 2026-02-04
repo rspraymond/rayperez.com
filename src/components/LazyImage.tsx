@@ -21,11 +21,65 @@ const LazyImage: React.FC<LazyImageProps> = ({
 }) => {
   const [isLoading, setIsLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
+  const imgRef = React.useRef<HTMLImageElement | null>(null)
+
+  const notifyCompletion = React.useCallback(
+    (value: boolean) => {
+      setIsLoading(value)
+      if (onLoadStateChange) {
+        onLoadStateChange(value)
+      }
+    },
+    [onLoadStateChange],
+  )
 
   React.useEffect(() => {
-    if (onLoadStateChange) onLoadStateChange(isLoading)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading])
+    setIsLoading(true)
+    setError(false)
+    if (onLoadStateChange) {
+      onLoadStateChange(true)
+    }
+  }, [src, onLoadStateChange])
+
+  React.useEffect(() => {
+    const node = imgRef.current
+    if (!node) {
+      return undefined
+    }
+
+    let isMounted = true
+    let completionTimer: number | undefined
+
+    const resolveCompletion = () => {
+      if (!isMounted) return
+      if (node.complete && node.naturalWidth > 0) {
+        notifyCompletion(false)
+        return true
+      }
+
+      return false
+    }
+
+    const scheduleCompletionCheck = () => {
+      if (completionTimer) {
+        window.clearTimeout(completionTimer)
+      }
+      completionTimer = window.setTimeout(() => {
+        resolveCompletion()
+      }, 50)
+    }
+
+    if (!resolveCompletion()) {
+      scheduleCompletionCheck()
+    }
+
+    return () => {
+      isMounted = false
+      if (completionTimer) {
+        window.clearTimeout(completionTimer)
+      }
+    }
+  }, [notifyCompletion, src])
 
   return (
     <Box
@@ -36,6 +90,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
       data-testid='lazy-image-container'
     >
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
         width={width}
@@ -43,13 +98,11 @@ const LazyImage: React.FC<LazyImageProps> = ({
         loading={priority ? 'eager' : 'lazy'}
         decoding='async'
         onLoad={() => {
-          setIsLoading(false)
-          if (onLoadStateChange) onLoadStateChange(false)
+          notifyCompletion(false)
         }}
         onError={() => {
           setError(true)
-          setIsLoading(false)
-          if (onLoadStateChange) onLoadStateChange(false)
+          notifyCompletion(false)
         }}
         style={{
           opacity: isLoading ? 0 : 1,

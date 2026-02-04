@@ -3,7 +3,7 @@ import { CardContent, Typography, Box } from '@mui/material'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Occupation } from 'schema-dts'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import SectionCard from './SectionCard'
 import type { Experience as ExperienceType } from '../types/contentData'
 

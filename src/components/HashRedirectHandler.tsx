@@ -5,6 +5,7 @@ const HashRedirectHandler: React.FC = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const path = (/#!(\/.*)$/.exec(window.location.hash) || [])[1]
     if (path) {
       navigate(path, { replace: true })
