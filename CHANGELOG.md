@@ -1,6 +1,20 @@
 ## Changelog
 
 
+## [0.102.0] - 2026-02-04
+### Features
+
+- setup prerender build (#247)
+
+### Other Changes
+
+- chore: setup entry point for prerender (#246)
+- chore: update test coverage badge
+- chore: setup prerender routes (#245)
+- chore: update test coverage badge
+
+
+
 ## [0.101.3] - 2026-02-01
 ### Bug Fixes
 
