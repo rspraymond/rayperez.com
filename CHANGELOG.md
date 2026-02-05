@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.103.0] - 2026-02-05
+### Features
+
+- update deploy for static pre-rendered pages (#248)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.102.0] - 2026-02-04
 ### Features
 
