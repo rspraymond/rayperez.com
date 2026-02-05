@@ -103,16 +103,25 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Build SSG output
+        run: npm run build:ssg
 
-      - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --follow-symlinks --delete
+      - name: Deploy assets to S3
+        run: |
+          aws s3 sync dist/ s3://$AWS_S3_BUCKET --delete --cache-control "public,max-age=31536000,immutable"
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          SOURCE_DIR: 'dist'
+
+      - name: Set HTML cache headers
+        run: |
+          aws s3 sync dist/ s3://$AWS_S3_BUCKET --delete --exclude "*" --include "*.html" \
+            --cache-control "public,max-age=60" \
+            --metadata-directive REPLACE
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
