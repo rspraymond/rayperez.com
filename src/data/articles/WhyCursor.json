@@ -1,0 +1,639 @@
+[
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Key Takeaways",
+    "gutterBottom": true
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "Integrated loop, not a single feature",
+        "secondary": "I pay for plan and debug modes, agents, chat, and edits across files living next to code, tests, and git in one shell, not a lone autocomplete trick."
+      },
+      {
+        "primary": "Judge what ships, including the Claude question",
+        "secondary": "I compare by fit to how I ship and review, cost, and friction. A lot of capability overlaps with Claude Code style workflows. I rarely use Claude Code as the wrapper, but I stay aware of what it ships, and I still pick Claude family models inside Cursor when I want a frontier model on a hard step. The split is usually primary surface and packaging, not a clean unique feature list."
+      },
+      {
+        "primary": "Honest scope",
+        "secondary": "Cursor is not for every stack or editor home. I still own design, review, tests, and data habits, and the sections below cover cost, alternatives, and pushback without one logo for every team."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I am a software engineer. TypeScript and web UI are a steady part of my work, but they are not the whole job. I also touch APIs, services, data paths, and whatever it takes to ship a feature safely. I use Cursor because I want one place to think, edit, and move that whole slice forward with AI in the room. Below is my honest view of what that costs, what it does not do, and how I place Cursor next to other options.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "The problem and what Cursor does",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Before I settled on Cursor, PhpStorm was my daily driver for ten years. At the time I switched, I was already using PhpStorm with GitHub Copilot. My problem was still friction. I jumped between search, chat, terminal, and the editor. Questions were often about this repo, but the tools kept me shallow. Small changes still felt slow when the loop was fragmented. I wanted less hunting and more deciding, shipping, and reviewing, with tests and judgment still in charge.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "What that friction looked like",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Picture a bug on a feature branch. I would bounce between a browser tab for docs, a chat window that forgot yesterday's file paths, the terminal for logs, and the editor for the fix. The same question came up again and I had to rebuild context each time.",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "text",
+    "code": "Read the stack trace in the terminal\nSearch the web for the error string\nPaste a generic answer into a chat that does not see the repo\nApply a change, realize imports broke\nSwitch git branches and lose the conversation thread"
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "What I wanted in one environment",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Cursor is my daily environment for serious work because it stacks the pieces I care about in one shell.",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "AI sits next to code, tests, and git instead of in a separate silo.",
+      "Agents and chat can span multi step edits and file lists without leaving the project.",
+      "Rules and project context steer answers toward how this repo actually works.",
+      "I can align intent before a long run, then pick the routing or model option that fits the task."
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Project rules are one way I steer without repeating myself. A short rules file nudges the model toward our stack and review habits before I send the first prompt.",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "text",
+    "code": "# .cursorrules (illustrative)\nStack: TypeScript, React, Vitest\nPrefer patterns already in src/components before inventing new ones\nWhen changing public props, update callers and a focused test file\nDo not add dependencies unless I say so explicitly"
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Core surfaces",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Cursor bundles a lot of names and panels. I do not treat them as a checklist to max out. I treat them as layers I can stack when a workflow repeats or when risk goes up. Product names and default shortcuts change, so I verify labels in the in app docs when I upgrade. The ideas below are what I actually reach for.",
+    "paragraph": true
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "Plan mode",
+        "secondary": "For bigger work I want an explicit plan before a long edit run. Plan mode is a dedicated surface in the product, not just a prompt style. I use it to lock intent, file scope, and acceptance checks so the agent does not wander. That matches the medium and large examples later, just formalized as a first class step."
+      },
+      {
+        "primary": "Agents, chat, and multi file edits",
+        "secondary": "This is the daily loop: thread across files, apply diffs, keep context in the repo. Under the hood Cursor wires first party harnesses into that loop: web search, browser control, terminal runs, repo search, file reads and edits, and related tools, so I am not hand pasting every intermediate step. The bundled multi file and agent flows are what I mean by integrated loop, not a single popup suggestion."
+      },
+      {
+        "primary": "Commands",
+        "secondary": "I keep reusable prompts as project commands, usually markdown under .cursor/commands, so I do not retype the same instructions. Examples on my machine: summarize staged changes for a PR body, run the repo lint fix and format scripts, or walk a standard security checklist before I paste anything external."
+      },
+      {
+        "primary": "Skills",
+        "secondary": "Skills are packaged instructions the agent can load from SKILL.md style files. I use them for repeatable playbooks, for example email triage steps or a sequence I want every time I touch a given subsystem. They are how I share habits with future me without bloating every chat."
+      },
+      {
+        "primary": "Debug mode",
+        "secondary": "Cursor ships debug mode as a first class companion to plan mode, not only ad hoc chat next to a breakpoint. I use it when I want a shaped workflow for a failing run: reproduction, stack context, locals, and hypotheses in one thread. I still use the normal debugger, breakpoints, and stepping when the runtime is the source of truth. Debug mode is where I want structured help interpreting that state, the same way plan mode structures work before big edits."
+      },
+      {
+        "primary": "User rules and project rules",
+        "secondary": "User rules live in my global Cursor settings and follow me across repos: voice, defaults, things I always want true. Project rules stay in the repo, often under .cursor/rules or a legacy rules file at the root, and tell the model how this codebase expects tests, naming, and stack choices. Together they cut repeated preamble in every thread."
+      },
+      {
+        "primary": "MCP",
+        "secondary": "Model Context Protocol servers expose tools and resources to the agent, for example issue trackers, docs, or mail integrations. I only enable servers I trust, I read what each tool can do, and I treat them like any external surface: least privilege, no secrets in prompts, and I assume contracts can change when the server updates."
+      }
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Built in agent harnesses",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Separate from MCP, Cursor ships first party tools the agent can invoke. The catalog and defaults change with releases, so I treat the official agent tools page as the checklist. In plain language, these are the harnesses I mean when I say the editor carries the whole loop.",
+    "paragraph": true
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "Semantic search over the indexed codebase",
+        "secondary": "The agent can search by meaning across the indexed tree, not only exact string matches. I rely on this when I know behavior but not the file name."
+      },
+      {
+        "primary": "File and folder search",
+        "secondary": "Path, name, and pattern style search rounds out repo navigation when I need a symbol, a directory shape, or a keyword hit without loading whole trees into context."
+      },
+      {
+        "primary": "Web search",
+        "secondary": "The agent can run web queries when the answer lives outside the repo, docs, error text, API behavior, or vendor guidance. I still verify anything safety critical on the source site."
+      },
+      {
+        "primary": "Browser control",
+        "secondary": "A built in browser lets the agent open pages, interact, and capture screenshots so I can validate UI work, repro front end bugs, or compare what shipped against what I see on screen."
+      },
+      {
+        "primary": "Read and edit files",
+        "secondary": "Read includes normal source and, when the model supports vision, image assets the agent pulls into context. Edit applies patches so I review diffs the same way as any other change."
+      },
+      {
+        "primary": "Run shell commands",
+        "secondary": "The agent can execute commands and read output inside the project workflow. I treat this like any automated shell access: trust boundaries, review commands, and know org policy on what may run unattended."
+      },
+      {
+        "primary": "Fetch rules",
+        "secondary": "The agent can pull the relevant user or project rules into the thread instead of me pasting the same preamble every time."
+      },
+      {
+        "primary": "Image generation",
+        "secondary": "Cursor can generate images from prompts or references and drop them into the project, often under an assets style path by default. I use it sparingly for mockups or diagrams, not as a substitute for design sign off."
+      },
+      {
+        "primary": "Ask questions mid task",
+        "secondary": "The agent can pause for clarification while still doing other work, so small ambiguities do not derail a long run."
+      },
+      {
+        "primary": "Checkpoints and queued follow ups",
+        "secondary": "Checkpoints snapshot the working tree during agent work so I can roll back a bad turn without pretending git is the only undo. Queued messages let me line up the next instruction while a run is still in flight. Both are part of how I tolerate longer autonomous sessions."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I add skills, commands, and MCP servers when a path repeats or when manual copy paste starts to hurt. Built in harnesses are already in the box; MCP stacks org specific systems on top. Turning every integration on at once is still how noise and surprise usage show up.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "How I actually use it",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I split work by size so context and cost stay under control.",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Small: local questions, edits, lint and type fixes.",
+      "Medium: a short plan, then implementation with a tight file scope.",
+      "Large: an explicit plan, then execution with default or cheaper models when that is enough.",
+      "It is never a substitute for judgment, review, or tests."
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Examples by size",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Small: fix one eslint rule in a form file, rename a prop across three components, or ask why a type narrowed the wrong way with only that file in scope.",
+      "Medium: add skeleton loading to a route, list the four files that should change, run plan mode or a short planning thread, then apply diffs and run the project test script.",
+      "Large: sketch a migration for a new status column, outline rollback, then use a cheaper model for boilerplate once the plan is agreed.",
+      "At every size I still run checks and read the diff the way I would for a teammate's branch."
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Cost, limits, and caveats",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Usage is real money or quota. Large context and capable models on every step add up. I treat metering as part of the product. I narrow context, cut noise, match the picker to the job, and keep the repo navigable. Billing usually splits everyday agent style usage from separately metered model picks, but the exact pools, caps, and labels change with the product. I read whatever Cursor publishes for pricing, models, and teams before I assume a number.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Models and metering",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "The model dropdown is not cosmetic. It decides which meter runs. In my head I group automatic routing together with Cursor's own agent focused models as everyday tooling, and I group pinned provider models together with Premium style routing as the meter that tracks closer to public API style rates. Premium still means let Cursor pick strong models for hard steps; it does not magically use the same allowance as the everyday bucket. None of that wording is a promise about tomorrow's price list or packaging. I confirm pools and prices in the product and on the vendor billing pages whenever I upgrade or when a bill surprises me.",
+    "paragraph": true
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "Automatic routing",
+        "secondary": "I pick this when I want Cursor to route across capable models for cost and reliability without me choosing every request. It is my default for mixed days when context size jumps around and I do not want to babysit the picker."
+      },
+      {
+        "primary": "Built in agent models",
+        "secondary": "Cursor ships agent tuned models under its own branding. I group them with automatic routing when I think about budget because the product usually treats them as part of the same everyday story, but I still read the pricing page in the product. I reach for them when I want the native agent stack instead of a provider label I pinned by hand."
+      },
+      {
+        "primary": "Named provider models",
+        "secondary": "When I select a specific vendor model in the picker, spend typically tracks that vendor's published rates and burns whatever included allowance applies to that meter. Smaller or faster tiers are useful for mechanical edits once I already know the plan. The most capable rows cost more per token, so I reserve them for ambiguous or design heavy work."
+      },
+      {
+        "primary": "Premium routing",
+        "secondary": "Premium is another let Cursor choose path, but oriented toward the strongest available models for the hardest steps. I expect it to spend like a premium model pick, not like my lightest everyday bucket. I turn it on when a task is genuinely difficult and I accept faster spend."
+      },
+      {
+        "primary": "Expanded context modes",
+        "secondary": "Some modes widen how much repository and thread context the model can see. That usually costs more because tokens add up, and surcharges change with plans. I enable them when I am stuck without enough surrounding files, not for every chat."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Practical habit: match the picker to the risk. Automatic routing or the built in agent models for steady shipping, a smaller named model for cleanup after the plan is frozen, Premium when the problem is fuzzy and expensive anyway, expanded context only when the bottleneck is what fits in the window.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "When a week runs hot on usage, a few habits matter as much as the headline price.",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Attach only the files that matter instead of the whole tree.",
+      "Open big tasks with a written plan so the model does not wander.",
+      "Move from Premium or a heavy named model back to automatic routing, the built in agent models, or a lighter named model once the approach is clear and the work is mechanical.",
+      "Start fresh chats for new work so old transcripts do not inflate context by accident."
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "What it is not",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "It is not right every time.",
+      "It does not replace clear architecture when the problem is fuzzy.",
+      "It is not the only paid tool you would buy if your job were only line completion."
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Example: it once suggested a helper that duplicated something already in src/utils. A quick repo search would have shown the existing function. The failure mode is not malice, it is plausible looking noise. Search first, then accept with tests.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Claude, alternatives, and overlap",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "When people ask this, they usually mean Claude Code and a terminal first Anthropic workflow versus Cursor as my daily driver. It is rarely a pure model debate. I rarely use Claude Code as my shell, but I stay current on what it offers so the comparison stays honest. When I need a frontier model, I still select Claude family options inside Cursor when the vendor and my plan allow. The real fork is packaging and where I want friction to live.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I should be blunt about overlap. Claude Code and Cursor both sell multi step agents, planning before big edits, repo aware file work, and ways to plug in tools and context so behavior stays repeatable. On the Claude Code side you get hooks, skills, MCP, and related extension points. On the Cursor side you get rules, commands, skills, MCP, plan mode, debug mode, first party agent harnesses such as web search and browser control, and related extension points. Marketing names move; the overlap is in the ideas. When I compare the two, I am not scoring a checklist of features only one product has. I am picking the primary home for most hours, the billing and policy envelope I accept, and how much glue I want to own between terminal, editor, and accounts.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "A practical split: a day of hopping between components, tests, and pull request comments is editor shaped for me. An afternoon of deploy scripts and log checks from one terminal session is a natural fit for a CLI led assistant. Same engineer, different center of gravity that week.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I default to Cursor when my week is editor heavy and I want agents, chat, diffs, and project context in one loop without me gluing terminals, plugins, and accounts together. Claude Code is the option when you want the terminal to lead and you are fine owning that assembly. I rarely run that path myself, even though I respect what it does. Both can produce strong output. I am choosing cognitive load and habit for most hours, not declaring a winner on intelligence.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Spend and policy matter too. I watch what agent heavy weeks cost on each path and I pick the bill that matches the behavior. Your mix of CLI work, team contracts, and model tiers can easily point the other way. That would be a rational outcome.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "If you already move faster in Claude Code than you would in any IDE bundle, stay there. I am not recruiting you. I am explaining why Cursor stays my default when someone asks why I do not lead with Claude as the product wrapper.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Compared in a table",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I do not think one logo wins for every team. I think you pick the tool that matches your editor home, your cloud and buyer reality, and how much assembly you want to own. The table is a snapshot of how I read the field. The short notes under it add texture.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "When I am unsure, I run a simple check: where will the next stretch of file edits happen, inside the IDE or in a terminal first loop? If the answer is mostly IDE, I bias toward Cursor or a similar bundle. If the answer is mostly shell and scripts, I bias toward a CLI first assistant and wire the editor as a viewer.",
+    "paragraph": true
+  },
+  {
+    "type": "table",
+    "table": {
+      "caption": "How I read the main alternatives",
+      "headers": ["Product", "Often strongest when", "Tradeoff or caveat"],
+      "rows": [
+        [
+          "Cursor",
+          "You want agent work, chat, and edits in one IDE with clear upgrade paths",
+          "Cost follows usage and model choices. Discipline matters"
+        ],
+        [
+          "GitHub Copilot",
+          "You already live in GitHub and Microsoft editors",
+          "A different shape than a dedicated agent first IDE bundle"
+        ],
+        [
+          "JetBrains AI Assistant",
+          "IntelliJ or the JetBrains stack is already home",
+          "A smaller move if you are not in JetBrains day to day"
+        ],
+        [
+          "Claude Code",
+          "You want terminal first control and Anthropic's CLI workflow",
+          "You assemble IDE, plugins, and accounts yourself"
+        ],
+        [
+          "Amazon Q Developer and Gemini Code Assist",
+          "Cloud identity and procurement already center on AWS or GCP",
+          "Less automatic value if your footprint is mostly GitHub and static front ends"
+        ],
+        [
+          "Cody, Tabnine, Windsurf, Continue",
+          "Search depth, governance, another agent IDE, or bring your own keys",
+          "Each story targets a different buyer. Read the docs for your fit"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Cursor",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Cursor ships as its own IDE with bundled agent UX, inline completion, and subscription tiers from individual use up through teams and enterprise. Surprise usage can still happen when every step runs large context on the most capable models. For me the trade is worth it when I want the whole loop in one product and I stay deliberate about cost.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "GitHub Copilot",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Copilot is strong when GitHub and Microsoft editors are already central. It is a natural fit for orgs that standardize there. I used it from PhpStorm right before I moved, so I am not guessing how that pairing feels. It is not the same product as a forked IDE built around agents end to end. If that bundled shell is what you want, Copilot alone will feel different.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "JetBrains AI Assistant",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "If IntelliJ or the wider JetBrains stack is already your home, AI inside that world can be a smaller step than changing your whole editor story. I lived in PhpStorm for a decade before Cursor, so I am not dismissive of JetBrains. I changed because I wanted the agent first loop Cursor bundles, not because the JetBrains stack failed me.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Claude Code",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Same trade as the opening of this section: terminal first and self owned wiring favors this path. Feature overlap with Cursor is real, so I treat the decision as ergonomics and procurement, not a story where one side lacks agents or extensibility. Cursor stays my default when I care more about an integrated editor loop than a loop led from the terminal.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Amazon Q and Gemini Code Assist",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "These make the most sense when AWS or Google Cloud already owns identity, security, and procurement for your team. If your work is mostly static sites and GitHub Actions with little cloud footprint, the value proposition is harder to assume.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Cody, Tabnine, and similar tools",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Cody and Tabnine matter when codebase search and enterprise governance lead the buying decision. Other agent first IDEs show up in the same lane as Cursor over time. Continue matters when I want open extension workflows and I am willing to supply my own models and keys.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Pushback and how I land",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I know the critiques before someone posts them. Some people treat AI in the editor like proof you stopped thinking. That is not how I use it. I still own architecture, I still read diffs, and I still answer for what ships. The tool speeds exploration and edits. It does not replace responsibility.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Concrete guardrails I still use on real merges:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Run the project test command before I call a feature done.",
+      "Skim every changed hunk, not only the summary the tool prints.",
+      "Pause for a second read when a suggestion touches auth, billing, or migrations.",
+      "Keep secrets in env files and out of chat without exception."
+    ]
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Others say paid tooling is a waste next to a free model in a browser. Fair enough if your workflow stays disciplined there. I pay when the integrated loop returns more hours than the subscription costs. If your math differs, your choice should differ too.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Lock in and data handling are serious topics, not jokes. I read vendor terms, I use org controls when they exist, and I do not paste secrets into chat. Those risks are not unique to Cursor. Any hosted assistant deserves the same caution.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Some folks hate that Cursor is a forked editor rather than stock VS Code plus plugins. That is a real trade. I accept it because the product shape matches how I work. Preferring the stock editor stack is coherent. We are optimizing for different constraints.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "If you still think this whole category is a fad, you are allowed to sit it out. I am not trying to win an argument online. I am stating what I run in production, what I watch on the bill, and where I draw the line on trust.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h4",
+    "content": "Closing",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I still pay and I still open Cursor first when the fit to my workflow and the time I get back beat the cost and the learning curve. If you rarely live in an editor, or your buyer stack is anchored in another cloud with hard requirements, you may get a better match elsewhere. I name my decision unit in plain terms: solo or team, regulated or not, GitHub centric or cloud IAM centric. Facts live in pricing and docs. Habits decide whether the bill is worth it.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "Frequently Asked Questions",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Short answers for the questions people actually ask after reading the above.",
+    "paragraph": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "One habit that shows up in many of these answers: vague asks burn context. I name the file, the failure, and what done means.",
+    "paragraph": true
+  },
+  {
+    "type": "code",
+    "language": "text",
+    "code": "Weak: fix this\nStronger: In src/components/CheckoutForm.tsx the submit handler double fires on mobile Safari. Propose a minimal fix, add a test in the matching test file, and do not change the public API."
+  },
+  {
+    "type": "complexList",
+    "hideBullets": true,
+    "complexItems": [
+      {
+        "primary": "Why not just use Claude in the browser?",
+        "secondary": "You can. I pay for Cursor when the integrated editor loop saves more time than juggling browser tabs, terminals, and paste back workflows. Free chat is not the same as a tight repo loop."
+      },
+      {
+        "primary": "Why not make Claude Code your default?",
+        "secondary": "See Claude, alternatives, and overlap above. Capabilities overlap a lot; pick the flow where you actually move fastest. I rarely make Claude Code my default wrapper, but I still use Claude models in Cursor when I want a frontier model. I pick Cursor for agents, diffs, and project context in one GUI shell most days."
+      },
+      {
+        "primary": "Do you ship without tests or review?",
+        "secondary": "No. The tool speeds edits. I still read diffs, run checks, and own what merges."
+      },
+      {
+        "primary": "What about code leaving my machine?",
+        "secondary": "I read vendor terms, use org controls when available, and treat chat like any external surface. I do not paste secrets. Same discipline applies to any hosted assistant."
+      },
+      {
+        "primary": "Why not stock VS Code plus extensions?",
+        "secondary": "Valid choice. I accept a forked shell because the bundled agent workflow matches how I work. If you want maximum stock editor purity, optimize for that instead."
+      },
+      {
+        "primary": "Does Cursor replace architecture?",
+        "secondary": "No. If the problem is unclear, no assistant fixes that. I still need intent, boundaries, and a real design conversation before large runs."
+      }
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "References",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Pricing, limits, and product names change. Verify numbers on official pages before you budget. A few links I use when I need a source of truth:",
+    "paragraph": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "[Cursor pricing](https://www.cursor.com/en/pricing)",
+      "[Cursor models and billing](https://cursor.com/docs/models) (pool names and rates change; read before you quote anything)",
+      "[Cursor agent tools](https://cursor.com/docs/agent/tools) (built in harnesses: web, browser, terminal, search, and related)",
+      "[Cursor docs](https://docs.cursor.com) (feature names and layouts change)",
+      "[GitHub Octoverse (ecosystem reporting)](https://github.blog/news-insights/octoverse/)"
+    ]
+  }
+]

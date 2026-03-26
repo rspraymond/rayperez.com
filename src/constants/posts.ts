@@ -9,6 +9,12 @@ export interface PostMeta {
 
 export const posts: PostMeta[] = [
   {
+    title: 'Why I Choose Cursor',
+    date: '2026-03-25',
+    path: '/why-cursor',
+    Component: lazy(() => import('../pages/articles/WhyCursor')),
+  },
+  {
     title: 'Why Type Safety Matters',
     date: '2025-11-29',
     path: '/why-type-safety',
