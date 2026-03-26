@@ -15,9 +15,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+# Rolled back release; tag remains on GitHub. Do not run tag pipelines for it.
+env:
+  BLOCKED_RELEASE_TAG: refs/tags/v0.103.0
+
 jobs:
   test:
     name: Run Tests
+    if: ${{ github.event_name != 'push' || github.ref != env.BLOCKED_RELEASE_TAG }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -66,7 +71,7 @@ jobs:
   lint:
     name: Run Lint
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
+    if: ${{ startsWith(github.ref, 'refs/tags/') && github.ref != env.BLOCKED_RELEASE_TAG }}
 
     steps:
       - name: Checkout
@@ -87,7 +92,7 @@ jobs:
   deploy:
     name: Build and Deploy
     needs: [test, lint]
-    if: startsWith(github.ref, 'refs/tags/')
+    if: ${{ startsWith(github.ref, 'refs/tags/') && github.ref != env.BLOCKED_RELEASE_TAG }}
     runs-on: ubuntu-latest
 
     steps:
