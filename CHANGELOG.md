@@ -1,6 +1,19 @@
 ## Changelog
 
 
+## [0.103.0] - 2026-03-26
+### Features
+
+- add why cursor article (#249)
+
+### Other Changes
+
+- ci: skip jobs for rolled back tag v0.103.0
+- chore: update test coverage badge
+- chore: update test coverage badge
+
+
+
 ## [0.102.0] - 2026-02-04
 ### Features
 
