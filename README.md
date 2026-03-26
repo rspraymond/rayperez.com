@@ -2,7 +2,7 @@
 
 A personal portfolio and technical blog built with React, TypeScript, and Vite.
 
-[![Test Coverage](https://img.shields.io/badge/coverage-84.7%25-green)](coverage)
+[![Test Coverage](https://img.shields.io/badge/coverage-82.3%25-green)](coverage)
 
 ## 🚀 Features
 
@@ -268,5 +268,3 @@ Raymond Perez:
 - [GitHub](https://github.com/rspraymond)
 - [LinkedIn](https://www.linkedin.com/in/raymond-perez-eng/)
 - [Twitter](https://twitter.com/onlyray7)
-
-.
