@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isReactCoreVendor, manualChunkForId } from './chunks'
+import { isReactCoreVendor, isReactMuiVendorChunk, manualChunkForId } from './chunks'
 
 describe('chunks', () => {
   describe('isReactCoreVendor', () => {
@@ -18,16 +18,36 @@ describe('chunks', () => {
     })
   })
 
+  describe('isReactMuiVendorChunk', () => {
+    it('includes react core and MUI stack paths', () => {
+      expect(isReactMuiVendorChunk('/p/node_modules/react/cjs/react.production.min.js')).toBe(true)
+      expect(isReactMuiVendorChunk('/p/node_modules/@mui/material/Button/Button.js')).toBe(true)
+      expect(isReactMuiVendorChunk('/p/node_modules/@mui/system/esm/index.js')).toBe(true)
+      expect(
+        isReactMuiVendorChunk('/p/node_modules/.pnpm/@emotion+react@11/node_modules/@emotion/react/x.js'),
+      ).toBe(true)
+    })
+
+    it('includes icons but not router', () => {
+      expect(isReactMuiVendorChunk('/p/node_modules/@mui/icons-material/Home.js')).toBe(true)
+      expect(isReactMuiVendorChunk('/p/node_modules/react-router-dom/dist/index.js')).toBe(false)
+    })
+  })
+
   describe('manualChunkForId', () => {
-    it('routes MUI and Emotion to mui-core before react-vendor', () => {
+    it('routes React, MUI, and Emotion to a single react-mui-vendor chunk', () => {
       expect(
         manualChunkForId(
           '/p/node_modules/.pnpm/@emotion+react@11/node_modules/@emotion/react/dist/foo.js',
         ),
-      ).toBe('mui-core')
+      ).toBe('react-mui-vendor')
       expect(
         manualChunkForId('/p/node_modules/@mui/material/Button/Button.js'),
-      ).toBe('mui-core')
+      ).toBe('react-mui-vendor')
+      expect(manualChunkForId('/p/node_modules/react/cjs/react.production.min.js')).toBe(
+        'react-mui-vendor',
+      )
+      expect(manualChunkForId('/p/node_modules/react-dom/index.js')).toBe('react-mui-vendor')
     })
 
     it('routes react-router packages to react-router', () => {
@@ -35,21 +55,24 @@ describe('chunks', () => {
       expect(manualChunkForId('/p/node_modules/history/index.js')).toBe('react-router')
     })
 
-    it('routes react-query to data', () => {
-      expect(manualChunkForId('/p/node_modules/react-query/es/index.js')).toBe('data')
-    })
-
-    it('routes react and react-dom to react-vendor', () => {
-      expect(manualChunkForId('/p/node_modules/react/cjs/react.production.min.js')).toBe(
-        'react-vendor',
-      )
-      expect(manualChunkForId('/p/node_modules/react-dom/index.js')).toBe('react-vendor')
+    it('does not assign a manual chunk for react-query, react-schemaorg, or schema-dts (avoids vendor cycles)', () => {
+      expect(manualChunkForId('/p/node_modules/react-query/es/index.js')).toBeUndefined()
+      expect(
+        manualChunkForId('/p/node_modules/react-schemaorg/dist/index.js'),
+      ).toBeUndefined()
+      expect(manualChunkForId('/p/node_modules/schema-dts/types/index.d.ts')).toBeUndefined()
     })
 
     it('routes react-helmet-async to ui-utils', () => {
       expect(
         manualChunkForId('/p/node_modules/react-helmet-async/lib/index.esm.js'),
       ).toBe('ui-utils')
+    })
+
+    it('routes MUI icons into react-mui-vendor to avoid chunk cycles with material', () => {
+      expect(manualChunkForId('/p/node_modules/@mui/icons-material/Home.js')).toBe(
+        'react-mui-vendor',
+      )
     })
 
     it('returns undefined for unmatched node_modules', () => {

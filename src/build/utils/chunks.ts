@@ -7,17 +7,25 @@ export interface ChunkMatcher {
 export const isReactCoreVendor = (id: string): boolean =>
   /[\\/]node_modules[\\/](?:react[\\/]|react-dom[\\/])/.test(id)
 
+/**
+ * React, React DOM, MUI core, Emotion, and shared @mui packages must share one chunk.
+ * Splitting them produced a react-vendor ↔ mui-core import cycle and TDZ errors in production.
+ */
+export const isReactMuiVendorChunk = (id: string): boolean =>
+  isReactCoreVendor(id) ||
+  id.includes('node_modules/@mui/material/') ||
+  id.includes('node_modules/@mui/icons-material/') ||
+  id.includes('node_modules/@emotion/react/') ||
+  id.includes('node_modules/@emotion/styled/') ||
+  id.includes('node_modules/@mui/system/') ||
+  id.includes('node_modules/@mui/utils/') ||
+  id.includes('node_modules/@mui/styled-engine/') ||
+  id.includes('node_modules/@mui/base/')
+
 export const chunkMatchers: ChunkMatcher[] = [
   {
-    matcher: (id) =>
-      id.includes('node_modules/@mui/material/') ||
-      id.includes('node_modules/@emotion/react/') ||
-      id.includes('node_modules/@emotion/styled/'),
-    name: 'mui-core',
-  },
-  {
-    matcher: (id) => id.includes('node_modules/@mui/icons-material/'),
-    name: 'mui-icons',
+    matcher: isReactMuiVendorChunk,
+    name: 'react-mui-vendor',
   },
   {
     matcher: (id) =>
@@ -36,20 +44,9 @@ export const chunkMatchers: ChunkMatcher[] = [
   },
   {
     matcher: (id) =>
-      id.includes('node_modules/react-query/') ||
-      id.includes('node_modules/react-schemaorg/') ||
-      id.includes('node_modules/schema-dts/'),
-    name: 'data',
-  },
-  {
-    matcher: (id) =>
       id.includes('node_modules/react-helmet-async/') ||
       id.includes('node_modules/react-helmet/'),
     name: 'ui-utils',
-  },
-  {
-    matcher: isReactCoreVendor,
-    name: 'react-vendor',
   },
 ]
 
