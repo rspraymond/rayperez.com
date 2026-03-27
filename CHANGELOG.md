@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.103.3] - 2026-03-27
+### Bug Fixes
+
+- dependency updates (#250)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.103.2] - 2026-03-26
 ### Bug Fixes
 
