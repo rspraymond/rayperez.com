@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.103.4] - 2026-03-28
+### Bug Fixes
+
+- **deps:** override minimatch for typescript-estree ReDoS advisories (#251)
+
+
+
 ## [0.103.3] - 2026-03-27
 ### Bug Fixes
 
