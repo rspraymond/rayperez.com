@@ -68,7 +68,10 @@
     "vitest": "^3.1.4"
   },
   "overrides": {
-    "prismjs": "^1.30.0"
+    "prismjs": "^1.30.0",
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^9.0.7"
+    }
   },
   "lint-staged": {
     "*.{ts,tsx}": [
