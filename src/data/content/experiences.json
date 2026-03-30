@@ -1,6 +1,15 @@
 [
   {
     "title": "Senior Software Engineer",
+    "company": "iClassPro, Inc.",
+    "duration": "Feb 2026 - Present",
+    "bullets": [
+      "Laravel development for class and camp management products used by gymnastics, swim, cheer, dance, and related youth activity programs.",
+      "Contribute to backend services, application quality, and engineering practices across the PHP stack."
+    ]
+  },
+  {
+    "title": "Senior Software Engineer",
     "company": "Pronomix",
     "duration": "Oct 2025 - Jan 2026",
     "bullets": [
