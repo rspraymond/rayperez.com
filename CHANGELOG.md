@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.103.6] - 2026-04-01
+### Bug Fixes
+
+- move missing build steps to non ssg build (#253)
+
+
+
 ## [0.103.5] - 2026-03-30
 ### Bug Fixes
 
