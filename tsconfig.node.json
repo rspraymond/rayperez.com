@@ -6,10 +6,5 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "vite.config.ts",
-    "src/build/**/*.ts",
-    "src/constants/seo.ts",
-    "src/types/vite-react-ssg.d.ts"
-  ]
+  "include": ["vite.config.ts", "src/build/**/*.ts", "src/constants/seo.ts"]
 }

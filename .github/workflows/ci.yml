@@ -106,6 +106,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify post-build artifacts
+        run: test -f dist/feed.xml && test -f dist/sitemap.xml
+
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
