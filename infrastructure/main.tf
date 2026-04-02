@@ -1,7 +1,7 @@
 provider "aws" {
-  region                  = "us-east-2"
+  region                   = "us-east-2"
   shared_credentials_files = ["~/.aws/credentials"]
-  profile                 = "s3-deployer"
+  profile                  = "s3-deployer"
 }
 
 resource "aws_s3_bucket" "bucket" {
@@ -26,6 +26,68 @@ resource "aws_s3_bucket_ownership_controls" "bucket_ownership" {
 
 locals {
   resume_manifest = jsondecode(file("${path.module}/../dist/resume-manifest.json"))
+
+  # Legacy WordPress (or other) URL path prefixes that should 301 to the site home.
+  # Use S3 object key style: no leading slash. Prefer a trailing slash for old post permalinks.
+  # Use ReplaceKeyPrefixWith = "" (not ReplaceKeyWith = "index.html") so the Location is / not /index.html (SPA route).
+  # If both .../slug and .../slug/ appear in the wild, add two entries or one shorter prefix that covers the subtree you want to redirect.
+  legacy_home_redirect_prefixes = [
+    "2011/10/painted-the-valve-cover-on-my-1996-toyota-corolla/",
+  ]
+
+  legacy_home_redirect_rules = [
+    for prefix in local.legacy_home_redirect_prefixes : {
+      Condition = {
+        KeyPrefixEquals = prefix
+      }
+      Redirect = {
+        HttpRedirectCode     = "301"
+        HostName             = "www.rayperez.com"
+        Protocol             = "https"
+        ReplaceKeyPrefixWith = ""
+      }
+    }
+  ]
+
+  resume_redirect_rule = {
+    Condition = {
+      KeyPrefixEquals = "raymond-perez-software-engineer-resume.pdf"
+    }
+    Redirect = {
+      HostName       = "www.rayperez.com"
+      Protocol       = "https"
+      ReplaceKeyWith = "assets/${local.resume_manifest.hashedFilename}"
+    }
+  }
+
+  spa_fallback_rules = [
+    {
+      Condition = {
+        HttpErrorCodeReturnedEquals = "404"
+      }
+      Redirect = {
+        HostName             = "www.rayperez.com"
+        Protocol             = "https"
+        ReplaceKeyPrefixWith = "#!/"
+      }
+    },
+    {
+      Condition = {
+        HttpErrorCodeReturnedEquals = "403"
+      }
+      Redirect = {
+        HostName             = "www.rayperez.com"
+        Protocol             = "https"
+        ReplaceKeyPrefixWith = "#!/"
+      }
+    },
+  ]
+
+  website_routing_rules = jsonencode(concat(
+    [local.resume_redirect_rule],
+    local.legacy_home_redirect_rules,
+    local.spa_fallback_rules,
+  ))
 }
 
 resource "aws_s3_bucket_website_configuration" "website_config" {
@@ -39,40 +101,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
     key = "index.html"
   }
 
-  routing_rules = <<EOF
-[
-  {
-    "Condition": {
-      "KeyPrefixEquals": "raymond-perez-software-engineer-resume.pdf"
-    },
-    "Redirect": {
-      "Protocol": "https",
-      "HostName": "www.rayperez.com",
-      "ReplaceKeyWith": "assets/${local.resume_manifest.hashedFilename}"
-    }
-  },
-  {
-    "Condition": {
-      "HttpErrorCodeReturnedEquals": "404"
-    },
-    "Redirect": {
-      "Protocol": "https",
-      "HostName": "www.rayperez.com",
-      "ReplaceKeyPrefixWith": "#!/"
-    }
-  },
-  {
-    "Condition": {
-      "HttpErrorCodeReturnedEquals": "403"
-    },
-    "Redirect": {
-      "Protocol": "https",
-      "HostName": "www.rayperez.com",
-      "ReplaceKeyPrefixWith": "#!/"
-    }
-  }
-]
-EOF
+  routing_rules = local.website_routing_rules
 }
 
 data "aws_iam_policy_document" "website_bucket_policy" {
