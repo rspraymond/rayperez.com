@@ -1,6 +1,18 @@
 ## Changelog
 
 
+## [0.103.7] - 2026-04-03
+### Bug Fixes
+
+- upgrade lodash (#255)
+
+### Other Changes
+
+- chore: terraform updates for redirects (#254)
+- chore: update test coverage badge
+
+
+
 ## [0.103.6] - 2026-04-01
 ### Bug Fixes
 
