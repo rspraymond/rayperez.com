@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.103.8] - 2026-04-26
+### Bug Fixes
+
+- deps update (#256)
+
+### Other Changes
+
+- chore: bump vite
+
+
+
 ## [0.103.7] - 2026-04-03
 ### Bug Fixes
 
