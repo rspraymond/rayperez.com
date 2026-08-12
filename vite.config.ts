@@ -39,7 +39,6 @@ export default defineConfig({
       'react-helmet-async',
       'react-router-dom',
       'react-dom',
-      'vite-react-ssg',
       'react-syntax-highlighter',
     ],
   },

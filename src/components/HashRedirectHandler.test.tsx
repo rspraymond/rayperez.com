@@ -76,4 +76,40 @@ describe('HashRedirectHandler', () => {
     renderWithRouter(<HashRedirectHandler />)
     expect(mockNavigate).toHaveBeenCalledWith('/deep/nested/path', { replace: true })
   })
+
+  it('does not navigate for backslash open-redirect shapes', () => {
+    Object.defineProperty(window, 'location', {
+      value: {
+        hash: '#!/\\evil.example.com',
+      },
+      writable: true,
+    })
+
+    renderWithRouter(<HashRedirectHandler />)
+    expect(mockNavigate).not.toHaveBeenCalled()
+  })
+
+  it('does not navigate for mixed slash open-redirect shapes', () => {
+    Object.defineProperty(window, 'location', {
+      value: {
+        hash: '#!/\\/evil.example.com',
+      },
+      writable: true,
+    })
+
+    renderWithRouter(<HashRedirectHandler />)
+    expect(mockNavigate).not.toHaveBeenCalled()
+  })
+
+  it('does not navigate for protocol-relative paths', () => {
+    Object.defineProperty(window, 'location', {
+      value: {
+        hash: '#!//evil.example.com',
+      },
+      writable: true,
+    })
+
+    renderWithRouter(<HashRedirectHandler />)
+    expect(mockNavigate).not.toHaveBeenCalled()
+  })
 })
