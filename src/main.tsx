@@ -1,41 +1,26 @@
-import { ViteReactSSG } from 'vite-react-ssg'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
-import { canonicalRoutes } from './constants/routes'
-import AppContent from './components/AppContent.tsx'
 
-// Preload important routes
-// This tells the browser to start loading the Home page component early
 const preloadHome = () => {
   import('./pages/Home.tsx')
 }
 
-// Export createRoot factory for vite-ssg
-const createRoot = ViteReactSSG(
-  {
-    routes: [
-      {
-        path: '/',
-        element: <App />,
-        children: canonicalRoutes
-          .filter((path) => path !== '/')
-          .map((path) => ({
-            path: path.startsWith('/') ? path.slice(1) : path,
-            element: <AppContent />,
-          })),
-      },
-    ],
-  },
-  ({ isClient }) => {
-    if (isClient) {
-      // Start preloading after the main app is rendered
-      window.addEventListener('load', () => {
-        // Wait a bit to prioritize main page rendering first
-        setTimeout(() => {
-          preloadHome()
-        }, 1000)
-      })
-    }
-  },
+const rootElement = document.getElementById('root')
+if (!rootElement) {
+  throw new Error('Root element #root not found')
+}
+
+// Declarative SPA bootstrap: production uses plain Vite, not vite-react-ssg prerender.
+createRoot(rootElement).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
 )
 
-export { createRoot }
+// Defer Home chunk warmup until after first paint so the entry route stays prioritized.
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    preloadHome()
+  }, 1000)
+})

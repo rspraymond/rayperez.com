@@ -2,7 +2,7 @@ import { posts } from './posts'
 import { caseStudies } from './caseStudies'
 
 /**
- * Canonical list of routes for prerendering and sitemap generation.
+ * Canonical list of routes for sitemap generation and route inventory.
  * This includes the home route, all blog posts, and all case studies.
  */
 export const routes = [
@@ -12,6 +12,6 @@ export const routes = [
 ]
 
 /**
- * Deduplicated list of routes to ensure no redundant rendering during build.
+ * Deduplicated list of routes for sitemap and related generators.
  */
 export const canonicalRoutes = Array.from(new Set(routes))
