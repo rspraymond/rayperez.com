@@ -4,7 +4,7 @@
     "type": "list",
     "hideBullets": true,
     "items": [
-      "Fewer Runtime Bugs: Type safety catches errors before code runs, preventing common mistakes like passing wrong data types or accessing undefined properties.",
+      "Fewer Runtime Bugs: Type safety helps catch errors before code runs, reducing common mistakes like passing wrong data types or accessing undefined properties.",
       "Clearer Team Communication: Type annotations serve as documentation, making it easier for team members to understand code without reading implementation details.",
       "Safer Refactoring: When you change code, type safety tools show exactly where updates are needed, reducing the risk of breaking existing functionality."
     ]
@@ -13,7 +13,7 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Type safety is one of the most practical tools in modern software development. It helps prevent bugs, makes code easier to understand, and speeds up development. This article explains what type safety is, why it matters, and how to use it in your projects.",
+    "content": "Type safety means checking that values match the types that functions expect. In programming, these checks help catch invalid data before code runs or when data enters the system. Type safety matters because it helps prevent common bugs, clarifies how code should be used, and makes changes safer.",
     "paragraph": true
   },
   {
@@ -65,13 +65,13 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "What Is Type Safety?",
+    "content": "What Is Type Safety in Programming?",
     "gutterBottom": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Type safety means your code checks that data types match what functions expect. For example, if a function needs a number, type safety prevents you from passing a string. This catches errors before your code runs.",
+    "content": "Type safety is a set of rules that checks whether code uses data in valid ways. A function that expects a number should not receive a string. A function that may return no value should make that possibility clear. These checks give developers useful feedback before a mistake becomes a runtime failure.",
     "paragraph": true
   },
   {
@@ -99,38 +99,38 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "The type system tells you about the problem before you run the code. This saves time and prevents bugs from reaching production.",
+    "content": "The type system tells you about the problem before you run the code. This saves time and helps keep some bugs from reaching production.",
     "paragraph": true
   },
 
   {
     "type": "heading",
     "variant": "h3",
-    "content": "Static vs Dynamic Type Safety",
+    "content": "Static and Runtime Type Checks",
     "gutterBottom": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "There are two main approaches to type safety: static and dynamic.",
+    "content": "Type checking can happen before code runs or while code runs. These approaches help developers find different kinds of mistakes.",
     "paragraph": true
   },
   {
     "type": "heading",
     "variant": "h5",
-    "content": "Static Type Safety",
+    "content": "Static Type Checking",
     "gutterBottom": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Static type safety checks types before code runs. Tools like TypeScript, PHPStan for PHP, or Rust's compiler analyze your code and report errors during development. This catches problems early, when they're easiest to fix.",
+    "content": "Static type checking checks types before code runs. Tools like TypeScript, PHPStan for PHP, and the Rust compiler analyze code and report many errors during development. This gives developers feedback while mistakes are still easier to fix.",
     "paragraph": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Benefits of static type safety:",
+    "content": "Benefits of static type checking:",
     "paragraph": true
   },
   {
@@ -145,13 +145,13 @@
   {
     "type": "heading",
     "variant": "h5",
-    "content": "Dynamic Type Safety",
+    "content": "Runtime Type Checks",
     "gutterBottom": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Dynamic type safety checks types while code runs. Languages like Python or JavaScript check types at runtime. This is flexible but means errors might only appear when specific code paths execute.",
+    "content": "Runtime type checks inspect values while code runs. JavaScript uses runtime values and can convert between types during some operations. This is flexible, but a problem may appear only when a specific code path executes.",
     "paragraph": true
   },
   {
@@ -163,25 +163,29 @@
   {
     "type": "table",
     "table": {
-      "caption": "Static vs Dynamic Type Safety Comparison",
-      "headers": ["Aspect", "Static Type Safety", "Dynamic Type Safety"],
+      "caption": "Static Checking vs Runtime Checks",
+      "headers": ["Aspect", "Static Checking", "Runtime Checks"],
       "rows": [
-        ["When Errors Are Found", "Before code runs (compile time)", "While code runs (runtime)"],
+        ["When Errors Are Found", "Before code runs", "While code runs"],
         [
           "Error Detection",
           "Catches errors early in development",
           "Errors appear when code executes"
         ],
-        ["Performance Impact", "No runtime overhead", "Minimal runtime overhead"],
-        ["Flexibility", "Less flexible, more structured", "More flexible, less structured"],
+        ["Performance Impact", "Checks happen before execution", "Checks happen during execution"],
+        ["Flexibility", "More structure before execution", "More flexibility during execution"],
         [
           "Tooling Support",
           "Excellent autocomplete and refactoring",
           "Limited compile-time tooling"
         ],
-        ["Learning Curve", "Requires learning type syntax", "Easier to start, learn as you go"],
-        ["Best For", "Large projects, team collaboration", "Rapid prototyping, small projects"],
-        ["Examples", "TypeScript, PHPStan, Rust, Java", "Python, JavaScript, Ruby"]
+        ["Learning Curve", "Requires learning type syntax", "Uses the language's runtime behavior"],
+        ["Best For", "Large projects, team collaboration", "Flexible code and runtime input"],
+        [
+          "Examples",
+          "TypeScript, PHPStan, Rust, Java",
+          "JavaScript runtime checks, Python runtime checks"
+        ]
       ]
     }
   },
@@ -189,25 +193,25 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "Why Type Safety Matters for My Stack",
+    "content": "Why Is Type Safety Important?",
     "gutterBottom": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "Type safety tools are available for most modern languages and frameworks. Here are practical examples from common stacks:",
+    "content": "Type safety is important because it finds many mistakes while you are writing and changing code. It can reduce runtime bugs, make function behavior easier to understand, improve editor feedback, and show which parts of a codebase need updates during a refactor. The tools differ by language, but the goal is the same: make invalid operations easier to find.",
     "paragraph": true
   },
   {
     "type": "heading",
     "variant": "h5",
-    "content": "TypeScript for JavaScript",
+    "content": "JavaScript Type Safety with TypeScript",
     "gutterBottom": true
   },
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "TypeScript adds type safety to JavaScript. You can start with plain JavaScript and gradually add types. Many teams adopt TypeScript incrementally, adding types to new code while keeping existing JavaScript unchanged.",
+    "content": "JavaScript is dynamically typed, so values can have different types while the program runs. TypeScript is a static type checker and compiler for JavaScript. During development, it reports many incorrect function arguments, missing properties, and incompatible assignments before the code runs. TypeScript emits JavaScript for deployment, so the browser or server runs the generated JavaScript, not TypeScript. Runtime validation is still needed for data from APIs or users.",
     "paragraph": true
   },
   {
@@ -460,12 +464,20 @@
     "hideBullets": true,
     "complexItems": [
       {
-        "primary": "What is type safety and why does it matter?",
-        "secondary": "Type safety ensures that your code checks data types match what functions expect. It catches errors before code runs, prevents bugs, makes code easier to understand, and improves the development experience. Type safety matters because it saves time debugging and helps teams work together more effectively."
+        "primary": "What is type safety?",
+        "secondary": "Type safety checks that values are used with the types that functions and other parts of a program expect. It helps find invalid data earlier, before it causes a runtime error."
       },
       {
-        "primary": "What's the difference between static and dynamic type safety?",
-        "secondary": "Static type safety checks types before code runs using tools like TypeScript or PHPStan. Dynamic type safety checks types while code runs, as in Python or JavaScript. Static checking finds errors earlier, while dynamic checking is more flexible. Many projects use both approaches."
+        "primary": "Why is type safety important?",
+        "secondary": "It helps reduce common bugs, makes code easier to understand, and gives developers safer feedback when they refactor or extend a program."
+      },
+      {
+        "primary": "Does JavaScript have type safety?",
+        "secondary": "JavaScript determines value types while code runs, but it does not provide the same compile time checking as TypeScript. TypeScript adds static checks to JavaScript code, while runtime validation is still needed for external data."
+      },
+      {
+        "primary": "What's the difference between static checking and runtime checks?",
+        "secondary": "Static type checking analyzes code before it runs using tools like TypeScript or PHPStan. Runtime checks inspect values while code executes. Static checking can find some errors earlier, while runtime checks can handle values that are only known during execution. Many projects use both approaches."
       },
       {
         "primary": "Do I need to rewrite my existing code to use type safety?",
