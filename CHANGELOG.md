@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.105.0] - 2026-09-29
+### Features
+
+- **content:** update type safety article for search intent
+
+
+
 ## [0.104.0] - 2026-09-29
 ### Features
 
