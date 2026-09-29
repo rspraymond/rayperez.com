@@ -5,16 +5,16 @@
     "hideBullets": true,
     "complexItems": [
       {
-        "primary": "NestJS's Structured Approach",
-        "secondary": "NestJS's structured and opinionated nature, along with its modular architecture, makes it an excellent choice for large-scale applications. It provides a clear path for organizing code, which improves maintainability and scalability."
+        "primary": "NestJS advantages",
+        "secondary": "NestJS gives Node.js applications a clear structure. Its modules, dependency injection, TypeScript support, and testing tools can make larger codebases easier to organize and test."
       },
       {
-        "primary": "TypeScript and Dependency Injection",
-        "secondary": "NestJS leverages TypeScript to enhance the developer experience with better type safety and autocompletion. It also implements Dependency Injection out of the box, promoting loose coupling and enhancing code testability."
+        "primary": "NestJS pros and cons",
+        "secondary": "NestJS can improve consistency and maintenance, but it adds concepts and boilerplate. It fits teams that value structure, while a smaller Express or Fastify application may be simpler for a small API."
       },
       {
-        "primary": "Comprehensive Documentation and Built-in Features",
-        "secondary": "NestJS offers comprehensive, well-structured documentation and a growing community for support. It also comes with numerous built-in features that enforce best practices, saving developers the effort of manual implementation."
+        "primary": "When NestJS is a good fit",
+        "secondary": "NestJS is a practical choice for TypeScript backends that need clear boundaries, shared conventions, testing support, or room to grow."
       }
     ]
   },
@@ -24,7 +24,7 @@
   {
     "type": "paragraph",
     "variant": "body1",
-    "content": "NestJS is a progressive Node.js framework that has been gaining traction in the developer community for its robustness and flexibility. It's built with TypeScript and combines elements of Object-Oriented Programming (OOP), Functional Programming (FP), and Functional Reactive Programming (FRP). The purpose of this post is to delve into the reasons why I, as a developer, choose NestJS over other frameworks.",
+    "content": "NestJS is a Node.js framework built with TypeScript for server side applications. Its main advantages are a clear module based structure, dependency injection, TypeScript support, and testing tools for common backend work. Common tradeoffs include a steeper learning curve and more boilerplate than lighter frameworks. I choose NestJS when a project benefits from consistent architecture and room to grow.",
     "paragraph": true
   },
 
@@ -71,7 +71,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "Structured and Opinionated Framework",
+    "content": "NestJS Advantages",
     "gutterBottom": true
   },
   {
@@ -322,7 +322,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "Addressing Common Criticisms",
+    "content": "NestJS Pros and Cons",
     "gutterBottom": true
   },
   {
@@ -428,7 +428,7 @@
   {
     "type": "heading",
     "variant": "h3",
-    "content": "Why NestJS is Worth the Investment",
+    "content": "Is NestJS Worth Using?",
     "gutterBottom": true
   },
   {
@@ -449,20 +449,20 @@
     "hideBullets": true,
     "complexItems": [
       {
-        "primary": "What is NestJS?",
-        "secondary": "NestJS is a progressive Node.js framework for building efficient, reliable, and scalable server-side applications. It's built with TypeScript and combines elements of Object-Oriented Programming (OOP), Functional Programming (FP), and Functional Reactive Programming (FRP)."
+        "primary": "What are the advantages of NestJS?",
+        "secondary": "NestJS provides a structured architecture, TypeScript support, dependency injection, testing tools, and built in features for common backend tasks. These features can make a growing application easier to organize and maintain."
       },
       {
-        "primary": "Why choose NestJS over other frameworks?",
-        "secondary": "NestJS provides a structured and opinionated framework, making it easier to maintain and scale large applications. It integrates seamlessly with TypeScript for better developer experience and uses Dependency Injection for managing dependencies. NestJS also has comprehensive documentation and a growing community for support."
+        "primary": "What are the pros and cons of NestJS?",
+        "secondary": "The main advantages are consistent structure, modularity, TypeScript integration, and support for testing and common server side patterns. The main drawbacks are a steeper learning curve, more concepts, and more boilerplate than lighter frameworks."
       },
       {
-        "primary": "Is NestJS suitable for beginners?",
-        "secondary": "Yes, NestJS is suitable for beginners. While it has a learning curve, its comprehensive documentation and structured approach make it easier for new developers to get up to speed. NestJS also enforces best practices, guiding beginners towards writing high-quality code."
+        "primary": "Is NestJS worth using?",
+        "secondary": "NestJS is worth considering when a project needs a consistent architecture or may grow across multiple developers and features. A smaller API may be easier to build with a lighter framework."
       },
       {
-        "primary": "What are some criticisms of NestJS?",
-        "secondary": "Some developers find NestJS complex and say it has a steep learning curve. Others complain about the amount of boilerplate code required. However, these issues can be mitigated with gradual adoption and using the NestJS CLI to generate code."
+        "primary": "Why use NestJS?",
+        "secondary": "I use NestJS when its structure helps the team organize modules, manage dependencies, test services, and keep a larger Node.js application maintainable."
       }
     ]
   }
