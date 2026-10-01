@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.105.1] - 2026-10-01
+### Bug Fixes
+
+- add GitHub activity loading fallback
+
+
+
 ## [0.105.0] - 2026-09-29
 ### Features
 
