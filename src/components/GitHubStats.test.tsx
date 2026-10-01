@@ -66,6 +66,34 @@ describe('GitHubStats - Basic Rendering', () => {
       expect.stringContaining('github-readme-activity-graph.vercel.app'),
     )
     expect(image).toHaveAttribute('src', expect.stringContaining('username=rspraymond'))
+    expect(image).toHaveAttribute('loading', 'lazy')
+    expect(screen.getByTestId('github-activity-skeleton')).toBeInTheDocument()
+
+    fireEvent.load(image)
+
+    expect(screen.queryByTestId('github-activity-skeleton')).not.toBeInTheDocument()
+  })
+
+  it('shows a profile fallback when the activity graph fails to load', () => {
+    const theme = createTheme({ palette: { mode: 'dark' } })
+    renderWithTheme(theme)
+
+    const expandButton = screen.getByLabelText('expand GitHub activity')
+    fireEvent.click(expandButton)
+
+    const image = screen.getByAltText('GitHub contribution graph showing coding activity')
+    fireEvent.error(image)
+
+    expect(screen.getByRole('status', { name: 'GitHub activity unavailable' })).toBeInTheDocument()
+    expect(screen.getByText('GitHub activity is temporarily unavailable.')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'View GitHub profile' })).toHaveAttribute(
+      'href',
+      'https://github.com/rspraymond',
+    )
+    expect(
+      screen.queryByAltText('GitHub contribution graph showing coding activity'),
+    ).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Open GitHub activity graph in modal')).not.toBeInTheDocument()
   })
 })
 
