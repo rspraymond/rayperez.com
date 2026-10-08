@@ -262,6 +262,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Contributing Guidelines](CONTRIBUTING.md) - How to contribute to the project
 - [Release Process](docs/RELEASE_PROCESS.md) - Release workflow and versioning
 - [Static route HTML](docs/static-route-html.md) - Crawler shells, meta tags, and deploy order for canonical URLs
+- [Client route meta](docs/client-route-meta.md) - SPA navigation, `SocialMeta`, and in-place head updates
 
 ## 🤝 Contact
 

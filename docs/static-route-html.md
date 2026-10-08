@@ -24,13 +24,15 @@ Article JSON paths live on `contentFile` in `src/constants/posts.ts` and `src/co
 
 ## Client head tags after load
 
-| Concern                | Where                                                                      |
-| ---------------------- | -------------------------------------------------------------------------- |
-| Open Graph and Twitter | `src/components/SocialMeta.tsx` only (see CONTRIBUTING SEO)                |
-| Article title pattern  | `src/components/BlogPost.tsx` → heading, name, role                        |
-| Stable description     | `JsonBlogPost` passes `metaDescription`; reading time does not update meta |
-| Canonical URL          | `src/components/WithCanonical.tsx` → `SITE_URL` + pathname                 |
-| Share image            | `src/constants/shareImage.ts` (hashed JPEG from Vite import)               |
+Prerendered tags are correct on first paint. SPA navigation is documented in **[docs/client-route-meta.md](client-route-meta.md)** (in-place head updates, single `SocialMeta` writer, AuthorBio JSON-LD only).
+
+| Concern                | Where                                                                       |
+| ---------------------- | --------------------------------------------------------------------------- |
+| Open Graph and Twitter | `SocialMeta` + `src/utils/socialMetaDocumentHead.ts` (see CONTRIBUTING SEO) |
+| Article title pattern  | `src/components/BlogPost.tsx` → heading, name, role                         |
+| Stable description     | `JsonBlogPost` passes `metaDescription`; reading time does not update meta  |
+| Canonical URL          | `WithCanonical.tsx` and `SocialMeta` `url` prop → `SITE_URL` + pathname     |
+| Share image            | `src/constants/shareImage.ts` (hashed JPEG from Vite import)                |
 
 Do not add a second meta pipeline or hand written tags in page components.
 

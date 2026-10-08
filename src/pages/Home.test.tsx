@@ -5,6 +5,7 @@ import Home from './Home'
 import { BookmarkProvider } from '../contexts/BookmarkContext'
 import experiencesData from '../data/content/experiences.json'
 import educationData from '../data/content/education.json'
+import { HOME_DOCUMENT_TITLE, HOME_META_DESCRIPTION } from '../constants/seoCopy'
 
 // Mock the Helmet component
 vi.mock('react-helmet-async', () => ({
@@ -90,12 +91,16 @@ describe('Home Component', () => {
   it('includes structured data for SEO', () => {
     renderWithProvider(<Home />)
 
-    // Check for Helmet components that contain schema.org data and social meta tags
-    const helmets = screen.getAllByTestId('helmet-mock')
-    expect(helmets.length).toBe(2) // Structured data and social meta tags
+    expect(screen.getAllByTestId('helmet-mock')).toHaveLength(1)
 
-    // Check that we have the expected meta tag containers
-    expect(helmets[0]).toBeInTheDocument()
-    expect(helmets[1]).toBeInTheDocument()
+    expect(document.title).toBe(HOME_DOCUMENT_TITLE)
+    expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
+      'content',
+      HOME_META_DESCRIPTION,
+    )
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      HOME_DOCUMENT_TITLE,
+    )
   })
 })

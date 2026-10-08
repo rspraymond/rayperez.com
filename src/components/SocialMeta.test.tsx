@@ -1,4 +1,3 @@
-import React from 'react'
 import { render } from '@testing-library/react'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import SocialMeta from './SocialMeta'
@@ -9,14 +8,6 @@ vi.mock('../assets/raymond-perez.jpg', () => ({
   default: '/assets/raymond-perez-mock.jpg',
 }))
 
-// Mock react-helmet-async
-vi.mock('react-helmet-async', () => ({
-  Helmet: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid='helmet'>{children}</div>
-  ),
-  HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}))
-
 // Mock window.location.href
 const mockLocation = 'https://example.com/test-page'
 Object.defineProperty(window, 'location', {
@@ -25,7 +16,8 @@ Object.defineProperty(window, 'location', {
 })
 
 beforeEach(() => {
-  // Reset window.location.href before each test
+  document.head.innerHTML = ''
+  document.title = ''
   Object.defineProperty(window, 'location', {
     value: { href: mockLocation },
     writable: true,
@@ -258,5 +250,77 @@ describe('SocialMeta - custom and types', () => {
     expectedProperties.forEach((property) => {
       expect(properties).toContain(property)
     })
+  })
+})
+
+describe('SocialMeta - in-place navigation updates', () => {
+  it('updates an existing description meta tag without duplicating it', () => {
+    const existing = document.createElement('meta')
+    existing.setAttribute('name', 'description')
+    existing.setAttribute('content', 'Previous page description')
+    document.head.appendChild(existing)
+
+    const { rerender } = render(
+      <SocialMeta
+        title='Article A'
+        description='Article A description'
+        url='https://example.com/a'
+      />,
+    )
+
+    const descriptionTags = document.querySelectorAll('meta[name="description"]')
+    expect(descriptionTags).toHaveLength(1)
+    expect(descriptionTags[0]).toHaveAttribute('content', 'Article A description')
+
+    rerender(
+      <SocialMeta
+        title='Article B'
+        description='Article B description'
+        url='https://example.com/b'
+      />,
+    )
+
+    const afterNav = document.querySelectorAll('meta[name="description"]')
+    expect(afterNav).toHaveLength(1)
+    expect(afterNav[0]).toHaveAttribute('content', 'Article B description')
+  })
+
+  it('updates og:title in place when the route title changes', () => {
+    const staleOg = document.createElement('meta')
+    staleOg.setAttribute('property', 'og:title')
+    staleOg.setAttribute('content', 'Homepage title')
+    document.head.appendChild(staleOg)
+
+    const { rerender } = render(<SocialMeta title='NestJS article title' />)
+
+    expect(document.querySelectorAll('meta[property="og:title"]')).toHaveLength(1)
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      'NestJS article title',
+    )
+
+    rerender(<SocialMeta title='Opinionated article title' />)
+
+    expect(document.querySelectorAll('meta[property="og:title"]')).toHaveLength(1)
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      'Opinionated article title',
+    )
+  })
+
+  it('sets document.title and canonical link from the url prop', () => {
+    render(
+      <SocialMeta
+        title='Canonical page'
+        description='Desc'
+        url='https://www.rayperez.com/why-nest'
+      />,
+    )
+
+    expect(document.title).toBe('Canonical page')
+    expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://www.rayperez.com/why-nest',
+    )
   })
 })
