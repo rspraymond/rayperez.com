@@ -60,33 +60,12 @@ locals {
     }
   }
 
-  spa_fallback_rules = [
-    {
-      Condition = {
-        HttpErrorCodeReturnedEquals = "404"
-      }
-      Redirect = {
-        HostName             = "www.rayperez.com"
-        Protocol             = "https"
-        ReplaceKeyPrefixWith = "#!/"
-      }
-    },
-    {
-      Condition = {
-        HttpErrorCodeReturnedEquals = "403"
-      }
-      Redirect = {
-        HostName             = "www.rayperez.com"
-        Protocol             = "https"
-        ReplaceKeyPrefixWith = "#!/"
-      }
-    },
-  ]
+  # Trailing-slash redirects for content URLs live in Cloudflare, not S3. S3 prefix rules
+  # would also match deeper paths such as /why-nestjs/extra and send them to the article.
 
   website_routing_rules = jsonencode(concat(
     [local.resume_redirect_rule],
     local.legacy_home_redirect_rules,
-    local.spa_fallback_rules,
   ))
 }
 
@@ -97,8 +76,9 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
     suffix = "index.html"
   }
 
+  # Static 404.html avoids serving index.html for missing keys (soft 404 for crawlers).
   error_document {
-    key = "index.html"
+    key = "404.html"
   }
 
   routing_rules = local.website_routing_rules

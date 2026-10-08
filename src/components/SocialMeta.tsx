@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { SOCIAL_CONFIG, ContentType } from '../constants/social'
+import { SHARE_IMAGE_URL } from '../constants/shareImage'
 
 export interface MetaTag {
   name?: string
@@ -32,7 +33,7 @@ const SocialMeta: React.FC<SocialMetaProps> = ({
   const getFallbackValues = (): Required<SocialMetaProps> => ({
     title: title || SOCIAL_CONFIG.siteName,
     description: description || SOCIAL_CONFIG.defaultDescription,
-    image: image || SOCIAL_CONFIG.defaultImage,
+    image: image || SHARE_IMAGE_URL,
     url: url || (typeof window !== 'undefined' ? window.location.href : ''),
     type: type || 'website',
     twitterCreator: twitterCreator || SOCIAL_CONFIG.twitterCreator,
@@ -45,6 +46,7 @@ const SocialMeta: React.FC<SocialMetaProps> = ({
 
     return [
       { name: 'keywords', content: values.keywords },
+      { name: 'description', content: values.description },
       // Open Graph tags
       { property: 'og:title', content: values.title },
       { property: 'og:description', content: values.description },

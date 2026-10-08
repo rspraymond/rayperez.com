@@ -1,10 +1,11 @@
 import { PROFILE } from './profile'
 import { DEFAULT_SEO_KEYWORDS } from './seo'
+import { SITE_URL } from './siteUrl'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'
 import React from 'react'
 
-export const SITE_URL = 'https://www.rayperez.com' as const
+export { SITE_URL }
 
 export const SOCIAL_CONFIG = {
   siteName: 'Raymond Perez - Software Engineer',

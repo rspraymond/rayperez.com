@@ -98,6 +98,7 @@ describe('BlogPost', () => {
   const defaultProps = {
     title: 'Test Blog Title',
     author: 'Test Author',
+    metaDescription: 'Test meta description for the article.',
     date: '2023-01-01',
     children: <div data-testid='blog-content'>Test blog content</div>,
   }

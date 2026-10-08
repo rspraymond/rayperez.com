@@ -3,11 +3,12 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { posts } from '../src/constants/posts.js'
 import { caseStudies } from '../src/constants/caseStudies.js'
+import { SITE_URL } from '../src/constants/siteUrl.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const baseUrl = 'https://www.rayperez.com'
+const baseUrl = SITE_URL
 const today = new Date().toISOString().split('T')[0]
 
 function generateSitemap(): void {

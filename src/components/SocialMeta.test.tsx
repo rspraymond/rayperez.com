@@ -3,6 +3,11 @@ import { render } from '@testing-library/react'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import SocialMeta from './SocialMeta'
 import { SOCIAL_CONFIG } from '../constants/social'
+import { SHARE_IMAGE_URL } from '../constants/shareImage'
+
+vi.mock('../assets/raymond-perez.jpg', () => ({
+  default: '/assets/raymond-perez-mock.jpg',
+}))
 
 // Mock react-helmet-async
 vi.mock('react-helmet-async', () => ({
@@ -46,7 +51,7 @@ describe('SocialMeta - defaults and fallbacks', () => {
     )
     expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      SOCIAL_CONFIG.defaultImage,
+      SHARE_IMAGE_URL,
     )
     expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
       'content',
@@ -73,7 +78,7 @@ describe('SocialMeta - defaults and fallbacks', () => {
     )
     expect(document.querySelector('meta[property="twitter:image"]')).toHaveAttribute(
       'content',
-      SOCIAL_CONFIG.defaultImage,
+      SHARE_IMAGE_URL,
     )
     expect(document.querySelector('meta[property="twitter:creator"]')).toHaveAttribute(
       'content',
@@ -106,7 +111,7 @@ describe('SocialMeta - defaults and fallbacks', () => {
     )
     expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      SOCIAL_CONFIG.defaultImage,
+      SHARE_IMAGE_URL,
     )
     expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
       'content',
@@ -139,7 +144,7 @@ describe('SocialMeta - defaults and fallbacks', () => {
     )
     expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      SOCIAL_CONFIG.defaultImage,
+      SHARE_IMAGE_URL,
     )
     expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
       'content',
@@ -217,6 +222,15 @@ describe('SocialMeta - custom and types', () => {
 
       expect(document.querySelector('meta[property="og:type"]')).toHaveAttribute('content', type)
     })
+  })
+
+  it('renders a document description meta tag', () => {
+    render(<SocialMeta title='Article title' description='Stable article description.' />)
+
+    expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
+      'content',
+      'Stable article description.',
+    )
   })
 
   it('generates correct number of meta tags', () => {

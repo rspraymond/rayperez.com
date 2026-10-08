@@ -6,6 +6,7 @@ export const caseStudies: CaseStudyMeta[] = [
     title: 'Prejump.com: Rocket League Training Pack Platform',
     date: '2025-01-01',
     path: '/case-studies/prejump',
+    contentFile: 'src/data/case-studies/prejump.json',
     project: 'Prejump.com',
     role: 'Software Engineer & Co-Creator',
     timeline: 'Ongoing',

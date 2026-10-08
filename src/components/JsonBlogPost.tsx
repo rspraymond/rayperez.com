@@ -2,17 +2,26 @@ import React from 'react'
 import BlogPost from './BlogPost'
 import ArticleRenderer from './ArticleRenderer'
 import { ArticleDocument } from '../types/articleContent'
-import { flattenArticleText } from '../utils/articleText'
+import { flattenArticleText, leadArticleText } from '../utils/articleText'
 
 interface JsonBlogPostProps {
   title: string
   author: string
   date: string
   content: ArticleDocument
+  description?: string
   metadata?: React.ReactNode
 }
 
-const JsonBlogPost: React.FC<JsonBlogPostProps> = ({ title, author, date, content, metadata }) => {
+const JsonBlogPost: React.FC<JsonBlogPostProps> = ({
+  title,
+  author,
+  date,
+  content,
+  description,
+  metadata,
+}) => {
+  const metaDescription = description ?? leadArticleText(content)
   const [readingText, setReadingText] = React.useState<string | undefined>(undefined)
 
   React.useEffect(() => {
@@ -28,6 +37,7 @@ const JsonBlogPost: React.FC<JsonBlogPostProps> = ({ title, author, date, conten
       author={author}
       date={date}
       readingText={readingText}
+      metaDescription={metaDescription}
       metadata={metadata}
     >
       <ArticleRenderer content={content} />

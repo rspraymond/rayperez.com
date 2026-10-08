@@ -467,7 +467,9 @@ rayperez-site/
 
 ## SEO Guidelines
 
-This project follows several SEO best practices:
+This project follows several SEO best practices. Crawlable HTML for each canonical route is generated at build time (extensionless keys in `dist/`), while the SPA still handles navigation after load. Meta descriptions for articles come from `leadArticleText` or locked copy in `seoCopy.ts`, not from reading time.
+
+Full build, deploy order, and contributor checklist: **[docs/static-route-html.md](docs/static-route-html.md)**.
 
 ### Social Media Meta Tags
 

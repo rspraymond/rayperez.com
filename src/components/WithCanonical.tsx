@@ -1,5 +1,7 @@
 import { ComponentType } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useLocation } from 'react-router-dom'
+import { SITE_URL } from '../constants/social'
 
 /**
  * Higher-order component (HOC) for adding a canonical link to a component.
@@ -14,12 +16,14 @@ import { Helmet } from 'react-helmet-async'
  */
 const withCanonical = <P extends object>(Component: ComponentType<P>) => {
   return (props: P) => {
-    const canonicalUrl = typeof window !== 'undefined' ? window.location.href.toString() : ''
+    const location = useLocation()
+    // Path only: hashbang migration and query strings must not become the canonical URL.
+    const canonicalUrl = `${SITE_URL}${location.pathname}`
 
     return (
       <>
         <Helmet>
-          {canonicalUrl && <link rel='canonical' href={canonicalUrl.replace('/#!', '')} />}
+          <link rel='canonical' href={canonicalUrl} />
         </Helmet>
         <Component {...props} />
       </>

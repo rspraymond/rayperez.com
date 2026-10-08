@@ -2,13 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { posts } from '../src/constants/posts.js'
-import { PROFILE } from '../src/constants/profile.js'
 import { SOCIAL_CONFIG } from '../src/constants/social.js'
+import { descriptionForContentFile } from '../src/build/utils/routeDescriptions.js'
+import { SITE_URL } from '../src/constants/siteUrl.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const baseUrl = 'https://www.rayperez.com'
+const baseUrl = SITE_URL
 
 function toRfc822Date(isoDate: string): string {
   const date = new Date(isoDate)
@@ -65,7 +66,7 @@ function generateRssFeed(): void {
       const link = `${baseUrl}${post.path}`
       const pubDate = toRfc822Date(post.date)
       const guid = link
-      const description = escapeXml(`${post.title} by ${PROFILE.name}`)
+      const description = escapeXml(descriptionForContentFile(post.contentFile, post.description))
 
       return `    <item>
       <title>${title}</title>
