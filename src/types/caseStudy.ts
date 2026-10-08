@@ -19,6 +19,7 @@ export interface CaseStudyMeta {
   title: string
   date: string // ISO format
   path: string
+  contentFile: string
   project: string
   role: string
   timeline: string

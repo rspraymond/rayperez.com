@@ -249,8 +249,9 @@ For detailed workflow instructions on updating content data, see the [Content Fl
 ## 🧰 SEO Features
 
 - **Structured Data**: Schema.org markup for better search indexing
-- **Meta Tags**: Dynamic meta tags with React Helmet
-- **Canonical URLs**: Proper handling of canonical URLs
+- **Meta Tags**: `SocialMeta` after load; static shells from the route HTML build step
+- **Canonical URLs**: Static canonical in built HTML; client canonical via `WithCanonical`
+- **Route HTML**: See [docs/static-route-html.md](docs/static-route-html.md)
 
 ## 📝 License
 
@@ -260,6 +261,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [Contributing Guidelines](CONTRIBUTING.md) - How to contribute to the project
 - [Release Process](docs/RELEASE_PROCESS.md) - Release workflow and versioning
+- [Static route HTML](docs/static-route-html.md) - Crawler shells, meta tags, and deploy order for canonical URLs
 
 ## 🤝 Contact
 

@@ -1,8 +1,25 @@
 import { describe, it, expect } from 'vitest'
-import { flattenArticleText } from './articleText'
+import { flattenArticleText, leadArticleText } from './articleText'
 import { ArticleDocument } from '../types/articleContent'
 
 describe('articleText', () => {
+  describe('leadArticleText', () => {
+    it('returns the first prose paragraph and skips later headings', () => {
+      const doc: ArticleDocument = [
+        { type: 'heading', content: 'Key Takeaways', variant: 'h3' },
+        {
+          type: 'complexList',
+          complexItems: [{ primary: 'One', secondary: 'Detail' }],
+        },
+        { type: 'paragraph', content: 'First prose paragraph for crawlers.' },
+        { type: 'heading', content: 'Later Section', variant: 'h3' },
+        { type: 'paragraph', content: 'Second paragraph should not appear.' },
+      ]
+
+      expect(leadArticleText(doc)).toBe('First prose paragraph for crawlers.')
+    })
+  })
+
   describe('flattenArticleText', () => {
     it('should flatten heading content', () => {
       const doc: ArticleDocument = [{ type: 'heading', content: 'Test Heading', variant: 'h1' }]

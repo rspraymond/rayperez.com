@@ -1,5 +1,18 @@
 import { ArticleDocument } from '../types/articleContent'
 
+/** First prose block only; key takeaways and headings are not used as the static lead or default description. */
+export const leadArticleText = (doc: ArticleDocument): string => {
+  for (const item of doc) {
+    if (item.type === 'paragraph') {
+      const text = item.content?.trim()
+      if (text) {
+        return text
+      }
+    }
+  }
+  return ''
+}
+
 export const flattenArticleText = (doc: ArticleDocument): string => {
   const parts: string[] = []
   const append = (s?: string) => {

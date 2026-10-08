@@ -18,6 +18,12 @@
       }
     ]
   },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "An opinionated framework makes the default choices for you. An unopinionated one leaves those choices open.",
+    "paragraph": true
+  },
 
   {
     "type": "heading",
