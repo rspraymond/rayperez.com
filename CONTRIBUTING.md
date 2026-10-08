@@ -405,7 +405,8 @@ rayperez-site/
 #### Social Media Meta Tags
 
 - **Always use the `SocialMeta` component** for implementing social media meta tags
-- **Never implement meta tags directly** in components using React Helmet
+- **Never implement meta tags directly** in components using React Helmet (JSON-LD via Helmet `script` is fine)
+- **Page routes own `SocialMeta`**; nested UI such as `AuthorBio` must not add share tags
 - The `SocialMeta` component provides comprehensive Open Graph and Twitter Card coverage
 - All props are optional and will use sensible defaults from `SOCIAL_CONFIG`
 - Use appropriate content types: `'website'` for general pages, `'article'` for blog posts, `'profile'` for author pages
@@ -471,12 +472,15 @@ This project follows several SEO best practices. Crawlable HTML for each canonic
 
 Full build, deploy order, and contributor checklist: **[docs/static-route-html.md](docs/static-route-html.md)**.
 
+After the first load, only `SocialMeta` updates Open Graph and Twitter tags in `document.head` (in place, no duplicate Helmet meta). Lazy sections such as `AuthorBio` must not mount a second `SocialMeta`. Full runtime rules and decision table: **[docs/client-route-meta.md](docs/client-route-meta.md)**.
+
 ### Social Media Meta Tags
 
 - **All pages use the centralized `SocialMeta` component** for consistent social media optimization
 - The component automatically generates comprehensive Open Graph and Twitter Card meta tags
 - No manual meta tag implementation is needed or allowed
 - Social media configuration is centralized in `src/constants/social.ts`
+- **Do not add `SocialMeta` inside lazy-loaded fragments** (for example the author bio); the route page already owns share tags
 
 ### Internal Linking
 

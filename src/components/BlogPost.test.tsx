@@ -172,10 +172,7 @@ describe('BlogPost', () => {
       )
       expect(titleElement).toBeInTheDocument()
 
-      const metaTag = screen.getByText('', {
-        selector: 'meta[property="og:image"]',
-      })
-      expect(metaTag).toBeInTheDocument()
+      expect(document.querySelector('meta[property="og:image"]')).toBeInTheDocument()
     })
   })
 

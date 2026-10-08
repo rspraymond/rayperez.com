@@ -1,24 +1,11 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { SOCIAL_CONFIG, ContentType } from '../constants/social'
-import { SHARE_IMAGE_URL } from '../constants/shareImage'
+import React, { useLayoutEffect, useMemo } from 'react'
+import {
+  applySocialMetaToDocumentHead,
+  resolveSocialMetaValues,
+} from '../utils/socialMetaDocumentHead'
+import type { SocialMetaProps } from '../types/socialMeta'
 
-export interface MetaTag {
-  name?: string
-  property?: string
-  content: string
-}
-
-export interface SocialMetaProps {
-  title?: string
-  description?: string
-  image?: string
-  url?: string
-  type?: ContentType
-  twitterCreator?: string
-  siteName?: string
-  keywords?: string
-}
+export type { SocialMetaProps } from '../types/socialMeta'
 
 const SocialMeta: React.FC<SocialMetaProps> = ({
   title,
@@ -30,42 +17,21 @@ const SocialMeta: React.FC<SocialMetaProps> = ({
   siteName,
   keywords,
 }) => {
-  const getFallbackValues = (): Required<SocialMetaProps> => ({
-    title: title || SOCIAL_CONFIG.siteName,
-    description: description || SOCIAL_CONFIG.defaultDescription,
-    image: image || SHARE_IMAGE_URL,
-    url: url || (typeof window !== 'undefined' ? window.location.href : ''),
-    type: type || 'website',
-    twitterCreator: twitterCreator || SOCIAL_CONFIG.twitterCreator,
-    siteName: siteName || SOCIAL_CONFIG.siteName,
-    keywords: keywords || SOCIAL_CONFIG.keywords,
-  })
+  const values = useMemo(
+    () =>
+      resolveSocialMetaValues({
+        title,
+        description,
+        image,
+        url,
+        type,
+        twitterCreator,
+        siteName,
+        keywords,
+      }),
+    [title, description, image, url, type, twitterCreator, siteName, keywords],
+  )
 
-  const generateMetaTags = (): MetaTag[] => {
-    const values = getFallbackValues()
-
-    return [
-      { name: 'keywords', content: values.keywords },
-      { name: 'description', content: values.description },
-      // Open Graph tags
-      { property: 'og:title', content: values.title },
-      { property: 'og:description', content: values.description },
-      { property: 'og:image', content: values.image },
-      { property: 'og:url', content: values.url },
-      { property: 'og:type', content: values.type },
-      { property: 'og:site_name', content: values.siteName },
-
-      // Twitter Card tags
-      { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:title', content: values.title },
-      { property: 'twitter:description', content: values.description },
-      { property: 'twitter:image', content: values.image },
-      { property: 'twitter:creator', content: values.twitterCreator },
-    ]
-  }
-
-  const metaTags = generateMetaTags()
-  const values = getFallbackValues()
   const metaPayload = JSON.stringify({
     title: values.title,
     description: values.description,
@@ -77,24 +43,18 @@ const SocialMeta: React.FC<SocialMetaProps> = ({
     siteName: values.siteName,
   })
 
+  // Before paint so tab title and first meta tags match the route during client transitions.
+  useLayoutEffect(() => {
+    applySocialMetaToDocumentHead(values)
+  }, [values])
+
   return (
-    <>
-      <Helmet>
-        {metaTags.map((tag, index) => (
-          <meta
-            key={index}
-            {...(tag.property ? { property: tag.property } : {})}
-            {...(tag.name ? { name: tag.name } : {})}
-            content={tag.content}
-          />
-        ))}
-      </Helmet>
-      <script
-        type='application/json'
-        data-ssg-meta
-        dangerouslySetInnerHTML={{ __html: metaPayload }}
-      />
-    </>
+    // Route HTML generation reads this script; head tags are updated directly at runtime.
+    <script
+      type='application/json'
+      data-ssg-meta
+      dangerouslySetInnerHTML={{ __html: metaPayload }}
+    />
   )
 }
 

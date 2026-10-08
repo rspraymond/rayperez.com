@@ -48,30 +48,27 @@ describe('NotFound', () => {
   it('sets the correct page metadata', () => {
     renderComponent()
 
-    // With our simple mock, we're just testing that Helmet components are rendered
-    // with the appropriate children, not the actual Helmet functionality
-    const helmets = screen.getAllByTestId('helmet')
-    expect(helmets).toHaveLength(2)
-
-    // First helmet should contain title and robots meta tag
-    const firstHelmet = helmets[0]
-    const title = Array.from(firstHelmet.children).find(
+    const helmet = screen.getByTestId('helmet')
+    const title = Array.from(helmet.children).find(
       (child) => (child as HTMLElement).tagName.toLowerCase() === 'title',
     )
     expect(title).toHaveTextContent('404 - Page Not Found')
 
-    // Verify the meta tag for robots is present
-    const metaTags = Array.from(firstHelmet.children).filter(
-      (child) => (child as HTMLElement).tagName.toLowerCase() === 'meta',
+    const robotsMeta = Array.from(helmet.children).find(
+      (child) =>
+        (child as HTMLElement).tagName.toLowerCase() === 'meta' &&
+        (child as HTMLElement).getAttribute('name') === 'robots',
     )
-    expect(metaTags.length).toBeGreaterThan(0)
+    expect(robotsMeta).toBeTruthy()
 
-    // Second helmet should contain social meta tags
-    const secondHelmet = helmets[1]
-    const socialMetaTags = Array.from(secondHelmet.children).filter(
-      (child) => (child as HTMLElement).tagName.toLowerCase() === 'meta',
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      '404 - Page Not Found',
     )
-    expect(socialMetaTags.length).toBeGreaterThan(0)
+    expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
+      'content',
+      "The page you're looking for doesn't exist. Please check the URL or return to the home page.",
+    )
   })
 
   /**
