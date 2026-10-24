@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.106.0] - 2026-10-24
+### Features
+
+- **seo:** add crawlable authorship signals and an About page (#263)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.105.3] - 2026-10-08
 ### Bug Fixes
 
