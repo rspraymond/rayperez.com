@@ -1,0 +1,58 @@
+[
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I'm a Senior Software Engineer in Denver, Colorado, focused on full stack web development, performance, and maintainable architecture. I build with Laravel, Node.js, TypeScript, and React.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "My Career",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I've spent over a decade building web software, from early WordPress sites to platforms serving millions of visitors. I have supported mortgage and editorial platforms at Red Ventures, built a chatbot system for hundreds of dealerships at Dealer Inspire, and developed an agent referral system at RE/MAX. Over time my work has moved from building applications to designing the systems behind them.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "What I'm Doing Now",
+    "gutterBottom": true
+  },
+  {
+    "type": "list",
+    "items": [
+      "Senior Software Engineer at DHI Group, the company behind Dice.com, since August 2026.",
+      "Co-creator of Prejump, a Rocket League training pack platform with a training pack database and BakkesMod integration. Read [the Prejump case study](/case-studies/prejump).",
+      "Builder of Twitch Clips Finder, a utility for discovering and organizing clips with advanced search."
+    ]
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "My Motivation",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "I believe great software should make developers' lives easier. That means expressive code that communicates intent, [opinionated frameworks](/why-opinionated) that reduce decision fatigue, and systems that earn trust through reliability. When code is maintainable and teams can move faster, we can focus on solving real problems instead of fighting technical debt.",
+    "paragraph": true
+  },
+  {
+    "type": "heading",
+    "variant": "h3",
+    "content": "For Fun",
+    "gutterBottom": true
+  },
+  {
+    "type": "paragraph",
+    "variant": "body1",
+    "content": "Outside of work, I play Rocket League, watch Twitch streams, and build custom PCs. I'm also usually tinkering with side projects that definitely won't take that long.",
+    "paragraph": true
+  }
+]

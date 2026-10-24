@@ -8,7 +8,7 @@ const WhyInertia = (): React.ReactElement => {
     <JsonBlogPost
       title='Why I Choose Inertia.js'
       author='Raymond Perez'
-      date='2025-05-08'
+      date='2025-05-09'
       content={articleContent as ArticleContent[]}
     />
   )

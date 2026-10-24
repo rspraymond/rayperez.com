@@ -2,6 +2,15 @@
 
 This site is a Vite SPA. Search engines still need a real HTML document at each canonical URL before JavaScript runs. The build emits one extensionless HTML file per route with title, description, canonical, Open Graph tags, and a short lead paragraph in `#root`.
 
+## What each page contains
+
+| Piece           | Articles and case studies                                        | Home and About                         |
+| --------------- | ---------------------------------------------------------------- | -------------------------------------- |
+| JSON-LD         | `BlogPosting` with author `@id`, `datePublished`, `dateModified` | `Person` (home), `ProfilePage` (about) |
+| Body in `#root` | `h1`, byline linking to `/about`, dates, lead paragraph, outline | `h1`, lead paragraph, outline          |
+
+The body is bounded on purpose. It carries the authorship and freshness signals, not a second copy of the article. React replaces `#root` on load, so there is no hydration mismatch.
+
 ## How the build works
 
 ```text
@@ -16,6 +25,9 @@ closeBundle → generate-route-html.ts → dist/why-nestjs, dist/case-studies/pr
 | Copy and titles   | `src/build/utils/routeDescriptions.ts`         | Same descriptions as RSS and article pages                |
 | Lead text         | `src/utils/articleText.ts` → `leadArticleText` | First prose paragraph only (skips takeaways and headings) |
 | Locked query copy | `src/constants/seoCopy.ts`                     | NestJS and opinionated meta descriptions                  |
+| Body and JSON-LD  | `src/build/utils/routeHtml.ts`                 | Pure renderer for the byline, dates, outline, and JSON-LD |
+| Schema            | `src/constants/schema.ts`                      | `buildBlogPostingSchema` is shared with `BlogPost.tsx`    |
+| Sitemap           | `src/build/utils/sitemap.ts`                   | `lastmod` is `updated ?? date`                            |
 | Orchestration     | `scripts/generate-route-html.ts`               | Reads `dist/index.html`, writes route keys                |
 | Hook              | `vite.config.ts` `closeBundle`                 | Runs after RSS, sitemap, resume manifest                  |
 | S3 keys           | `src/build/utils/extensionlessRouteKeys.ts`    | Same paths as `canonicalRoutes` for deploy content-type   |
@@ -61,6 +73,8 @@ Full release steps: [docs/RELEASE_PROCESS.md](RELEASE_PROCESS.md).
 | Adding an article                       | Add the post to `posts.ts` with `contentFile` and path; `canonicalRoutes` drives S3 content-type and route HTML automatically |
 | Changing NestJS or opinionated snippets | Edit `src/constants/seoCopy.ts` and the opinionated JSON opening if the visible lead must match                               |
 | Changing homepage title or description  | Align `index.html`, `src/constants/seoCopy.ts`, and `src/pages/Home.tsx`                                                      |
+| Adding a standalone page                | Add the path to `routes.ts`, a meta builder in `routeDescriptions.ts`, and a route                                            |
+| Revising an article                     | Set `updated` in `posts.ts` and in the article wrapper                                                                        |
 | Verifying output                        | `npm run build`, inspect `dist/why-nestjs` and `dist/feed.xml`                                                                |
 | Testing behavior                        | `scripts/build-route-html-shell.test.ts`, `scripts/generate-route-html.test.ts`, `src/utils/articleText.test.ts`              |
 

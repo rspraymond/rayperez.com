@@ -8,6 +8,7 @@ interface JsonBlogPostProps {
   title: string
   author: string
   date: string
+  updated?: string
   content: ArticleDocument
   description?: string
   metadata?: React.ReactNode
@@ -17,6 +18,7 @@ const JsonBlogPost: React.FC<JsonBlogPostProps> = ({
   title,
   author,
   date,
+  updated,
   content,
   description,
   metadata,
@@ -36,6 +38,7 @@ const JsonBlogPost: React.FC<JsonBlogPostProps> = ({
       title={title}
       author={author}
       date={date}
+      updated={updated}
       readingText={readingText}
       metaDescription={metaDescription}
       metadata={metadata}

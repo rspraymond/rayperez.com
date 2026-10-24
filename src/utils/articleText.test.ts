@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { flattenArticleText, leadArticleText } from './articleText'
+import { articleOutline, flattenArticleText, leadArticleText } from './articleText'
 import { ArticleDocument } from '../types/articleContent'
 
 describe('articleText', () => {
@@ -17,6 +17,19 @@ describe('articleText', () => {
       ]
 
       expect(leadArticleText(doc)).toBe('First prose paragraph for crawlers.')
+    })
+  })
+
+  describe('articleOutline', () => {
+    it('lists non empty heading text in document order', () => {
+      const doc: ArticleDocument = [
+        { type: 'heading', content: 'Key Takeaways', variant: 'h3' },
+        { type: 'paragraph', content: 'Body' },
+        { type: 'heading', content: '  ', variant: 'h3' },
+        { type: 'heading', content: 'Introduction', variant: 'h3' },
+      ]
+
+      expect(articleOutline(doc)).toEqual(['Key Takeaways', 'Introduction'])
     })
   })
 

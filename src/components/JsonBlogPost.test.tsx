@@ -17,6 +17,7 @@ vi.mock('./BlogPost', () => ({
     title: string
     author: string
     date: string
+    updated?: string
     readingText?: string
     metaDescription?: string
     children: React.ReactNode
@@ -25,6 +26,7 @@ vi.mock('./BlogPost', () => ({
       <div data-testid='blog-post-title'>{props.title}</div>
       <div data-testid='blog-post-author'>{props.author}</div>
       <div data-testid='blog-post-date'>{props.date}</div>
+      <div data-testid='blog-post-updated'>{props.updated ?? 'none'}</div>
       <div data-testid='blog-post-reading-text'>{props.readingText || 'undefined'}</div>
       <div data-testid='blog-post-meta-description'>{props.metaDescription || 'undefined'}</div>
       {props.children}
@@ -119,6 +121,20 @@ describe('JsonBlogPost', () => {
       expect(screen.getByTestId('blog-post-title')).toHaveTextContent('Test Blog Title')
       expect(screen.getByTestId('blog-post-author')).toHaveTextContent('Test Author')
       expect(screen.getByTestId('blog-post-date')).toHaveTextContent('2023-01-01')
+
+      await act(async () => {
+        vi.runAllTimers()
+      })
+    })
+
+    it('passes the updated date through to BlogPost', async () => {
+      render(
+        <BrowserRouter>
+          <JsonBlogPost {...defaultProps} updated='2024-02-03' />
+        </BrowserRouter>,
+      )
+
+      expect(screen.getByTestId('blog-post-updated')).toHaveTextContent('2024-02-03')
 
       await act(async () => {
         vi.runAllTimers()

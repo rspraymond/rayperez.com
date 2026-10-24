@@ -146,6 +146,7 @@ const Prejump = (): React.ReactElement => {
       title={caseStudy.title}
       author={PROFILE.name}
       date={caseStudy.date}
+      updated={caseStudy.updated}
       content={articleContent as ArticleContent[]}
       metadata={metadataCard}
     />

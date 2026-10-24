@@ -6,11 +6,13 @@ import PrintStyles from './PrintStyles'
 import { useTheme } from '../contexts/useTheme'
 import { posts } from '../constants/posts'
 import { caseStudies } from '../constants/caseStudies'
+import { ABOUT_PATH } from '../constants/paths'
 import HashRedirectHandler from './HashRedirectHandler'
 import ScrollAndFocusReset from './ScrollAndFocusReset'
 import SiteLayout from './SiteLayout'
 
 const Home = lazy(() => import('../pages/Home'))
+const About = lazy(() => import('../pages/About'))
 const NotFound = lazy(() => import('../pages/NotFound'))
 
 const AppContent: React.FC = () => {
@@ -28,6 +30,14 @@ const AppContent: React.FC = () => {
             element={
               <Suspense fallback={<LoadingFallback />}>
                 <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ABOUT_PATH}
+            element={
+              <Suspense fallback={<LoadingFallback />}>
+                <About />
               </Suspense>
             }
           />

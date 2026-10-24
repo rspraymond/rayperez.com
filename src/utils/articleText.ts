@@ -13,6 +13,11 @@ export const leadArticleText = (doc: ArticleDocument): string => {
   return ''
 }
 
+export const articleOutline = (doc: ArticleDocument): string[] =>
+  doc.flatMap((item) =>
+    item.type === 'heading' && item.content?.trim() ? [item.content.trim()] : [],
+  )
+
 export const flattenArticleText = (doc: ArticleDocument): string => {
   const parts: string[] = []
   const append = (s?: string) => {

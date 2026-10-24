@@ -4,6 +4,7 @@ import { NESTJS_META_DESCRIPTION, OPINIONATED_META_DESCRIPTION } from './seoCopy
 export interface PostMeta {
   title: string
   date: string // ISO format
+  updated?: string // ISO format, set only after a substantive content revision
   path: string
   contentFile: string
   description?: string
@@ -20,21 +21,21 @@ export const posts: PostMeta[] = [
   },
   {
     title: 'Why Type Safety Matters',
-    date: '2025-11-29',
+    date: '2025-11-30',
     path: '/why-type-safety',
     contentFile: 'src/data/articles/WhyTypeSafety.json',
     Component: lazy(() => import('../pages/articles/WhyTypeSafety')),
   },
   {
     title: 'Why I Use MVC Pattern',
-    date: '2024-10-05',
+    date: '2025-05-25',
     path: '/why-mvc-pattern',
     contentFile: 'src/data/articles/WhyMVC.json',
     Component: lazy(() => import('../pages/articles/WhyMVC')),
   },
   {
     title: 'Why I Choose Inertia.js',
-    date: '2025-05-08',
+    date: '2025-05-09',
     path: '/why-inertia',
     contentFile: 'src/data/articles/WhyInertia.json',
     Component: lazy(() => import('../pages/articles/WhyInertia')),
@@ -62,7 +63,7 @@ export const posts: PostMeta[] = [
   },
   {
     title: 'Why I Prefer Opinionated Frameworks',
-    date: '2024-07-04',
+    date: '2024-11-19',
     path: '/why-opinionated',
     contentFile: 'src/data/articles/WhyOpinionated.json',
     description: OPINIONATED_META_DESCRIPTION,

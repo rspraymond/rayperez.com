@@ -9,7 +9,7 @@ const WhyOpinionated = (): React.ReactElement => {
     <JsonBlogPost
       title='Why I Prefer Opinionated Frameworks'
       author='Raymond Perez'
-      date='2024-07-04'
+      date='2024-11-19'
       content={articleContent as ArticleContent[]}
       description={OPINIONATED_META_DESCRIPTION}
     />

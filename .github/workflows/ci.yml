@@ -107,7 +107,7 @@ jobs:
         run: npm run build
 
       - name: Verify post-build artifacts
-        run: test -f dist/feed.xml && test -f dist/sitemap.xml
+        run: test -f dist/feed.xml && test -f dist/sitemap.xml && test -f dist/about && test -f dist/why-typescript
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master

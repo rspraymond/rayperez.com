@@ -1,8 +1,11 @@
 import { screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
 import Footer from './Footer'
-import { render as renderWithProviders } from '../test-utils'
+import { render } from '../test-utils'
 import { FOOTER_SOCIAL_LINKS } from '../constants/social'
+
+const renderWithProviders = (ui: React.ReactElement) => render(<MemoryRouter>{ui}</MemoryRouter>)
 
 describe('Footer', () => {
   it('renders the copyright notice with current year', () => {
@@ -22,6 +25,14 @@ describe('Footer', () => {
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
       expect(screen.getByText(social.text)).toBeInTheDocument()
     })
+  })
+
+  it('links to the about page in the same tab', () => {
+    renderWithProviders(<Footer />)
+
+    const aboutLink = screen.getByRole('link', { name: 'About' })
+    expect(aboutLink).toHaveAttribute('href', '/about')
+    expect(aboutLink).not.toHaveAttribute('target')
   })
 
   it('renders the RSS feed link', () => {

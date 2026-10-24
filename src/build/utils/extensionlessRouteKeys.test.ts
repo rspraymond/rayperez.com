@@ -18,7 +18,7 @@ describe('extensionlessRouteKeys', () => {
   })
 
   it('stays aligned with route HTML meta paths', () => {
-    const metaPaths = buildRouteHtmlMetaList().map((route) => route.path)
+    const metaPaths = buildRouteHtmlMetaList('https://www.rayperez.com/assets/x.jpg').map((route) => route.path)
     expect(() => assertExtensionlessRoutesMatchMetaPaths(metaPaths)).not.toThrow()
   })
 })

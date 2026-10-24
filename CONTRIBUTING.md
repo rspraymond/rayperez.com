@@ -512,8 +512,9 @@ After the first load, only `SocialMeta` updates Open Graph and Twitter tags in `
 ### Structured Data
 
 - All blog posts use Schema.org structured data via `react-schemaorg`
-- The `BlogPost` component handles the structured data for articles
-- The `Home` page uses Person schema for the author information
+- Build article schema with `buildBlogPostingSchema` from `src/constants/schema.ts`; the `BlogPost` component and the static HTML generator both use it so they cannot drift
+- The author is a `Person` referenced by `PERSON_ID`; the full `Person` block lives on `Home` and `AuthorBio`, and the About page uses `ProfilePage`
+- Set the optional `updated` date in `posts.ts` or `caseStudies.ts` only after a substantive content revision; it becomes `dateModified` and the sitemap `lastmod`
 - Ensure all new pages have appropriate structured data
 
 ## Style Guide

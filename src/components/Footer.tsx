@@ -1,5 +1,7 @@
 import React from 'react'
 import { Box, Typography, Link, Stack } from '@mui/material'
+import RouterLinkRef from '../utils/RouterLink'
+import { ABOUT_PATH } from '../constants/paths'
 import RssFeedIcon from '@mui/icons-material/RssFeed'
 import { PROFILE } from '../constants/profile'
 import { FOOTER_SOCIAL_LINKS } from '../constants/social'
@@ -53,6 +55,22 @@ const Footer: React.FC = () => {
             </Typography>
           </Link>
         ))}
+        <Link
+          component={RouterLinkRef}
+          to={ABOUT_PATH}
+          sx={{
+            color: 'text.secondary',
+            textDecoration: 'none',
+            '&:hover': {
+              color: 'primary.main',
+              textDecoration: 'underline',
+            },
+          }}
+        >
+          <Typography variant='body2' component='span'>
+            About
+          </Typography>
+        </Link>
         <Link
           href='/feed.xml'
           target='_blank'

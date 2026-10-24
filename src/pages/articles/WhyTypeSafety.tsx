@@ -8,7 +8,7 @@ const WhyTypeSafety = (): React.ReactElement => {
     <JsonBlogPost
       title='Why Type Safety Matters'
       author='Raymond Perez'
-      date='2025-11-29'
+      date='2025-11-30'
       content={articleContent as ArticleContent[]}
     />
   )

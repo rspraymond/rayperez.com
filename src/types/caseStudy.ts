@@ -18,6 +18,7 @@ export interface CaseStudyMetadata {
 export interface CaseStudyMeta {
   title: string
   date: string // ISO format
+  updated?: string // ISO format, set only after a substantive content revision
   path: string
   contentFile: string
   project: string

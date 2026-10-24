@@ -176,6 +176,56 @@ describe('BlogPost', () => {
     })
   })
 
+  describe('Byline and dates', () => {
+    const renderPost = (props: Partial<typeof defaultProps & { updated: string }> = {}) =>
+      render(
+        <BrowserRouter>
+          <BlogPost {...defaultProps} {...props} />
+        </BrowserRouter>,
+      )
+
+    it('links the author byline to the about page', async () => {
+      renderPost()
+
+      const byline = await screen.findByRole('link', { name: 'Test Author' })
+
+      expect(byline).toHaveAttribute('href', '/about')
+    })
+
+    it('shows the published date as a machine readable time', async () => {
+      renderPost()
+
+      const published = await screen.findByTestId('published-date')
+
+      expect(published.tagName).toBe('TIME')
+      expect(published).toHaveAttribute('datetime', '2023-01-01')
+      expect(published).toHaveTextContent('Jan 1, 2023')
+    })
+
+    it('hides the updated date when the article was never revised', async () => {
+      renderPost()
+      await screen.findByTestId('published-date')
+
+      expect(screen.queryByTestId('updated-date')).not.toBeInTheDocument()
+    })
+
+    it('hides the updated date when it equals the published date', async () => {
+      renderPost({ updated: '2023-01-01' })
+      await screen.findByTestId('published-date')
+
+      expect(screen.queryByTestId('updated-date')).not.toBeInTheDocument()
+    })
+
+    it('shows the updated date when it differs from the published date', async () => {
+      renderPost({ updated: '2024-02-03' })
+
+      const updated = await screen.findByTestId('updated-date')
+
+      expect(updated).toHaveAttribute('datetime', '2024-02-03')
+      expect(updated).toHaveTextContent('Feb 3, 2024')
+    })
+  })
+
   describe('Bookmark State Branch', () => {
     it('renders bookmark border icon when article is not bookmarked', async () => {
       mockIsBookmarked.mockReturnValue(false)

@@ -11,3 +11,5 @@ export const HOME_DOCUMENT_TITLE = 'Raymond Perez - Software Engineer in Denver,
 
 export const HOME_META_DESCRIPTION =
   'Software Engineer in Denver, Colorado specializing in modern web development, performance optimization, and scalable architecture.'
+
+export const ABOUT_DOCUMENT_TITLE = 'About Raymond Perez - Software Engineer in Denver, Colorado'
