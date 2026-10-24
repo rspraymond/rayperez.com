@@ -4,7 +4,7 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'
 import React from 'react'
 
-export const SITE_URL = 'https://www.rayperez.com' as const
+export { SITE_URL } from './siteUrl'
 
 export const SOCIAL_CONFIG = {
   siteName: 'Raymond Perez - Software Engineer',

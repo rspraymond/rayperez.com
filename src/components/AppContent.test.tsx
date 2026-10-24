@@ -48,6 +48,10 @@ vi.mock('../pages/Home', () => ({
   default: () => <div>Home Page</div>,
 }))
 
+vi.mock('../pages/About', () => ({
+  default: () => <div>About Page</div>,
+}))
+
 vi.mock('../pages/NotFound', () => ({
   default: () => <div>Not Found Page</div>,
 }))
@@ -66,6 +70,12 @@ describe('AppContent', () => {
 
     // Check that the main content is rendered
     expect(await screen.findByText('Home Page')).toBeInTheDocument()
+  })
+
+  it('registers the about page route', async () => {
+    renderWithProviders(<AppContent />)
+
+    expect(await screen.findByText('About Page')).toBeInTheDocument()
   })
 
   it('includes the HashRedirectHandler component', async () => {

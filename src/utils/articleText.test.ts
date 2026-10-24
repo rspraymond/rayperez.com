@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { flattenArticleText } from './articleText'
+import { articleOutline, flattenArticleText, leadArticleText } from './articleText'
 import { ArticleDocument } from '../types/articleContent'
 
 describe('articleText', () => {
@@ -131,6 +131,36 @@ describe('articleText', () => {
       ]
       const result = flattenArticleText(doc)
       expect(result).toBe('Valid content More content')
+    })
+  })
+
+  describe('leadArticleText', () => {
+    it('returns the first prose paragraph, skipping headings and list takeaways', () => {
+      const doc: ArticleDocument = [
+        { type: 'heading', content: 'Key Takeaways', variant: 'h3' },
+        { type: 'complexList', complexItems: [{ primary: 'A', secondary: 'B' }] },
+        { type: 'paragraph', content: '  First real paragraph.  ' },
+        { type: 'paragraph', content: 'Second paragraph.' },
+      ]
+
+      expect(leadArticleText(doc)).toBe('First real paragraph.')
+    })
+
+    it('returns an empty string when the document has no prose', () => {
+      expect(leadArticleText([{ type: 'divider' }])).toBe('')
+    })
+  })
+
+  describe('articleOutline', () => {
+    it('lists non empty heading text in document order', () => {
+      const doc: ArticleDocument = [
+        { type: 'heading', content: 'Key Takeaways', variant: 'h3' },
+        { type: 'paragraph', content: 'Body' },
+        { type: 'heading', content: '  ', variant: 'h3' },
+        { type: 'heading', content: 'Introduction', variant: 'h3' },
+      ]
+
+      expect(articleOutline(doc)).toEqual(['Key Takeaways', 'Introduction'])
     })
   })
 })

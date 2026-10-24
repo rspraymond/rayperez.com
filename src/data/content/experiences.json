@@ -1,8 +1,14 @@
 [
   {
     "title": "Senior Software Engineer",
+    "company": "DHI Group, Inc. (Dice.com)",
+    "duration": "Aug 2026 - Present",
+    "bullets": ["Full stack development with Node.js and Next.js."]
+  },
+  {
+    "title": "Senior Software Engineer",
     "company": "iClassPro, Inc.",
-    "duration": "Feb 2026 - Present",
+    "duration": "Feb 2026 - Jul 2026",
     "bullets": [
       "Laravel development for class and camp management products used by gymnastics, swim, cheer, dance, and related youth activity programs.",
       "Contribute to backend services, application quality, and engineering practices across the PHP stack."

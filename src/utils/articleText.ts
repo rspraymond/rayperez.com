@@ -1,5 +1,14 @@
 import { ArticleDocument } from '../types/articleContent'
 
+/** First prose block only; key takeaways and headings are not used as a page lead. */
+export const leadArticleText = (doc: ArticleDocument): string =>
+  doc.find((item) => item.type === 'paragraph' && item.content?.trim())?.content?.trim() ?? ''
+
+export const articleOutline = (doc: ArticleDocument): string[] =>
+  doc.flatMap((item) =>
+    item.type === 'heading' && item.content?.trim() ? [item.content.trim()] : [],
+  )
+
 export const flattenArticleText = (doc: ArticleDocument): string => {
   const parts: string[] = []
   const append = (s?: string) => {

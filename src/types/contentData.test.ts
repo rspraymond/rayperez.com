@@ -111,6 +111,15 @@ describe('Content Data Schema Validation', () => {
         expect(experience.bullets.length).toBeGreaterThan(0)
       })
     })
+
+    it('lists the current employer first and marks only that role as present', () => {
+      const experiences: Experience[] = experiencesData
+      const current = experiences.filter((experience) => experience.duration.endsWith('Present'))
+
+      expect(current).toHaveLength(1)
+      expect(experiences[0]).toBe(current[0])
+      expect(current[0].company).toBe('DHI Group, Inc. (Dice.com)')
+    })
   })
 
   describe('Education Data', () => {

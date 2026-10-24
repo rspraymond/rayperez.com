@@ -8,7 +8,7 @@ const WhyMVC = (): React.ReactElement => {
     <JsonBlogPost
       title='Why I Use MVC Pattern'
       author='Raymond Perez'
-      date='2024-10-05'
+      date='2025-05-25'
       content={articleContent as ArticleContent[]}
     />
   )

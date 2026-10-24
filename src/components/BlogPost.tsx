@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { BlogPosting } from 'schema-dts'
-import { Box, Container, Stack, Typography, IconButton, Tooltip } from '@mui/material'
+import { Box, Container, Link, Stack, Typography, IconButton, Tooltip } from '@mui/material'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import { Helmet } from 'react-helmet-async'
@@ -9,6 +9,11 @@ import { useLocation } from 'react-router-dom'
 import LoadingSkeleton from './LoadingSkeleton'
 import withCanonical from './WithCanonical'
 import { PROFILE } from '../constants/profile'
+import { ABOUT_PATH } from '../constants/paths'
+import RouterLinkRef from '../utils/RouterLink'
+import { buildBlogPostingSchema } from '../constants/schema'
+import { SITE_URL } from '../constants/siteUrl'
+import { formatIsoDate } from '../utils/formatIsoDate'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { useScrollToTop } from '../hooks/useScrollToTop'
 import { usePostNavigation } from '../hooks/usePostNavigation'
@@ -26,6 +31,7 @@ interface BlogPostProps {
   title: string
   author: string
   date: string
+  updated?: string
   children: React.ReactNode
   readingText?: string
   metadata?: React.ReactNode
@@ -35,6 +41,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
   title,
   author,
   date,
+  updated,
   children,
   readingText,
   metadata,
@@ -44,6 +51,8 @@ const BlogPost: React.FC<BlogPostProps> = ({
   const { isBookmarked, toggleBookmark } = useBookmarks()
 
   const currentPath = location.pathname
+  // Equal dates mean the article was never revised, so showing an update would be misleading.
+  const hasUpdate = updated !== undefined && updated !== date
   const isCurrentlyBookmarked = isBookmarked(currentPath)
   const [announcement, setAnnouncement] = useState<string>('')
 
@@ -79,17 +88,14 @@ const BlogPost: React.FC<BlogPostProps> = ({
       </Box>
       <Helmet
         script={[
-          helmetJsonLdProp<BlogPosting>({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            headline: title,
-            author: {
-              '@type': 'Person',
-              name: author,
-            },
-            datePublished: date,
-            image: PROFILE.image,
-          }),
+          helmetJsonLdProp<BlogPosting>(
+            buildBlogPostingSchema({
+              title,
+              url: `${SITE_URL}${currentPath}`,
+              datePublished: date,
+              dateModified: updated,
+            }),
+          ),
         ]}
       >
         <title>
@@ -134,7 +140,25 @@ const BlogPost: React.FC<BlogPostProps> = ({
             </Tooltip>
           </Box>
           <SocialShareButtons title={title} />
-          <Box>
+          <Stack spacing={0.5}>
+            <Typography variant='body2' color='text.secondary'>
+              By{' '}
+              <Link component={RouterLinkRef} to={ABOUT_PATH} rel='author'>
+                {author}
+              </Link>
+              {' · '}
+              <time data-testid='published-date' dateTime={date}>
+                {formatIsoDate(date)}
+              </time>
+              {hasUpdate && (
+                <React.Fragment>
+                  {' · Updated '}
+                  <time data-testid='updated-date' dateTime={updated}>
+                    {formatIsoDate(updated)}
+                  </time>
+                </React.Fragment>
+              )}
+            </Typography>
             {readingTimeDisplay ? (
               <Typography variant='body2' color='text.secondary'>
                 {readingTimeDisplay}
@@ -142,7 +166,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
             ) : (
               <LoadingSkeleton testId='reading-time' />
             )}
-          </Box>
+          </Stack>
           {metadata && <Box sx={{ mb: 2 }}>{metadata}</Box>}
           <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
             <TableOfContents />

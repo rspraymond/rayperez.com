@@ -11,6 +11,7 @@ function postBuildGenerators(): Plugin {
       execSync('npx tsx scripts/generate-rss-feed.ts', { stdio: 'inherit' })
       execSync('npx tsx scripts/generate-sitemap.ts', { stdio: 'inherit' })
       execSync('npx tsx scripts/generate-resume-manifest.ts', { stdio: 'inherit' })
+      execSync('npx tsx scripts/generate-route-html.ts', { stdio: 'inherit' })
     },
   }
 }
