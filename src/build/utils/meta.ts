@@ -19,8 +19,10 @@ export const escapeHtml = (value?: string) =>
 export const buildMetaTags = (values: MetaTagValues) => {
   const { title, description, keywords, image, url, type, siteName, twitterCreator } = values
 
+  // Canonical is in the static shell so crawlers see the preferred URL before hydration.
   return `
     <title>${escapeHtml(title)}</title>
+    <link rel="canonical" href="${escapeHtml(url)}" />
     <meta name="description" content="${escapeHtml(description)}" />
     <meta name="keywords" content="${escapeHtml(keywords)}" />
     <meta property="og:title" content="${escapeHtml(title)}" />

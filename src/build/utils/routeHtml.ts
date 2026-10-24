@@ -1,13 +1,13 @@
 import { buildMetaTags, escapeHtml } from './meta'
 import { DEFAULT_SEO_KEYWORDS } from '../../constants/seo'
 import { PROFILE } from '../../constants/profile'
+import { SOCIAL_CONFIG } from '../../constants/social'
 import { ABOUT_PATH } from '../../constants/paths'
 import { formatIsoDate } from '../../utils/formatIsoDate'
 
 const META_START = '<!-- DEFAULT_META_START -->'
 const META_END = '<!-- DEFAULT_META_END -->'
 const EMPTY_ROOT = '<div id="root"></div>'
-const SITE_NAME = 'rayperez.com'
 
 export interface RouteHtmlMeta {
   path: string
@@ -62,12 +62,12 @@ const replaceMetaBlock = (shell: string, tags: string): string => {
   if (start === -1 || end === -1 || end < start) {
     throw new Error('DEFAULT_META markers missing from index.html template')
   }
-  return `${shell.slice(0, start + META_START.length)}\n${tags}\n    ${shell.slice(end)}`
+  return `${shell.slice(0, start + META_START.length)}\n${tags}\n    <!-- META_PLACEHOLDER -->\n    ${shell.slice(end)}`
 }
 
 /**
  * Builds the first HTML response for one route from the built shell.
- * The canonical link is added here because buildMetaTags omits it and the client only sets it after JavaScript runs.
+ * Canonical and share tags come from buildMetaTags so crawlers see them before JavaScript runs.
  */
 export const renderRouteHtml = (
   shell: string,
@@ -82,10 +82,9 @@ export const renderRouteHtml = (
       image: imageUrl,
       url,
       type: meta.type === 'article' ? 'article' : 'profile',
-      siteName: SITE_NAME,
+      siteName: SOCIAL_CONFIG.siteName,
       twitterCreator: PROFILE.twitterCreator,
     }),
-    `<link rel="canonical" href="${escapeHtml(url)}" />`,
     renderJsonLd(meta.schemas),
   ].join('\n    ')
 

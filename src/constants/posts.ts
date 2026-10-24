@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+import { NESTJS_META_DESCRIPTION, OPINIONATED_META_DESCRIPTION } from './seoCopy'
 
 export interface PostMeta {
   title: string
@@ -6,6 +7,7 @@ export interface PostMeta {
   updated?: string // ISO format, set only after a substantive content revision
   path: string
   contentFile: string
+  description?: string
   Component: React.LazyExoticComponent<() => JSX.Element>
 }
 
@@ -64,6 +66,7 @@ export const posts: PostMeta[] = [
     date: '2024-11-19',
     path: '/why-opinionated',
     contentFile: 'src/data/articles/WhyOpinionated.json',
+    description: OPINIONATED_META_DESCRIPTION,
     Component: lazy(() => import('../pages/articles/WhyOpinionated')),
   },
   {
@@ -85,6 +88,7 @@ export const posts: PostMeta[] = [
     date: '2024-07-04',
     path: '/why-nestjs',
     contentFile: 'src/data/articles/WhyNest.json',
+    description: NESTJS_META_DESCRIPTION,
     Component: lazy(() => import('../pages/articles/WhyNest')),
   },
   {

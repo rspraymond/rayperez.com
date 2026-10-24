@@ -3,14 +3,18 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { renderRouteHtml } from '../src/build/utils/routeHtml.js'
 import { buildRouteHtmlMetaList } from '../src/build/utils/routeDescriptions.js'
+import { assertExtensionlessRoutesMatchMetaPaths } from '../src/build/utils/extensionlessRouteKeys.js'
 import { SITE_URL } from '../src/constants/siteUrl.js'
 
 const scriptPath = fileURLToPath(import.meta.url)
 const defaultDistDir = path.resolve(path.dirname(scriptPath), '../dist')
 
-// The unhashed PROFILE.image path is not a real file, so crawlers and og:image need Vite's hashed copy.
+// Crawlers and og:image need the hashed JPEG Vite emitted, not PROFILE.image (that key 301s to the SPA).
 const resolveProfileImageUrl = (distDir: string): string => {
   const assetsDir = path.join(distDir, 'assets')
+  if (!fs.existsSync(assetsDir)) {
+    throw new Error('dist/assets is missing. Run vite build before generate-route-html.')
+  }
   const match = fs
     .readdirSync(assetsDir)
     .find((file) => file.startsWith('raymond-perez-') && file.endsWith('.jpg'))
@@ -26,15 +30,16 @@ export function generateRouteHtml(distDir: string = defaultDistDir): void {
     throw new Error('dist/index.html is missing. Run vite build first.')
   }
 
-  // Every route starts from the built shell so entry script and hashed asset URLs stay shared.
+  // Reuse the built index shell so every route shares the same entry script and hashed asset URLs.
   const shell = fs.readFileSync(indexPath, 'utf8')
   const imageUrl = resolveProfileImageUrl(distDir)
   const routes = buildRouteHtmlMetaList(imageUrl)
+  assertExtensionlessRoutesMatchMetaPaths(routes.map((route) => route.path))
 
   for (const route of routes) {
     const url = route.path === '/' ? SITE_URL : `${SITE_URL}${route.path}`
     const html = renderRouteHtml(shell, route, { imageUrl, url })
-    // Extensionless keys match the canonical URLs served from S3.
+    // Extensionless object keys match canonical URLs on S3 static website hosting.
     const outPath = route.path === '/' ? indexPath : path.join(distDir, route.path.slice(1))
     fs.mkdirSync(path.dirname(outPath), { recursive: true })
     fs.writeFileSync(outPath, html, 'utf8')

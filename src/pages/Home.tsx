@@ -13,6 +13,8 @@ import { PROFILE } from '../constants/profile'
 import { SKILLS } from '../constants/skills'
 import { PERSON_SCHEMA } from '../constants/schema'
 import { SITE_URL } from '../constants/social'
+import { HOME_DOCUMENT_TITLE, HOME_META_DESCRIPTION } from '../constants/seoCopy'
+import { SHARE_IMAGE_URL } from '../constants/shareImage'
 import { useScrollToTop } from '../hooks/useScrollToTop'
 import BackToTopButton from '../components/BackToTopButton'
 import LoadingSkeleton from '../components/LoadingSkeleton'
@@ -56,12 +58,12 @@ const Home: React.FC = () => {
         ]}
       >
         <link rel='canonical' href={SITE_URL} />
-        <title>{`${PROFILE.name} - ${PROFILE.role} in ${PROFILE.location.city}, ${PROFILE.location.stateName}`}</title>
+        <title>{HOME_DOCUMENT_TITLE}</title>
       </Helmet>
       <SocialMeta
-        title={PROFILE.name}
-        description={`${PROFILE.role} in ${PROFILE.location.city}, ${PROFILE.location.stateName} specializing in modern web development, performance optimization, and scalable architecture.`}
-        image={PROFILE.image}
+        title={HOME_DOCUMENT_TITLE}
+        description={HOME_META_DESCRIPTION}
+        image={SHARE_IMAGE_URL}
         url={SITE_URL}
         type='profile'
       />

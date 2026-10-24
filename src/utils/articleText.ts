@@ -1,8 +1,17 @@
 import { ArticleDocument } from '../types/articleContent'
 
-/** First prose block only; key takeaways and headings are not used as a page lead. */
-export const leadArticleText = (doc: ArticleDocument): string =>
-  doc.find((item) => item.type === 'paragraph' && item.content?.trim())?.content?.trim() ?? ''
+/** First prose block only; key takeaways and headings are not used as the static lead or default description. */
+export const leadArticleText = (doc: ArticleDocument): string => {
+  for (const item of doc) {
+    if (item.type === 'paragraph') {
+      const text = item.content?.trim()
+      if (text) {
+        return text
+      }
+    }
+  }
+  return ''
+}
 
 export const articleOutline = (doc: ArticleDocument): string[] =>
   doc.flatMap((item) =>

@@ -120,7 +120,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           SOURCE_DIR: 'dist'
 
-      - name: Set text/html on route pages
+      - name: Set Content-Type on extensionless HTML routes
         run: npx tsx scripts/set-route-html-content-type.ts
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}

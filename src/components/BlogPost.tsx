@@ -34,6 +34,7 @@ interface BlogPostProps {
   updated?: string
   children: React.ReactNode
   readingText?: string
+  metaDescription?: string
   metadata?: React.ReactNode
 }
 
@@ -44,6 +45,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
   updated,
   children,
   readingText,
+  metaDescription,
   metadata,
 }) => {
   const { showBackToTop, scrollToTop } = useScrollToTop()
@@ -58,6 +60,8 @@ const BlogPost: React.FC<BlogPostProps> = ({
 
   const readingTimeDisplay = useReadingTime(readingText ?? children)
   const { prevPost, nextPost } = usePostNavigation()
+  const documentTitle = `${title} - ${PROFILE.name} - ${PROFILE.role}`
+  const pageUrl = `${SITE_URL}${currentPath}`
 
   const handleBookmarkClick = () => {
     const wasBookmarked = isCurrentlyBookmarked
@@ -98,15 +102,14 @@ const BlogPost: React.FC<BlogPostProps> = ({
           ),
         ]}
       >
-        <title>
-          {title} - {PROFILE.name} - {PROFILE.role}
-        </title>
+        <title>{documentTitle}</title>
       </Helmet>
+      {/* Reading time is computed later; do not tie description to it or the head would change twice. */}
       <SocialMeta
-        title={title}
-        description={`${title} by ${author} - ${readingTimeDisplay} read`}
+        title={documentTitle}
+        description={metaDescription}
         type='article'
-        url={typeof window !== 'undefined' ? window.location.href : ''}
+        url={pageUrl}
       />
       <Container
         component='article'

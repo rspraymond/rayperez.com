@@ -1,45 +1,69 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { posts } from '../../constants/posts'
-import { caseStudies } from '../../constants/caseStudies'
-import { PROFILE } from '../../constants/profile'
-import { PERSON_SCHEMA, buildBlogPostingSchema, buildProfilePageSchema } from '../../constants/schema'
-import { ABOUT_PATH } from '../../constants/paths'
-import { SITE_URL } from '../../constants/siteUrl'
+import { posts } from '../../constants/posts.js'
+import { caseStudies } from '../../constants/caseStudies.js'
+import { PROFILE } from '../../constants/profile.js'
+import {
+  PERSON_SCHEMA,
+  buildBlogPostingSchema,
+  buildProfilePageSchema,
+} from '../../constants/schema.js'
+import { ABOUT_PATH } from '../../constants/paths.js'
+import { SITE_URL } from '../../constants/siteUrl.js'
+import { articleOutline, leadArticleText } from '../../utils/articleText.js'
+import { ArticleDocument } from '../../types/articleContent.js'
 import {
   ABOUT_DOCUMENT_TITLE,
   HOME_DOCUMENT_TITLE,
   HOME_META_DESCRIPTION,
-} from '../../constants/seoCopy'
-import { articleOutline, leadArticleText } from '../../utils/articleText'
-import type { ArticleDocument } from '../../types/articleContent'
-import type { RouteHtmlMeta } from './routeHtml'
+  NESTJS_META_DESCRIPTION,
+  OPINIONATED_META_DESCRIPTION,
+} from '../../constants/seoCopy.js'
+import type { RouteHtmlMeta } from './routeHtml.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
 
-const readDocument = (file: string): ArticleDocument =>
-  JSON.parse(fs.readFileSync(path.join(projectRoot, file), 'utf8')) as ArticleDocument
+export const documentTitleForArticle = (heading: string): string =>
+  `${heading} - ${PROFILE.name} - ${PROFILE.role}`
+
+const readArticleDocument = (contentFile: string): ArticleDocument => {
+  const absolutePath = path.join(projectRoot, contentFile)
+  if (!fs.existsSync(absolutePath)) {
+    throw new Error(`Missing content file: ${contentFile}`)
+  }
+  return JSON.parse(fs.readFileSync(absolutePath, 'utf8')) as ArticleDocument
+}
+
+export const descriptionForContentFile = (contentFile: string, explicit?: string): string => {
+  // Query-target articles pass locked copy in posts.ts instead of the introduction paragraph.
+  if (explicit) {
+    return explicit
+  }
+  return leadArticleText(readArticleDocument(contentFile))
+}
 
 interface DatedEntry {
   title: string
   path: string
   date: string
   updated?: string
+  contentFile: string
+  description?: string
 }
 
 const toArticleMeta = (
-  { title, path: routePath, date, updated }: DatedEntry,
-  doc: ArticleDocument,
+  { title, path: routePath, date, updated, contentFile, description }: DatedEntry,
   imageUrl: string,
 ): RouteHtmlMeta => {
+  // Each content file is parsed once; the lead, outline, and fallback description share it.
+  const doc = readArticleDocument(contentFile)
   const lead = leadArticleText(doc)
   return {
     path: routePath,
-    title: `${title} - ${PROFILE.name} - ${PROFILE.role}`,
+    title: documentTitleForArticle(title),
     heading: title,
-    // The description matches the lead in the body so snippets and page text agree.
-    description: lead,
+    description: description ?? lead,
     lead,
     outline: articleOutline(doc),
     type: 'article',
@@ -69,7 +93,7 @@ const buildHomeMeta = (imageUrl: string): RouteHtmlMeta => ({
 })
 
 const buildAboutMeta = (imageUrl: string): RouteHtmlMeta => {
-  const doc = readDocument('src/data/content/about.json')
+  const doc = readArticleDocument('src/data/content/about.json')
   const lead = leadArticleText(doc)
   return {
     path: ABOUT_PATH,
@@ -83,12 +107,12 @@ const buildAboutMeta = (imageUrl: string): RouteHtmlMeta => {
   }
 }
 
-/** Every canonical route's static HTML inputs; each content file is parsed once. */
+/** Titles and descriptions for static HTML and RSS; keep aligned with JsonBlogPost page props. */
 export const buildRouteHtmlMetaList = (imageUrl: string): RouteHtmlMeta[] => [
   buildHomeMeta(imageUrl),
   buildAboutMeta(imageUrl),
-  ...posts.map((post) => toArticleMeta(post, readDocument(post.contentFile), imageUrl)),
-  ...caseStudies.map((study) =>
-    toArticleMeta(study, readDocument(study.contentFile), imageUrl),
-  ),
+  ...posts.map((post) => toArticleMeta(post, imageUrl)),
+  ...caseStudies.map((study) => toArticleMeta(study, imageUrl)),
 ]
+
+export { NESTJS_META_DESCRIPTION, OPINIONATED_META_DESCRIPTION }

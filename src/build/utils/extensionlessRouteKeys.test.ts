@@ -1,15 +1,24 @@
-import { describe, expect, it } from 'vitest'
-import { extensionlessRouteKeys } from './extensionlessRouteKeys'
+import { describe, it, expect } from 'vitest'
+import { canonicalRoutes } from '../../constants/routes.js'
+import {
+  assertExtensionlessRoutesMatchMetaPaths,
+  extensionlessHtmlObjectKeys,
+} from './extensionlessRouteKeys.js'
+import { buildRouteHtmlMetaList } from './routeDescriptions.js'
 
 describe('extensionlessRouteKeys', () => {
-  it('drops the root and strips the leading slash from every other route', () => {
-    expect(extensionlessRouteKeys(['/', '/about', '/case-studies/prejump'])).toEqual([
-      'about',
-      'case-studies/prejump',
-    ])
+  it('lists one S3 key per non-home canonical route', () => {
+    const keys = extensionlessHtmlObjectKeys()
+    const expectedCount = canonicalRoutes.filter((path) => path !== '/').length
+
+    expect(keys).toHaveLength(expectedCount)
+    expect(keys).toContain('why-nestjs')
+    expect(keys).toContain('case-studies/prejump')
+    expect(keys.every((key) => !key.startsWith('/'))).toBe(true)
   })
 
-  it('removes duplicate routes', () => {
-    expect(extensionlessRouteKeys(['/about', '/about'])).toEqual(['about'])
+  it('stays aligned with route HTML meta paths', () => {
+    const metaPaths = buildRouteHtmlMetaList('https://www.rayperez.com/assets/x.jpg').map((route) => route.path)
+    expect(() => assertExtensionlessRoutesMatchMetaPaths(metaPaths)).not.toThrow()
   })
 })

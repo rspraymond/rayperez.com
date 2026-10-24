@@ -1,12 +1,11 @@
 # Static route HTML for crawlers
 
-This site is a Vite SPA. Search engines and AI crawlers still need a real HTML document at each canonical URL before JavaScript runs. The build writes one extensionless HTML file per route with the title, description, canonical link, Open Graph tags, JSON-LD, and a short body in `#root`.
+This site is a Vite SPA. Search engines still need a real HTML document at each canonical URL before JavaScript runs. The build emits one extensionless HTML file per route with title, description, canonical, Open Graph tags, and a short lead paragraph in `#root`.
 
 ## What each page contains
 
 | Piece           | Articles and case studies                                        | Home and About                         |
 | --------------- | ---------------------------------------------------------------- | -------------------------------------- |
-| Head tags       | Title, description, canonical, Open Graph, Twitter               | Same                                   |
 | JSON-LD         | `BlogPosting` with author `@id`, `datePublished`, `dateModified` | `Person` (home), `ProfilePage` (about) |
 | Body in `#root` | `h1`, byline linking to `/about`, dates, lead paragraph, outline | `h1`, lead paragraph, outline          |
 
@@ -15,37 +14,73 @@ The body is bounded on purpose. It carries the authorship and freshness signals,
 ## How the build works
 
 ```text
-vite build → dist/index.html + assets
-closeBundle → generate-route-html.ts → dist/why-typescript, dist/about, dist/case-studies/prejump, ...
-            → rewrites dist/index.html for /
+Vite build → dist/index.html + assets
+closeBundle → generate-route-html.ts → dist/why-nestjs, dist/case-studies/prejump, …
+            → updates dist/index.html meta for /
 ```
 
-| Step             | File                                     | Role                                                     |
-| ---------------- | ---------------------------------------- | -------------------------------------------------------- |
-| Route inventory  | `src/constants/routes.ts`                | `canonicalRoutes` drives the sitemap, HTML, and S3 keys  |
-| Per route inputs | `src/build/utils/routeDescriptions.ts`   | Parses each content JSON once and builds `RouteHtmlMeta` |
-| Rendering        | `src/build/utils/routeHtml.ts`           | Pure functions that return the final HTML string         |
-| Schema           | `src/constants/schema.ts`                | `buildBlogPostingSchema` is shared with `BlogPost.tsx`   |
-| Orchestration    | `scripts/generate-route-html.ts`         | Reads `dist/index.html` once, writes one file per route  |
-| Sitemap          | `src/build/utils/sitemap.ts`             | `lastmod` is `updated ?? date`                           |
-| Content type     | `scripts/set-route-html-content-type.ts` | Sets `text/html` on extensionless S3 objects after sync  |
+| Step              | Script or file                                 | Role                                                      |
+| ----------------- | ---------------------------------------------- | --------------------------------------------------------- |
+| Meta HTML         | `src/build/utils/meta.ts`                      | `buildMetaTags` for the static shell (includes canonical) |
+| Copy and titles   | `src/build/utils/routeDescriptions.ts`         | Same descriptions as RSS and article pages                |
+| Lead text         | `src/utils/articleText.ts` → `leadArticleText` | First prose paragraph only (skips takeaways and headings) |
+| Locked query copy | `src/constants/seoCopy.ts`                     | NestJS and opinionated meta descriptions                  |
+| Body and JSON-LD  | `src/build/utils/routeHtml.ts`                 | Pure renderer for the byline, dates, outline, and JSON-LD |
+| Schema            | `src/constants/schema.ts`                      | `buildBlogPostingSchema` is shared with `BlogPost.tsx`    |
+| Sitemap           | `src/build/utils/sitemap.ts`                   | `lastmod` is `updated ?? date`                            |
+| Orchestration     | `scripts/generate-route-html.ts`               | Reads `dist/index.html`, writes route keys                |
+| Hook              | `vite.config.ts` `closeBundle`                 | Runs after RSS, sitemap, resume manifest                  |
+| S3 keys           | `src/build/utils/extensionlessRouteKeys.ts`    | Same paths as `canonicalRoutes` for deploy content-type   |
 
-Home copy in `src/constants/seoCopy.ts` mirrors the default head in `index.html`. `scripts/meta-build-parity.test.ts` fails if they drift.
+Article JSON paths live on `contentFile` in `src/constants/posts.ts` and `src/constants/caseStudies.ts`.
 
-## Dates
+## Client head tags after load
 
-`date` in `src/constants/posts.ts` or `src/constants/caseStudies.ts` is the publish date. Set the optional `updated` field only after a substantive content revision, not for styling or formatting commits. Article page wrappers pass the same dates to `JsonBlogPost`.
+Prerendered tags are correct on first paint. SPA navigation is documented in **[docs/client-route-meta.md](client-route-meta.md)** (in-place head updates, single `SocialMeta` writer, AuthorBio JSON-LD only).
 
-## Deploy
+| Concern                | Where                                                                       |
+| ---------------------- | --------------------------------------------------------------------------- |
+| Open Graph and Twitter | `SocialMeta` + `src/utils/socialMetaDocumentHead.ts` (see CONTRIBUTING SEO) |
+| Article title pattern  | `src/components/BlogPost.tsx` → heading, name, role                         |
+| Stable description     | `JsonBlogPost` passes `metaDescription`; reading time does not update meta  |
+| Canonical URL          | `WithCanonical.tsx` and `SocialMeta` `url` prop → `SITE_URL` + pathname     |
+| Share image            | `src/constants/shareImage.ts` (hashed JPEG from Vite import)                |
 
-CI builds `dist`, syncs it to S3, then runs `scripts/set-route-html-content-type.ts` so crawlers get `text/html` for extensionless keys. Existing S3 routing rules only fire on 404 or 403, so a route that has an object returns `200` and is not redirected to a hashbang URL.
+Do not add a second meta pipeline or hand written tags in page components.
 
-## If you are changing
+## Deploy and infrastructure
 
-| You are                  | Do                                                                                 |
-| ------------------------ | ---------------------------------------------------------------------------------- |
-| Adding an article        | Add it to `posts.ts` with `contentFile`; the next build generates its HTML         |
-| Adding a case study      | Add it to `caseStudies.ts` with `contentFile`                                      |
-| Adding a standalone page | Add the path to `routes.ts`, a meta builder in `routeDescriptions.ts`, and a route |
-| Changing the home head   | Update `index.html` and `seoCopy.ts` together                                      |
-| Revising an article      | Set `updated` in `posts.ts` and in the article wrapper                             |
+Deploy order matters: route objects must exist and return `200` before S3 stops rewriting 404s to hashbang URLs.
+
+| Order | Action                                                                                                                  |
+| ----- | ----------------------------------------------------------------------------------------------------------------------- |
+| 1     | Tag release → CI builds `dist` and syncs to S3                                                                          |
+| 2     | CI runs `scripts/set-route-html-content-type.ts` (keys from `canonicalRoutes`) so extensionless objects are `text/html` |
+| 3     | `terraform apply` in `infrastructure/` (error document `404.html`, hashbang rules removed)                              |
+| 4     | Cloudflare: exact trailing slash `301` to slash free paths (not in Terraform; see comment in `main.tf`)                 |
+| 5     | `curl` checks per release notes; then sitemap resubmit and URL inspection in Search Console                             |
+
+Static missing URL page: `public/404.html` (no app bundle, `noindex`). In app 404 remains `src/pages/NotFound.tsx`.
+
+S3 cannot rewrite extensionless URLs without a redirect. See [docs/s3-extensionless-url-rewrite-impossible.md](s3-extensionless-url-rewrite-impossible.md).
+
+Full release steps: [docs/RELEASE_PROCESS.md](RELEASE_PROCESS.md).
+
+## If you are changing…
+
+| You are…                                | Do…                                                                                                                           |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Adding an article                       | Add the post to `posts.ts` with `contentFile` and path; `canonicalRoutes` drives S3 content-type and route HTML automatically |
+| Changing NestJS or opinionated snippets | Edit `src/constants/seoCopy.ts` and the opinionated JSON opening if the visible lead must match                               |
+| Changing homepage title or description  | Align `index.html`, `src/constants/seoCopy.ts`, and `src/pages/Home.tsx`                                                      |
+| Adding a standalone page                | Add the path to `routes.ts`, a meta builder in `routeDescriptions.ts`, and a route                                            |
+| Revising an article                     | Set `updated` in `posts.ts` and in the article wrapper                                                                        |
+| Verifying output                        | `npm run build`, inspect `dist/why-nestjs` and `dist/feed.xml`                                                                |
+| Testing behavior                        | `scripts/build-route-html-shell.test.ts`, `scripts/generate-route-html.test.ts`, `src/utils/articleText.test.ts`              |
+
+## Commands
+
+```bash
+npm run build    # produces dist route HTML and feed/sitemap
+npm run test     # includes route HTML and article meta tests
+```

@@ -4,7 +4,6 @@ import { Person } from 'schema-dts'
 import { Box, Avatar, Typography, Divider } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
 import LazyImage from './LazyImage'
-import SocialMeta from './SocialMeta'
 import SkillsSection from './SkillsSection'
 import SocialLinksSection from './SocialLinksSection'
 import { PROFILE } from '../constants/profile'
@@ -15,13 +14,7 @@ import { PERSON_SCHEMA } from '../constants/schema'
 const AuthorBio: React.FC = () => {
   return (
     <React.Fragment>
-      <SocialMeta
-        title={`${PROFILE.name} - ${PROFILE.role}`}
-        description={`${PROFILE.name} is a ${PROFILE.role} in Denver, Colorado, specializing in modern web development and scalable architecture.`}
-        image={profileImage}
-        url='https://www.rayperez.com'
-        type='profile'
-      />
+      {/* Route SocialMeta owns share tags; bio JSON-LD must not rewrite og:url after lazy load. */}
       <Helmet
         script={[
           helmetJsonLdProp<Person>(

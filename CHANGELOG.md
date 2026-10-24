@@ -1,6 +1,31 @@
 ## Changelog
 
 
+## [0.105.3] - 2026-10-08
+### Bug Fixes
+
+- **seo:** crawlable route HTML and SPA document head updates
+- **test:** remove unused React import in SocialMeta tests
+- **seo:** update document head on SPA navigation
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
+## [0.105.2] - 2026-10-08
+### Bug Fixes
+
+- **seo:** serve crawlable HTML at canonical article URLs
+- **seo:** serve crawlable HTML at canonical article URLs
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.105.1] - 2026-10-01
 ### Bug Fixes
 

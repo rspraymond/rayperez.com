@@ -6,7 +6,6 @@ import { ThemeProvider } from '@mui/material/styles'
 import { createTheme } from '@mui/material'
 import AuthorBio from './AuthorBio'
 import { PROFILE } from '../constants/profile'
-import profileImage from '../assets/raymond-perez.jpg'
 
 // Mock the Helmet component
 vi.mock('react-helmet-async', () => ({
@@ -113,29 +112,11 @@ describe('AuthorBio Component', () => {
     expect(headingTexts).toContain('Find me online:')
   })
 
-  it('renders social meta tags for SEO', () => {
+  it('does not inject page-level Open Graph or Twitter meta tags', () => {
     renderComponent()
 
-    // Check for Open Graph meta tags
-    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
-      'content',
-      `${PROFILE.name} - ${PROFILE.role}`,
-    )
-    expect(document.querySelector('meta[property="og:type"]')).toHaveAttribute('content', 'profile')
-    expect(document.querySelector('meta[property="og:image"]')).toHaveAttribute(
-      'content',
-      profileImage,
-    )
-
-    // Check for Twitter Card meta tags
-    expect(document.querySelector('meta[property="twitter:card"]')).toHaveAttribute(
-      'content',
-      'summary_large_image',
-    )
-    expect(document.querySelector('meta[property="twitter:creator"]')).toHaveAttribute(
-      'content',
-      PROFILE.twitterCreator,
-    )
+    expect(document.querySelector('meta[property="og:title"]')).toBeNull()
+    expect(document.querySelector('meta[property="twitter:card"]')).toBeNull()
   })
 
   it('has responsive design elements', () => {

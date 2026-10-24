@@ -6,8 +6,10 @@ import JsonBlogPost from './JsonBlogPost'
 import { ArticleDocument } from '../types/articleContent'
 
 const mockFlattenArticleText = vi.fn()
+const mockLeadArticleText = vi.fn()
 vi.mock('../utils/articleText', () => ({
   flattenArticleText: (doc: ArticleDocument) => mockFlattenArticleText(doc),
+  leadArticleText: (doc: ArticleDocument) => mockLeadArticleText(doc),
 }))
 
 vi.mock('./BlogPost', () => ({
@@ -17,6 +19,7 @@ vi.mock('./BlogPost', () => ({
     date: string
     updated?: string
     readingText?: string
+    metaDescription?: string
     children: React.ReactNode
   }) => (
     <div data-testid='blog-post'>
@@ -25,6 +28,7 @@ vi.mock('./BlogPost', () => ({
       <div data-testid='blog-post-date'>{props.date}</div>
       <div data-testid='blog-post-updated'>{props.updated ?? 'none'}</div>
       <div data-testid='blog-post-reading-text'>{props.readingText || 'undefined'}</div>
+      <div data-testid='blog-post-meta-description'>{props.metaDescription || 'undefined'}</div>
       {props.children}
     </div>
   ),
@@ -82,6 +86,7 @@ describe('JsonBlogPost', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockFlattenArticleText.mockReturnValue('Flattened article text for reading time')
+    mockLeadArticleText.mockReturnValue('Lead paragraph for meta')
     vi.useFakeTimers()
   })
 
