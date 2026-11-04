@@ -9,7 +9,7 @@ import {
   buildBlogPostingSchema,
   buildProfilePageSchema,
 } from '../../constants/schema.js'
-import { ABOUT_PATH } from '../../constants/paths.js'
+import { ABOUT_PATH, ABOUT_PROFILE_SECTIONS } from '../../constants/paths.js'
 import { SITE_URL } from '../../constants/siteUrl.js'
 import { articleOutline, leadArticleText } from '../../utils/articleText.js'
 import { ArticleDocument } from '../../types/articleContent.js'
@@ -86,7 +86,7 @@ const buildHomeMeta = (imageUrl: string): RouteHtmlMeta => ({
   title: HOME_DOCUMENT_TITLE,
   heading: PROFILE.name,
   description: HOME_META_DESCRIPTION,
-  lead: HOME_META_DESCRIPTION,
+  lead: PROFILE.tagline,
   outline: [],
   type: 'profile',
   schemas: [{ ...PERSON_SCHEMA, image: imageUrl, description: PROFILE.description }],
@@ -101,7 +101,8 @@ const buildAboutMeta = (imageUrl: string): RouteHtmlMeta => {
     heading: `About ${PROFILE.name}`,
     description: lead,
     lead,
-    outline: articleOutline(doc),
+    // The profile sections render from components, not about.json, so they are appended for crawlers here.
+    outline: [...articleOutline(doc), ...Object.values(ABOUT_PROFILE_SECTIONS)],
     type: 'profile',
     schemas: [buildProfilePageSchema(imageUrl)],
   }

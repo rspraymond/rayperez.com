@@ -162,7 +162,10 @@ This project implements several performance optimizations that should be maintai
 
 ### Loading States
 
-- Always use the `LoadingFallback` component as the fallback for Suspense
+- Use the `LoadingFallback` component as the fallback for Suspense, except on routes with a matching skeleton in `RouteSkeleton.tsx` (Home and About)
+- Route skeletons reuse the section styles in `src/styles/sectionStyles.ts`, so placeholder lines take the same space as the text that replaces them
+- Render content known at build time, such as the home page name and introduction, outside `Suspense` so it paints with the entry chunk
+- Section rules, the type scale, and how to build a skeleton: **[docs/page-sections-and-skeletons.md](docs/page-sections-and-skeletons.md)**
 - The loading screen maintains a dark theme to prevent flash of white background
 - When creating new lazy-loaded components, provide meaningful loading indicators
 

@@ -1,5 +1,4 @@
-import { Box, IconButton, useTheme, Link, Typography } from '@mui/material'
-import { useLocation } from 'react-router-dom'
+import { Box, IconButton, useTheme, Link } from '@mui/material'
 import RouterLinkRef from '../utils/RouterLink'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
@@ -8,10 +7,11 @@ import ThemeToggle from './ThemeToggle'
 import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
 import { PROFILE } from '../constants/profile'
 
+/**
+ * Sidebar header. The name is a plain link on every route because each page owns its single h1.
+ */
 function Header() {
   const theme = useTheme()
-  const location = useLocation()
-  const isHomePage = location.pathname === '/'
 
   return (
     <Box
@@ -31,50 +31,24 @@ function Header() {
           gap: 1,
         }}
       >
-        {isHomePage ? (
-          <Typography
-            component='h1'
-            itemScope
-            itemType='https://schema.org/Person'
-            sx={{
-              flexGrow: 1,
-              fontWeight: 400,
-              fontSize: theme.typography.h6.fontSize,
-              lineHeight: theme.typography.h6.lineHeight,
-              fontFamily: theme.typography.h6.fontFamily,
-            }}
-          >
-            <Link
-              component={RouterLinkRef}
-              to='/'
-              underline='hover'
-              color='inherit'
-              sx={{ textDecoration: 'none' }}
-              itemProp='name'
-            >
-              {PROFILE.name}
-            </Link>
-          </Typography>
-        ) : (
-          <Link
-            component={RouterLinkRef}
-            to='/'
-            underline='hover'
-            color='inherit'
-            itemScope
-            itemType='https://schema.org/Person'
-            sx={{
-              flexGrow: 1,
-              fontWeight: 400,
-              fontSize: theme.typography.h6.fontSize,
-              lineHeight: theme.typography.h6.lineHeight,
-              fontFamily: theme.typography.h6.fontFamily,
-              textDecoration: 'none',
-            }}
-          >
-            <span itemProp='name'>{PROFILE.name}</span>
-          </Link>
-        )}
+        <Link
+          component={RouterLinkRef}
+          to='/'
+          underline='hover'
+          color='inherit'
+          itemScope
+          itemType='https://schema.org/Person'
+          sx={{
+            flexGrow: 1,
+            fontWeight: 400,
+            fontSize: theme.typography.h6.fontSize,
+            lineHeight: theme.typography.h6.lineHeight,
+            fontFamily: theme.typography.h6.fontFamily,
+            textDecoration: 'none',
+          }}
+        >
+          <span itemProp='name'>{PROFILE.name}</span>
+        </Link>
         <ThemeToggle />
         <IconButton
           href='https://www.linkedin.com/in/raymond-perez-eng/'

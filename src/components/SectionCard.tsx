@@ -1,41 +1,33 @@
-import React from 'react'
-import { Card, CardContent, Typography, SvgIconProps } from '@mui/material'
+import React, { useId } from 'react'
+import { Box, Typography } from '@mui/material'
+import { SECTION_LABEL_SX, SECTION_SX } from '../styles/sectionStyles'
 
 interface SectionCardProps {
   title: string
-  icon: React.ElementType<SvgIconProps>
   children: React.ReactNode
   headingId?: string
   headingComponent?: 'h2' | 'h3'
-  marginTop?: number
-  marginBottom?: number
+  testId?: string
 }
 
 const SectionCard: React.FC<SectionCardProps> = ({
   title,
-  icon: Icon,
   children,
   headingId,
   headingComponent = 'h2',
-  marginTop = 16,
-  marginBottom = 0,
+  testId,
 }) => {
+  // aria-labelledby always needs a target, so sections without an explicit id get a generated one.
+  const generatedId = useId()
+  const id = headingId ?? generatedId
+
   return (
-    <Card style={{ marginTop, marginBottom }}>
-      <CardContent>
-        <Typography
-          variant='h5'
-          gutterBottom
-          component={headingComponent}
-          id={headingId}
-          sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}
-        >
-          <Icon sx={{ mr: 1, color: 'text.secondary' }} fontSize='medium' aria-hidden='true' />
-          {title}
-        </Typography>
-        {children}
-      </CardContent>
-    </Card>
+    <Box component='section' aria-labelledby={id} data-testid={testId} sx={SECTION_SX}>
+      <Typography component={headingComponent} id={id} sx={SECTION_LABEL_SX}>
+        {title}
+      </Typography>
+      {children}
+    </Box>
   )
 }
 

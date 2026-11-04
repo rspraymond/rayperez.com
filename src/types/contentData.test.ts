@@ -1,14 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type {
-  Profile,
-  ProfessionalSummary,
-  Project,
-  Achievement,
-  Experience,
-  Education,
-} from './contentData'
+import type { Profile, Project, Achievement, Experience, Education } from './contentData'
 import profileData from '../data/content/profile.json'
-import summaryData from '../data/content/summary.json'
 import projectsData from '../data/content/projects.json'
 import achievementsData from '../data/content/achievements.json'
 import experiencesData from '../data/content/experiences.json'
@@ -40,16 +32,6 @@ describe('Content Data Schema Validation', () => {
       expect(typeof profile.email).toBe('string')
       expect(typeof profile.description).toBe('string')
       expect(typeof profile.twitterCreator).toBe('string')
-    })
-  })
-
-  describe('Professional Summary Data', () => {
-    it('should match ProfessionalSummary interface structure', () => {
-      const summary: ProfessionalSummary = summaryData
-
-      expect(summary.text).toBeDefined()
-      expect(typeof summary.text).toBe('string')
-      expect(summary.text.length).toBeGreaterThan(0)
     })
   })
 

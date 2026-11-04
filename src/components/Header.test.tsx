@@ -13,13 +13,19 @@ const renderWithTheme = (component: React.ReactElement) => {
 }
 
 describe('Header', () => {
+  it('links the name home without claiming the page heading', () => {
+    window.history.pushState({}, '', '/')
+    renderWithTheme(<Header />)
+
+    expect(screen.getByRole('link', { name: 'Raymond Perez' })).toHaveAttribute('href', '/')
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument()
+  })
+
   it('renders the header with title, theme toggle, and navigation buttons', () => {
     renderWithTheme(<Header />)
 
     // Check for title link
-    const titleLink = screen.getByText('Raymond Perez')
-    expect(titleLink).toBeInTheDocument()
-    expect(titleLink).toHaveAttribute('href', '/')
+    expect(screen.getByRole('link', { name: 'Raymond Perez' })).toHaveAttribute('href', '/')
 
     // Check for theme toggle button
     const buttons = screen.getAllByRole('button')

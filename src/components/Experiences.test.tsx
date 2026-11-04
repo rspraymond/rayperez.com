@@ -16,19 +16,19 @@ describe('Experiences', () => {
 
   const renderWithHelmet = (ui: React.ReactElement) => render(<HelmetProvider>{ui}</HelmetProvider>)
 
-  it('renders the Career heading', () => {
+  it('is a section named Experience', () => {
     renderWithHelmet(<Experiences experiences={fixture} />)
 
-    expect(screen.getByText('Career')).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Experience' })).toBeInTheDocument()
   })
 
-  it('renders one card per experience with company and duration', () => {
+  it('titles each role by company, with the role and dates beside it', () => {
     renderWithHelmet(<Experiences experiences={fixture} />)
 
-    expect(screen.getByText('C1 - D1')).toBeInTheDocument()
-    expect(screen.getByText('C2 - D2')).toBeInTheDocument()
-    const headings = screen.getAllByRole('heading', { level: 3 })
-    expect(headings).toHaveLength(2)
+    const companies = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+    expect(companies).toEqual(['C1', 'C2'])
+    expect(screen.getByText('T1')).toBeInTheDocument()
+    expect(screen.getByText('D2')).toBeInTheDocument()
   })
 
   it('renders bullets from props', () => {

@@ -1,10 +1,11 @@
 import React from 'react'
-import { CardContent, Typography, Box } from '@mui/material'
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
+import { Box, Stack, Typography } from '@mui/material'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Occupation } from 'schema-dts'
 import { Helmet } from 'react-helmet-async'
 import SectionCard from './SectionCard'
+import ItemHeader from './ItemHeader'
+import { BODY_SX, ITEM_GAP, META_SX } from '../styles/sectionStyles'
 import type { Experience as ExperienceType } from '../types/contentData'
 
 type ExperiencesProps = {
@@ -22,51 +23,35 @@ const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
   )
 
   return (
-    <SectionCard title='Career' icon={WorkOutlineIcon} marginTop={0} marginBottom={0}>
+    <SectionCard title='Experience' headingId='experience-heading'>
       <Helmet script={occupationScripts} />
-      <CardContent sx={{ p: 0 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {experiences.length === 0 ? (
-            <Typography variant='body2' color='text.secondary'>
-              No experiences to display.
-            </Typography>
-          ) : (
-            experiences.map((experience, index) => (
-              <Box
-                key={`${experience.company}-${experience.duration}-${index}`}
-                sx={{
-                  p: 2,
-                  border: 1,
-                  borderColor: 'divider',
-                  borderRadius: 3,
-                  bgcolor: 'background.paper',
-                  transition: 'all 0.2s ease-in-out',
-                  '&:hover': {
-                    borderColor: 'primary.main',
-                    boxShadow: 1,
-                  },
-                }}
-              >
-                <Typography variant='h6' component='h3' sx={{ fontWeight: 600, mb: 0.5 }}>
-                  {experience.title}
-                </Typography>
-                <Typography
-                  variant='body2'
-                  color='text.secondary'
-                  sx={{ mb: experience.bullets.length ? 1 : 0 }}
+      {experiences.length === 0 ? (
+        <Typography sx={META_SX}>No experiences to display.</Typography>
+      ) : (
+        <Stack spacing={ITEM_GAP}>
+          {experiences.map((experience, index) => (
+            <Box key={`${experience.company}-${experience.duration}-${index}`}>
+              <ItemHeader
+                title={experience.company}
+                detail={experience.title}
+                dates={experience.duration}
+              />
+              {experience.bullets.length > 0 && (
+                <Box
+                  component='ul'
+                  sx={{ m: 0, mt: 1, pl: 2.5, display: 'flex', flexDirection: 'column', gap: 1 }}
                 >
-                  {experience.company} - {experience.duration}
-                </Typography>
-                {experience.bullets.map((bullet, bulletIndex) => (
-                  <Box marginTop={1.5} key={`${experience.company}-${bulletIndex}`}>
-                    <Typography variant='body1'>{bullet}</Typography>
-                  </Box>
-                ))}
-              </Box>
-            ))
-          )}
-        </Box>
-      </CardContent>
+                  {experience.bullets.map((bullet) => (
+                    <Typography component='li' key={bullet} sx={BODY_SX}>
+                      {bullet}
+                    </Typography>
+                  ))}
+                </Box>
+              )}
+            </Box>
+          ))}
+        </Stack>
+      )}
     </SectionCard>
   )
 }

@@ -3,6 +3,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import About from './About'
 import { PROFILE } from '../constants/profile'
+import { ABOUT_PROFILE_SECTIONS } from '../constants/paths'
+import { SKILLS } from '../constants/skills'
 
 vi.mock('react-helmet-async', () => ({
   Helmet: ({ children }: { children: React.ReactNode }) => (
@@ -54,5 +56,25 @@ describe('About', () => {
     const meta = screen.getByTestId('social-meta')
     expect(meta).toHaveAttribute('data-type', 'profile')
     expect(meta).toHaveAttribute('data-url', 'https://www.rayperez.com/about')
+  })
+
+  it('shows skills, achievements, and education after the story', () => {
+    renderAbout()
+
+    const sectionNames = Object.values(ABOUT_PROFILE_SECTIONS)
+    const headings = screen
+      .getAllByRole('heading', { level: 2 })
+      .map((heading) => heading.textContent)
+      .filter((text) => sectionNames.some((name) => name === text))
+    expect(headings).toEqual(sectionNames)
+  })
+
+  it('links every skill to the article explaining it', () => {
+    renderAbout()
+
+    const hrefs = screen.getAllByRole('link').map((link) => link.getAttribute('href'))
+    for (const skill of SKILLS) {
+      expect(hrefs).toContain(skill.url)
+    }
   })
 })

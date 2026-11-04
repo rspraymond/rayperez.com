@@ -1,83 +1,43 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { describe, it, expect } from 'vitest'
 import Skills from './Skills'
 
+const skill = (label: string) => ({ label, url: `/why-${label.toLowerCase()}` })
+
+const renderSkills = (labels: string[]) =>
+  render(
+    <MemoryRouter>
+      <Skills skills={labels.map(skill)} />
+    </MemoryRouter>,
+  )
+
 describe('Skills', () => {
-  const mockSkills = [
-    { label: 'React', url: '/why-react' },
-    { label: 'TypeScript', url: '/why-typescript' },
-    { label: 'Material UI', url: '/why-mui' },
-  ]
+  it.each([
+    [['A'], 'I work most with A.'],
+    [['A', 'B'], 'I work most with A and B.'],
+    [['A', 'B', 'C'], 'I work most with A, B, and C.'],
+  ])('reads %j as one sentence', (labels, sentence) => {
+    renderSkills(labels)
 
-  const renderWithRouter = (skills: typeof mockSkills) => {
-    return render(
-      <MemoryRouter>
-        <Skills skills={skills} />
-      </MemoryRouter>,
-    )
-  }
-
-  it('renders the skills heading', () => {
-    renderWithRouter(mockSkills)
-    expect(screen.getByText('Skills')).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        (_, element) => element?.tagName === 'P' && element.textContent === sentence,
+      ),
+    ).toBeInTheDocument()
   })
 
-  it('renders all skill chips with correct labels', () => {
-    renderWithRouter(mockSkills)
+  it('links each skill to the article about it', () => {
+    renderSkills(['React', 'Laravel'])
 
-    mockSkills.forEach((skill) => {
-      const chip = screen.getByText(skill.label)
-      expect(chip).toBeInTheDocument()
-    })
+    expect(screen.getByRole('link', { name: 'React' })).toHaveAttribute('href', '/why-react')
+    expect(screen.getByRole('link', { name: 'Laravel' })).toHaveAttribute('href', '/why-laravel')
   })
 
-  it('creates chips with correct links and accessibility attributes', () => {
-    renderWithRouter(mockSkills)
+  it('shows only the heading when there are no skills', () => {
+    renderSkills([])
 
-    mockSkills.forEach((skill) => {
-      const link = screen.getByText(skill.label).closest('a')
-      expect(link).toHaveAttribute('href', skill.url)
-      expect(link).toHaveAttribute('aria-label', `Read more about ${skill.label}`)
-    })
-  })
-
-  it('has onMouseOver and onMouseOut event handlers', () => {
-    renderWithRouter(mockSkills)
-
-    const chip = screen.getByText(mockSkills[0].label)
-    expect(chip).toHaveProperty('onmouseover')
-    expect(chip).toHaveProperty('onmouseout')
-
-    // Verify we can call these handlers without errors
-    fireEvent.mouseOver(chip)
-    fireEvent.mouseOut(chip)
-  })
-
-  it('has onFocus and onBlur event handlers', () => {
-    renderWithRouter(mockSkills)
-
-    const chip = screen.getByText(mockSkills[0].label)
-    expect(chip).toHaveProperty('onfocus')
-    expect(chip).toHaveProperty('onblur')
-
-    // Verify we can call these handlers without errors
-    fireEvent.focus(chip)
-    fireEvent.blur(chip)
-  })
-
-  it('renders empty state gracefully', () => {
-    renderWithRouter([])
-    expect(screen.getByText('Skills')).toBeInTheDocument()
-    // Should not throw any errors when no skills are provided
-  })
-
-  it('renders chips as links', () => {
-    renderWithRouter(mockSkills)
-
-    mockSkills.forEach((skill) => {
-      const link = screen.getByText(skill.label).closest('a')
-      expect(link).toBeInTheDocument()
-    })
+    expect(screen.getByRole('heading', { name: 'Skills' })).toBeInTheDocument()
+    expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
 })

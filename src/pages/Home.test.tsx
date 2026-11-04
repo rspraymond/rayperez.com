@@ -1,106 +1,83 @@
-import { render, screen, waitFor } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { describe, it, expect, vi } from 'vitest'
 import Home from './Home'
-import { BookmarkProvider } from '../contexts/BookmarkContext'
-import experiencesData from '../data/content/experiences.json'
-import educationData from '../data/content/education.json'
+import { PROFILE } from '../constants/profile'
 import { HOME_DOCUMENT_TITLE, HOME_META_DESCRIPTION } from '../constants/seoCopy'
 
-// Mock the Helmet component
-vi.mock('react-helmet-async', () => ({
-  Helmet: ({ children }) => <div data-testid='helmet-mock'>{children}</div>,
-  HelmetProvider: ({ children }) => <>{children}</>,
-}))
-
-vi.mock('../components/Summary.tsx', () => ({
-  default: () => <div data-testid='summary-component'>Summary Mock</div>,
-}))
-
-vi.mock('../components/Projects.tsx', () => ({
-  default: () => <div data-testid='projects-component'>Projects Mock</div>,
-}))
-
-vi.mock('../components/Skills.tsx', () => ({
-  default: () => <div data-testid='skills-component'>Skills Mock</div>,
-}))
-
-vi.mock('../components/Achievements.tsx', () => ({
-  default: () => <div data-testid='achievements-component'>Achievements Mock</div>,
-}))
-
-vi.mock('../components/Experiences.tsx', () => ({
-  default: ({ experiences }) => (
-    <div data-testid='experiences-component'>
-      {experiences.map((exp, index) => (
-        <div data-testid='experience-component' key={`${exp.company}-${index}`}>
-          {exp.title} at {exp.company}
-        </div>
-      ))}
-    </div>
-  ),
-}))
-
-vi.mock('../components/Educations.tsx', () => ({
-  default: ({ educations }) => (
-    <div data-testid='educations-component'>
-      {educations.map((edu, index) => (
-        <div data-testid='education-component' key={`${edu.school}-${index}`}>
-          {edu.degree} from {edu.school}
-        </div>
-      ))}
-    </div>
-  ),
-}))
-
-// BookmarkedPosts is provided by layout; Home no longer renders it directly
-
-const renderWithProvider = (component: React.ReactElement) => {
-  return render(<BookmarkProvider>{component}</BookmarkProvider>)
+interface HelmetScript {
+  type: string
+  innerHTML: string
 }
 
-describe('Home Component', () => {
-  it('renders primary content correctly', () => {
-    renderWithProvider(<Home />)
-    expect(screen.getByTestId('summary-component')).toBeInTheDocument()
+// Renders JSON-LD inline so a test can read it on the first render, the way crawlers do once Helmet flushes.
+vi.mock('react-helmet-async', () => ({
+  Helmet: ({ script, children }: { script?: HelmetScript[]; children?: React.ReactNode }) => (
+    <div>
+      {script?.map((entry, index) => (
+        <script key={index} type={entry.type}>
+          {entry.innerHTML}
+        </script>
+      ))}
+      {children}
+    </div>
+  ),
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}))
+
+const renderHome = () =>
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>,
+  )
+
+const jsonLdTypes = (): string[] =>
+  Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map(
+    (script) => JSON.parse(script.textContent ?? '{}')['@type'],
+  )
+
+describe('Home', () => {
+  it('shows Experience, then Projects', () => {
+    renderHome()
+
+    const sectionHeadings = screen
+      .getAllByRole('heading', { level: 2 })
+      .map((heading) => heading.textContent)
+    expect(sectionHeadings).toEqual(['Experience', 'Projects'])
   })
 
-  it('renders all main content sections', async () => {
-    renderWithProvider(<Home />)
+  it('leaves the name and introduction to the route, so the page has no heading of its own', () => {
+    renderHome()
 
-    // Verify main content sections are present in correct order
-    expect(screen.getByTestId('summary-component')).toBeInTheDocument()
-    expect(screen.getByTestId('skills-component')).toBeInTheDocument()
-    expect(screen.getByTestId('projects-component')).toBeInTheDocument()
-    expect(screen.getByTestId('achievements-component')).toBeInTheDocument()
-
-    // Wait for lazy-loaded Experiences component to render
-    await waitFor(() => {
-      expect(screen.getByTestId('experiences-component')).toBeInTheDocument()
-    })
-
-    // Check that the correct number of experience and education components are rendered from data files
-    const experiences = screen.getAllByTestId('experience-component')
-    const educations = screen.getAllByTestId('education-component')
-
-    expect(experiences.length).toBe(experiencesData.length)
-    expect(educations.length).toBe(educationData.length)
-    expect(screen.getByTestId('educations-component')).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 1 })).not.toBeInTheDocument()
+    expect(screen.queryByText(PROFILE.tagline)).not.toBeInTheDocument()
   })
 
-  it('includes structured data for SEO', () => {
-    renderWithProvider(<Home />)
+  it('no longer shows skills, achievements, or education, which now live on About', () => {
+    renderHome()
 
-    expect(screen.getAllByTestId('helmet-mock')).toHaveLength(1)
+    for (const name of ['Skills', 'Achievements', 'Education']) {
+      expect(screen.queryByRole('heading', { name })).not.toBeInTheDocument()
+    }
+  })
+
+  it('describes the person and each role as structured data on the first render', () => {
+    renderHome()
+
+    const types = jsonLdTypes()
+    expect(types).toContain('Person')
+    expect(types).toContain('Occupation')
+  })
+
+  it('sets the home title and description for sharing', () => {
+    renderHome()
 
     expect(document.title).toBe(HOME_DOCUMENT_TITLE)
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
       'content',
       HOME_META_DESCRIPTION,
-    )
-    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
-      'content',
-      HOME_DOCUMENT_TITLE,
     )
   })
 })

@@ -9,10 +9,6 @@ vi.mock('./ProfileCard', () => ({
   default: () => <div data-testid='mock-profile-card'>ProfileCard</div>,
 }))
 
-vi.mock('./GitHubStats', () => ({
-  default: () => <div data-testid='mock-github-stats'>GitHubStats</div>,
-}))
-
 vi.mock('./BookmarkedPosts', () => ({
   default: () => <div data-testid='mock-bookmarked-posts'>BookmarkedPosts</div>,
 }))
@@ -41,7 +37,7 @@ describe('SiteLayout', () => {
     expect(screen.getByText('child')).toBeInTheDocument()
   })
 
-  it('renders all sidebar lazy components', () => {
+  it('renders the sidebar without a GitHub activity panel', () => {
     renderWithProviders(
       <MemoryRouter>
         <Routes>
@@ -56,7 +52,7 @@ describe('SiteLayout', () => {
     expect(screen.getByTestId('mock-profile-card')).toBeInTheDocument()
     expect(screen.getByTestId('mock-bookmarked-posts')).toBeInTheDocument()
     expect(screen.getByTestId('mock-recent-posts')).toBeInTheDocument()
-    expect(screen.getByTestId('mock-github-stats')).toBeInTheDocument()
+    expect(screen.queryByText(/GitHub activity/i)).not.toBeInTheDocument()
   })
 
   it('renders main content with id main-content and tabIndex -1 for focus target', () => {
