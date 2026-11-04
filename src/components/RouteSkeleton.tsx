@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Container, Skeleton, Stack, Typography } from '@mui/material'
+import { Box, Skeleton, Stack, Typography } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material'
 import {
   BODY_SX,
   ITEM_GAP,
   ITEM_TITLE_SX,
   META_SX,
-  PAGE_CONTAINER_SX,
+  PAGE_SX,
   PAGE_STACK_SPACING,
   PROJECT_GAP,
   SECTION_LABEL_SX,
@@ -30,16 +30,23 @@ interface SectionSkeletonProps {
   items: number
   bodyLines: number
   gap: number
+  /** Off for one line items such as Experience roles, where the detail shares the title row. */
+  metaLine?: boolean
 }
 
-export const SectionSkeleton: React.FC<SectionSkeletonProps> = ({ items, bodyLines, gap }) => (
+export const SectionSkeleton: React.FC<SectionSkeletonProps> = ({
+  items,
+  bodyLines,
+  gap,
+  metaLine = true,
+}) => (
   <Box sx={SECTION_SX}>
     <Bar sx={SECTION_LABEL_SX} width='7ch' />
     <Stack spacing={gap}>
       {Array.from({ length: items }, (_, item) => (
         <Box key={item}>
           <Bar sx={ITEM_TITLE_SX} width='45%' />
-          <Bar sx={META_SX} width='30%' />
+          {metaLine && <Bar sx={META_SX} width='30%' />}
           {Array.from({ length: bodyLines }, (_, line) => (
             <Bar key={line} sx={BODY_SX} width={line === bodyLines - 1 ? '70%' : '95%'} />
           ))}
@@ -55,13 +62,13 @@ export const SectionSkeleton: React.FC<SectionSkeletonProps> = ({ items, bodyLin
  */
 export const HomeSectionsSkeleton: React.FC = () => (
   <Box aria-busy='true' sx={{ minHeight: '100vh' }}>
-    <SectionSkeleton items={2} bodyLines={3} gap={ITEM_GAP} />
+    <SectionSkeleton items={6} bodyLines={0} gap={ITEM_GAP / 2} metaLine={false} />
     <SectionSkeleton items={3} bodyLines={2} gap={PROJECT_GAP} />
   </Box>
 )
 
 export const AboutSkeleton: React.FC = () => (
-  <Container maxWidth='md' aria-busy='true' sx={{ ...PAGE_CONTAINER_SX, minHeight: '100vh' }}>
+  <Box aria-busy='true' sx={{ ...PAGE_SX, minHeight: '100vh' }}>
     <Stack spacing={PAGE_STACK_SPACING}>
       {/* The About heading wraps to three lines on phones and fits on one line from sm up. */}
       <Typography variant='h2' component='div'>
@@ -86,5 +93,5 @@ export const AboutSkeleton: React.FC = () => (
       </Box>
       <SectionSkeleton items={1} bodyLines={2} gap={ITEM_GAP} />
     </Stack>
-  </Container>
+  </Box>
 )

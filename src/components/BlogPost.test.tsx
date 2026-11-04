@@ -1,30 +1,16 @@
 import React from 'react'
 import { render, screen, act, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { BrowserRouter } from 'react-router-dom'
 import BlogPost from './BlogPost'
 
 // Create mock functions that can be controlled per test
-const mockIsBookmarked = vi.fn()
-const mockToggleBookmark = vi.fn()
 const mockScrollToTop = vi.fn()
 const mockShowBackToTop = vi.fn()
 const mockReadingTimeDisplay = vi.fn()
 const mockPrevPost = vi.fn()
 const mockNextPost = vi.fn()
 const mockPathname = vi.fn()
-
-// Mock the useBookmarks hook
-vi.mock('../hooks/useBookmarks', () => ({
-  useBookmarks: () => ({
-    bookmarks: [],
-    isBookmarked: mockIsBookmarked,
-    addBookmark: vi.fn(),
-    removeBookmark: vi.fn(),
-    toggleBookmark: mockToggleBookmark,
-  }),
-}))
 
 // Mock useScrollToTop hook
 vi.mock('../hooks/useScrollToTop', () => ({
@@ -105,8 +91,6 @@ describe('BlogPost', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    mockIsBookmarked.mockReturnValue(false)
-    mockToggleBookmark.mockClear()
     mockReadingTimeDisplay.mockReturnValue('5 min read')
     mockShowBackToTop.mockReturnValue(false)
     mockPrevPost.mockReturnValue(undefined)
@@ -223,68 +207,6 @@ describe('BlogPost', () => {
 
       expect(updated).toHaveAttribute('datetime', '2024-02-03')
       expect(updated).toHaveTextContent('Feb 3, 2024')
-    })
-  })
-
-  describe('Bookmark State Branch', () => {
-    it('renders bookmark border icon when article is not bookmarked', async () => {
-      mockIsBookmarked.mockReturnValue(false)
-
-      render(
-        <BrowserRouter>
-          <BlogPost {...defaultProps} />
-        </BrowserRouter>,
-      )
-
-      await act(async () => {
-        await Promise.resolve()
-      })
-
-      const bookmarkButton = screen.getByRole('button', { name: 'bookmark article' })
-      expect(bookmarkButton).toBeInTheDocument()
-      expect(screen.getByTestId('BookmarkBorderIcon')).toBeInTheDocument()
-      expect(screen.queryByTestId('BookmarkIcon')).not.toBeInTheDocument()
-    })
-
-    it('renders bookmark icon when article is bookmarked', async () => {
-      mockIsBookmarked.mockReturnValue(true)
-
-      render(
-        <BrowserRouter>
-          <BlogPost {...defaultProps} />
-        </BrowserRouter>,
-      )
-
-      await act(async () => {
-        await Promise.resolve()
-      })
-
-      const bookmarkButton = screen.getByRole('button', { name: 'remove bookmark' })
-      expect(bookmarkButton).toBeInTheDocument()
-      expect(screen.getByTestId('BookmarkIcon')).toBeInTheDocument()
-      expect(screen.queryByTestId('BookmarkBorderIcon')).not.toBeInTheDocument()
-    })
-
-    it('calls toggleBookmark with correct arguments on click', async () => {
-      const user = userEvent.setup()
-      mockIsBookmarked.mockReturnValue(false)
-      mockPathname.mockReturnValue('/test-article')
-
-      render(
-        <BrowserRouter>
-          <BlogPost {...defaultProps} />
-        </BrowserRouter>,
-      )
-
-      await act(async () => {
-        await Promise.resolve()
-      })
-
-      const bookmarkButton = screen.getByRole('button', { name: 'bookmark article' })
-      await user.click(bookmarkButton)
-
-      expect(mockToggleBookmark).toHaveBeenCalledTimes(1)
-      expect(mockToggleBookmark).toHaveBeenCalledWith('Test Blog Title', '/test-article')
     })
   })
 

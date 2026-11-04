@@ -2,7 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
-import { BookmarkProvider } from '../../contexts/BookmarkContext'
 import WhyNest from './WhyNest'
 import { NESTJS_META_DESCRIPTION } from '../../constants/seoCopy'
 
@@ -21,13 +20,11 @@ vi.mock('../../components/AuthorBio', () => ({
 describe('WhyNest page', () => {
   it('keeps the heading, document title, and NestJS meta description', async () => {
     render(
-      <BookmarkProvider>
-        <HelmetProvider>
-          <MemoryRouter initialEntries={['/why-nestjs']}>
-            <WhyNest />
-          </MemoryRouter>
-        </HelmetProvider>
-      </BookmarkProvider>,
+      <HelmetProvider>
+        <MemoryRouter initialEntries={['/why-nestjs']}>
+          <WhyNest />
+        </MemoryRouter>
+      </HelmetProvider>,
     )
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Why I Choose NestJS')

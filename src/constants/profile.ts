@@ -6,6 +6,8 @@ export const PROFILE = {
   image: '/assets/raymond-perez.jpg',
   twitterCreator: '@onlyray7',
   email: 'ray@rayperez.com',
+  linkedinUrl: 'https://www.linkedin.com/in/raymond-perez-eng/',
+  githubUrl: 'https://github.com/rspraymond',
   location: {
     city: 'Denver',
     state: 'CO',

@@ -9,7 +9,7 @@ import {
   buildBlogPostingSchema,
   buildProfilePageSchema,
 } from '../../constants/schema.js'
-import { ABOUT_PATH, ABOUT_PROFILE_SECTIONS } from '../../constants/paths.js'
+import { ABOUT_PATH, ABOUT_PROFILE_SECTIONS, HOME_SECTIONS } from '../../constants/paths.js'
 import { SITE_URL } from '../../constants/siteUrl.js'
 import { articleOutline, leadArticleText } from '../../utils/articleText.js'
 import { ArticleDocument } from '../../types/articleContent.js'
@@ -87,7 +87,7 @@ const buildHomeMeta = (imageUrl: string): RouteHtmlMeta => ({
   heading: PROFILE.name,
   description: HOME_META_DESCRIPTION,
   lead: PROFILE.tagline,
-  outline: [],
+  outline: Object.values(HOME_SECTIONS).map((section) => section.title),
   type: 'profile',
   schemas: [{ ...PERSON_SCHEMA, image: imageUrl, description: PROFILE.description }],
 })

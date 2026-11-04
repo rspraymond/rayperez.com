@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { ProfilePage } from 'schema-dts'
-import { Box, Container, Divider, Stack, Typography } from '@mui/material'
+import { Box, Divider, Stack, Typography } from '@mui/material'
 import ArticleRenderer from '../components/ArticleRenderer'
 import SocialLinksSection from '../components/SocialLinksSection'
 import Skills from '../components/Skills'
@@ -15,7 +15,7 @@ import { SITE_URL } from '../constants/siteUrl'
 import { ABOUT_DOCUMENT_TITLE } from '../constants/seoCopy'
 import { PROFILE } from '../constants/profile'
 import { SKILLS } from '../constants/skills'
-import { PAGE_CONTAINER_SX, PAGE_STACK_SPACING } from '../styles/sectionStyles'
+import { PAGE_SX, PAGE_STACK_SPACING } from '../styles/sectionStyles'
 import { leadArticleText } from '../utils/articleText'
 import profileImage from '../assets/raymond-perez.jpg'
 import aboutContent from '../data/content/about.json'
@@ -41,7 +41,7 @@ const About: React.FC = () => (
       type='profile'
       url={aboutUrl}
     />
-    <Container component='article' maxWidth='md' sx={PAGE_CONTAINER_SX}>
+    <Box component='article' sx={PAGE_SX}>
       <Stack spacing={PAGE_STACK_SPACING}>
         <Typography variant='h2' component='h1'>
           About {PROFILE.name}
@@ -55,7 +55,7 @@ const About: React.FC = () => (
         <Divider />
         <SocialLinksSection />
       </Stack>
-    </Container>
+    </Box>
   </React.Fragment>
 )
 

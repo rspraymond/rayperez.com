@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import AppContent from './AppContent'
 import { ThemeProvider } from '../contexts/ThemeContext'
-import { BookmarkProvider } from '../contexts/BookmarkContext'
 
 // Mock react-router-dom
 vi.mock('react-router-dom', () => {
@@ -57,11 +56,7 @@ vi.mock('../pages/NotFound', () => ({
 }))
 
 const renderWithProviders = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider>
-      <BookmarkProvider>{component}</BookmarkProvider>
-    </ThemeProvider>,
-  )
+  return render(<ThemeProvider>{component}</ThemeProvider>)
 }
 
 describe('AppContent', () => {

@@ -1,89 +1,61 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import Header from './Header'
 import { ThemeProvider } from '../contexts/ThemeContext'
 
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <BrowserRouter>
-      <ThemeProvider>{component}</ThemeProvider>
-    </BrowserRouter>,
+const renderHeader = (path = '/') =>
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <ThemeProvider>
+        <Header />
+      </ThemeProvider>
+    </MemoryRouter>,
   )
-}
+
+const menu = () => within(screen.getByRole('navigation', { name: 'Main' }))
 
 describe('Header', () => {
   it('links the name home without claiming the page heading', () => {
-    window.history.pushState({}, '', '/')
-    renderWithTheme(<Header />)
+    renderHeader()
 
     expect(screen.getByRole('link', { name: 'Raymond Perez' })).toHaveAttribute('href', '/')
     expect(screen.queryByRole('heading')).not.toBeInTheDocument()
   })
 
-  it('renders the header with title, theme toggle, and navigation buttons', () => {
-    renderWithTheme(<Header />)
+  it('offers Writing, Projects, About, Resume, and the theme switch in that order', () => {
+    renderHeader()
 
-    // Check for title link
-    expect(screen.getByRole('link', { name: 'Raymond Perez' })).toHaveAttribute('href', '/')
-
-    // Check for theme toggle button
-    const buttons = screen.getAllByRole('button')
-    expect(buttons).toHaveLength(1)
-
-    // Check for expected navigation links by their accessible labels
-    expect(screen.getByLabelText('LinkedIn Profile')).toBeInTheDocument()
-    expect(screen.getByLabelText('GitHub Profile')).toBeInTheDocument()
-    expect(screen.getByLabelText('Resume')).toBeInTheDocument()
+    const names = menu()
+      .getAllByRole('link')
+      .map((link) => link.textContent)
+    expect(names).toEqual(['Writing', 'Projects', 'About', 'Resume'])
+    expect(menu().getByRole('button', { name: /Current theme:/ })).toBeInTheDocument()
   })
 
-  it('renders social media and resume links with correct attributes', () => {
-    renderWithTheme(<Header />)
+  it('jumps to the home sections from any page', () => {
+    renderHeader('/about')
 
-    // Check LinkedIn link
-    const linkedInLink = screen.getByLabelText('LinkedIn Profile')
-    expect(linkedInLink).toHaveAttribute('href', expect.stringContaining('linkedin.com'))
-    expect(linkedInLink).toHaveAttribute('target', '_blank')
-    expect(linkedInLink).toHaveAttribute('rel', 'noopener noreferrer')
-
-    // Check GitHub link
-    const githubLink = screen.getByLabelText('GitHub Profile')
-    expect(githubLink).toHaveAttribute('href', expect.stringContaining('github.com'))
-    expect(githubLink).toHaveAttribute('target', '_blank')
-    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
-
-    // Check resume link
-    const resumeLink = screen.getByLabelText('Resume')
-    expect(resumeLink).toHaveAttribute('href', expect.stringContaining('.pdf'))
-    expect(resumeLink).toHaveAttribute('target', '_blank')
-    expect(resumeLink).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(menu().getByRole('link', { name: 'Writing' })).toHaveAttribute('href', '/#writing')
+    expect(menu().getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/#projects')
   })
 
-  it('provides accessible labels for all social media buttons', () => {
-    renderWithTheme(<Header />)
+  it('opens the resume in a new window and says so', () => {
+    renderHeader()
 
-    // Check that the LinkedIn button has an accessible label
-    const linkedInButton = screen.getByLabelText('LinkedIn Profile')
-    expect(linkedInButton).toBeInTheDocument()
-
-    // Check that the GitHub button has an accessible label
-    const githubButton = screen.getByLabelText('GitHub Profile')
-    expect(githubButton).toBeInTheDocument()
-
-    // Check that the resume button has an accessible label
-    const resumeButton = screen.getByLabelText('Resume')
-    expect(resumeButton).toBeInTheDocument()
+    const resume = menu().getByRole('link', { name: 'Resume (opens in new window)' })
+    expect(resume).toHaveAttribute('href', expect.stringContaining('.pdf'))
+    expect(resume).toHaveAttribute('target', '_blank')
+    expect(resume).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
-  it('renders theme toggle with proper accessibility', () => {
-    renderWithTheme(<Header />)
+  it('marks About as the current page only on About', () => {
+    renderHeader('/about')
+    expect(menu().getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page')
+  })
 
-    // Check that theme toggle button exists
-    const themeToggle = screen.getByRole('button')
-    expect(themeToggle).toBeInTheDocument()
-
-    // Check that it has proper aria-label
-    expect(themeToggle).toHaveAttribute('aria-label')
-    expect(themeToggle.getAttribute('aria-label')).toContain('Current theme:')
+  it('marks no menu link as current on the home page', () => {
+    renderHeader('/')
+    expect(menu().getByRole('link', { name: 'About' })).not.toHaveAttribute('aria-current')
   })
 })

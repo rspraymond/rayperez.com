@@ -4,10 +4,12 @@ import type { SxProps, Theme } from '@mui/material'
  * Shared by the real sections and their route skeletons, so a placeholder line
  * occupies exactly the space of the text that replaces it.
  */
-/** Page column shared by Home, About, and their skeletons. */
-export const PAGE_CONTAINER_SX = {
+/** About 70 to 80 characters of body text per line, the comfortable reading range. */
+export const SITE_COLUMN_MAX_WIDTH = '45rem'
+
+/** Vertical rhythm for each page inside the site column, which already owns the side gutters. */
+export const PAGE_SX = {
   py: { xs: 4, md: 6 },
-  px: { xs: 2, sm: 3 },
 } satisfies SxProps<Theme>
 
 export const PAGE_STACK_SPACING = { xs: 3, md: 4 } as const

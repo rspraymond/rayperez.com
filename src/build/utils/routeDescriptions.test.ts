@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { buildRouteHtmlMetaList } from './routeDescriptions'
 import { renderRouteHtml } from './routeHtml'
 import { PROFILE } from '../../constants/profile'
-import { ABOUT_PATH, ABOUT_PROFILE_SECTIONS } from '../../constants/paths'
+import { ABOUT_PATH, ABOUT_PROFILE_SECTIONS, HOME_SECTIONS } from '../../constants/paths'
 
 const SHELL = `<!doctype html><html><head><!-- DEFAULT_META_START --><title>x</title><!-- DEFAULT_META_END --></head><body><div id="root"></div></body></html>`
 const IMAGE_URL = 'https://www.rayperez.com/assets/raymond-perez.jpg'
@@ -30,5 +30,14 @@ describe('crawlable route HTML', () => {
     )
 
     expect(outline).toEqual(expect.arrayContaining(Object.values(ABOUT_PROFILE_SECTIONS)))
+  })
+
+  it('outlines the home page with its sections in page order', () => {
+    const outline = Array.from(crawlerRootFor('/').querySelectorAll('li')).map(
+      (item) => item.textContent,
+    )
+
+    expect(outline).toEqual(['Experience', 'Projects', 'Writing'])
+    expect(outline).toEqual(Object.values(HOME_SECTIONS).map((section) => section.title))
   })
 })

@@ -1,9 +1,7 @@
-import React, { Suspense, lazy, useState } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { BlogPosting } from 'schema-dts'
-import { Box, Container, Link, Stack, Typography, IconButton, Tooltip } from '@mui/material'
-import BookmarkIcon from '@mui/icons-material/Bookmark'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+import { Box, Link, Stack, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import LoadingSkeleton from './LoadingSkeleton'
@@ -14,7 +12,6 @@ import RouterLinkRef from '../utils/RouterLink'
 import { buildBlogPostingSchema } from '../constants/schema'
 import { SITE_URL } from '../constants/siteUrl'
 import { formatIsoDate } from '../utils/formatIsoDate'
-import { useBookmarks } from '../hooks/useBookmarks'
 import { useScrollToTop } from '../hooks/useScrollToTop'
 import { usePostNavigation } from '../hooks/usePostNavigation'
 import { useReadingTime } from '../hooks/useReadingTime'
@@ -23,6 +20,7 @@ import SocialMeta from './SocialMeta'
 import PostNavigation from './PostNavigation'
 import BackToTopButton from './BackToTopButton'
 import BlogBreadcrumbs from './BlogBreadcrumbs'
+import { PAGE_SX, PAGE_STACK_SPACING } from '../styles/sectionStyles'
 
 const AuthorBio = lazy(() => import('./AuthorBio'))
 const TableOfContents = lazy(() => import('./TableOfContents'))
@@ -50,46 +48,18 @@ const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const { showBackToTop, scrollToTop } = useScrollToTop()
   const location = useLocation()
-  const { isBookmarked, toggleBookmark } = useBookmarks()
 
   const currentPath = location.pathname
   // Equal dates mean the article was never revised, so showing an update would be misleading.
   const hasUpdate = updated !== undefined && updated !== date
-  const isCurrentlyBookmarked = isBookmarked(currentPath)
-  const [announcement, setAnnouncement] = useState<string>('')
 
   const readingTimeDisplay = useReadingTime(readingText ?? children)
   const { prevPost, nextPost } = usePostNavigation()
   const documentTitle = `${title} - ${PROFILE.name} - ${PROFILE.role}`
   const pageUrl = `${SITE_URL}${currentPath}`
 
-  const handleBookmarkClick = () => {
-    const wasBookmarked = isCurrentlyBookmarked
-    toggleBookmark(title, currentPath)
-    setAnnouncement(wasBookmarked ? 'Bookmark removed' : 'Article bookmarked')
-    setTimeout(() => setAnnouncement(''), 1000)
-  }
-
   return (
     <React.Fragment>
-      <Box
-        component='div'
-        aria-live='polite'
-        role='status'
-        sx={{
-          position: 'absolute',
-          width: '1px',
-          height: '1px',
-          padding: 0,
-          margin: '-1px',
-          overflow: 'hidden',
-          clip: 'rect(0, 0, 0, 0)',
-          whiteSpace: 'nowrap',
-          borderWidth: 0,
-        }}
-      >
-        {announcement}
-      </Box>
       <Helmet
         script={[
           helmetJsonLdProp<BlogPosting>(
@@ -111,37 +81,12 @@ const BlogPost: React.FC<BlogPostProps> = ({
         type='article'
         url={pageUrl}
       />
-      <Container
-        component='article'
-        maxWidth='md'
-        sx={{
-          py: { xs: 4, md: 6 },
-          px: { xs: 2, sm: 3 },
-        }}
-      >
-        <Stack spacing={{ xs: 3, md: 4 }}>
+      <Box component='article' sx={PAGE_SX}>
+        <Stack spacing={PAGE_STACK_SPACING}>
           <BlogBreadcrumbs title={title} />
-          <Box display='flex' alignItems='center' justifyContent='space-between'>
-            <Typography variant='h2' component='h1' sx={{ flexGrow: 1 }}>
-              {title}
-            </Typography>
-            <Tooltip title={isCurrentlyBookmarked ? 'Remove Bookmark' : 'Bookmark Article'}>
-              <IconButton
-                onClick={handleBookmarkClick}
-                aria-label={isCurrentlyBookmarked ? 'remove bookmark' : 'bookmark article'}
-                sx={{
-                  color: isCurrentlyBookmarked ? 'primary.main' : 'text.secondary',
-                  ml: 2,
-                  '&:hover': {
-                    color: 'primary.main',
-                    bgcolor: 'action.hover',
-                  },
-                }}
-              >
-                {isCurrentlyBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-              </IconButton>
-            </Tooltip>
-          </Box>
+          <Typography variant='h2' component='h1'>
+            {title}
+          </Typography>
           <SocialShareButtons title={title} />
           <Stack spacing={0.5}>
             <Typography variant='body2' color='text.secondary'>
@@ -180,7 +125,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
           </Suspense>
           <PostNavigation prevPost={prevPost} nextPost={nextPost} />
         </Stack>
-      </Container>
+      </Box>
       <BackToTopButton show={showBackToTop} onClick={scrollToTop} />
     </React.Fragment>
   )

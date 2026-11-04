@@ -71,7 +71,7 @@ Thank you for considering contributing to this project! This document outlines t
 | --------------------- | -------------------------------------- |
 | Lazy loading fallback | `src/assets/LoadingFallback.tsx`       |
 | Code block renderer   | `src/assets/LazySyntaxHighlighter.tsx` |
-| Recent posts sidebar  | `src/assets/RecentPosts.tsx`           |
+| Home Writing list     | `src/components/Writing.tsx`           |
 | Social meta defaults  | `src/constants/social.ts`              |
 | Article metadata      | `src/constants/posts.ts`               |
 | JSON article content  | `src/data/articles/`                   |
@@ -293,7 +293,7 @@ Coverage reports are generated in the `coverage` directory and are also uploaded
 
 - Test files should be named with the `.test.tsx` or `.test.ts` extension
 - Place test files in the same directory as the component or module they test
-- Example: For `ProfileCard.tsx`, the test file should be `ProfileCard.test.tsx` in the same directory
+- Example: For `SectionCard.tsx`, the test file should be `SectionCard.test.tsx` in the same directory
 
 ### Writing Effective Tests
 
@@ -378,8 +378,6 @@ rayperez-site/
 │   │   ├── LoadingFallback.tsx  # Loading indicator for lazy-loaded components
 │   │   ├── LazySyntaxHighlighter.tsx # Lazy-loaded code syntax highlighter
 │   │   ├── SyntaxHighlighterWithTheme.tsx # Implementation for syntax highlighting
-│   │   ├── ProfileCard.tsx   # User profile information
-│   │   ├── RecentPosts.tsx   # Recent articles sidebar component
 │   │   └── ...
 │   ├── components/     # Reusable UI components
 │   │   └── ...
@@ -401,8 +399,8 @@ rayperez-site/
 
 - Place all reusable components in the `src/components` directory
 - Each component should have its own file
-- Use consistent naming: PascalCase for component files (e.g., `ProfileCard.tsx`)
-- When modifying data-driven components like `RecentPosts.tsx`, ensure the data is accurate and up-to-date
+- Use consistent naming: PascalCase for component files (e.g., `SectionCard.tsx`)
+- When modifying data-driven components like `Writing.tsx`, ensure the data is accurate and up-to-date
 - Use the `LazySyntaxHighlighter` component for code blocks in articles instead of importing the syntax highlighter directly
 
 #### Social Media Meta Tags
@@ -442,7 +440,7 @@ rayperez-site/
 - Article pages should go in the `src/pages/articles` directory
 - Case study pages should go in the `src/pages/case-studies` directory
 - Follow the established article structure for consistency
-- When adding new article pages, update the post list in `RecentPosts.tsx` to include the new article
+- New article pages only need an entry in `src/constants/posts.ts`; routing and the home Writing list read from it
 - Case studies are automatically routed when added to `src/constants/caseStudies.ts`
 
 ### Constants and Configuration
@@ -487,30 +485,10 @@ After the first load, only `SocialMeta` updates Open Graph and Twitter tags in `
 
 ### Internal Linking
 
-- The `RecentPosts` component provides internal linking between article pages with an enhanced visual design
-- When adding new articles, ensure they are added to the `posts` array in `RecentPosts.tsx`
-- Use the following format for each post:
-  ```typescript
-  {
-    title: 'Article Title',
-    path: '/article-path',
-  }
-  ```
-- Keep the most recent 5 articles in the list, sorted by recency (newest first)
-- The component uses visual cues like icons and hover effects to encourage exploration of content
-
-### Recent Posts Design Principles
-
-- The Recent Posts sidebar component follows these design principles:
-  - Prominent header with contrasting color and an icon for immediate recognition
-  - Clean, uncluttered links with arrow indicators suggesting navigation
-  - Interactive elements with subtle animations (transform on hover)
-  - Clear separation between items using dividers
-  - Responsive design that collapses on mobile devices but expands by default on desktop
-  - Toggle functionality allowing users to expand/collapse the list as needed
-  - Accessibility features including proper ARIA attributes for the toggle button
-  - Smooth animations for expanding and collapsing using Material UI's Collapse component
-  - A consistent visual language that matches the site's Material UI theme
+- The home page links every article from its Writing section (`src/components/Writing.tsx`), newest first with dates, so search engines can reach each one from `/`
+- Adding a post to `src/constants/posts.ts` adds it to that list; no other change is needed
+- Once the list grows past about fifteen articles, add a link to a full archive rather than trimming the list
+- The menu's Writing and Projects links jump to `/#writing` and `/#projects`; the ids come from `HOME_SECTIONS` in `src/constants/paths.ts`
 
 ### Structured Data
 
@@ -607,16 +585,16 @@ For container padding and margins:
 
 The project uses a modern border radius scale aligned with 2026 design trends:
 
-| Value                 | Pixels | Recommended Use                              | Example Components                          |
-| --------------------- | ------ | -------------------------------------------- | ------------------------------------------- |
-| `borderRadius: 1`     | 8px    | Compact elements, inputs, micro-interactions | Buttons, chip-like controls                 |
-| `borderRadius: 2`     | 16px   | Default Material UI elements and containers  | Forms, modal bodies                         |
-| `borderRadius: 3`     | 24px   | Hero cards and elevated surfaces             | `RecentPosts`, `Projects`, `SidebarSocials` |
-| `borderRadius: '50%'` | Circle | Strictly for circular imagery                | Profile avatars                             |
+| Value                 | Pixels | Recommended Use                              | Example Components             |
+| --------------------- | ------ | -------------------------------------------- | ------------------------------ |
+| `borderRadius: 1`     | 8px    | Compact elements, inputs, micro-interactions | Buttons, chip-like controls    |
+| `borderRadius: 2`     | 16px   | Default Material UI elements and containers  | Forms, modal bodies            |
+| `borderRadius: 3`     | 24px   | Hero cards and elevated surfaces             | Article tables and code blocks |
+| `borderRadius: '50%'` | Circle | Strictly for circular imagery                | Profile avatars                |
 
 This scale supports emerging design trends like glassmorphism and enhanced 3D depth effects.
 
-**Main Card Components** (`RecentPosts`, `BookmarkedPosts`, `SidebarSocials`, `Projects`):
+**Card surfaces** (home and About sections are plain, borderless sections; use cards only inside article content):
 
 ```tsx
 const StyledCard = styled(Paper)(({ theme }) => ({
@@ -707,8 +685,8 @@ const MyComponent: React.FC = () => {
 | Breakpoint | Range      | Device Type   | Common Usage                                |
 | ---------- | ---------- | ------------- | ------------------------------------------- |
 | `xs`       | 0-599px    | Mobile        | Single-column layouts, collapsed navigation |
-| `sm`       | 600-899px  | Tablet        | Two-column grids, stacked sidebars          |
-| `md`       | 900-1199px | Desktop       | Standard desktop layout, sidebars visible   |
+| `sm`       | 600-899px  | Tablet        | Menu and name share one row                 |
+| `md`       | 900-1199px | Desktop       | Larger type in the same single column       |
 | `lg`       | 1200px+    | Large Desktop | Wide hero sections, multi-column dashboards |
 
 Example:
@@ -793,7 +771,7 @@ When adding a new article:
 
 #### Adding a New Blog Post
 
-Add your post's metadata (title, date, path, and component import) to `src/constants/posts.ts`. This array is the single source for routing, navigation, and the sidebar. No other changes are needed.
+Add your post's metadata (title, date, path, and component import) to `src/constants/posts.ts`. This array is the single source for routing, navigation, and the home Writing list. No other changes are needed.
 
 ## Case Study Guidelines
 
@@ -956,14 +934,13 @@ Site content is stored in structured JSON files in `src/data/content/`. These fi
 
 ### Content Data Files
 
-| File                | Content Type                                                                            | Used By                 |
-| ------------------- | --------------------------------------------------------------------------------------- | ----------------------- |
-| `profile.json`      | Profile information (name, role, image, email, location, description)                   | `ProfileCard` component |
-| `summary.json`      | Professional summary text                                                               | `Summary` component     |
-| `projects.json`     | Project portfolio items (title, description, technologies, URLs, optional caseStudyUrl) | `Home` page             |
-| `achievements.json` | Achievement list items                                                                  | `Home` page             |
-| `experiences.json`  | Work experience entries (title, company, duration, bullets)                             | `Home` page             |
-| `education.json`    | Education entries (degree, school, duration, details)                                   | `Home` page             |
+| File                | Content Type                                                                            | Used By            |
+| ------------------- | --------------------------------------------------------------------------------------- | ------------------ |
+| `profile.json`      | Profile information (name, role, image, email, location, description)                   | Content type tests |
+| `projects.json`     | Project portfolio items (title, description, technologies, URLs, optional caseStudyUrl) | `Home` page        |
+| `achievements.json` | Achievement list items                                                                  | `Home` page        |
+| `experiences.json`  | Work experience entries (title, company, duration, bullets)                             | `Home` page        |
+| `education.json`    | Education entries (degree, school, duration, details)                                   | `Home` page        |
 
 ### Updating Content Data
 

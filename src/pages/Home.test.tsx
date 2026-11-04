@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect, vi } from 'vitest'
 import Home from './Home'
 import { PROFILE } from '../constants/profile'
+import { posts } from '../constants/posts'
 import { HOME_DOCUMENT_TITLE, HOME_META_DESCRIPTION } from '../constants/seoCopy'
 
 interface HelmetScript {
@@ -39,13 +40,36 @@ const jsonLdTypes = (): string[] =>
   )
 
 describe('Home', () => {
-  it('shows Experience, then Projects', () => {
+  it('shows Experience, then Projects, then Writing', () => {
     renderHome()
 
     const sectionHeadings = screen
       .getAllByRole('heading', { level: 2 })
       .map((heading) => heading.textContent)
-    expect(sectionHeadings).toEqual(['Experience', 'Projects'])
+    expect(sectionHeadings).toEqual(['Experience', 'Projects', 'Writing'])
+  })
+
+  it('links to every article', () => {
+    renderHome()
+
+    const linked = new Set(screen.getAllByRole('link').map((link) => link.getAttribute('href')))
+    for (const post of posts) {
+      expect(linked).toContain(post.path)
+    }
+  })
+
+  it('scrolls to the section named in the address, as the menu links do', () => {
+    const scrollIntoView = vi.fn()
+    Element.prototype.scrollIntoView = scrollIntoView
+
+    render(
+      <MemoryRouter initialEntries={['/#writing']}>
+        <Home />
+      </MemoryRouter>,
+    )
+
+    expect(scrollIntoView).toHaveBeenCalledTimes(1)
+    expect(scrollIntoView.mock.instances[0]).toBe(screen.getByRole('region', { name: 'Writing' }))
   })
 
   it('leaves the name and introduction to the route, so the page has no heading of its own', () => {

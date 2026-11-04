@@ -1,15 +1,18 @@
 # Page sections and route skeletons
 
-How content sections on Home and About are built, and how those routes stay fast and steady while their code loads.
+How the site column, the menu, and the content sections on Home and About are built, and how those routes stay fast and steady while their code loads.
 
 ## The pieces
 
 | File                               | Role                                                                                                              |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `src/styles/sectionStyles.ts`      | Single source for page spacing, the type scale, and the text link look                                            |
+| `src/styles/sectionStyles.ts`      | Single source for the column width, page spacing, the type scale, and the text link look                          |
+| `src/components/SiteLayout.tsx`    | One reading column on every screen: header and menu, the page, then the footer                                    |
+| `src/components/Header.tsx`        | Name link and the menu: Writing, Projects, About, Resume, and the theme switch, with no menu button               |
 | `src/components/SectionCard.tsx`   | A plain `section` with a top rule and a small uppercase `h2`, named for assistive technology by `aria-labelledby` |
 | `src/components/ItemHeader.tsx`    | Title, detail, and dates row shared by Experience and Education                                                   |
-| `src/components/Intro.tsx`         | Home page name, photo, and introduction, rendered outside `Suspense`                                              |
+| `src/components/Intro.tsx`         | Home page name, photo, introduction, and contact line, rendered outside `Suspense`                                |
+| `src/components/Writing.tsx`       | Every article, newest first with dates, as one list on Home                                                       |
 | `src/components/RouteSkeleton.tsx` | Placeholders for Home and About, built from the same styles as the real sections                                  |
 
 ## Type scale
@@ -33,6 +36,8 @@ All sizes live in `sectionStyles.ts`. Change them there, never inline, so the sk
 - Text links use `TEXT_LINK_PROPS`. It applies `primary.dark`, which passes AA contrast on the light background where `primary.main` does not, and always underlines.
 - When the same link text repeats, such as "Visit site", give each link an `aria-label` that starts with the visible text and names the item.
 - Use theme palette tokens only. No hardcoded colors.
+- Pages do not set their own width or side padding. `SiteLayout` owns both through `SITE_COLUMN_MAX_WIDTH`, and pages use `PAGE_SX` for vertical spacing only.
+- A Home section the menu jumps to takes its `id` and title from `HOME_SECTIONS` in `src/constants/paths.ts`. Home scrolls to the hash after it loads, because the browser's own jump happens before the lazy sections exist.
 - Add no transitions or animations, so the sections need no reduced motion handling.
 
 ## Loading a route
@@ -58,7 +63,7 @@ The default fallback, `LoadingFallback`, covers the page with a spinner. That hi
 | Check             | How                                                                                                                                                                                          |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Behavior          | `npm run test`. Query by role and accessible name, as in `AppContent.routes.test.tsx`, which proves the Home heading renders before the Home chunk loads                                     |
-| Crawler HTML      | `routeDescriptions.test.ts` covers the home lead and the About outline                                                                                                                       |
+| Crawler HTML      | `routeDescriptions.test.ts` covers the home lead and outline, and the About outline                                                                                                          |
 | Skeleton fidelity | On `npm run preview`, block the route chunk in the browser's network tools and compare against the loaded page at 390px and 1440px. The Intro and the first section's top edge must not move |
 | Speed             | Run Lighthouse on the build before and after your change. LCP and CLS must not get worse                                                                                                     |
 

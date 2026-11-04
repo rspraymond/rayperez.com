@@ -49,7 +49,7 @@ Before initiating a release, verify the following:
 
 ### Content
 
-- [ ] Recent posts are added to the posts list in `RecentPosts.tsx`
+- [ ] New posts are added to `src/constants/posts.ts`, which feeds the home Writing list
 - [ ] Sitemap is current (`npm run generate-sitemap`)
 - [ ] All links are working
 - [ ] SEO metadata is correct

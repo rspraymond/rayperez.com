@@ -1,19 +1,26 @@
 import React from 'react'
-import { Box, Stack, Typography } from '@mui/material'
+import { Link, Stack, Typography } from '@mui/material'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Occupation } from 'schema-dts'
 import { Helmet } from 'react-helmet-async'
 import SectionCard from './SectionCard'
 import ItemHeader from './ItemHeader'
-import { BODY_SX, ITEM_GAP, META_SX } from '../styles/sectionStyles'
+import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
+import { HOME_SECTIONS } from '../constants/paths'
+import { toYearRange } from '../utils/toYearRange'
+import { ITEM_GAP, META_SX, TEXT_LINK_PROPS } from '../styles/sectionStyles'
 import type { Experience as ExperienceType } from '../types/contentData'
 
 type ExperiencesProps = {
   experiences: ExperienceType[]
 }
 
+const SENIOR_TITLE = /\bsenior\b/i
+
+/** Home shows only the senior roles, one line each; the resume carries the full history. */
 const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
-  const occupationScripts = experiences.map((experience) =>
+  const seniorRoles = experiences.filter((experience) => SENIOR_TITLE.test(experience.title))
+  const occupationScripts = seniorRoles.map((experience) =>
     helmetJsonLdProp<Occupation>({
       '@context': 'https://schema.org',
       '@type': 'Occupation',
@@ -23,35 +30,37 @@ const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
   )
 
   return (
-    <SectionCard title='Experience' headingId='experience-heading'>
+    <SectionCard
+      title={HOME_SECTIONS.experience.title}
+      id={HOME_SECTIONS.experience.id}
+      headingId='experience-heading'
+    >
       <Helmet script={occupationScripts} />
-      {experiences.length === 0 ? (
+      {seniorRoles.length === 0 ? (
         <Typography sx={META_SX}>No experiences to display.</Typography>
       ) : (
-        <Stack spacing={ITEM_GAP}>
-          {experiences.map((experience, index) => (
-            <Box key={`${experience.company}-${experience.duration}-${index}`}>
-              <ItemHeader
-                title={experience.company}
-                detail={experience.title}
-                dates={experience.duration}
-              />
-              {experience.bullets.length > 0 && (
-                <Box
-                  component='ul'
-                  sx={{ m: 0, mt: 1, pl: 2.5, display: 'flex', flexDirection: 'column', gap: 1 }}
-                >
-                  {experience.bullets.map((bullet) => (
-                    <Typography component='li' key={bullet} sx={BODY_SX}>
-                      {bullet}
-                    </Typography>
-                  ))}
-                </Box>
-              )}
-            </Box>
+        <Stack spacing={ITEM_GAP / 2}>
+          {seniorRoles.map((experience) => (
+            <ItemHeader
+              key={`${experience.company}-${experience.duration}`}
+              title={experience.company}
+              detail={experience.title}
+              dates={toYearRange(experience.duration)}
+            />
           ))}
         </Stack>
       )}
+      <Typography component='p' sx={{ ...META_SX, mt: ITEM_GAP }}>
+        <Link
+          href={resumePdf}
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='Full history in my resume (opens in new window)'
+          {...TEXT_LINK_PROPS}
+        >
+          Full history in my resume
+        </Link>
+      </Typography>
     </SectionCard>
   )
 }
