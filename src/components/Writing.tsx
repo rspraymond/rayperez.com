@@ -4,7 +4,7 @@ import SectionCard from './SectionCard'
 import RouterLinkRef from '../utils/RouterLink'
 import { HOME_SECTIONS } from '../constants/paths'
 import { formatIsoDate } from '../utils/formatIsoDate'
-import { BODY_SX, DATES_SX, TEXT_LINK_PROPS } from '../styles/sectionStyles'
+import { BODY_SX, DATES_SX, PANEL_ROW_SX, PANEL_SX } from '../styles/sectionStyles'
 import type { PostMeta } from '../constants/posts'
 
 type WritingPost = Pick<PostMeta, 'title' | 'date' | 'path'>
@@ -27,27 +27,34 @@ const Writing: React.FC<WritingProps> = ({ posts }) => (
     id={HOME_SECTIONS.writing.id}
     headingId='writing-heading'
   >
-    <Box
-      component='ul'
-      sx={{ m: 0, p: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 1.5 }}
-    >
+    <Box component='ul' sx={PANEL_SX}>
       {[...posts].sort(newestFirst).map((post) => (
         <Box
           component='li'
           key={post.path}
           sx={{
+            ...PANEL_ROW_SX,
+            position: 'relative',
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-between',
             alignItems: 'baseline',
             columnGap: 2,
+            '&:hover': { bgcolor: 'action.hover' },
           }}
         >
           <Link
             component={RouterLinkRef}
             to={post.path}
-            {...TEXT_LINK_PROPS}
-            sx={{ ...TEXT_LINK_PROPS.sx, ...BODY_SX }}
+            color='text.primary'
+            underline='hover'
+            sx={{
+              ...BODY_SX,
+              fontWeight: 500,
+              textUnderlineOffset: '0.2em',
+              // Stretches the click target over the whole row, date included, while the link's name stays the title.
+              '&::after': { content: '""', position: 'absolute', inset: 0 },
+            }}
           >
             {post.title}
           </Link>

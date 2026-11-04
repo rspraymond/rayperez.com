@@ -3,14 +3,18 @@ import { Box, Skeleton, Stack, Typography } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material'
 import {
   BODY_SX,
+  CARD_PADDING,
   ITEM_GAP,
   ITEM_TITLE_SX,
   META_SX,
   PAGE_SX,
   PAGE_STACK_SPACING,
+  PANEL_ROW_SX,
+  PANEL_SX,
   PROJECT_GAP,
   SECTION_LABEL_SX,
   SECTION_SX,
+  SURFACE_SX,
 } from '../styles/sectionStyles'
 
 interface BarProps {
@@ -32,6 +36,8 @@ interface SectionSkeletonProps {
   gap: number
   /** Off for one line items such as Experience roles, where the detail shares the title row. */
   metaLine?: boolean
+  /** Matches how the real section groups its items: plain blocks, one panel of rows, or separate cards. */
+  layout?: 'plain' | 'panel' | 'cards'
 }
 
 export const SectionSkeleton: React.FC<SectionSkeletonProps> = ({
@@ -39,22 +45,35 @@ export const SectionSkeleton: React.FC<SectionSkeletonProps> = ({
   bodyLines,
   gap,
   metaLine = true,
-}) => (
-  <Box sx={SECTION_SX}>
-    <Bar sx={SECTION_LABEL_SX} width='7ch' />
-    <Stack spacing={gap}>
-      {Array.from({ length: items }, (_, item) => (
-        <Box key={item}>
-          <Bar sx={ITEM_TITLE_SX} width='45%' />
-          {metaLine && <Bar sx={META_SX} width='30%' />}
-          {Array.from({ length: bodyLines }, (_, line) => (
-            <Bar key={line} sx={BODY_SX} width={line === bodyLines - 1 ? '70%' : '95%'} />
-          ))}
-        </Box>
+  layout = 'plain',
+}) => {
+  const lines = (item: number) => (
+    <Box
+      key={item}
+      sx={
+        layout === 'panel'
+          ? PANEL_ROW_SX
+          : layout === 'cards'
+            ? { ...SURFACE_SX, p: CARD_PADDING }
+            : undefined
+      }
+    >
+      <Bar sx={ITEM_TITLE_SX} width='45%' />
+      {metaLine && <Bar sx={META_SX} width='30%' />}
+      {Array.from({ length: bodyLines }, (_, line) => (
+        <Bar key={line} sx={BODY_SX} width={line === bodyLines - 1 ? '70%' : '95%'} />
       ))}
-    </Stack>
-  </Box>
-)
+    </Box>
+  )
+  const rows = Array.from({ length: items }, (_, item) => lines(item))
+
+  return (
+    <Box sx={SECTION_SX}>
+      <Bar sx={SECTION_LABEL_SX} width='7ch' />
+      {layout === 'panel' ? <Box sx={PANEL_SX}>{rows}</Box> : <Stack spacing={gap}>{rows}</Stack>}
+    </Box>
+  )
+}
 
 /**
  * Stands in for Home's sections while the Home chunk loads; the route already shows Intro above it.
@@ -62,8 +81,8 @@ export const SectionSkeleton: React.FC<SectionSkeletonProps> = ({
  */
 export const HomeSectionsSkeleton: React.FC = () => (
   <Box aria-busy='true' sx={{ minHeight: '100vh' }}>
-    <SectionSkeleton items={6} bodyLines={0} gap={ITEM_GAP / 2} metaLine={false} />
-    <SectionSkeleton items={3} bodyLines={2} gap={PROJECT_GAP} />
+    <SectionSkeleton items={6} bodyLines={0} gap={0} metaLine={false} layout='panel' />
+    <SectionSkeleton items={3} bodyLines={2} gap={PROJECT_GAP} layout='cards' />
   </Box>
 )
 

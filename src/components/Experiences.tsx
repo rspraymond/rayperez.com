@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Stack, Typography } from '@mui/material'
+import { Box, Link, Typography } from '@mui/material'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Occupation } from 'schema-dts'
 import { Helmet } from 'react-helmet-async'
@@ -8,7 +8,7 @@ import ItemHeader from './ItemHeader'
 import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
 import { HOME_SECTIONS } from '../constants/paths'
 import { toYearRange } from '../utils/toYearRange'
-import { ITEM_GAP, META_SX, TEXT_LINK_PROPS } from '../styles/sectionStyles'
+import { ITEM_GAP, META_SX, PANEL_ROW_SX, PANEL_SX, TEXT_LINK_PROPS } from '../styles/sectionStyles'
 import type { Experience as ExperienceType } from '../types/contentData'
 
 type ExperiencesProps = {
@@ -39,16 +39,21 @@ const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
       {seniorRoles.length === 0 ? (
         <Typography sx={META_SX}>No experiences to display.</Typography>
       ) : (
-        <Stack spacing={ITEM_GAP / 2}>
+        <Box component='ul' sx={PANEL_SX}>
           {seniorRoles.map((experience) => (
-            <ItemHeader
+            <Box
+              component='li'
               key={`${experience.company}-${experience.duration}`}
-              title={experience.company}
-              detail={experience.title}
-              dates={toYearRange(experience.duration)}
-            />
+              sx={PANEL_ROW_SX}
+            >
+              <ItemHeader
+                title={experience.company}
+                detail={experience.title}
+                dates={toYearRange(experience.duration)}
+              />
+            </Box>
           ))}
-        </Stack>
+        </Box>
       )}
       <Typography component='p' sx={{ ...META_SX, mt: ITEM_GAP }}>
         <Link

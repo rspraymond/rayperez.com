@@ -1,9 +1,16 @@
 import React from 'react'
-import { Box, Link, Stack, Typography } from '@mui/material'
+import { Box, Link, Typography } from '@mui/material'
 import RouterLinkRef from '../utils/RouterLink'
 import SectionCard from './SectionCard'
 import { HOME_SECTIONS } from '../constants/paths'
-import { BODY_SX, ITEM_TITLE_SX, PROJECT_GAP, TEXT_LINK_PROPS } from '../styles/sectionStyles'
+import {
+  BODY_SX,
+  CARD_PADDING,
+  ITEM_TITLE_SX,
+  PROJECT_GAP,
+  SURFACE_SX,
+  TEXT_LINK_PROPS,
+} from '../styles/sectionStyles'
 import type { Project } from '../types/contentData'
 
 const ROW_LINK_SX = {
@@ -24,6 +31,7 @@ const externalLinkProps = {
 /**
  * Each project title is plain text so every destination has one link.
  * Repeated link text like "Visit site" gets an accessible name that adds the project, so screen reader link lists stay distinct.
+ * From md up the first project, the featured one, spans the row and the rest pair up beneath it.
  */
 const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
   <SectionCard
@@ -31,9 +39,22 @@ const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
     id={HOME_SECTIONS.projects.id}
     headingId='projects-heading'
   >
-    <Stack spacing={PROJECT_GAP}>
-      {projects.map((project) => (
-        <Box key={project.title}>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+        gap: PROJECT_GAP,
+      }}
+    >
+      {projects.map((project, index) => (
+        <Box
+          key={project.title}
+          sx={{
+            ...SURFACE_SX,
+            p: CARD_PADDING,
+            gridColumn: { md: index === 0 ? '1 / -1' : 'auto' },
+          }}
+        >
           <Typography component='h3' sx={ITEM_TITLE_SX}>
             {project.title}
           </Typography>
@@ -71,7 +92,7 @@ const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
           </Box>
         </Box>
       ))}
-    </Stack>
+    </Box>
   </SectionCard>
 )
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Link, Typography } from '@mui/material'
+import { Box, Link, Typography, alpha } from '@mui/material'
 import profileImage from '../assets/raymond-perez.jpg'
 import { PROFILE } from '../constants/profile'
 import { NAME_SX, TAGLINE_SX, TEXT_LINK_PROPS } from '../styles/sectionStyles'
@@ -17,7 +17,26 @@ const CONTACT_LINKS = [
  * The photo is a plain img rather than LazyImage, which would flash a spinner inside the small circle.
  */
 const Intro: React.FC = () => (
-  <Box sx={{ pb: { xs: 5, md: 8 } }}>
+  <Box
+    sx={{
+      position: 'relative',
+      isolation: 'isolate',
+      pb: { xs: 5, md: 8 },
+      // A soft glow behind the name lifts the intro off the page. It stays inside the column so phones never scroll sideways.
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        zIndex: -1,
+        top: { xs: -32, md: -64 },
+        left: 0,
+        width: '100%',
+        height: { xs: 280, md: 380 },
+        pointerEvents: 'none',
+        background: (theme) =>
+          `radial-gradient(closest-side at 32% 50%, ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.11 : 0.07)}, transparent)`,
+      },
+    }}
+  >
     <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 2, md: 3 } }}>
       <Box
         component='img'
@@ -34,6 +53,9 @@ const Intro: React.FC = () => (
           borderRadius: '50%',
           objectFit: 'cover',
           bgcolor: 'action.hover',
+          // A paper colored ring and a soft shadow seat the photo above the glow.
+          boxShadow: (theme) =>
+            `0 0 0 4px ${theme.palette.background.paper}, 0 0 0 5px ${theme.palette.divider}, 0 12px 28px ${alpha('#0f172a', theme.palette.mode === 'dark' ? 0.5 : 0.18)}`,
           // Hides the broken image glyph and alt text if the photo fails; the name beside it still identifies the person.
           color: 'transparent',
         }}
