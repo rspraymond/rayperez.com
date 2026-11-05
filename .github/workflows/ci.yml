@@ -50,10 +50,21 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
-          if ! git diff --staged --quiet; then
-            git commit -m "chore: update test coverage badge"
-            git push
-          fi
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: update test coverage badge"
+          # Version and Tag pushes its release commit to main while these tests run, so rebase onto it before pushing.
+          for attempt in 1 2 3; do
+            if ! git pull --rebase origin main; then
+              # Only a newer badge commit can conflict on README.md, and that run's coverage is the current one.
+              git rebase --abort
+              echo "A newer coverage badge is already on main, skipping this one"
+              exit 0
+            fi
+            git push origin HEAD:main && exit 0
+            echo "Push attempt $attempt was rejected, retrying"
+            sleep $((attempt * 5))
+          done
+          exit 1
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
