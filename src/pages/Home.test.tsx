@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, it, expect, vi } from 'vitest'
+import { afterEach, describe, it, expect, vi } from 'vitest'
 import Home from './Home'
 import { PROFILE } from '../constants/profile'
 import { posts } from '../constants/posts'
@@ -58,9 +58,19 @@ describe('Home', () => {
     }
   })
 
-  it('scrolls to the section named in the address, as the menu links do', () => {
+  // jsdom has no scrollIntoView, so each scroll test installs a spy and removes it afterward.
+  const stubScrollIntoView = () => {
     const scrollIntoView = vi.fn()
     Element.prototype.scrollIntoView = scrollIntoView
+    return scrollIntoView
+  }
+
+  afterEach(() => {
+    delete (Element.prototype as Partial<Element>).scrollIntoView
+  })
+
+  it('scrolls to the section named in the address, as the menu links do', () => {
+    const scrollIntoView = stubScrollIntoView()
 
     render(
       <MemoryRouter initialEntries={['/#writing']}>
@@ -70,6 +80,19 @@ describe('Home', () => {
 
     expect(scrollIntoView).toHaveBeenCalledTimes(1)
     expect(scrollIntoView.mock.instances[0]).toBe(screen.getByRole('region', { name: 'Writing' }))
+  })
+
+  it('still shows the page when a link carries a malformed address fragment', () => {
+    const scrollIntoView = stubScrollIntoView()
+
+    render(
+      <MemoryRouter initialEntries={['/#%E0%A4%A']}>
+        <Home />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByRole('region', { name: 'Writing' })).toBeInTheDocument()
+    expect(scrollIntoView).not.toHaveBeenCalled()
   })
 
   it('leaves the name and introduction to the route, so the page has no heading of its own', () => {

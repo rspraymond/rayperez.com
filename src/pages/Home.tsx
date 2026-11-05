@@ -30,7 +30,8 @@ const Home: React.FC = () => {
   // This page loads after the browser's own jump to a hash such as /#writing, so the menu target is scrolled to here.
   // The location key reruns it when the same menu link is used twice.
   useEffect(() => {
-    if (hash) document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView()
+    // Section ids are plain words, so the hash is used as is; decoding would throw on a malformed link and crash the page.
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView()
   }, [hash, key])
 
   return (

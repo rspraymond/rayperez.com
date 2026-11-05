@@ -103,11 +103,13 @@ export const DATES_SX = {
   fontVariantNumeric: 'tabular-nums',
 } satisfies SxProps<Theme>
 
+/** About 70 characters per line, the comfortable reading range, however wide the column gets. */
+export const READABLE_MEASURE = '70ch'
+
 export const BODY_SX = {
   fontSize: '1rem',
   lineHeight: 1.6,
-  // About 70 characters per line, the comfortable reading range, however wide the column gets.
-  maxWidth: '70ch',
+  maxWidth: READABLE_MEASURE,
 } satisfies SxProps<Theme>
 
 export const ITEM_GAP = 3

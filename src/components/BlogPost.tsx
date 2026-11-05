@@ -20,7 +20,7 @@ import SocialMeta from './SocialMeta'
 import PostNavigation from './PostNavigation'
 import BackToTopButton from './BackToTopButton'
 import BlogBreadcrumbs from './BlogBreadcrumbs'
-import { PAGE_SX, PAGE_STACK_SPACING } from '../styles/sectionStyles'
+import { PAGE_SX, PAGE_STACK_SPACING, READABLE_MEASURE } from '../styles/sectionStyles'
 
 const AuthorBio = lazy(() => import('./AuthorBio'))
 const TableOfContents = lazy(() => import('./TableOfContents'))
@@ -119,7 +119,10 @@ const BlogPost: React.FC<BlogPostProps> = ({
           <Suspense fallback={<LoadingSkeleton testId='table-of-contents' />}>
             <TableOfContents />
           </Suspense>
-          <Box component='section'>{children}</Box>
+          {/* Prose keeps a readable measure while tables and code blocks use the full column. */}
+          <Box component='section' sx={{ '& p, & li': { maxWidth: READABLE_MEASURE } }}>
+            {children}
+          </Box>
           <Suspense fallback={<LoadingSkeleton testId='author-bio' />}>
             <AuthorBio />
           </Suspense>
