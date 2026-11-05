@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.107.1] - 2026-11-05
+### Bug Fixes
+
+- **toc:** keep articles up on malformed hashes (#268)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.107.0] - 2026-11-05
 ### Features
 
