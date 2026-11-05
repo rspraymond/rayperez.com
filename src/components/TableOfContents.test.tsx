@@ -508,3 +508,27 @@ describe('TableOfContents - edge cases', () => {
     expect(dynamicInToc).toBe(false) // Not in TOC
   })
 })
+
+describe('TableOfContents - initial hash', () => {
+  it('scrolls to the heading named by an encoded hash on load', async () => {
+    document.body.innerHTML = '<div><h5 id="café">Café</h5><h5>Other</h5></div>'
+    window.location.hash = '#caf%C3%A9'
+
+    renderTableOfContents()
+
+    await waitFor(() => {
+      expect(mockScrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' })
+    })
+  })
+
+  it('keeps rendering when the hash is malformed', async () => {
+    window.location.hash = '#%E0%A4'
+
+    renderTableOfContents()
+
+    await waitFor(() => {
+      expect(screen.getByText('Table of Contents')).toBeInTheDocument()
+    })
+    expect(mockScrollIntoView).not.toHaveBeenCalled()
+  })
+})
