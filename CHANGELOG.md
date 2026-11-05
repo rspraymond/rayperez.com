@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.107.0] - 2026-11-05
+### Features
+
+- **home:** one column homepage with a clear introduction (#267)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.106.0] - 2026-10-24
 ### Features
 
