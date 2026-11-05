@@ -1,4 +1,4 @@
-import { ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { Box, ThemeProvider as MuiThemeProvider } from '@mui/material'
 import React, { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import LoadingFallback from './LoadingFallback'
@@ -10,6 +10,9 @@ import { ABOUT_PATH } from '../constants/paths'
 import HashRedirectHandler from './HashRedirectHandler'
 import ScrollAndFocusReset from './ScrollAndFocusReset'
 import SiteLayout from './SiteLayout'
+import Intro from './Intro'
+import { AboutSkeleton, HomeSectionsSkeleton } from './RouteSkeleton'
+import { PAGE_SX } from '../styles/sectionStyles'
 
 const Home = lazy(() => import('../pages/Home'))
 const About = lazy(() => import('../pages/About'))
@@ -28,15 +31,19 @@ const AppContent: React.FC = () => {
           <Route
             path='/'
             element={
-              <Suspense fallback={<LoadingFallback />}>
-                <Home />
-              </Suspense>
+              // Intro sits outside Suspense so the page heading paints with the entry chunk, not after Home loads.
+              <Box sx={PAGE_SX}>
+                <Intro />
+                <Suspense fallback={<HomeSectionsSkeleton />}>
+                  <Home />
+                </Suspense>
+              </Box>
             }
           />
           <Route
             path={ABOUT_PATH}
             element={
-              <Suspense fallback={<LoadingFallback />}>
+              <Suspense fallback={<AboutSkeleton />}>
                 <About />
               </Suspense>
             }

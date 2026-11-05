@@ -1,19 +1,23 @@
-import { Box, Typography } from '@mui/material'
 import React from 'react'
-import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined'
+import { Box, Typography } from '@mui/material'
 import SectionCard from './SectionCard'
+import { ABOUT_PROFILE_SECTIONS } from '../constants/paths'
+import { BODY_SX } from '../styles/sectionStyles'
 
-type Achievements = {
+type AchievementsProps = {
   achievements: string[]
 }
 
-const Achievements: React.FC<Achievements> = ({ achievements }) => (
-  <SectionCard title='Achievements' icon={EmojiEventsOutlinedIcon} marginTop={0} marginBottom={0}>
-    {achievements.map((achievement, key) => (
-      <Box marginTop={2} key={key}>
-        <Typography variant='body1'>{achievement}</Typography>
-      </Box>
-    ))}
+const Achievements: React.FC<AchievementsProps> = ({ achievements }) => (
+  <SectionCard title={ABOUT_PROFILE_SECTIONS.achievements}>
+    <Box component='ul' sx={{ m: 0, pl: 2.5, display: 'flex', flexDirection: 'column', gap: 1 }}>
+      {achievements.map((achievement) => (
+        <Typography component='li' key={achievement} sx={BODY_SX}>
+          {achievement}
+        </Typography>
+      ))}
+    </Box>
   </SectionCard>
 )
+
 export default Achievements

@@ -1,74 +1,41 @@
 import { screen } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import SiteLayout from './SiteLayout'
 import { render as renderWithProviders } from '../test-utils'
 
-// Mock all lazy-loaded components BEFORE importing SiteLayout
-vi.mock('./ProfileCard', () => ({
-  default: () => <div data-testid='mock-profile-card'>ProfileCard</div>,
-}))
-
-vi.mock('./GitHubStats', () => ({
-  default: () => <div data-testid='mock-github-stats'>GitHubStats</div>,
-}))
-
-vi.mock('./BookmarkedPosts', () => ({
-  default: () => <div data-testid='mock-bookmarked-posts'>BookmarkedPosts</div>,
-}))
-
-vi.mock('./RecentPosts', () => ({
-  default: () => <div data-testid='mock-recent-posts'>RecentPosts</div>,
-}))
+const renderLayout = () =>
+  renderWithProviders(
+    <MemoryRouter>
+      <Routes>
+        <Route path='/' element={<SiteLayout />}>
+          <Route index element={<div data-testid='child'>child</div>} />
+        </Route>
+      </Routes>
+    </MemoryRouter>,
+  )
 
 describe('SiteLayout', () => {
-  it('renders Header and outlet content', () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path='/' element={<SiteLayout />}>
-            <Route index element={<div data-testid='child'>child</div>} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
-    )
+  it('renders the menu, the page, and the footer in reading order', () => {
+    renderLayout()
 
-    // Assert Header is present (check for profile name which is always in Header)
-    expect(screen.getByText('Raymond Perez')).toBeInTheDocument()
-
-    // Assert outlet content is rendered
-    expect(screen.getByTestId('child')).toBeInTheDocument()
-    expect(screen.getByText('child')).toBeInTheDocument()
+    const header = screen.getByRole('banner')
+    const main = screen.getByRole('main')
+    const footer = screen.getByRole('contentinfo')
+    expect(header.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(main.compareDocumentPosition(footer) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(main).toContainElement(screen.getByTestId('child'))
   })
 
-  it('renders all sidebar lazy components', () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path='/' element={<SiteLayout />}>
-            <Route index element={<div>outlet content</div>} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
-    )
+  it('has no side column', () => {
+    renderLayout()
 
-    // Assert all mocked sidebar components are present
-    expect(screen.getByTestId('mock-profile-card')).toBeInTheDocument()
-    expect(screen.getByTestId('mock-bookmarked-posts')).toBeInTheDocument()
-    expect(screen.getByTestId('mock-recent-posts')).toBeInTheDocument()
-    expect(screen.getByTestId('mock-github-stats')).toBeInTheDocument()
+    expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
+    expect(screen.queryByText(/GitHub activity/i)).not.toBeInTheDocument()
   })
 
   it('renders main content with id main-content and tabIndex -1 for focus target', () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path='/' element={<SiteLayout />}>
-            <Route index element={<div>outlet content</div>} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
-    )
+    renderLayout()
 
     const main = screen.getByRole('main')
     expect(main).toHaveAttribute('id', 'main-content')

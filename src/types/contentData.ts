@@ -15,10 +15,6 @@ export interface Profile {
   twitterCreator: string
 }
 
-export interface ProfessionalSummary {
-  text: string
-}
-
 export interface Project {
   title: string
   description: string

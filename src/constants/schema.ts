@@ -37,8 +37,8 @@ export const PERSON_SCHEMA = {
   sameAs: [
     'https://prejump.com',
     'https://twitch.tv/onlyray',
-    'https://github.com/rspraymond',
-    'https://www.linkedin.com/in/raymond-perez-eng/',
+    PROFILE.githubUrl,
+    PROFILE.linkedinUrl,
     'https://twitter.com/onlyray7',
   ],
 } as const

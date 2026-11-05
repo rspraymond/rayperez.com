@@ -5,8 +5,19 @@ import { HelmetProvider } from 'react-helmet-async'
 import Experiences from './Experiences'
 
 const fixture = [
-  { title: 'T1', company: 'C1', duration: 'D1', bullets: ['B1'] },
-  { title: 'T2', company: 'C2', duration: 'D2', bullets: ['B2'] },
+  {
+    title: 'Senior Software Engineer',
+    company: 'C1',
+    duration: 'Aug 2026 - Present',
+    bullets: ['B1'],
+  },
+  {
+    title: 'Senior Software Engineer',
+    company: 'C2',
+    duration: 'Feb 2021 - Sep 2021',
+    bullets: ['B2'],
+  },
+  { title: 'Web Developer', company: 'C3', duration: 'Jan 2015 - Jun 2015', bullets: ['B3'] },
 ]
 
 describe('Experiences', () => {
@@ -16,26 +27,31 @@ describe('Experiences', () => {
 
   const renderWithHelmet = (ui: React.ReactElement) => render(<HelmetProvider>{ui}</HelmetProvider>)
 
-  it('renders the Career heading', () => {
+  it('is a section named Experience', () => {
     renderWithHelmet(<Experiences experiences={fixture} />)
 
-    expect(screen.getByText('Career')).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Experience' })).toBeInTheDocument()
   })
 
-  it('renders one card per experience with company and duration', () => {
+  it('lists only the senior roles, one line each with company, title, and years', () => {
     renderWithHelmet(<Experiences experiences={fixture} />)
 
-    expect(screen.getByText('C1 - D1')).toBeInTheDocument()
-    expect(screen.getByText('C2 - D2')).toBeInTheDocument()
-    const headings = screen.getAllByRole('heading', { level: 3 })
-    expect(headings).toHaveLength(2)
+    const companies = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+    expect(companies).toEqual(['C1', 'C2'])
+    expect(screen.getAllByText('Senior Software Engineer')).toHaveLength(2)
+    expect(screen.getByText('2026 to present')).toBeInTheDocument()
+    expect(screen.getByText('2021')).toBeInTheDocument()
+    expect(screen.queryByText('B1')).not.toBeInTheDocument()
   })
 
-  it('renders bullets from props', () => {
+  it('links to the resume for the full history', () => {
     renderWithHelmet(<Experiences experiences={fixture} />)
 
-    expect(screen.getByText('B1')).toBeInTheDocument()
-    expect(screen.getByText('B2')).toBeInTheDocument()
+    const resume = screen.getByRole('link', {
+      name: 'Full history in my resume (opens in new window)',
+    })
+    expect(resume).toHaveAttribute('href', expect.stringContaining('.pdf'))
+    expect(resume).toHaveAttribute('target', '_blank')
   })
 
   it('handles empty experiences gracefully', () => {
@@ -44,14 +60,13 @@ describe('Experiences', () => {
     expect(screen.getByText('No experiences to display.')).toBeInTheDocument()
   })
 
-  it('renders one ld+json Occupation script per experience', async () => {
+  it('renders one ld+json Occupation script per role shown', async () => {
     renderWithHelmet(<Experiences experiences={fixture} />)
 
     await waitFor(() => {
       const ldJsonScripts = document.querySelectorAll('script[type="application/ld+json"]')
       expect(ldJsonScripts.length).toBe(2)
       expect(ldJsonScripts[0].textContent).toContain('Occupation')
-      expect(ldJsonScripts[0].textContent).toContain('schema.org')
     })
   })
 })

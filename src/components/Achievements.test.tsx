@@ -20,19 +20,10 @@ describe('Achievements', () => {
     })
   })
 
-  it('renders empty state correctly when no achievements are provided', () => {
+  it('renders an empty section when there are no achievements', () => {
     render(<Achievements achievements={[]} />)
 
-    // Verify heading is present
-    expect(screen.getByText('Achievements')).toBeInTheDocument()
-
-    // Verify the Card component renders (by checking if it contains the heading)
-    const headingElement = screen.getByText('Achievements')
-    expect(headingElement).toBeInTheDocument()
-
-    // Verify no achievement items are rendered
-    // We should only have one Typography element with the heading text
-    const typographyElements = screen.getAllByRole('heading')
-    expect(typographyElements.length).toBe(1)
+    expect(screen.getByRole('region', { name: 'Achievements' })).toBeInTheDocument()
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0)
   })
 })

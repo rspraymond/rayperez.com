@@ -1,18 +1,26 @@
 import React from 'react'
-import { CardContent, Typography, Box } from '@mui/material'
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
+import { Box, Link, Typography } from '@mui/material'
 import { helmetJsonLdProp } from 'react-schemaorg'
 import { Occupation } from 'schema-dts'
 import { Helmet } from 'react-helmet-async'
 import SectionCard from './SectionCard'
+import ItemHeader from './ItemHeader'
+import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
+import { HOME_SECTIONS } from '../constants/paths'
+import { toYearRange } from '../utils/toYearRange'
+import { ITEM_GAP, META_SX, PANEL_ROW_SX, PANEL_SX, TEXT_LINK_PROPS } from '../styles/sectionStyles'
 import type { Experience as ExperienceType } from '../types/contentData'
 
 type ExperiencesProps = {
   experiences: ExperienceType[]
 }
 
+const SENIOR_TITLE = /\bsenior\b/i
+
+/** Home shows only the senior roles, one line each; the resume carries the full history. */
 const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
-  const occupationScripts = experiences.map((experience) =>
+  const seniorRoles = experiences.filter((experience) => SENIOR_TITLE.test(experience.title))
+  const occupationScripts = seniorRoles.map((experience) =>
     helmetJsonLdProp<Occupation>({
       '@context': 'https://schema.org',
       '@type': 'Occupation',
@@ -22,51 +30,42 @@ const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
   )
 
   return (
-    <SectionCard title='Career' icon={WorkOutlineIcon} marginTop={0} marginBottom={0}>
+    <SectionCard
+      title={HOME_SECTIONS.experience.title}
+      id={HOME_SECTIONS.experience.id}
+      headingId='experience-heading'
+    >
       <Helmet script={occupationScripts} />
-      <CardContent sx={{ p: 0 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {experiences.length === 0 ? (
-            <Typography variant='body2' color='text.secondary'>
-              No experiences to display.
-            </Typography>
-          ) : (
-            experiences.map((experience, index) => (
-              <Box
-                key={`${experience.company}-${experience.duration}-${index}`}
-                sx={{
-                  p: 2,
-                  border: 1,
-                  borderColor: 'divider',
-                  borderRadius: 3,
-                  bgcolor: 'background.paper',
-                  transition: 'all 0.2s ease-in-out',
-                  '&:hover': {
-                    borderColor: 'primary.main',
-                    boxShadow: 1,
-                  },
-                }}
-              >
-                <Typography variant='h6' component='h3' sx={{ fontWeight: 600, mb: 0.5 }}>
-                  {experience.title}
-                </Typography>
-                <Typography
-                  variant='body2'
-                  color='text.secondary'
-                  sx={{ mb: experience.bullets.length ? 1 : 0 }}
-                >
-                  {experience.company} - {experience.duration}
-                </Typography>
-                {experience.bullets.map((bullet, bulletIndex) => (
-                  <Box marginTop={1.5} key={`${experience.company}-${bulletIndex}`}>
-                    <Typography variant='body1'>{bullet}</Typography>
-                  </Box>
-                ))}
-              </Box>
-            ))
-          )}
+      {seniorRoles.length === 0 ? (
+        <Typography sx={META_SX}>No experiences to display.</Typography>
+      ) : (
+        <Box component='ul' sx={PANEL_SX}>
+          {seniorRoles.map((experience) => (
+            <Box
+              component='li'
+              key={`${experience.company}-${experience.duration}`}
+              sx={PANEL_ROW_SX}
+            >
+              <ItemHeader
+                title={experience.company}
+                detail={experience.title}
+                dates={toYearRange(experience.duration)}
+              />
+            </Box>
+          ))}
         </Box>
-      </CardContent>
+      )}
+      <Typography component='p' sx={{ ...META_SX, mt: ITEM_GAP }}>
+        <Link
+          href={resumePdf}
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='Full history in my resume (opens in new window)'
+          {...TEXT_LINK_PROPS}
+        >
+          Full history in my resume
+        </Link>
+      </Typography>
     </SectionCard>
   )
 }

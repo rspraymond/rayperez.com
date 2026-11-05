@@ -2,7 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
-import { BookmarkProvider } from '../../contexts/BookmarkContext'
 import WhyOpinionated from './WhyOpinionated'
 import { OPINIONATED_DEFINITION_PARAGRAPH } from '../../constants/seoCopy'
 
@@ -17,13 +16,11 @@ vi.mock('../../components/AuthorBio', () => ({
 describe('WhyOpinionated page', () => {
   it('keeps the heading, document title, and definition paragraph', async () => {
     render(
-      <BookmarkProvider>
-        <HelmetProvider>
-          <MemoryRouter initialEntries={['/why-opinionated']}>
-            <WhyOpinionated />
-          </MemoryRouter>
-        </HelmetProvider>
-      </BookmarkProvider>,
+      <HelmetProvider>
+        <MemoryRouter initialEntries={['/why-opinionated']}>
+          <WhyOpinionated />
+        </MemoryRouter>
+      </HelmetProvider>,
     )
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(

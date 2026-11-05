@@ -19,13 +19,14 @@ const ScrollAndFocusReset: React.FC = () => {
     // Only perform scroll and focus on actual navigation (pathname change)
     if (prevPathnameRef.current !== pathname) {
       prevPathnameRef.current = pathname
-      window.scrollTo(0, 0)
+      // A hash such as /#writing names its own scroll target, which Home handles once it renders.
+      if (!location.hash) window.scrollTo(0, 0)
       // Use requestAnimationFrame to ensure DOM is ready before focusing
       requestAnimationFrame(() => {
-        document.getElementById('main-content')?.focus()
+        document.getElementById('main-content')?.focus({ preventScroll: true })
       })
     }
-  }, [location.pathname])
+  }, [location.pathname, location.hash])
 
   return null
 }

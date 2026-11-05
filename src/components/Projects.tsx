@@ -1,128 +1,99 @@
 import React from 'react'
-import { CardContent, CardActions, Typography, Button, Box, Chip } from '@mui/material'
-import CodeIcon from '@mui/icons-material/Code'
-import LaunchIcon from '@mui/icons-material/Launch'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import ArticleIcon from '@mui/icons-material/Article'
-import { Link } from 'react-router-dom'
+import { Box, Link, Typography } from '@mui/material'
+import RouterLinkRef from '../utils/RouterLink'
 import SectionCard from './SectionCard'
+import { HOME_SECTIONS } from '../constants/paths'
+import {
+  BODY_SX,
+  CARD_PADDING,
+  ITEM_TITLE_SX,
+  PROJECT_GAP,
+  SURFACE_SX,
+  TEXT_LINK_PROPS,
+} from '../styles/sectionStyles'
+import type { Project } from '../types/contentData'
 
-type Project = {
-  title: string
-  description: string
-  technologies: string[]
-  liveUrl: string
-  githubUrl?: string
-  caseStudyUrl?: string
-  featured?: boolean
+const ROW_LINK_SX = {
+  ...TEXT_LINK_PROPS.sx,
+  display: 'inline-flex',
+  alignItems: 'center',
+  minHeight: 24,
+  fontSize: '0.9375rem',
 }
 
-const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => {
-  return (
-    <SectionCard title='Projects' icon={CodeIcon} marginTop={0} marginBottom={0}>
-      <CardContent sx={{ p: 0 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {projects.map((project, index) => (
-            <Box
-              key={index}
-              sx={{
-                p: 2,
-                border: 1,
-                borderColor: 'divider',
-                borderRadius: 3,
-                bgcolor: 'background.paper',
-                transition: 'all 0.2s ease-in-out',
-                '&:hover': {
-                  borderColor: 'primary.main',
-                  boxShadow: 1,
-                },
-              }}
+const externalLinkProps = {
+  ...TEXT_LINK_PROPS,
+  sx: ROW_LINK_SX,
+  target: '_blank',
+  rel: 'noopener noreferrer',
+} as const
+
+/**
+ * Each project title is plain text so every destination has one link.
+ * Repeated link text like "Visit site" gets an accessible name that adds the project, so screen reader link lists stay distinct.
+ * From md up the first project, the featured one, spans the row and the rest pair up beneath it.
+ */
+const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
+  <SectionCard
+    title={HOME_SECTIONS.projects.title}
+    id={HOME_SECTIONS.projects.id}
+    headingId='projects-heading'
+  >
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+        gap: PROJECT_GAP,
+      }}
+    >
+      {projects.map((project, index) => (
+        <Box
+          key={project.title}
+          sx={{
+            ...SURFACE_SX,
+            p: CARD_PADDING,
+            gridColumn: { md: index === 0 ? '1 / -1' : 'auto' },
+          }}
+        >
+          <Typography component='h3' sx={ITEM_TITLE_SX}>
+            {project.title}
+          </Typography>
+          <Typography sx={{ ...BODY_SX, mt: 0.5, color: 'text.secondary' }}>
+            {project.description}
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', columnGap: 2, mt: 0.5 }}>
+            <Link
+              href={project.liveUrl}
+              aria-label={`Visit site: ${project.title} (opens in new window)`}
+              {...externalLinkProps}
             >
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  mb: 1,
-                }}
+              Visit site
+            </Link>
+            {project.caseStudyUrl && (
+              <Link
+                component={RouterLinkRef}
+                to={project.caseStudyUrl}
+                aria-label={`Read the case study: ${project.title}`}
+                {...TEXT_LINK_PROPS}
+                sx={ROW_LINK_SX}
               >
-                <Typography variant='h6' component='h3' sx={{ fontWeight: 600 }}>
-                  {project.title}
-                </Typography>
-                {project.featured && (
-                  <Chip
-                    label='Featured'
-                    size='small'
-                    color='primary'
-                    variant='outlined'
-                    sx={{ ml: 1, fontSize: '0.75rem' }}
-                  />
-                )}
-              </Box>
-
-              <Typography variant='body2' color='text.secondary' sx={{ mb: 1.5, lineHeight: 1.4 }}>
-                {project.description}
-              </Typography>
-
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 1.5 }}>
-                {project.technologies.map((tech, techIndex) => (
-                  <Chip
-                    key={techIndex}
-                    label={tech}
-                    size='small'
-                    variant='outlined'
-                    sx={{ fontSize: '0.7rem', height: '24px' }}
-                  />
-                ))}
-              </Box>
-
-              <CardActions sx={{ p: 0, gap: 1 }}>
-                <Button
-                  size='small'
-                  color='primary'
-                  href={project.liveUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  startIcon={<LaunchIcon fontSize='small' />}
-                  sx={{ textTransform: 'none' }}
-                  aria-label={`Visit ${project.title} - ${project.description} (opens in new window)`}
-                >
-                  Visit {project.title}
-                </Button>
-                {project.githubUrl && (
-                  <Button
-                    size='small'
-                    color='secondary'
-                    href={project.githubUrl}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    startIcon={<GitHubIcon fontSize='small' />}
-                    sx={{ textTransform: 'none' }}
-                    aria-label={`View ${project.title} source code on GitHub (opens in new window)`}
-                  >
-                    Source Code
-                  </Button>
-                )}
-                {project.caseStudyUrl && (
-                  <Button
-                    size='small'
-                    color='secondary'
-                    component={Link}
-                    to={project.caseStudyUrl}
-                    startIcon={<ArticleIcon fontSize='small' />}
-                    sx={{ textTransform: 'none' }}
-                    aria-label={`View case study for ${project.title}`}
-                  >
-                    View Case Study
-                  </Button>
-                )}
-              </CardActions>
-            </Box>
-          ))}
+                Read the case study
+              </Link>
+            )}
+            {project.githubUrl && (
+              <Link
+                href={project.githubUrl}
+                aria-label={`Source code: ${project.title} (opens in new window)`}
+                {...externalLinkProps}
+              >
+                Source code
+              </Link>
+            )}
+          </Box>
         </Box>
-      </CardContent>
-    </SectionCard>
-  )
-}
+      ))}
+    </Box>
+  </SectionCard>
+)
 
 export default Projects
