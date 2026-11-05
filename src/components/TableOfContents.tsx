@@ -58,6 +58,16 @@ const scrollToHeading = (id: string): void => {
   }
 }
 
+// A malformed hash such as #%E0%A4 makes decodeURIComponent throw, which would take the article down with it.
+const hashToId = (hash: string): string => {
+  const raw = hash.replace(/^#/, '')
+  try {
+    return decodeURIComponent(raw)
+  } catch {
+    return raw
+  }
+}
+
 const TableOfContents: React.FC = () => {
   const [headings, setHeadings] = useState<HeadingItem[]>([])
   const [isExpanded, setIsExpanded] = useState(true)
@@ -80,8 +90,7 @@ const TableOfContents: React.FC = () => {
     const hash = typeof window !== 'undefined' ? window.location.hash : ''
     if (!hash) return
 
-    const targetId = decodeURIComponent(hash.replace(/^#/, ''))
-    const targetElement = document.getElementById(targetId)
+    const targetElement = document.getElementById(hashToId(hash))
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
       hasScrolledOnLoadRef.current = true
