@@ -1,6 +1,17 @@
 ## Changelog
 
 
+## [0.107.2] - 2026-11-05
+### Bug Fixes
+
+- **ci:** rebase the coverage badge onto main before pushing (#269)
+
+### Other Changes
+
+- chore: update test coverage badge
+
+
+
 ## [0.107.1] - 2026-11-05
 ### Bug Fixes
 
