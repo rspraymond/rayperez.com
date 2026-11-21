@@ -2,6 +2,7 @@ import { Box, Container, Link, alpha } from '@mui/material'
 import { useLocation } from 'react-router-dom'
 import RouterLinkRef from '../utils/RouterLink'
 import ThemeToggle from './ThemeToggle'
+import CommandPaletteTrigger from './CommandPaletteTrigger'
 import resumePdf from '../assets/raymond-perez-software-engineer-resume.pdf'
 import { PROFILE } from '../constants/profile'
 import { ABOUT_PATH, HOME_SECTIONS } from '../constants/paths'
@@ -30,6 +31,7 @@ const homeSection = (id: string) => ({ pathname: '/', hash: id })
  * Site header and menu. The name is a plain link because each page owns its single h1, and phones hide it so the
  * menu and the intro fit the first screen. Writing and Projects jump to home sections from any page; Home scrolls to them once loaded.
  * From sm up the bar sticks and blurs what scrolls beneath it; on phones it stays in flow so it never covers the short screen.
+ * The search button opens the command palette, which Cmd+K, Ctrl+K, and "/" also open from anywhere.
  */
 function Header() {
   const { pathname } = useLocation()
@@ -115,6 +117,7 @@ function Header() {
           >
             Resume
           </Link>
+          <CommandPaletteTrigger />
           <ThemeToggle />
         </Box>
       </Container>

@@ -32,6 +32,8 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ content }) => {
           : 'h3'
       }
       gutterBottom={item.gutterBottom}
+      // Jumps from the table of contents or search land below the sticky menu instead of under it.
+      sx={{ scrollMarginTop: { sm: '5rem' } }}
     >
       {item.content}
     </Typography>

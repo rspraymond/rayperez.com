@@ -3,12 +3,13 @@ import { Box, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import SocialMeta from '../components/SocialMeta'
+import { MAIN_CONTENT_ID } from '../constants/paths'
 
 const NotFound: React.FC = () => {
   return (
     <Box
       component='main'
-      id='main-content'
+      id={MAIN_CONTENT_ID}
       tabIndex={-1}
       display='flex'
       flexDirection='column'

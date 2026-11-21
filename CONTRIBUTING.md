@@ -67,18 +67,21 @@ Thank you for considering contributing to this project! This document outlines t
 
 ### Key File Locations
 
-| Purpose               | File/Directory                         |
-| --------------------- | -------------------------------------- |
-| Lazy loading fallback | `src/assets/LoadingFallback.tsx`       |
-| Code block renderer   | `src/assets/LazySyntaxHighlighter.tsx` |
-| Home Writing list     | `src/components/Writing.tsx`           |
-| Social meta defaults  | `src/constants/social.ts`              |
-| Article metadata      | `src/constants/posts.ts`               |
-| JSON article content  | `src/data/articles/`                   |
-| Article wrappers      | `src/pages/articles/`                  |
-| Case study metadata   | `src/constants/caseStudies.ts`         |
-| Case study content    | `src/data/case-studies/`               |
-| Case study pages      | `src/pages/case-studies/`              |
+| Purpose               | File/Directory                             |
+| --------------------- | ------------------------------------------ |
+| Lazy loading fallback | `src/assets/LoadingFallback.tsx`           |
+| Code block renderer   | `src/assets/LazySyntaxHighlighter.tsx`     |
+| Home Writing list     | `src/components/Writing.tsx`               |
+| Social meta defaults  | `src/constants/social.ts`                  |
+| Article metadata      | `src/constants/posts.ts`                   |
+| JSON article content  | `src/data/articles/`                       |
+| Article wrappers      | `src/pages/articles/`                      |
+| Case study metadata   | `src/constants/caseStudies.ts`             |
+| Case study content    | `src/data/case-studies/`                   |
+| Case study pages      | `src/pages/case-studies/`                  |
+| Search palette        | `src/components/CommandPalette.tsx`        |
+| Search commands       | `src/hooks/usePaletteCommands.ts`          |
+| Search shortcuts      | `src/components/CommandPaletteTrigger.tsx` |
 
 ## Development Setup
 
@@ -402,6 +405,8 @@ rayperez-site/
 - Use consistent naming: PascalCase for component files (e.g., `SectionCard.tsx`)
 - When modifying data-driven components like `Writing.tsx`, ensure the data is accurate and up-to-date
 - Use the `LazySyntaxHighlighter` component for code blocks in articles instead of importing the syntax highlighter directly
+- New articles and case studies appear in the search palette on their own because it reads `src/constants/posts.ts` and `src/constants/caseStudies.ts`; add pages and actions in `src/hooks/usePaletteCommands.ts`
+- Mark a palette command `waitForClose` when it scrolls the page, so it runs after the dialog finishes closing and releases its scroll lock; leave it off for commands that call `window.open`, which browsers only allow during the click
 
 #### Social Media Meta Tags
 
