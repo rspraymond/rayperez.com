@@ -3,7 +3,7 @@ import { Box, Dialog, InputBase, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { PALETTE_GROUPS, usePaletteCommands } from '../hooks/usePaletteCommands'
 import type { PaletteCommand } from '../hooks/usePaletteCommands'
-import { matchesQuery } from '../utils/matchesQuery'
+import { foldText, includesAllWords, queryWords } from '../utils/matchesQuery'
 import type { ArticleSection } from '../utils/articleHeadings'
 import { VISUALLY_HIDDEN_SX } from '../styles/sectionStyles'
 
@@ -19,6 +19,11 @@ const searchableText = ({ label, group, hint = '', keywords = '' }: PaletteComma
 
 const resultCountText = (count: number): string =>
   count === 1 ? '1 result' : `${count === 0 ? 'No' : count} results`
+
+// One stable callback: React calls it only when the highlight lands on a different option, not on every render.
+const scrollIntoViewNearest = (node: HTMLElement | null): void => {
+  node?.scrollIntoView?.({ block: 'nearest' })
+}
 
 const KBD_SX = {
   px: 0.75,
@@ -42,14 +47,28 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose, sections
   const listboxId = `${idPrefix}listbox`
   const optionId = (index: number): string => `${idPrefix}option-${index}`
 
-  const groups = useMemo(() => {
-    const matches = commands.filter((command) => matchesQuery(searchableText(command), query))
-    return PALETTE_GROUPS.map((group) => ({
+  // Folding is the costly part of a match, so each command's text is folded once rather than on every keystroke.
+  const searchIndex = useMemo(
+    () => commands.map((command) => ({ command, text: foldText(searchableText(command)) })),
+    [commands],
+  )
+
+  const { groups, results, indexById } = useMemo(() => {
+    const words = queryWords(query)
+    const matches = searchIndex
+      .filter(({ text }) => includesAllWords(text, words))
+      .map(({ command }) => command)
+    const matchedGroups = PALETTE_GROUPS.map((group) => ({
       group,
       items: matches.filter((command) => command.group === group),
     })).filter(({ items }) => items.length > 0)
-  }, [commands, query])
-  const results = useMemo(() => groups.flatMap(({ items }) => items), [groups])
+    const flat = matchedGroups.flatMap(({ items }) => items)
+    return {
+      groups: matchedGroups,
+      results: flat,
+      indexById: new Map(flat.map((command, index) => [command.id, index])),
+    }
+  }, [searchIndex, query])
   const activeCommand: PaletteCommand | undefined = results[activeIndex]
 
   const commandAfterCloseRef = useRef<PaletteCommand | null>(null)
@@ -81,10 +100,20 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose, sections
     }
   }
 
-  // Each open starts fresh; clearing on exit keeps the old query from flashing while the dialog fades out.
-  const handleExited = (): void => {
+  const resetSearch = (): void => {
     setQuery('')
     setActiveIndex(0)
+  }
+
+  // Reopening before the fade out finishes skips onExited, so entering resets too and drops a jump chosen before the reopen.
+  const handleEnter = (): void => {
+    commandAfterCloseRef.current = null
+    resetSearch()
+  }
+
+  // Each open starts fresh; clearing on exit keeps the old query from flashing while the dialog fades out.
+  const handleExited = (): void => {
+    resetSearch()
     commandAfterCloseRef.current?.run()
     commandAfterCloseRef.current = null
   }
@@ -95,7 +124,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose, sections
       onClose={onClose}
       fullWidth
       maxWidth='sm'
-      TransitionProps={{ onExited: handleExited }}
+      TransitionProps={{ onEnter: handleEnter, onExited: handleExited }}
       PaperProps={{ 'aria-label': 'Search the site' }}
       sx={{
         '& .MuiDialog-container': { alignItems: 'flex-start' },
@@ -167,7 +196,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose, sections
                 {group}
               </Typography>
               {items.map((command) => {
-                const index = results.indexOf(command)
+                const index = indexById.get(command.id) ?? -1
                 const isActive = index === activeIndex
                 const { Icon } = command
                 return (
@@ -177,11 +206,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose, sections
                     role='option'
                     aria-selected={isActive}
                     // Keeps the highlighted option visible as the arrow keys move past the scroll edge.
-                    ref={
-                      isActive
-                        ? (node: HTMLElement | null) => node?.scrollIntoView?.({ block: 'nearest' })
-                        : undefined
-                    }
+                    ref={isActive ? scrollIntoViewNearest : undefined}
                     onMouseMove={() => {
                       if (!isActive) setActiveIndex(index)
                     }}

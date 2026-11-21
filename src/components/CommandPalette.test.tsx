@@ -67,8 +67,18 @@ const optionLabels = () =>
 const selectedOption = () =>
   screen.getAllByRole('option').find((option) => option.getAttribute('aria-selected') === 'true')
 
+/** An article heading to jump to; removed after each test so a failure cannot leave a duplicate id behind. */
+const appendHeading = (id: string): HTMLHeadingElement => {
+  const heading = document.createElement('h3')
+  heading.id = id
+  heading.scrollIntoView = vi.fn()
+  document.body.appendChild(heading)
+  return heading
+}
+
 afterEach(() => {
   vi.restoreAllMocks()
+  document.querySelectorAll('body > h3').forEach((heading) => heading.remove())
 })
 
 describe('CommandPalette results', () => {
@@ -211,6 +221,44 @@ describe('CommandPalette keyboard', () => {
 
     expect(searchBox()).toHaveValue('')
   })
+
+  it('starts fresh and forgets a chosen jump when reopened before it finishes closing', async () => {
+    const heading = appendHeading('intro')
+    const { user } = renderPalette({ sections: [{ id: 'intro', text: 'Introduction' }] })
+
+    await user.type(searchBox(), 'intro')
+    // Synchronous clicks reopen inside the fade out, the window where onExited never runs.
+    fireEvent.click(screen.getByRole('option', { name: 'Introduction' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Reopen', hidden: true }))
+
+    expect(searchBox()).toHaveValue('')
+    await user.keyboard('{Escape}')
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+    expect(heading.scrollIntoView).not.toHaveBeenCalled()
+  })
+
+  it('scrolls the highlight into view when it moves, not on every keystroke', async () => {
+    const scrollIntoView = vi.fn()
+    Object.defineProperty(Element.prototype, 'scrollIntoView', {
+      value: scrollIntoView,
+      configurable: true,
+    })
+    try {
+      const { user } = renderPalette({ sections: [{ id: 'intro', text: 'Introduction' }] })
+
+      await user.type(searchBox(), 'i')
+      const callsWithFirstMatch = scrollIntoView.mock.calls.length
+      await user.type(searchBox(), 'nt')
+      expect(scrollIntoView).toHaveBeenCalledTimes(callsWithFirstMatch)
+
+      await user.clear(searchBox())
+      await user.keyboard('{ArrowDown}')
+      expect(scrollIntoView.mock.calls.length).toBeGreaterThan(callsWithFirstMatch)
+      expect(scrollIntoView).toHaveBeenLastCalledWith({ block: 'nearest' })
+    } finally {
+      delete (Element.prototype as unknown as Record<string, unknown>).scrollIntoView
+    }
+  })
 })
 
 describe('CommandPalette commands', () => {
@@ -275,10 +323,7 @@ describe('CommandPalette commands', () => {
   })
 
   it('scrolls to a section only after the dialog has closed', async () => {
-    const heading = document.createElement('h3')
-    heading.id = 'intro'
-    heading.scrollIntoView = vi.fn()
-    document.body.appendChild(heading)
+    const heading = appendHeading('intro')
     const { user } = renderPalette({ sections: [{ id: 'intro', text: 'Introduction' }] })
 
     await user.click(screen.getByRole('option', { name: 'Introduction' }))
@@ -286,6 +331,5 @@ describe('CommandPalette commands', () => {
     expect(heading.scrollIntoView).not.toHaveBeenCalled()
     await waitFor(() => expect(heading.scrollIntoView).toHaveBeenCalledTimes(1))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-    heading.remove()
   })
 })

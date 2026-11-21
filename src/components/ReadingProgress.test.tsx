@@ -84,4 +84,19 @@ describe('ReadingProgress', () => {
     expect(removeListener).toHaveBeenCalledWith('scroll', expect.any(Function))
     expect(removeListener).toHaveBeenCalledWith('resize', expect.any(Function))
   })
+
+  it('cancels a frame still waiting to draw when the article goes away', () => {
+    setPage({ scrollY: 0, scrollHeight: 3000 })
+    const { unmount } = renderProgress()
+    vi.mocked(window.requestAnimationFrame).mockImplementation(() => 7)
+    const cancelFrame = vi.spyOn(window, 'cancelAnimationFrame')
+
+    fireEvent.scroll(window)
+    fireEvent.scroll(window)
+    unmount()
+
+    // Two scrolls in one frame ask for a single draw, and that draw is canceled rather than run late.
+    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1)
+    expect(cancelFrame).toHaveBeenCalledWith(7)
+  })
 })

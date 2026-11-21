@@ -8,15 +8,11 @@ export const UNLISTED_HEADINGS: readonly string[] = ['Key Takeaways', 'Frequentl
 
 export const scrollToHeading = (id: string): void => {
   const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    // Reflect hash in URL without triggering native jump
-    if (typeof window !== 'undefined' && window.history && 'replaceState' in window.history) {
-      window.history.replaceState(null, '', `#${id}`)
-    } else if (typeof window !== 'undefined') {
-      window.location.hash = id
-    }
-  }
+  if (!element) return
+  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  // Reflect the hash in the URL without triggering the browser's own jump.
+  if ('replaceState' in window.history) window.history.replaceState(null, '', `#${id}`)
+  else window.location.hash = id
 }
 
 /**

@@ -1,8 +1,10 @@
-import { afterEach, describe, expect, it } from 'vitest'
-import { readArticleSections } from './articleHeadings'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { readArticleSections, scrollToHeading } from './articleHeadings'
 
 afterEach(() => {
   document.body.innerHTML = ''
+  vi.restoreAllMocks()
+  window.history.replaceState(null, '', window.location.pathname)
 })
 
 describe('readArticleSections', () => {
@@ -40,5 +42,34 @@ describe('readArticleSections', () => {
     document.body.innerHTML = '<section><h3 id="dhi">DHI Group</h3></section>'
 
     expect(readArticleSections()).toEqual([])
+  })
+})
+
+describe('scrollToHeading', () => {
+  const addHeading = (id: string): HTMLElement => {
+    document.body.innerHTML = `<article><h3 id="${id}">Heading</h3></article>`
+    const heading = document.getElementById(id) as HTMLElement
+    heading.scrollIntoView = vi.fn()
+    return heading
+  }
+
+  it('scrolls smoothly to the heading and records it in the URL without a jump', () => {
+    const heading = addHeading('intro')
+    const replaceState = vi.spyOn(window.history, 'replaceState')
+
+    scrollToHeading('intro')
+
+    expect(heading.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' })
+    expect(replaceState).toHaveBeenCalledWith(null, '', '#intro')
+    expect(window.location.hash).toBe('#intro')
+  })
+
+  it('leaves the page and URL alone when no heading has the id', () => {
+    const replaceState = vi.spyOn(window.history, 'replaceState')
+
+    scrollToHeading('missing')
+
+    expect(replaceState).not.toHaveBeenCalled()
+    expect(window.location.hash).toBe('')
   })
 })

@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import type { CommandPaletteProps } from './CommandPalette'
 import { readArticleSections } from '../utils/articleHeadings'
 import type { ArticleSection } from '../utils/articleHeadings'
+import { isApplePlatform } from '../utils/isApplePlatform'
 
 // The dialog and its command list load on first use, so every page's entry chunk stays small.
 const loadPalette = () => import('./CommandPalette')
@@ -12,8 +13,7 @@ const prefetchPalette = (): void => {
   loadPalette().catch(() => undefined)
 }
 
-const IS_APPLE_PLATFORM =
-  typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform)
+const IS_APPLE_PLATFORM = isApplePlatform()
 
 const SEARCH_SHORTCUT_LABEL = IS_APPLE_PLATFORM ? '⌘K' : 'Ctrl+K'
 
