@@ -114,6 +114,16 @@ describe('BlogPost', () => {
       expect(screen.getByTestId('blog-content')).toBeInTheDocument()
     })
 
+    it('shows a reading progress bar across the top of the window', () => {
+      render(
+        <BrowserRouter>
+          <BlogPost {...defaultProps} />
+        </BrowserRouter>,
+      )
+
+      expect(screen.getByTestId('reading-progress')).toHaveAttribute('aria-hidden', 'true')
+    })
+
     it('displays the correct blog title and content', async () => {
       render(
         <BrowserRouter>

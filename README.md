@@ -11,6 +11,9 @@ A personal portfolio and technical blog built with React, TypeScript, and Vite.
 - **Modern UI**: Clean, responsive design using Material UI
 - **Performance Optimized**: Implements code splitting, lazy loading, and optimized bundling
 - **SEO Friendly**: Schema.org structured data and meta tags for better search engine visibility
+- **Site Search**: Press `⌘K`, `Ctrl+K`, or `/` (or the search button in the header) to search pages, articles, case studies, and sections of the current article, and to run quick actions such as switching the theme or opening the resume
+- **Reading Aids**: A progress bar tracks how far you are through an article, and headings land below the fixed header when you jump to them
+- **Keyboard Friendly**: A skip link is the first tab stop and moves focus straight to the main content
 
 ## 🏗️ System Architecture
 

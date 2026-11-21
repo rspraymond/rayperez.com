@@ -12,6 +12,7 @@ import {
 } from '@mui/material'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { UNLISTED_HEADINGS, scrollToHeading } from '../utils/articleHeadings'
 
 interface HeadingItem {
   id: string
@@ -27,8 +28,7 @@ const extractHeadings = (): HeadingItem[] => {
     const text = heading.textContent?.trim()
     if (!text) return
 
-    // Skip "Key Takeaways" and "Frequently Asked Questions" headings
-    if (text === 'Key Takeaways' || text === 'Frequently Asked Questions') return
+    if (UNLISTED_HEADINGS.includes(text)) return
 
     const level = parseInt(heading.tagName.charAt(1))
     let id = heading.id
@@ -43,19 +43,6 @@ const extractHeadings = (): HeadingItem[] => {
   })
 
   return headingItems
-}
-
-const scrollToHeading = (id: string): void => {
-  const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    // Reflect hash in URL without triggering native jump
-    if (typeof window !== 'undefined' && window.history && 'replaceState' in window.history) {
-      window.history.replaceState(null, '', `#${id}`)
-    } else if (typeof window !== 'undefined') {
-      window.location.hash = id
-    }
-  }
 }
 
 // A malformed hash such as #%E0%A4 makes decodeURIComponent throw, which would take the article down with it.

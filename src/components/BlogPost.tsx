@@ -20,6 +20,7 @@ import SocialMeta from './SocialMeta'
 import PostNavigation from './PostNavigation'
 import BackToTopButton from './BackToTopButton'
 import BlogBreadcrumbs from './BlogBreadcrumbs'
+import ReadingProgress from './ReadingProgress'
 import { PAGE_SX, PAGE_STACK_SPACING, READABLE_MEASURE } from '../styles/sectionStyles'
 
 const AuthorBio = lazy(() => import('./AuthorBio'))
@@ -81,6 +82,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
         type='article'
         url={pageUrl}
       />
+      <ReadingProgress />
       <Box component='article' sx={PAGE_SX}>
         <Stack spacing={PAGE_STACK_SPACING}>
           <BlogBreadcrumbs title={title} />

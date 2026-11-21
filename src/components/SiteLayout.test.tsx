@@ -27,6 +27,15 @@ describe('SiteLayout', () => {
     expect(main).toContainElement(screen.getByTestId('child'))
   })
 
+  it('puts the skip link before the menu so it is the first tab stop', () => {
+    renderLayout()
+
+    const skipLink = screen.getByRole('link', { name: 'Skip to content' })
+    const header = screen.getByRole('banner')
+    expect(skipLink.compareDocumentPosition(header) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(skipLink).toHaveAttribute('href', `#${screen.getByRole('main').id}`)
+  })
+
   it('has no side column', () => {
     renderLayout()
 

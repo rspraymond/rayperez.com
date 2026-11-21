@@ -121,3 +121,16 @@ export const TEXT_LINK_PROPS = {
   underline: 'always',
   sx: { textUnderlineOffset: '0.2em', '&:hover': { textDecorationThickness: '2px' } },
 } as const
+
+/** Hidden on screen but still read by screen readers, for live status text. */
+export const VISUALLY_HIDDEN_SX = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  p: 0,
+  m: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0 0 0 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+} satisfies SxProps<Theme>

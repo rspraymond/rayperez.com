@@ -4,6 +4,7 @@ import SectionCard from './SectionCard'
 import RouterLinkRef from '../utils/RouterLink'
 import { HOME_SECTIONS } from '../constants/paths'
 import { formatIsoDate } from '../utils/formatIsoDate'
+import { newestFirst } from '../utils/newestFirst'
 import { BODY_SX, DATES_SX, PANEL_ROW_SX, PANEL_SX } from '../styles/sectionStyles'
 import type { PostMeta } from '../constants/posts'
 
@@ -12,10 +13,6 @@ type WritingPost = Pick<PostMeta, 'title' | 'date' | 'path'>
 interface WritingProps {
   posts: WritingPost[]
 }
-
-// Several posts share a date, so the path breaks ties and keeps the order stable between builds.
-const newestFirst = (a: WritingPost, b: WritingPost): number =>
-  b.date.localeCompare(a.date) || a.path.localeCompare(b.path)
 
 /**
  * Every article, newest first, so each one is a single link from the home page.

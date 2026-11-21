@@ -23,14 +23,17 @@ describe('Header', () => {
     expect(screen.queryByRole('heading')).not.toBeInTheDocument()
   })
 
-  it('offers Writing, Projects, About, Resume, and the theme switch in that order', () => {
+  it('offers Writing, Projects, About, Resume, search, and the theme switch in that order', () => {
     renderHeader()
 
     const names = menu()
       .getAllByRole('link')
       .map((link) => link.textContent)
     expect(names).toEqual(['Writing', 'Projects', 'About', 'Resume'])
-    expect(menu().getByRole('button', { name: /Current theme:/ })).toBeInTheDocument()
+    const buttons = menu()
+      .getAllByRole('button')
+      .map((button) => button.getAttribute('aria-label'))
+    expect(buttons).toEqual(['Search the site', expect.stringMatching(/^Current theme:/)])
   })
 
   it('jumps to the home sections from any page', () => {

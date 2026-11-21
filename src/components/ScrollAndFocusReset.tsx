@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { MAIN_CONTENT_ID } from '../constants/paths'
 
 const ScrollAndFocusReset: React.FC = () => {
   const location = useLocation()
@@ -23,7 +24,7 @@ const ScrollAndFocusReset: React.FC = () => {
       if (!location.hash) window.scrollTo(0, 0)
       // Use requestAnimationFrame to ensure DOM is ready before focusing
       requestAnimationFrame(() => {
-        document.getElementById('main-content')?.focus({ preventScroll: true })
+        document.getElementById(MAIN_CONTENT_ID)?.focus({ preventScroll: true })
       })
     }
   }, [location.pathname, location.hash])
