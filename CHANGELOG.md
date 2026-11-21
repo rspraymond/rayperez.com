@@ -1,6 +1,13 @@
 ## Changelog
 
 
+## [0.108.0] - 2026-11-21
+### Features
+
+- add site search palette, reading progress bar, and skip link (#270)
+
+
+
 ## [0.107.2] - 2026-11-05
 ### Bug Fixes
 
